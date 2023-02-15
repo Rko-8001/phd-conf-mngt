@@ -13,27 +13,34 @@ const userSchema = new mongoose.Schema({
     },
     entryNo: {
         type: String,
-        required:true
+        // required:true
     },
     department: {
         type: String,
-        required: true
+        // required: true
     },
     dateOfJoining: {
         type: String, 
-        required: true
+        // required: true
     },
     fellowshipCategory: {
         type: String,
-        required: true,
+        // required: true,
     },
     areaOfSpecialisation: {
         type: String,
-        required: true
+        // required: true
     },
     nameOfSupervisor: {
         type: String,
+        // required: true
+    },
+    role: {
+        type: String,
         required: true
+        // 0 for student
+        // 1 for faculty
+        // 2 for admin       
     }
 });
 

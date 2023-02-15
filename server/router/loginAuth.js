@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 
-
+const mongoose = require('mongoose');
 const Mail = require('nodemailer/lib/mailer');
 
 
@@ -27,6 +27,8 @@ var loginOtp = "696969";
 router.post('/login', async (req, res) => {
 
     const { email, mssg, otp } = req.body;
+    var id;
+    var role;
     if (!email || !mssg) {
         return res.status(422).json({ error: "Please fill properly.." });
     }
@@ -35,7 +37,8 @@ router.post('/login', async (req, res) => {
         if (!loginuser) {
             return res.status(423).json({ error: "Invalid Credientials." });
         }
-        // console.log(loginuser);
+        id = loginuser._id;
+        role = loginuser.role;
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: "Invalid Credientials." });
@@ -61,7 +64,7 @@ router.post('/login', async (req, res) => {
     }
     else {
         if(loginOtp == otp){
-            return res.status(200).json({message: "login success.."});
+            return res.status(200).json( role + " " + id);
         }
         else {
             return res.status(422).json({ message: "Invalid OTP" });

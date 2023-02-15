@@ -3,7 +3,7 @@ import { Form, Button, Container, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
-function Login( props) {
+function Login(props) {
 
     const navigate = useNavigate();
 
@@ -36,7 +36,8 @@ function Login( props) {
         });
 
         //logic
-        const data = await res.json();
+        // const data = await res.json();
+
         if (res.status === 422) {
             window.alert(" Galat hai");
         }
@@ -60,15 +61,28 @@ function Login( props) {
             body: JSON.stringify({ email, mssg, otp })
         });
         const data = await res.json();
+        const role = data.split(' ')[0];
+        // const id = data.split(' ')[1];
+
+
+        // console.log(role);
+        // console.log(id);
         // console.log(data);
 
         if (res.status === 422) {
-            window.alert(" Galat hai");
+            window.alert("Wrong OTP Entered!! Try Again..");
         }
         else {
-            window.alert("login Success..");
             props.getEmailIdLogin(emailId);
-            navigate('/studentLogin');
+            if (role === "0") {
+                navigate('/studentLogin');
+            }
+            else if (role === "1") {
+                navigate('/facultyLogin');  
+            }
+            else {
+                navigate('/adminLogin');
+            }
         }
     }
 

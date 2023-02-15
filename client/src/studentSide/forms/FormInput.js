@@ -10,6 +10,7 @@ import FormPrintIn from './FormPrintIn';
 
 function FormInput(props) {
 
+    const dataInTable = [];
     const [key, setKey] = useState('genInfo');
     const [generalInfo, setGeneralInfo] = useState({
         name: "",
@@ -28,18 +29,17 @@ function FormInput(props) {
         venueOfConference: "",
         periodOfConference: "",
         paperInConference: "",
+        financialSupport: ""
+    });
+    const [advance, setAdvance] = useState(false);
+    const [tableData, setTableData] = useState(dataInTable);
+    const [rowData, setRowData] = useState({
+        particular: "",
+        amount: ""
     });
 
-    const getConferenceInfo = ( (e) => {
-        
-        const { name, value } = e.target;
-        // console.log(name + " " + value);
-        setConferenceInfo(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    })
-
+    
+    
     const getGeneralInfo = ((e) => {
         const { name, value } = e.target;
         // console.log(name + " " + value);
@@ -48,6 +48,40 @@ function FormInput(props) {
             [name]: value
         }));
     });
+    const getConferenceInfo = ((e) => {
+        
+        const { name, value } = e.target;
+        // console.log(name + " " + value);
+        setConferenceInfo(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    });
+
+    const getAdvance = e => {
+        console.log("aaya");
+        setAdvance(!advance);
+    }
+    const addRowData = (e) => {
+        e.preventDefault();
+        if (!rowData.particular || !rowData.amount) {
+            window.alert("Fill all the fields!");
+            return;
+        }
+        const newTableData = [...tableData]
+        newTableData.push(rowData);
+        setTableData(newTableData);
+        setRowData({ particular: "", amount: "" });
+    }
+    const getRowData = (e) => {
+        const { name, value } = e.target;
+        // console.log(name + " " + value);
+        setRowData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
 
     const setFetchData = ((name, value) => {
         setGeneralInfo(prevState => ({
@@ -99,12 +133,12 @@ function FormInput(props) {
                     onSelect={(k) => setKey(k)}
                     className="mb-3"
                 >
-                    <Tab eventKey="genInfo" title="General Data">
-                        <FormInputGenData getGeneralInfo={getGeneralInfo} getConferenceInfo={getConferenceInfo} />
+                    <Tab eventKey="genInfo" title="Form Data">
+                        <FormInputGenData getGeneralInfo={getGeneralInfo} getConferenceInfo={getConferenceInfo} getAdvance={getAdvance} addRowData={addRowData} advance={advance} tableData={tableData} getRowData={getRowData} rowData={rowData}/>
                     </Tab>
 
                     <Tab eventKey="showForm" title="View Form" style={{ "justifyContent": "center" }}>
-                        <FormPrintIn partA={generalInfo} partB={conferenceInfo} />
+                        <FormPrintIn partA={generalInfo} partB={conferenceInfo} advance={advance} partC={tableData}/>
                     </Tab>
                 </Tabs>
             </Container>

@@ -1,23 +1,33 @@
-import React, {useRef} from 'react';
-import {Button, Card, Table, Row, Col, Container, ListGroup} from 'react-bootstrap';
-import { useReactToPrint} from 'react-to-print';
+import React, { useRef } from 'react';
+import { Button, Card, Table, Row, Col, Container, ListGroup } from 'react-bootstrap';
+import { useReactToPrint } from 'react-to-print';
 
 
 function FormPrintIn(props) {
 
     const componentRef = useRef();
-    
-    
+
+
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
         documentTitle: 'New_Application for Participating in Conference, Workshop, Seminar (within India)',
     })
-    
-    
+
+
+    const tableRows = props.partC.map((info) => {
+        return (
+            <tr key={info.particular}>
+                <th>{info.particular}</th>
+                <th>{info.amount}</th>
+            </tr>
+        );
+    });
+
+
     return (
         <>
             <Button variant='outline-dark' onClick={handlePrint}> Print Form</Button>
-            <br/> <br/> 
+            <br /> <br />
 
 
             <Container ref={componentRef} className='mt-3' style={{ "fontSize": "18px" }}>
@@ -58,7 +68,7 @@ function FormPrintIn(props) {
 
                 <br /> <br />
 
-                
+
                 <Card>
                     <Card.Header className='text-center'>Conference Details</Card.Header>
                     <Card.Body>
@@ -83,36 +93,35 @@ function FormPrintIn(props) {
 
                 <br /> <br />
 
-                <p>Financial support required (if any) from institute fund/ project/ any other:  </p>
-                <p>Advance required :  Yes</p>
+                <p>Financial support required (if any) from institute fund/ project/ any other:  {props.partB.financialSupport}</p>
+                <p>Advance required :  {props.advance ? "Yes" : "No"} </p>
 
-                <br /> <br />
-                <Table striped bordered hover size="sm">
-                    <thead>
-                        <tr>
-                            <th>Sr. No. </th>
-                            <th>Particulars</th>
-                            <th>Amount (Rs)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </Table>
+                <br />
+                {props.advance ?
+                    <Table striped size="sm">
+                        <thead>
+                            <tr>
+                                <th>Particulars</th>
+                                <th>Amount (Rs)</th>
+                            </tr>
+                        </thead>
+                        <tbody style={{ "Color": "grey" }}>{tableRows}</tbody>
+                    </Table>
+                    :
+                    <Table striped size="sm">
+                        <thead>
+                            <tr>
+                                <th>Particulars</th>
+                                <th>Amount (Rs)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>-</th>
+                                <th>-</th>
+                            </tr> </tbody>
+                    </Table>
+                }
                 <br /> <br />
                 <Card>
                     <Card.Header className='text-center'>Enclosures Attached (Please Tick)</Card.Header>
