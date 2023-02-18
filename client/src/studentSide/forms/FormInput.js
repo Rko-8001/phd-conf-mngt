@@ -37,7 +37,7 @@ function FormInput(props) {
         particular: "",
         amount: ""
     });
-
+    
     
     
     const getGeneralInfo = ((e) => {
@@ -59,7 +59,7 @@ function FormInput(props) {
     });
 
     const getAdvance = e => {
-        console.log("aaya");
+        // console.log("aaya");
         setAdvance(!advance);
     }
     const addRowData = (e) => {
@@ -91,14 +91,16 @@ function FormInput(props) {
     })
     const getBasicInfo = async (req, res) => {
         try {
-
-            const resp = await fetch("/studentInfo", {
-                method: "GET",
+            const email = props.studentEmail;
+            console.log(email);
+            const role = 0;
+            const resp = await fetch("/studentInfoLoading", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json"
-                }
+                },
+                body: JSON.stringify({email, role})
             });
-            //   console.log(resp);
             return resp.json();
             // console.log(resp);
         } catch (error) {
@@ -107,20 +109,19 @@ function FormInput(props) {
     }
 
     useEffect(() => {
-        getBasicInfo()
-            .then((resp) => {
-                console.log(resp);
-                setFetchData("name", resp.name);
-                setFetchData("entryNo", resp.entryNo);
-                setFetchData("dept", resp.department);
-                setFetchData("doj", resp.dateOfJoining);
-                setFetchData("fellowshipCat", resp.fellowshipCategory);
-                setFetchData("aos", resp.areaOfSpecialisation);
-                setFetchData("supervisor", resp.nameOfSupervisor);
-                setFetchData("email", resp.email);
-            }).catch((e) => {
-                console.log(e.message)
-            });
+        getBasicInfo().then((resp) => {
+            console.log(resp);
+            setFetchData("name", resp.name);
+            setFetchData("entryNo", resp.entryNo);
+            setFetchData("dept", resp.department);
+            setFetchData("doj", resp.dateOfJoining);
+            setFetchData("fellowshipCat", resp.fellowshipCategory);
+            setFetchData("aos", resp.areaOfSpecialisation);
+            setFetchData("supervisor", resp.nameOfSupervisor);
+            setFetchData("email", resp.email);
+        }).catch((e) => {
+            console.log(e.message)
+        });
     }, []);
 
     return (

@@ -75,7 +75,7 @@ function FormPrintIn(props) {
 
                         <Card.Text>
                             <Row>
-                                <Col style={{ "fontSize": "18px" }} ><pre>Name of Confernce DEP                       : {props.partB.nameOfConference}.</pre></Col>
+                                <Col style={{ "fontSize": "18px" }} ><pre>Name of Confernce                           : {props.partB.nameOfConference}</pre></Col>
                             </Row>
                             <Row>
                                 <Col style={{ "fontSize": "18px" }} ><pre>Venue of Confernce                          : {props.partB.venueOfConference}</pre></Col>

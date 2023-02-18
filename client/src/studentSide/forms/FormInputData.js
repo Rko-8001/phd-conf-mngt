@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import { Col, Form, Row, Card, Table, Container, Button } from 'react-bootstrap';
 function FormInputGenData(props) {
 
+    const [coa, setCoa] = useState(0);
+    const [cocb, setCocb] = useState(0);
+    const [coab, setCoab] = useState(0);
 
     const tableRows = props.tableData.map((info) => {
         return (
@@ -36,8 +39,9 @@ function FormInputGenData(props) {
                             Submit
                         </Button> */}
                     </Form>
-
                     <br /> <br />
+
+
 
                     <Form>
                         <p style={{ "fontSize": "26px" }}>Conference Info: </p>
@@ -64,9 +68,8 @@ function FormInputGenData(props) {
                             </Form.Group >
                         </Row>
                     </Form>
-
-
                     <br /> <br />
+
 
 
                     <Form className='justify-content-start'>
@@ -75,7 +78,7 @@ function FormInputGenData(props) {
                             <Form.Control name="financialSupport" type="text" placeholder="" onChange={props.getGeneralInfo} />
                         </Form.Group>
 
-                        <br/>
+                        <br />
                         <Card body>
                             <Row>
                                 <Col>
@@ -85,7 +88,7 @@ function FormInputGenData(props) {
                                     <Form.Check
                                         type="switch"
                                         id="finanaceSupport"
-                                        label={props.advance == true ? "Yes" : "No"}
+                                        label={props.advance === true ? "Yes" : "No"}
                                         onChange={props.getAdvance}
                                     />
                                 </Col>
@@ -133,10 +136,37 @@ function FormInputGenData(props) {
 
                         </Card>
 
-
+                        <br /> <br />
+                        <p>Enclosures Attached (Please Tick):</p>
+                        <Form.Check aria-label="option 1" label="Copy of Acceptance."  value={coa} checked={coa === 1} onChange={(e) => {
+                            if(coa === 1) {
+                                setCoa(0);
+                            }
+                            else {
+                                setCoa(1);
+                            }
+                        }}/>
+                        <Form.Check aria-label="option 1" label="Copy of Conference Brochure."  value={cocb} checked={cocb === 1} onChange={(e) => {
+                            if(cocb === 1) {
+                                setCocb(0);
+                            }
+                            else {
+                                setCocb(1);
+                            }
+                        }}/>
+                        <Form.Check aria-label="option 1" label="Copy of Abstract." value={coab} checked={coab === 1} onChange={(e) => {
+                            if(coab === 1) {
+                                setCoab(0);
+                            }
+                            else {
+                                setCoab(1);
+                            }
+                        }}/>
                     </Form>
-
+                    <br/>
                 </Container>
+                    <br /> <br />
+                    <br /> <br />
             </div>
         </>
     );
