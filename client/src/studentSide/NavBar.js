@@ -21,7 +21,7 @@ function NavBar(props) {
                             <Link to="/studentLogin/formFill" className="nav-link">Fill Form</Link>
                         </Nav.Item>
                     </Nav>
-                    <Navbar.Text style={{"fontSize": "24px", "color": "black"}}className='justify-content-end me-4'>
+                    <Navbar.Text style={{"fontSize": "20px", "color": "black"}}className='justify-content-end me-4'>
                         Signed in as: {props.emailNav}
                     </Navbar.Text>
                 </Navbar.Collapse>

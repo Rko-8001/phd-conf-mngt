@@ -1,12 +1,17 @@
 import React from 'react'
-import NavBar from './NavBar'
-
+import StudentDashboard from './mainPage/StudentDashboard';
+import NavBar from './NavBar';
+import { Container} from 'react-bootstrap';
 function Home(props) {
 
     return (
         <>
-            <NavBar emailNav={props.studentEmail}/>
-            <h1>Welcome to Phd Confernce Management Website by Team-12</h1>
+            <NavBar emailNav={props.studentEmail} />
+            <Container>
+                <br/>
+                <StudentDashboard studentEmail={props.studentEmail} />
+
+            </Container>
         </>
     )
 }
