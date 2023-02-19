@@ -1,34 +1,39 @@
-import React from 'react'
+import React, { useState } from "react";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import Home from './Home';
 import History from './History';
 import Notifications from './Notifications';
+import Contact from './Contact';
+import StudentDashboard from "./StudentDashboard";
 
 
-function JustifiedExample() {
+const TabComponent = (props) => {
+  const [activeTab, setActiveTab] = useState("tab1");
+
+  const handleTabSelect = (tab) => {
+    setActiveTab(tab);
+  };
+
   return (
-    <Tabs
-      defaultActiveKey="profile"
-      id="justify-tab-example"
-      className="mb-3"
-      justify
-    >
-      <Tab eventKey="profile" title="Profile">
-        <Home />
+    <div>
+    <Tabs activeKey={activeTab} onSelect={handleTabSelect}>
+      <Tab eventKey="tab1" title="Home">
+        <StudentDashboard studentEmail={props.studentEmail}/>
       </Tab>
-      <Tab eventKey="history" title="History">
-        <History/>
+      <Tab eventKey="tab2" title="History">
+        <History />
       </Tab>
-      <Tab eventKey="longer-tab" title="Loooonger Tab">
+      <Tab eventKey="tab3" title="Notifications">
         <Notifications/>
       </Tab>
-      <Tab eventKey="contact" title="Contact" disabled>
-        {/* <Sonnet /> */}
+      <Tab eventKey="tab4" title="Contact">
+        <Contact />
       </Tab>
     </Tabs>
+    </div>
   );
-}
+};
 
-export default JustifiedExample;
+export default TabComponent;

@@ -2,6 +2,7 @@ import React from 'react'
 import StudentDashboard from './mainPage/StudentDashboard';
 import NavBar from './NavBar';
 import { Container} from 'react-bootstrap';
+import Bar from "./mainPage/Bar";
 function Home(props) {
 
     return (
@@ -9,7 +10,7 @@ function Home(props) {
             <NavBar emailNav={props.studentEmail} />
             <Container>
                 <br/>
-                <StudentDashboard studentEmail={props.studentEmail} />
+                <Bar studentEmail={props.studentEmail} />
 
             </Container>
         </>
