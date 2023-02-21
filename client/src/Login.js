@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Button, Container, Navbar } from 'react-bootstrap';
+import { Form, Button, Container, Navbar, Card, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -78,7 +78,7 @@ function Login(props) {
                 navigate('/studentLogin');
             }
             else if (role === "1") {
-                navigate('/facultyLogin');  
+                navigate('/facultyLogin');
             }
             else {
                 navigate('/adminLogin');
@@ -90,47 +90,72 @@ function Login(props) {
 
     return (
         <>
+        {/* <div style={{"background": "lightgrey"}}> */}
             <div>
                 <Navbar bg="dark" variant="dark" >
                     <Navbar.Brand style={{ "marginLeft": "10px", "fontSize": "36px", "color": "white" }}> PCMP :: PhD Conference Management Portal </Navbar.Brand>
                 </Navbar>
             </div>
 
-            <Container style={{ "fontSize": "24px", "marginTop": "36px" }}>
-
-                <p style={{ "marginBottom": "5px", "fontSize": "30px", "textAlign": "center" }}>Log In</p>
-                <p style={{ "marginTop": "5px", "fontSize": "26px", "textAlign": "center", "color": "grey" }}>Please enter your email and OTP to Log In</p>
-
-                <Form method="POST">
+            <Container>
 
 
-                    <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Label style={{ "fontSize": "27px" }}>Email address</Form.Label>
-                        <Form.Control style={{ "fontSize": "25px" }} type="email" placeholder="Enter email" onChange={getEmailId} />
-                        <Form.Text style={{ "fontSize": "19px" }} id="emailHelpBlock" muted>
-                            Use your Institute Id to Login!
-                        </Form.Text>
-                    </Form.Group>
+                <Row style={{ "marginTop": "20px" }}>
+                    <Col>
+                        <Card>
+                            <Card.Header style={{"fontSize": "24px"}}>Login with your IIT Ropar Google ID</Card.Header>
+                            <Card.Body>
+
+                                <Card.Text>
+                                    Work under Progress..
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col>
+                        <Card >
+                            <Card.Header style={{"fontSize": "24px"}}>Login with PCMP credentials</Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    <p style={{ "marginTop": "5px", "fontSize": "19px", "textAlign": "center", "color": "grey" }}>Please enter your email and OTP to Log In</p>
+
+                                    <Form method="POST">
 
 
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <Button style={{ "fontSize": "20px" }} variant="dark" onClick={requestOtp}>Request OTP</Button>
-                    </div>
-
-                    <Form.Group className="mb-3" controlId="formgroupOtp">
-                        <Form.Label style={{ "fontSize": "27px" }}>OTP: </Form.Label>
-                        <Form.Control style={{ "fontSize": "25px" }} type="text" placeholder="" onChange={getOtp} />
-                        <Form.Text style={{ "fontSize": "19px" }} id="otpHelpBlock" muted>
-                            Enter the Otp you recieve on your email.
-                        </Form.Text>
-                    </Form.Group>
+                                        <Form.Group className="mb-3" controlId="formGroupEmail">
+                                            <Form.Label style={{ "fontSize": "18px" }}>Email address</Form.Label>
+                                            <Form.Control style={{ "fontSize": "17px" }} type="email" placeholder="Enter email" onChange={getEmailId} />
+                                            <Form.Text style={{ "fontSize": "15px" }} id="emailHelpBlock" muted>
+                                                Use your Institute Id to Login! 
+                                            </Form.Text>
+                                        </Form.Group>
 
 
-                    <div style={{ display: "flex", justifyContent: "right", alignItems: "right" }}>
-                        <Button style={{ "fontSize": "20px" }} variant="success" onClick={requestLogIn}>Log In</Button>
-                    </div>
-                </Form>
+                                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                                            <Button style={{ "fontSize": "14px" }} variant="secondary" onClick={requestOtp}>Request OTP</Button>
+                                        </div>
+
+                                        <Form.Group className="mb-3" controlId="formgroupOtp">
+                                            <Form.Label style={{ "fontSize": "18px" }}>OTP: </Form.Label>
+                                            <Form.Control style={{ "fontSize": "17px" }} type="text" placeholder="" onChange={getOtp} />
+                                            <Form.Text style={{ "fontSize": "15px" }} id="otpHelpBlock" muted>
+                                                Enter the Otp you recieve on your email. Please wait until alert pops out!
+                                            </Form.Text>
+                                        </Form.Group>
+
+
+                                        <div style={{ display: "flex", justifyContent: "right", alignItems: "right" }}>
+                                            <Button style={{ "fontSize": "14px" }} variant="success" onClick={requestLogIn}>Log In</Button>
+                                        </div>
+                                    </Form>
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
             </Container>
+
+            
 
         </>
     )
