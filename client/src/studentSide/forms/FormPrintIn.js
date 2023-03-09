@@ -24,9 +24,56 @@ function FormPrintIn(props) {
     });
 
 
+    const submitApplication = async (e) => {
+        e.preventDefault();
+        
+
+        // save all data
+        const email = props.partA.email ;
+        const status = "0";
+        const mobileNo = props.partA.mobileNo ;
+        const bankAccountNo = props.partA.bankAccNo ;
+        const nameOfConference = props.partB.nameOfConference ;
+        const venueOfConference = props.partB.venueOfConference ;
+        const periodOfConference = props.partB.periodOfConference ;
+        const paperInConference = props.partB.paperInConference ;
+        
+        //                      To be Fixed.. 
+        // const financialSupport = props.partB.financialSupport ;
+        const financialSupport = true;
+        const advance = props.advance ;
+        const coaa =   true ;
+        const coaba =  true;
+        const cocba  =   true;
+
+        const res = await fetch("/studentApplicationSubmit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({email,status,  mobileNo, bankAccountNo, nameOfConference, venueOfConference, periodOfConference, paperInConference, financialSupport, advance, coaa, coaba, cocba })
+        });
+
+        //logic
+        // const data = await res.json();
+
+        if (res.status === 422) {
+            window.alert("Loda lele");
+        }
+        else {
+            window.alert("Application Submitted");
+        }
+    }
     return (
         <>
-            <Button variant='outline-dark' onClick={handlePrint}> Print Form</Button>
+            <Row>
+                <Col>
+                    <Button variant='outline-dark' onClick={handlePrint}> Print Form</Button>
+                </Col>
+                <Col>
+                    <Button variant='outline-dark' onClick={submitApplication}>Request Grant</Button>
+                </Col>
+            </Row>
             <br /> <br />
 
 

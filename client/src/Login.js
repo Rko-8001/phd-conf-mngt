@@ -80,8 +80,11 @@ function Login(props) {
             else if (role === "1") {
                 navigate('/facultyLogin');
             }
-            else {
+            else if (role === "2") {
                 navigate('/adminLogin');
+            }
+            else {
+
             }
         }
     }
@@ -90,20 +93,20 @@ function Login(props) {
 
     return (
         <>
-        {/* <div style={{"background": "lightgrey"}}> */}
+            {/* <div style={{"background": "lightgrey"}}> */}
             <div>
                 <Navbar bg="dark" variant="dark" >
                     <Navbar.Brand style={{ "marginLeft": "10px", "fontSize": "36px", "color": "white" }}> PCMP :: PhD Conference Management Portal </Navbar.Brand>
                 </Navbar>
             </div>
-
+            
             <Container>
-
-
+                <br/>
+                <p style={{"fontSize": "19px", "color": "red"}} className="text-center">By proceeding with the login you agree to the terms of use of this service.</p>
                 <Row style={{ "marginTop": "20px" }}>
                     <Col>
                         <Card>
-                            <Card.Header style={{"fontSize": "24px"}}>Login with your IIT Ropar Google ID</Card.Header>
+                            <Card.Header style={{ "fontSize": "24px" }}>Login with your IIT Ropar Google ID</Card.Header>
                             <Card.Body>
 
                                 <Card.Text>
@@ -114,7 +117,7 @@ function Login(props) {
                     </Col>
                     <Col>
                         <Card >
-                            <Card.Header style={{"fontSize": "24px"}}>Login with PCMP credentials</Card.Header>
+                            <Card.Header style={{ "fontSize": "24px" }}>Login with PCMP credentials</Card.Header>
                             <Card.Body>
                                 <Card.Text>
                                     <p style={{ "marginTop": "5px", "fontSize": "19px", "textAlign": "center", "color": "grey" }}>Please enter your email and OTP to Log In</p>
@@ -126,7 +129,7 @@ function Login(props) {
                                             <Form.Label style={{ "fontSize": "18px" }}>Email address</Form.Label>
                                             <Form.Control style={{ "fontSize": "17px" }} type="email" placeholder="Enter email" onChange={getEmailId} />
                                             <Form.Text style={{ "fontSize": "15px" }} id="emailHelpBlock" muted>
-                                                Use your Institute Id to Login! 
+                                                Use your Institute Id to Login!
                                             </Form.Text>
                                         </Form.Group>
 
@@ -155,7 +158,7 @@ function Login(props) {
                 </Row>
             </Container>
 
-            
+
 
         </>
     )

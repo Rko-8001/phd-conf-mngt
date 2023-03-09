@@ -53,4 +53,4 @@ module.exports = User;
 
 
 //   mongo insertion 
-// {"_id":{"$oid":"63eba5a2540a443fd5f34388"},"name":"Yadwinder","email":"2020csb1143@iitrpr.ac.in","entryNo":"2020CSB1143", "department":"CSE", "dateOfJoining": "09/11/2022", "fellowshipCategory": "nirf", "areaOfSpecialisation": "WebDev", "nameOfSupervisor": "Dr. Puneet Goyal"}
+// {"_id":{"$oid":"63eba5a2540a443fd5f34388"},"name":"Yadwinder","email":"2020csb1143@iitrpr.ac.in","entryNo":"2020CSB1143", "department":"CSE", "dateOfJoining": "09/11/2022", "fellowshipCategory": "nirf", "areaOfSpecialisation": "WebDev", "nameOfSupervisor": "Dr. Puneet Goyal", "role" : "0"}

@@ -11,7 +11,6 @@ function Home(props) {
             <Container>
                 <br/>
                 <Bar studentEmail={props.studentEmail} />
-
             </Container>
         </>
     )
