@@ -14,10 +14,9 @@ const User = require('./model/userSchema');
 app.use(express.json());
 app.use(require('./router/loginAuth'));
 app.use(require('./router/studentSide'));
+app.use(require('./router/googleAuth'));
 
-app.get('/', (req,res) => {
-    res.send(`Hi`);
-})
+
 app.get('/login', (req,res) => {
     res.send(`Hi`);
 })

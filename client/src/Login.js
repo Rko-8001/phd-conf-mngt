@@ -89,6 +89,40 @@ function Login(props) {
         }
     }
 
+    const loginWithGoogle = async (e) => {
+        console.log("Hello");
+        e.preventDefault();
+        const res = await fetch("/auth", {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS'
+            }
+        });
+
+        const data = await res.json();
+        const role = data.split(' ')[0];
+        const email = data.split(' ')[1];
+        console.log(email);
+        if (res.status === 200) {
+            if (role === "0") {
+                navigate('/studentLogin');
+            }
+            else if (role === "1") {
+                navigate('/facultyLogin');
+            }
+            else if (role === "2") {
+                navigate('/adminLogin');
+            }
+            else {
+            }
+        }
+        else {
+            window.alert("Error! Try Again..");
+        }
+    }
 
 
     return (
@@ -99,10 +133,10 @@ function Login(props) {
                     <Navbar.Brand style={{ "marginLeft": "10px", "fontSize": "36px", "color": "white" }}> PCMP :: PhD Conference Management Portal </Navbar.Brand>
                 </Navbar>
             </div>
-            
+
             <Container>
-                <br/>
-                <p style={{"fontSize": "19px", "color": "red"}} className="text-center">By proceeding with the login you agree to the terms of use of this service.</p>
+                <br />
+                <p style={{ "fontSize": "19px", "color": "red" }} className="text-center">By proceeding with the login you agree to the terms of use of this service.</p>
                 <Row style={{ "marginTop": "20px" }}>
                     <Col>
                         <Card>
@@ -110,7 +144,7 @@ function Login(props) {
                             <Card.Body>
 
                                 <Card.Text>
-                                    Work under Progress..
+                                    <Button onClick={loginWithGoogle}>Sign In with Google ID</Button>
                                 </Card.Text>
                             </Card.Body>
                         </Card>
