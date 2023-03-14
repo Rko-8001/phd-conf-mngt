@@ -83,6 +83,9 @@ function Login(props) {
             else if (role === "2") {
                 navigate('/adminLogin');
             }
+            else if (role === "3") {
+                navigate('/researchLogin');
+            }
             else {
 
             }

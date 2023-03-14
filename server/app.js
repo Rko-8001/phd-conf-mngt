@@ -11,10 +11,12 @@ require('./mongoDb/connection');
 const User = require('./model/userSchema');
 
 
+// components Maintained
 app.use(express.json());
 app.use(require('./router/loginAuth'));
 app.use(require('./router/studentSide'));
 app.use(require('./router/googleAuth'));
+app.use(require('./router/researchSide'));
 
 
 app.get('/login', (req,res) => {

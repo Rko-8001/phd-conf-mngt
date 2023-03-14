@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required:true
+        required: true
     },
     entryNo: {
         type: String,
@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         // required: true
     },
     dateOfJoining: {
-        type: String, 
+        type: String,
         // required: true
     },
     fellowshipCategory: {
@@ -51,6 +51,27 @@ module.exports = User;
 
 
 
+/*
+        //   mongo insertion 
+{    
+     "_id":{"$oid":"63eba5a2540a443fd5f34388"},
+     "name":"Yadwinder",
+     "email":"2020csb1143@iitrpr.ac.in",
+     "entryNo":"2020CSB1143", 
+     "department":"CSE", 
+     "dateOfJoining": "09/11/2022", 
+     "fellowshipCategory": "nirf", 
+     "areaOfSpecialisation": "WebDev", 
+     "nameOfSupervisor": "Dr. Puneet Goyal", 
+     "role" : "0"
+}
 
-//   mongo insertion 
-// {"_id":{"$oid":"63eba5a2540a443fd5f34388"},"name":"Yadwinder","email":"2020csb1143@iitrpr.ac.in","entryNo":"2020CSB1143", "department":"CSE", "dateOfJoining": "09/11/2022", "fellowshipCategory": "nirf", "areaOfSpecialisation": "WebDev", "nameOfSupervisor": "Dr. Puneet Goyal", "role" : "0"}
+
+{    
+    "_id":{"$oid":"63eba5a2540a443fd5f34388"},
+    "name":"Tanuj",
+    "email":"2020csb1134@iitrpr.ac.in",
+    "role" : "3"
+}
+
+*/

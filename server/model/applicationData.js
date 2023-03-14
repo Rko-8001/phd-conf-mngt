@@ -14,10 +14,10 @@ const applicationData = new mongoose.Schema({
         /*
             Status
             0 for Submit Application
-            1 for Supervisor Approval
-            2 for Research Section Approval
-            3 for Account Section
-            
+            1 for Supervisor Approval           -1 for Supervisor Disapproval
+            2 for Research Section Approval     -2 for Research Section Dispproval
+            3 for Account Section               -3 for Account Section
+
          */
     },
     mobileNo: {
@@ -60,6 +60,15 @@ const applicationData = new mongoose.Schema({
     },
     coaba: {
         type: Boolean,
+    },
+    remarksResearch: {
+        type: String
+    },
+    remarksAccounts: {
+        type: String
+    },
+    remarksDean: {
+        type: String
     }
 });
 
@@ -74,6 +83,8 @@ module.exports = AppData;
 /* 
 
             Mongo Insertion
+
+            Student Submitted
 {
     "email": "2020csb1143@iitrpr.ac.in",
     "status": "0",
@@ -83,6 +94,42 @@ module.exports = AppData;
     "venueOfConference": "iitropar", 
     "periodOfConference": "12-11-2023",
     "paperInConference": "Defense Seminar",
+    "financialSupport": true, 
+    "advance": true,
+    "coaa": true, 
+    "coaba": true,
+    "cocba": true
+}
+
+        Faculty Approved
+{
+    ,
+    "email": "2020csb1143@iitrpr.ac.in",
+    "status": "1",
+    "mobileNo":         "1234567890", 
+    "bankAccountNo":    "12345678901",
+    "nameOfConference":   "fa2", 
+    "venueOfConference":  "fa2", 
+    "periodOfConference": "fa2",
+    "paperInConference":  "fa2",
+    "financialSupport": true, 
+    "advance": true,
+    "coaa": true, 
+    "coaba": true,
+    "cocba": true
+}
+
+        Faculty Disapproved
+{
+    ,
+    "email": "2020csb1143@iitrpr.ac.in",
+    "status": "-1",
+    "mobileNo":         "1234567890", 
+    "bankAccountNo":    "12345678901",
+    "nameOfConference":   "fd1", 
+    "venueOfConference":  "fd1", 
+    "periodOfConference": "fd1",
+    "paperInConference":  "fd1",
     "financialSupport": true, 
     "advance": true,
     "coaa": true, 

@@ -1,9 +1,12 @@
 import React from 'react'
+import { Container, Row, Col, Card, Button, Table } from "react-bootstrap";
 
 function AdminHome(props) {
   return (
-    <div>Hi!! Admin: {props.adminEmail} Work Under Progress!</div>
-  )
-}
+    <>
+    
+    </>
+      );
+    };
 
-export default AdminHome
+export default AdminHome;
