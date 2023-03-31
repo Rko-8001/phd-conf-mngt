@@ -9,8 +9,8 @@ import NavBar1 from "./studentSide/NavBar1";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    {/* <App /> */}
+    <App />
     {/* <Check/> */}
-    <NavBar1/>
+    {/* <NavBar1/> */}
   </BrowserRouter>
 );

@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 
+// credentials import
+require('dotenv').config();
 
 // connection established
 require('./mongoDb/connection');
@@ -21,6 +23,7 @@ app.use(require('./router/researchSide'));
 app.use(require('./router/facultySide'));
 app.use(require('./router/sharedFunctions'));
 app.use(require('./router/accountSide.js'))
+
 
 
 app.get('/login', (req,res) => {

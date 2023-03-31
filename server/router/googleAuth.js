@@ -4,8 +4,11 @@ const router = express();
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 // credentials import 
-require('./googleAuthCreds');
+require('../credentials/googleAuthCreds');
 
+
+// credentials import
+require('dotenv').config();
 
 // imported schema
 const User = require('../model/userSchema');
@@ -21,9 +24,9 @@ router.use(passport.session());
 
 
             // for testing google auth
-// router.get('/', (req, res) => {
-//     res.send("<a href='/auth'>Login With Google</a>")
-// });
+router.get('/', (req, res) => {
+    res.send("<a href='/auth'>Login With Google</a>")
+});
 
 
 // Auth logic
@@ -48,6 +51,7 @@ router.get('/auth/callback/success', async (req, res) => {
     try {
         const loginuser = await User.findOne({ email: email });
         if (!loginuser) {
+            // console.log("hi");
             return res.status(422).json({ error: "Invalid Credentials." });
             // res.send("<h1>Invalid Credientials</h1>");
         }
@@ -66,5 +70,6 @@ router.get('/auth/callback/success', async (req, res) => {
 router.get('/auth/callback/failure', (req, res) => {
     res.send("Error");
 })
+
 
 module.exports = router;

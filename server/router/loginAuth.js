@@ -9,20 +9,17 @@ const Mail = require('nodemailer/lib/mailer');
 // connection established
 require('../mongoDb/connection');
 
+// nodemailer import
+const transporter = require('../credentials/nodeMailerCreds')
 
 // requiring user Schema 
 const User = require('../model/userSchema');
 
+// credentials import
+require('dotenv').config();
 
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    auth: {
-        user: 'icpc.team7@gmail.com',
-        pass: 'ajildywjmufezfzs'
-    }
-});
+
 var loginOtp = "696969";
 router.post('/login', async (req, res) => {
 
@@ -51,7 +48,7 @@ router.post('/login', async (req, res) => {
         console.log("OTP: " + loginOtp);
         try {
             let info = await transporter.sendMail({
-                from: 'icpc.team7@gmail.com',
+                from: process.env.NODEMAILER_EMAIL,
                 to: email,
                 subject: "PCMP Login Requested!",
                 html: "<h3>OTP for PCMP Login is </h3>" + "<h1 style='font-weight:bold;'>" + loginOtp + "</h1>" // html body
