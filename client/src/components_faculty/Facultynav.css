@@ -1,0 +1,24 @@
+nav {
+    background-color: #333;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    margin: 0 10px;
+  }
+  
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
