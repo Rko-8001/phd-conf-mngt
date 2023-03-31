@@ -6,8 +6,6 @@ import Login from './Login';
 import FormInput from './studentSide/forms/FormInput';
 import StudentHome from './studentSide/StudentHome';
 import FacultyHome from './components_faculty/Faculty_dashboard';
-import AdminHome from './adminSide/AdminHome';
-// import ResearchHome from './researchSide/ResearchHome';
 import Accounts_dashboard from './components_accounts/Accounts_dashboard';
 import Research_dashboard from './components_research/Research_dashboard';
 

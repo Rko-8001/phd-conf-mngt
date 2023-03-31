@@ -17,6 +17,10 @@ app.use(require('./router/loginAuth'));
 app.use(require('./router/studentSide'));
 app.use(require('./router/googleAuth'));
 app.use(require('./router/researchSide'));
+app.use(require('./router/researchSide'));
+app.use(require('./router/facultySide'));
+app.use(require('./router/sharedFunctions'));
+app.use(require('./router/accountSide.js'))
 
 
 app.get('/login', (req,res) => {
