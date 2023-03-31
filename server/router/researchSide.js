@@ -14,7 +14,8 @@ const AppData = require('../model/applicationData');
 
 // Approve or Disapprove Logic
 router.post('/researchApproveOrDisapprove', async (req , res) => {
-    const {id, status, remarks} = req.body;
+    // const {id, status, remarks} = req.body;
+    const {id, status} = req.body;
     
                 // Debug Purpose
     // console.log(id);    console.log(status);
@@ -28,7 +29,8 @@ router.post('/researchApproveOrDisapprove', async (req , res) => {
             return res.status(422).json("Can't Approve Or Disapprove..");
         }
         
-        await AppData.findByIdAndUpdate(id, {status: status, remarksResearch: remarks});
+        // await AppData.findByIdAndUpdate(id, {status: status, remarksResearch: remarks});
+        await AppData.findByIdAndUpdate(id, {status: status});
         
         //             Debug Purpose
         // const appData2 = await AppData.findById(id);
