@@ -8,6 +8,8 @@ import StudentHome from './studentSide/StudentHome';
 import FacultyHome from './components_faculty/Faculty_dashboard';
 import Accounts_dashboard from './components_accounts/Accounts_dashboard';
 import Research_dashboard from './components_research/Research_dashboard';
+import LandingPage from './components/LandingPage';
+import ErrorPage from './components/ErrorPage';
 
 
 function App() {
@@ -21,9 +23,9 @@ function App() {
   return (
     <>
       <Routes>
-
-        <Route path='/' element={<Login getEmailIdLogin={getEmailId} />} />
-
+        <Route path='/' element={<LandingPage/>} />
+        <Route path='/login' element={<Login getEmailIdLogin={getEmailId} />} />
+        
         <Route path='/studentLogin' >
           <Route index element={<StudentHome studentEmail={emailId} />} />
           <Route path="formFill" element={<FormInput studentEmail={emailId} />} />
@@ -34,13 +36,12 @@ function App() {
         <Route path='/researchLogin' element={<Research_dashboard adminEmail={emailId} />} />
 
 
-        {/* <Route path='/resarchLogin'>
-          <Route index element={<ResearchHome researchEmail={emailId} />} />
-          {/* <Route path='approve'  element={ <ResearchHome researchEmail = {emailId}/>}/> */}
-        {/* </Route> */} */}
+        
         <Route path='/accountLogin'>
           <Route index element={<Accounts_dashboard accountsEmail={emailId}/>}/>
         </Route>
+
+        <Route  path='*' element={<ErrorPage/>} />
 
       </Routes>
     </>
