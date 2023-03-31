@@ -42,6 +42,7 @@ function FormPrintIn(props) {
         // const financialSupport = props.partB.financialSupport ;
         const financialSupport = true;
         const advance = props.advance ;
+        const finances = props.partC;
         const coaa =   true ;
         const coaba =  true;
         const cocba  =   true;
@@ -51,7 +52,7 @@ function FormPrintIn(props) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({email,status,  mobileNo, bankAccountNo, nameOfConference, venueOfConference, periodOfConference, paperInConference, financialSupport, advance, coaa, coaba, cocba })
+            body: JSON.stringify({email,status,  mobileNo, bankAccountNo, nameOfConference, venueOfConference, periodOfConference, paperInConference, financialSupport, advance, finances, coaa, coaba, cocba })
         });
 
         //logic

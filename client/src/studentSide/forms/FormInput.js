@@ -127,7 +127,7 @@ function FormInput(props) {
     return (
         <>
             <NavBar emailNav={props.studentEmail} />
-            <Container style={{ "fontSize": "24px" }}>
+            <Container style={{ "fontSize": "18px" }}>
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}

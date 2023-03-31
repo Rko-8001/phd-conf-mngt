@@ -23,7 +23,7 @@ const TabComponent = (props) => {
         <StudentDashboard studentEmail={props.studentEmail}/>
       </Tab>
       <Tab eventKey="tab2" title="History">
-        <History />
+        <History email={props.studentEmail}/>
       </Tab>
       <Tab eventKey="tab3" title="Notifications">
         <Notifications/>
