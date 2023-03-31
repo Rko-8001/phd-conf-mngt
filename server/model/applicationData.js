@@ -52,6 +52,9 @@ const applicationData = new mongoose.Schema({
         type: Boolean,
         // require: true
     },  
+    finances: {
+        type: Array,
+    },
     coaa: {
         type: Boolean,
     },

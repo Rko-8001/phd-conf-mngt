@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
         }
     }
     else {
-        if(loginOtp == otp){
+        if(loginOtp === otp){
             return res.status(200).json( role + " " + id);
         }
         else {

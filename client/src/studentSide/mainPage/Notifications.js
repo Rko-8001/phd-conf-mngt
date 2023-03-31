@@ -64,66 +64,7 @@ function PlacementExample() {
             </Toast.Header>
             <Toast.Body>Hello, This is test message.</Toast.Body>
           </Toast>
-          <Toast>
-            <Toast.Header closeButton={false}>
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">Message</strong>
-              <small>2 days ago</small>
-            </Toast.Header>
-            <Toast.Body>Hello, This is test message.</Toast.Body>
-          </Toast>
-          <Toast>
-            <Toast.Header closeButton={false}>
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">Bootstrap</strong>
-              <small>2 days ago</small>
-            </Toast.Header>
-            <Toast.Body>Hello, This is test message.</Toast.Body>
-          </Toast>
-          <Toast>
-            <Toast.Header closeButton={false}>
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">Bootstrap</strong>
-              <small>2 days ago</small>
-            </Toast.Header>
-            <Toast.Body>Hello, This is test message.</Toast.Body>
-          </Toast>
-          <Toast>
-            <Toast.Header closeButton={false}>
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">Bootstrap</strong>
-              <small>2 days ago</small>
-            </Toast.Header>
-            <Toast.Body>Hello, world! This is a toast message and here we go in the men time.</Toast.Body>
-          </Toast>
-          <Toast>
-            <Toast.Header closeButton={false}>
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">Bootstrap</strong>
-              <small>2 days ago</small>
-            </Toast.Header>
-            <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
-          </Toast>
+          
         </ToastContainer>
       </div>
     </>

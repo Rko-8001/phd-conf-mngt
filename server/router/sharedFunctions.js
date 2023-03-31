@@ -120,3 +120,17 @@ router.post('/applicationDisapprovedResearch', async (req,res) => {
         return res.status(422).json("Error Occurred..");
     }
 });
+
+
+router.post('/studentInfoAdmin', async (req, res) => {
+    const { semail, femail } = req.body;
+    try {
+            const appData = await AppData.find({email: semail});
+            return res.status(200).json(appData);
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json("Error Occurred..");
+    }
+});
+
+module.exports = router;

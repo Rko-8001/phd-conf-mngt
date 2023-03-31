@@ -38,8 +38,8 @@ function Login(props) {
         //logic
         // const data = await res.json();
 
-        if (res.status === 422) {
-            window.alert(" Galat hai");
+        if (res.status === 422 || res.status === 423) {
+            window.alert("Invalid Creds");
         }
         else {
             window.alert("OTP Sent to your " + email);
@@ -60,19 +60,26 @@ function Login(props) {
             },
             body: JSON.stringify({ email, mssg, otp })
         });
-        const data = await res.json();
-        const role = data.split(' ')[0];
+        
         // const id = data.split(' ')[1];
 
 
         // console.log(role);
         // console.log(id);
         // console.log(data);
-
-        if (res.status === 422) {
+        console.log(res.status);
+        if (res.status === 422 ) {
             window.alert("Wrong OTP Entered!! Try Again..");
         }
+        else if( res.status === 423)
+        {
+            window.alert("Invalid Creds");
+            setEmailId("");
+            setOtp("");
+        }
         else {
+            const data = await res.json();
+            const role = data.split(' ')[0];
             props.getEmailIdLogin(emailId);
             if (role === "0") {
                 navigate('/studentLogin');
@@ -81,13 +88,12 @@ function Login(props) {
                 navigate('/facultyLogin');
             }
             else if (role === "2") {
-                navigate('/adminLogin');
-            }
-            else if (role === "3") {
                 navigate('/researchLogin');
             }
+            else if (role === "3") {
+                navigate('/accountLogin');
+            }
             else {
-
             }
         }
     }
@@ -119,7 +125,8 @@ function Login(props) {
             else if (role === "2") {
                 navigate('/adminLogin');
             }
-            else {
+            else if (role === "3") {
+                navigate('/accountLogin');
             }
         }
         else {
@@ -147,7 +154,26 @@ function Login(props) {
                             <Card.Body>
 
                                 <Card.Text>
-                                    <Button onClick={loginWithGoogle}>Sign In with Google ID</Button>
+                                    <p>
+                                        Before proceeding, please ensure that:
+                                    </p>
+                                    <p>
+
+                                        1. You must be logged into your Institute College ID..
+                                    </p>
+                                    <p>
+
+                                        2. Popups are not blocked by your browser
+                                    </p>
+                                    <p>
+
+                                        3. You are not logged into multiple Google accounts
+                                    </p>
+                                    <br /><br />
+                                    <form action="http://localhost:5000/auth" method="get">
+                                        <input type="submit" value="Sign In with Google" />
+
+                                    </form>
                                 </Card.Text>
                             </Card.Body>
                         </Card>

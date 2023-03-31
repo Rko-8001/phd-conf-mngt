@@ -21,7 +21,7 @@ function FormInputGenData(props) {
 
             <div style={{ "marginTop": "50px" }}>
 
-                <Container className='mt-3' style={{ "fontSize": "20px" }}>
+                <Container className='mt-3' style={{ "fontSize": "15px" }}>
                     <Form>
                         <p style={{ "fontSize": "26px" }}>General Info: </p>
                         <Row className='mt-3'>
@@ -94,79 +94,77 @@ function FormInputGenData(props) {
                                 </Col>
                             </Row>
                             <br />
-                            {props.advance ?
-                                <div>
-                                    <Row className="align-items-center">
-                                        <Col >
-                                            <Form.Group as={Col} controlId="advanceType">
-                                                <Form.Label>Particulars</Form.Label>
-                                                <Form.Control name="particular" type="text" placeholder='Flight Charges' value={props.rowData.particular} onChange={props.getRowData} />
-                                            </Form.Group>
-                                        </Col>
 
-                                        <Col >
-                                            <Form.Group controlId="advanceAmount">
-                                                <Form.Label>Amount (Rs)</Form.Label>
-                                                <Form.Control name="amount" type="text" placeholder='8000' value={props.rowData.amount} onChange={props.getRowData} />
-                                            </Form.Group>
-                                        </Col>
+                            <div>
+                                <Row className="align-items-center">
+                                    <Col >
+                                        <Form.Group as={Col} controlId="advanceType">
+                                            <Form.Label>Particulars</Form.Label>
+                                            <Form.Control name="particular" type="text" placeholder='Flight Charges' value={props.rowData.particular} onChange={props.getRowData} />
+                                        </Form.Group>
+                                    </Col>
 
-                                        <Col md="auto">
-                                            <Button className="mb-2" onClick={props.addRowData}>
-                                                Add
-                                            </Button>
-                                        </Col>
-                                    </Row>
+                                    <Col >
+                                        <Form.Group controlId="advanceAmount">
+                                            <Form.Label>Amount (Rs)</Form.Label>
+                                            <Form.Control name="amount" type="text" placeholder='8000' value={props.rowData.amount} onChange={props.getRowData} />
+                                        </Form.Group>
+                                    </Col>
 
-                                    <br />
-                                    <Table striped bordered hover>
-                                        <thead>
-                                            <tr>
-                                                <th>Particular</th>
-                                                <th>Amount (Rs)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>{tableRows}</tbody>
-                                    </Table>
+                                    <Col md="auto">
+                                        <Button className="mb-2" onClick={props.addRowData}>
+                                            Add
+                                        </Button>
+                                    </Col>
+                                </Row>
 
-                                    <br /><br />
-                                </div>
-                                : <></>
-                            }
+                                <br />
+                                <Table striped bordered hover>
+                                    <thead>
+                                        <tr>
+                                            <th>Particular</th>
+                                            <th>Amount (Rs)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>{tableRows}</tbody>
+                                </Table>
+
+                                <br /><br />
+                            </div>
 
                         </Card>
 
                         <br /> <br />
                         <p>Enclosures Attached (Please Tick):</p>
-                        <Form.Check aria-label="option 1" label="Copy of Acceptance."  value={coa} checked={coa === 1} onChange={(e) => {
-                            if(coa === 1) {
+                        <Form.Check aria-label="option 1" label="Copy of Acceptance." value={coa} checked={coa === 1} onChange={(e) => {
+                            if (coa === 1) {
                                 setCoa(0);
                             }
                             else {
                                 setCoa(1);
                             }
-                        }}/>
-                        <Form.Check aria-label="option 1" label="Copy of Conference Brochure."  value={cocb} checked={cocb === 1} onChange={(e) => {
-                            if(cocb === 1) {
+                        }} />
+                        <Form.Check aria-label="option 1" label="Copy of Conference Brochure." value={cocb} checked={cocb === 1} onChange={(e) => {
+                            if (cocb === 1) {
                                 setCocb(0);
                             }
                             else {
                                 setCocb(1);
                             }
-                        }}/>
+                        }} />
                         <Form.Check aria-label="option 1" label="Copy of Abstract." value={coab} checked={coab === 1} onChange={(e) => {
-                            if(coab === 1) {
+                            if (coab === 1) {
                                 setCoab(0);
                             }
                             else {
                                 setCoab(1);
                             }
-                        }}/>
+                        }} />
                     </Form>
-                    <br/>
+                    <br />
                 </Container>
-                    <br /> <br />
-                    <br /> <br />
+                <br /> <br />
+                <br /> <br />
             </div>
         </>
     );

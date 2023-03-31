@@ -5,8 +5,8 @@ import { Nav, Navbar} from 'react-bootstrap';
 function NavBar(props) {
     return (
         <>
-            <Navbar style={{ "marginLeft": "20px", "fontSize": "30px" }} bg="light" expand="lg">
-                <Navbar.Brand style={{ "fontSize": "40px" }}><SiGooglescholar /> PCM Portal</Navbar.Brand>
+            <Navbar style={{ "marginLeft": "18px", "fontSize": "20px" }} bg="light" expand="lg">
+                <Navbar.Brand style={{ "fontSize": "30px" }}><SiGooglescholar /> PCM Portal</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav
@@ -21,7 +21,7 @@ function NavBar(props) {
                             <Link to="/studentLogin/formFill" className="nav-link">Fill Form</Link>
                         </Nav.Item>
                     </Nav>
-                    <Navbar.Text style={{"fontSize": "20px", "color": "black"}}className='justify-content-end me-4'>
+                    <Navbar.Text style={{"fontSize": "14px", "color": "black"}}className='justify-content-end me-4'>
                         Signed in as: {props.emailNav}
                     </Navbar.Text>
                 </Navbar.Collapse>
