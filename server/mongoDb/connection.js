@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const DB = 'mongodb+srv://team12:XS6QBYt51hArMeAC@cluster0.ij5ypw1.mongodb.net/phdmngt?retryWrites=true&w=majority'
+
+// credentials import
+require('dotenv').config();
+const DB = process.env.MONGODB_CONNECTION_KEY
 
 mongoose.connect(DB).then( () => {
     console.log("Connection Success..");
