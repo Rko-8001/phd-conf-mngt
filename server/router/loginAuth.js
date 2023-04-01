@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const nodemailer = require('nodemailer');
 
 const mongoose = require('mongoose');
 const Mail = require('nodemailer/lib/mailer');
 
 
+const { genUserToken } = require('../middleware/generateToken')
 // connection established
 require('../mongoDb/connection');
 
@@ -61,7 +61,9 @@ router.post('/login', async (req, res) => {
     }
     else {
         if(loginOtp === otp){
-            return res.status(200).json( role + " " + id);
+            const token = await genUserToken(email, role);
+            console.log(token);
+            return res.status(200).json({token: token});
         }
         else {
             return res.status(422).json({ message: "Invalid OTP" });
