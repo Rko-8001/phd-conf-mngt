@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Navbar, Card, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { setUserToken } from './Tokens';
 
 
 function Login(props) {
@@ -53,6 +54,7 @@ function Login(props) {
         const email = emailId;
         const otp = otpLogin;
 
+
         const res = await fetch("/login", {
             method: "POST",
             headers: {
@@ -79,10 +81,12 @@ function Login(props) {
         }
         else {
             const data = await res.json();
-            const role = data.split(' ')[0];
-            props.getEmailIdLogin(emailId);
+            const role = data.role;
+            const token = data.token;
+            console.log(token);
             if (role === "0") {
-                navigate('/studentLogin');
+                setUserToken(token);
+                navigate('/studentLogin/formFill');
             }
             else if (role === "1") {
                 navigate('/facultyLogin');

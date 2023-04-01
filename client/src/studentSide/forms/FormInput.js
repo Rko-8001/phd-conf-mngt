@@ -6,9 +6,10 @@ import { Container, Tab, Tabs } from 'react-bootstrap';
 import NavBar from '../NavBar';
 import FormInputGenData from './FormInputData';
 import FormPrintIn from './FormPrintIn';
+import { getToken } from '../../components_login/Tokens';
 
 
-function FormInput(props) {
+function FormInput() {
 
     const dataInTable = [];
     const [key, setKey] = useState('genInfo');
@@ -91,15 +92,16 @@ function FormInput(props) {
     })
     const getBasicInfo = async (req, res) => {
         try {
-            const email = props.studentEmail;
-            console.log(email);
-            const role = 0;
+            const data = "sending request";
+            const token = getToken();
+            console.log(token);
             const resp = await fetch("/studentInfoLoading", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify({email, role})
+                body: JSON.stringify({data, data}),
             });
             return resp.json();
             // console.log(resp);
@@ -120,13 +122,13 @@ function FormInput(props) {
             setFetchData("supervisor", resp.nameOfSupervisor);
             setFetchData("email", resp.email);
         }).catch((e) => {
-            console.log(e.message)
+            // console.log(e.message)
         });
     }, []);
 
     return (
         <>
-            <NavBar emailNav={props.studentEmail} />
+            <NavBar emailNav={generalInfo.email} />
             <Container style={{ "fontSize": "18px" }}>
                 <Tabs
                     id="controlled-tab-example"

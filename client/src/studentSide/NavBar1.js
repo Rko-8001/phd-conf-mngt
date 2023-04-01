@@ -1,26 +1,26 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom';
 
 const user = {
   
 }
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Applications', href: '#', current: false },
-  { name: 'Fill Form', href: '#', current: false },
+  { name: 'Home', href: '/studentLogin', current: true },
+  { name: 'Applications', href: '/studentlogin/applications', current: false },
+  { name: 'Fill Form', href: '/studentlogin/formFill', current: false },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', click: 'openProfile' },
+  { name: 'Sign out',   click: 'logout'  },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function NavBar() {
   return (
     <>
       
@@ -41,9 +41,9 @@ export default function Example() {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.href}
                             className={classNames(
                               item.current
                                 ? 'bg-gray-900 text-white'
@@ -53,7 +53,7 @@ export default function Example() {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -90,7 +90,7 @@ export default function Example() {
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <a
-                                    href={item.href}
+                                    onClick={item.click}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'

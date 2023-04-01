@@ -31,34 +31,40 @@ const User = require('../model/userSchema')
 // }
 // module.exports = { protect }
 
-function verifyStudentToken(req, res, next) {
+async function verifyStudentToken(req, res, next) {
+
+  var bearerToken;
+
+  const bearerHeader = await req.headers["authorization"];
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    bearerToken = bearerHeader.split(" ")[1];
+
+    // verfiy the token
+    const decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+
+    // debug purpose
+    // console.log(decode);
 
 
-    const bearerHeader = req.headers["authorization"];
+    // set up the req.body
+    req.body.email = decode.email;
 
-    if (typeof bearerHeader !== "undefined") {
-
-      const bearerToken = bearerHeader.split(" ")[1];
-
-      const decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
-  
-     // debug purpose
-      // console.log(decode);
-
-
-      // set up the req.body
-      req.body.email = decode.email;
-
-      // check whether it is student or not
-      if(decode.role !== "0")
-      {
-        res.sendStatus(422).json({error: "Not a Student"})
-      }     
-      next();
-
-    } else {
-      res.sendStatus(403).json("Error MW...")
+    // check whether it is student or not
+    if (decode.role !== "0") {
+      res.sendStatus(422).json({ error: "Not a Student" })
     }
+    next();
+
+  } else {
+    res.sendStatus(403).json("Error MW...")
+  }
+
+  if (!bearerToken) {
+        res.sendStatus(401).json({error: "empty token"})
+      }
 
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 //                    Components Maintained
-import Login from './Login';
+import Login from './components_login/Login';
 import FormInput from './studentSide/forms/FormInput';
 import StudentHome from './studentSide/StudentHome';
 import FacultyHome from './components_faculty/Faculty_dashboard';
@@ -28,7 +28,7 @@ function App() {
         
         <Route path='/studentLogin' >
           <Route index element={<StudentHome studentEmail={emailId} />} />
-          <Route path="formFill" element={<FormInput studentEmail={emailId} />} />
+          <Route path="formFill" element={<FormInput />} />
         </Route>
 
         <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId}/>} />

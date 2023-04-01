@@ -62,8 +62,8 @@ router.post('/login', async (req, res) => {
     else {
         if(loginOtp === otp){
             const token = await genUserToken(email, role);
-            console.log(token);
-            return res.status(200).json({token: token});
+            // console.log(token);
+            return res.status(200).json({role: role, token: token});
         }
         else {
             return res.status(422).json({ message: "Invalid OTP" });
