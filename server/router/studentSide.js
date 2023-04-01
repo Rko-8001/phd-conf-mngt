@@ -5,15 +5,18 @@ const router = express.Router();
 // connection established
 require('../mongoDb/connection');
 
+const { verifyStudentToken } = require('../middleware/authMiddleware');
 
 // requiring user Schema 
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
 
-router.post('/studentInfoLoading', async (req, res) => {
+router.post('/studentInfoLoading',verifyStudentToken,  async (req, res) => {
+
     const { email, role } = req.body;
+
     try {
-        const student = await User.findOne({ email: email })
+        const student = await User.findOne({ email: email });
         return res.status(200).json(student);
     } catch (error) {
         console.log(error);
@@ -42,8 +45,8 @@ router.post('/studentApplicationSubmit', async (req, res) => {
 });
 
 
-router.post('/studentApplicationView', async(req, res) => {
-    const {email } = req.body;
+router.post('/studentApplicationView', verifyStudentToken, async(req, res) => {
+    const { email } = req.body;
 
     try {
         const data = await AppData.find({email: email});
