@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // applicationData Schema
 const applicationData = new mongoose.Schema({
-    
+
     email: {
         type: String,
         required: true
@@ -51,7 +51,7 @@ const applicationData = new mongoose.Schema({
     advance: {
         type: Boolean,
         // require: true
-    },  
+    },
     finances: {
         type: Array,
     },
@@ -73,7 +73,10 @@ const applicationData = new mongoose.Schema({
     remarksDean: {
         type: String
     }
-});
+},
+    {
+        timestamps: true
+    });
 
 
 const AppData = mongoose.model('APPDATA', applicationData);
