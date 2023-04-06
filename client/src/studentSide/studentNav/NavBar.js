@@ -3,7 +3,9 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
 import { FamilyRestroomOutlined } from '@mui/icons-material';
-import user  from './user.png';
+import { useNavigate } from 'react-router-dom';
+import user from './user.png';
+import { removeUserToken } from '../../components_login/Tokens';
 
 const navigation = [
   { name: 'Home', href: '/studentLogin', current: false },
@@ -12,17 +14,32 @@ const navigation = [
 ]
 const userNavigation = [
   { name: 'Your Profile', click: '/studentLogin/profile' },
-  { name: 'Sign out',   click: '/'  },
+  { name: 'Sign out', click: '/' },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+
 export default function NavBar() {
+  const navigate = useNavigate();
+
+  const navigationFunction = (e) => {
+    const { name } = e.target;
+
+    if (name === "Sign out") {
+      removeUserToken();
+      navigate('/');
+    }
+    else 
+    {
+      navigate('/studentLogin/Profile');
+    }
+  }
   return (
     <>
-      
+
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-black">
           {({ open }) => (
@@ -87,15 +104,16 @@ export default function NavBar() {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <Link
-                                    to={item.click}
+                                  <a
+                                    name={item.name}
+                                    onClick={navigationFunction}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
                                     )}
                                   >
                                     {item.name}
-                                  </Link>
+                                  </a>
                                 )}
                               </Menu.Item>
                             ))}
@@ -169,7 +187,7 @@ export default function NavBar() {
           )}
         </Disclosure>
 
-        
+
       </div>
     </>
   )

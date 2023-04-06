@@ -1,173 +1,397 @@
-// eslint-disable-next-line
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Container } from '@mui/material'
+import dayjs from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Switch } from '@headlessui/react'
 
-import { Col, Form, Row, Card, Table, Container, Button } from 'react-bootstrap';
-function FormInputGenData(props) {
 
-    const [coa, setCoa] = useState(0);
-    const [cocb, setCocb] = useState(0);
-    const [coab, setCoab] = useState(0);
+export default function InputData(props) {
 
-    const tableRows = props.tableData.map((info) => {
-        return (
-            <tr key={info.particular}>
-                <th>{info.particular}</th>
-                <th>{info.amount}</th>
-            </tr>
-        );
-    });
+  const [value, setValue] = useState(dayjs('2023-01-01'));
+  const tableRows = props.tableData.map((info) => {
     return (
-        <>
-
-            <div style={{ "marginTop": "50px" }}>
-
-                <Container className='mt-3' style={{ "fontSize": "15px" }}>
-                    <Form>
-                        <p style={{ "fontSize": "26px" }}>General Info: </p>
-                        <Row className='mt-3'>
-                            <Form.Group as={Col} controlId="formPersMobile">
-                                <Form.Label>Mobile No.</Form.Label>
-                                <Form.Control name="mobileNo" type="text" placeholder="Mobile No" onChange={props.getGeneralInfo} />
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formPersAccNo">
-                                <Form.Label>Bank A/c No.</Form.Label>
-                                <Form.Control name="bankAccNo" type="text" placeholder="12345678901" onChange={props.getGeneralInfo} />
-                            </Form.Group>
-                        </Row>
-
-                        {/* <Button className="mt-3" variant="primary" type="submit">
-                            Submit
-                        </Button> */}
-                    </Form>
-                    <br /> <br />
-
-
-
-                    <Form>
-                        <p style={{ "fontSize": "26px" }}>Conference Info: </p>
-                        <Row className="mt-3">
-                            <Form.Group as={Col} controlId="formPersName">
-                                <Form.Label>Conference Name:</Form.Label>
-                                <Form.Control name="nameOfConference" type="text" placeholder="Defense Seminar" onChange={props.getConferenceInfo} />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formPersMobile">
-                                <Form.Label>Venue</Form.Label>
-                                <Form.Control name="venueOfConference" type="text" placeholder="Lab 201, CS Block, IIT Ropar" onChange={props.getConferenceInfo} />
-                            </Form.Group >
-                        </Row>
-                        <Row className="mt-3">
-                            <Form.Group as={Col} controlId="formPersName">
-                                <Form.Label>Period of Conference:</Form.Label>
-                                <Form.Control name="periodOfConference" type="text" placeholder="23/01/2023" onChange={props.getConferenceInfo} />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formPersMobile">
-                                <Form.Label>Paper(s)/Poster(s) to Present in Conference</Form.Label>
-                                <Form.Control name="paperInConference" type="text" placeholder="" onChange={props.getConferenceInfo} />
-                            </Form.Group >
-                        </Row>
-                    </Form>
-                    <br /> <br />
-
-
-
-                    <Form className='justify-content-start'>
-                        <Form.Group as={Col} controlId="finSupport">
-                            <Form.Label>Financial support required (if any) from institute fund/ project/ any other (please specify) </Form.Label>
-                            <Form.Control name="financialSupport" type="text" placeholder="" onChange={props.getGeneralInfo} />
-                        </Form.Group>
-
-                        <br />
-                        <Card body>
-                            <Row>
-                                <Col>
-                                    Advance Required:
-                                </Col>
-                                <Col>
-                                    <Form.Check
-                                        type="switch"
-                                        id="finanaceSupport"
-                                        label={props.advance === true ? "Yes" : "No"}
-                                        onChange={props.getAdvance}
-                                    />
-                                </Col>
-                            </Row>
-                            <br />
-
-                            <div>
-                                <Row className="align-items-center">
-                                    <Col >
-                                        <Form.Group as={Col} controlId="advanceType">
-                                            <Form.Label>Particulars</Form.Label>
-                                            <Form.Control name="particular" type="text" placeholder='Flight Charges' value={props.rowData.particular} onChange={props.getRowData} />
-                                        </Form.Group>
-                                    </Col>
-
-                                    <Col >
-                                        <Form.Group controlId="advanceAmount">
-                                            <Form.Label>Amount (Rs)</Form.Label>
-                                            <Form.Control name="amount" type="text" placeholder='8000' value={props.rowData.amount} onChange={props.getRowData} />
-                                        </Form.Group>
-                                    </Col>
-
-                                    <Col md="auto">
-                                        <Button className="mb-2" onClick={props.addRowData}>
-                                            Add
-                                        </Button>
-                                    </Col>
-                                </Row>
-
-                                <br />
-                                <Table striped bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>Particular</th>
-                                            <th>Amount (Rs)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>{tableRows}</tbody>
-                                </Table>
-
-                                <br /><br />
-                            </div>
-
-                        </Card>
-
-                        <br /> <br />
-                        <p>Enclosures Attached (Please Tick):</p>
-                        <Form.Check aria-label="option 1" label="Copy of Acceptance." value={coa} checked={coa === 1} onChange={(e) => {
-                            if (coa === 1) {
-                                setCoa(0);
-                            }
-                            else {
-                                setCoa(1);
-                            }
-                        }} />
-                        <Form.Check aria-label="option 1" label="Copy of Conference Brochure." value={cocb} checked={cocb === 1} onChange={(e) => {
-                            if (cocb === 1) {
-                                setCocb(0);
-                            }
-                            else {
-                                setCocb(1);
-                            }
-                        }} />
-                        <Form.Check aria-label="option 1" label="Copy of Abstract." value={coab} checked={coab === 1} onChange={(e) => {
-                            if (coab === 1) {
-                                setCoab(0);
-                            }
-                            else {
-                                setCoab(1);
-                            }
-                        }} />
-                    </Form>
-                    <br />
-                </Container>
-                <br /> <br />
-                <br /> <br />
-            </div>
-        </>
+      <tr key={info.particular} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{info.particular}</th>
+        <th className="px-6 py-2">{info.amount}</th>
+      </tr>
     );
-};
+  });
 
-export default FormInputGenData;
+
+  return (
+    <Container>
+
+      <form>
+
+        <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                Mobile No
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="mobileNo"
+                  id="mobileNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Bank Account Number
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="accountNo"
+                  id="accountNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Conference Details</h2>
+
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label htmlFor="nameOfConference" className="block text-sm font-medium leading-6 text-gray-900">
+                Name of Conference
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="nameOfConference"
+                  id="nameOfConference"
+                  onChange={props.getConferenceInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="sm:col-span-3">
+              <label htmlFor="venueOfConference" className="block text-sm font-medium leading-6 text-gray-900">
+                Venue of Conference
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="venueOfConference"
+                  id="venueOfConference"
+                  onChange={props.getConferenceInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div>
+
+
+
+          <div className="col-span-full">
+            <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+              Papers/ Posters
+            </label>
+            <div className="mt-2">
+              <textarea
+                id="about"
+                name="paperInConference"
+                onChange={props.getConferenceInfo}
+                rows={3}
+                className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                defaultValue={''}
+              />
+            </div>
+            <p className="mt-3 text-sm leading-6 text-gray-600">Write all paper(s)/ poster(s) to be present in the conference.</p>
+          </div>
+
+
+          <br />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="to"
+              name="periodOfConferenceStarts"
+              value={props.dateStarts}
+              onChange={(newvalue) => {
+                props.setDateStarts(newvalue);
+              }}
+
+            />
+            <span>      </span>
+            <DatePicker
+              label="to"
+              name="periodOfConferenceEnds"
+              value={props.dateEnds}
+              onChange={(newvalue) => {
+                props.setDateEnds(newvalue);
+              }}
+
+            />
+          </LocalizationProvider>
+
+        </div>
+
+
+        <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Financial Information</h2>
+
+
+          <br />
+          <div className="col-span-full">
+            <label htmlFor="financialSupport" className="block text-sm font-medium leading-6 text-gray-900">
+              Financial Support
+            </label>
+            <div className="mt-2">
+              <textarea
+                id="financialSupport"
+                name="financialSupport"
+                rows={2}
+                className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                defaultValue={''}
+                onChange={props.getConferenceInfo}
+              />
+            </div>
+            <p className="mt-3 text-sm leading-6 text-gray-600"> Any type of financial support from institute fund/ project/ any other source.</p>
+          </div>
+          <br />
+          <div className="col-span-full">
+
+            <label htmlFor="advance" className="block text-sm font-medium leading-6 text-gray-900">
+              Advance Required
+            </label>
+            <Switch
+              id="advance"
+              checked={props.advance}
+              onChange={props.getAdvance}
+              className={`${props.advance ? 'bg-blue-600' : 'bg-gray-200'
+                } relative inline-flex h-6 w-11 items-center rounded-full`}
+            >
+              <span className="sr-only">Advance Section</span>
+              <span
+                className={`${props.advance ? 'translate-x-6' : 'translate-x-1'
+                  } inline-block h-4 w-4 transform rounded-full bg-white transition`}
+              />
+            </Switch>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                Particulars
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="particular"
+                  id="abcd"
+                  value={props.rowData.particular}
+                  onChange={props.getRowData}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Amount
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="amount"
+                  id="amount"
+                  value={props.rowData.amount}
+                  onChange={props.getRowData}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+          </div>
+          <div className="mt-6 flex items-center justify-end gap-x-6">
+            <button
+              onClick={props.addRowData}
+              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              ADD
+            </button>
+          </div>
+
+
+
+          <br />
+          <div className="relative overflow-x-auto">
+            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" className="px-6 py-3">
+                    Particulars
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Amount (Rs)
+                  </th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Travel
+                  </th>
+                  <td className="px-6 py-2">
+                    <input
+                      type="text"
+                      name="travel"
+                      value={props.travel}
+                      className=""
+                      onChange={props.getFixedParts}
+                    />
+                  </td>
+
+                </tr>
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Food
+                  </th>
+                  <td className="px-6 py-2">
+                    <input
+                      type="text"
+                      name="food"
+                      value={props.food}
+                      className=""
+                      onChange={props.getFixedParts}
+                    />
+                  </td>
+
+                </tr>
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Stay
+                  </th>
+                  <td className="px-6 py-2">
+                    <input
+                      type="text"
+                      name="stay"
+                      value={props.stay}
+                      className=""
+                      onChange={props.getFixedParts}
+                    />
+                  </td>
+                </tr>
+                {tableRows}
+              </tbody>
+            </table>
+          </div>
+
+
+
+          <div className="mt-10 space-y-10">
+            <fieldset>
+              <legend className="text-sm font-semibold leading-6 text-gray-900">Enclosures Attached</legend>
+              <div className="mt-6 space-y-6">
+
+
+                <div className="relative flex gap-x-3">
+                  <div className="flex h-6 items-center">
+                    <input
+                      id="coa"
+                      name="coa"
+                      type="checkbox"
+                      onClick={props.getCopyInfo}
+                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    />
+                  </div>
+                  <div className="text-sm leading-6">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Acceptance</label>
+                    <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                    <p className="text-gray-500"></p>
+                  </div>
+                </div>
+
+                <div className="relative flex gap-x-3">
+                  <div className="flex h-6 items-center">
+                    <input
+                      id="cocb"
+                      type="checkbox"
+                      name="cocb"
+                      onClick={props.getCopyInfo}
+                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    />
+                  </div>
+                  <div className="text-sm leading-6">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Conference Brochure</label>
+                    <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                    <p className="text-gray-500"></p>
+                  </div>
+                </div>
+
+                <div className="relative flex gap-x-3">
+                  <div className="flex h-6 items-center">
+                    <input
+                      id="coab"
+                      type="checkbox"
+                      name="coab"
+                      onClick={props.getCopyInfo}
+                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                    />
+                  </div>
+                  <div className="text-sm leading-6">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Abstract</label>
+                    <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                    <p className="text-gray-500"></p>
+                  </div>
+                </div>
+
+              </div>
+            </fieldset>
+
+          </div>
+
+          <br /> <br />
+          <h3 className="text-base font-semibold leading-7 text-gray-900">Duty Leave</h3>
+          <br />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="From"
+              value={props.leaveStarts}
+              onChange={(newValue) => props.setLeaveStarts(newValue)}
+            />
+            <span>      </span>
+            <DatePicker
+              label="To"
+              value={props.leaveEnds}
+              onChange={(newValue) => props.setLeaveEnds(newValue)}
+            />
+          </LocalizationProvider>
+
+
+        </div>
+
+        <div className="mt-6 flex items-center justify-end gap-x-6">
+
+          <button
+          onClick={props.requestGrant}
+            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Request Grant
+          </button>
+        </div>
+      </form>
+
+      <br />
+      <br />
+      <br />
+      <br />
+    </Container>
+  )
+}

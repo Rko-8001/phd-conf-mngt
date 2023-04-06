@@ -3,12 +3,10 @@ import { Container, Tab, Tabs } from 'react-bootstrap';
 
 
 // importing Components
-import NavBar from '../NavBar';
+import NavBar from '../studentNav/NavBar';
 import FormInputGenData from './FormInputData';
-import FormInputGenData1 from './FormInputData1';
 import dayjs from 'dayjs';
 
-import FormPrintIn from './FormPrintIn';
 import { getToken } from '../../components_login/Tokens';
 
 
@@ -214,22 +212,21 @@ function FormInput(props) {
     // }
     const getBasicInfo = async (req, res) => {
         try {
-            const email = props.studentEmail;
-            console.log(email);
-            const role = 0;
-            const resp = await fetch("/studentInfoLoading", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ email, role })
-            });
-            return resp.json();
-            // console.log(resp);
+          const token = getToken();
+          // console.log(token);
+          const resp = await fetch("/studentInfoLoading", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "authorization": `Bearer ${token}`
+            },
+          });
+          return resp.json();
+          // console.log(resp);
         } catch (error) {
-            console.log(error);
+          console.log(error);
         }
-    }
+      }
     useEffect(() => {
         getBasicInfo().then((resp) => {
             console.log(resp);
@@ -248,50 +245,21 @@ function FormInput(props) {
 
     return (
         <>
-            {/* <NavBar emailNav={generalInfo.email} /> */}
             <NavBar />
-         
-
-            <Container style={{ "fontSize": "18px" }}>
-                <Tabs
-                    id="controlled-tab-example"
-                    activeKey={key}
-                    onSelect={(k) => setKey(k)}
-                    className="mb-3"
-                >
-                    <Tab eventKey="genInfo" title="Form Data">
-                        <FormInputGenData1
-                            getGeneralInfo={getGeneralInfo}
-                            getConferenceInfo={getConferenceInfo}
-                            dateStarts={dateStarts} setDateStarts={setDateStarts}
-                            dateEnds={dateEnds} setDateEnds={setDateEnds}
-                            advance={advance} getAdvance={getAdvance}
-                            leaveStarts={leaveStarts} setLeaveStarts={setLeaveStarts}
-                            leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
-                            addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
-                            getFixedParts={getFixedParts}
-                            food={food} travel={travel} stay={stay}
-                            getCopyInfo={getCopyInfo}
-                            requestGrant={requestGrant}
-                        />
-
-                    </Tab>
-
-                    <Tab eventKey="showForm" title="View Form" style={{ "justifyContent": "center" }}>
-                        <FormPrintIn
-                            partA={generalInfo}
-                            partB={conferenceInfo}
-                            advance={advance}
-                            partC={tableData} />  travel={travel} stay={stay} food={food}
-                        {/* dateStarts={dateStarts} dateEnds={dateEnds} leaveStarts={leaveStarts} leaveEnds={leaveEnds} */}
-                        coa={coa} coab={coab} cocb={cocb}
-                    </Tab>
-                </Tabs>
-
-
-
-
-            </Container> 
+            <FormInputGenData
+                getGeneralInfo={getGeneralInfo}
+                getConferenceInfo={getConferenceInfo}
+                dateStarts={dateStarts} setDateStarts={setDateStarts}
+                dateEnds={dateEnds} setDateEnds={setDateEnds}
+                advance={advance} getAdvance={getAdvance}
+                leaveStarts={leaveStarts} setLeaveStarts={setLeaveStarts}
+                leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
+                addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
+                getFixedParts={getFixedParts}
+                food={food} travel={travel} stay={stay}
+                getCopyInfo={getCopyInfo}
+                requestGrant={requestGrant}
+            />
         </>
     )
 }

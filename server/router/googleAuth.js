@@ -14,7 +14,7 @@ require('dotenv').config();
 const User = require('../model/userSchema');
 
 // imported token gen
-const { genUserToken } = require('../middleware/generateToken')
+const { genUserToken } = require('../tokens/generateToken')
 
 
 // cookie Session 

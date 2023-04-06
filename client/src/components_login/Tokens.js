@@ -1,5 +1,6 @@
 export const getToken = () => {
     return sessionStorage.getItem("token") || null;
+    
   };
   
 export const removeUserToken = () => {
@@ -8,4 +9,5 @@ export const removeUserToken = () => {
   
 export const setUserToken = (token) => {
     sessionStorage.setItem("token", token);
+    // console.log(" Token Set: " + token);
   };

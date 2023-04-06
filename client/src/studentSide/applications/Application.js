@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {PaperClipIcon} from '@heroicons/react/20/solid'
-import NavBar from '../NavBar';
+import NavBar from '../studentNav/NavBar';
 function Application(props) {
 
   const [apps, setapps] = useState([]);

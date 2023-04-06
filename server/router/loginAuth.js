@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const mongoose = require('mongoose');
-const Mail = require('nodemailer/lib/mailer');
 
+// generate tokens
+const { genUserToken } = require('../tokens/generateToken')
 
-const { genUserToken } = require('../middleware/generateToken')
 // connection established
 require('../mongoDb/connection');
 
@@ -63,7 +63,9 @@ router.post('/login', async (req, res) => {
         console.log(loginOtp);
         if(loginOtp == otp){
             const token = await genUserToken(email, role);
-            // console.log(token);
+            
+            // console.log("Login Token: " + token);
+            
             return res.status(200).json({role: role, token: token});
         }
         else {

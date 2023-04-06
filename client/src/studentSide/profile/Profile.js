@@ -1,8 +1,9 @@
 import { Container } from '@mui/material'
-import NavBar from '../NavBar';
+import NavBar from '../studentNav/NavBar';
 import { useState, useEffect} from 'react';
+import { getToken } from '../../components_login/Tokens';
 
-export default function Profile(props) {
+export default function Profile() {
 
     const [generalInfo, setGeneralInfo] = useState({
         name: "",
@@ -31,15 +32,14 @@ export default function Profile(props) {
       })
       const getBasicInfo = async (req, res) => {
         try {
-          const email = props.studentEmail;
-          console.log(email);
-          const role = 0;
+          const token = getToken();
+          // console.log(token);
           const resp = await fetch("/studentInfoLoading", {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
+              "authorization": `Bearer ${token}`
             },
-            body: JSON.stringify({ email, role })
           });
           return resp.json();
           // console.log(resp);
@@ -50,7 +50,7 @@ export default function Profile(props) {
     
       useEffect(() => {
         getBasicInfo().then((resp) => {
-          console.log(resp);
+          // console.log(resp);
           setFetchData("name", resp.name);
           setFetchData("entryNo", resp.entryNo);
           setFetchData("dept", resp.department);
@@ -66,7 +66,7 @@ export default function Profile(props) {
     
     return (
         <>
-            <NavBar emailNav={props.studentEmail} />
+            <NavBar/>
             <Container>
                 <div className="overflow-hidden bg-white shadow sm:rounded-lg">
                     <div className="px-4 py-5 sm:px-6">

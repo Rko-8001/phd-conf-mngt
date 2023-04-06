@@ -86,7 +86,7 @@ function Login(props) {
             props.getEmailIdLogin(email);
             console.log(token);
             if (role === "0") {
-                // setUserToken(token);
+                setUserToken(token);
                 navigate('/studentLogin');
             }
             else if (role === "1") {

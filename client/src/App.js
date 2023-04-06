@@ -6,7 +6,7 @@ import Login from './components_login/Login';
 import LoginN from './components_login/LoginN'; 
 import Team from './components_login/Team'; 
 import FormInput from './studentSide/forms/FormInput';
-import StudentHome from './studentSide/StudentHome';
+import StudentHome from './studentSide/mainPage/StudentHome';
 import FacultyHome from './components_faculty/Faculty_dashboard';
 import Accounts_dashboard from './components_accounts/Accounts_dashboard';
 import Research_dashboard from './components_research/Research_dashboard';
@@ -33,10 +33,9 @@ function App() {
         <Route path='/login' element={<LoginN getEmailIdLogin={getEmailId} />} />
         
         <Route path='/studentLogin' >
-          <Route index element={<StudentHome studentEmail={emailId} />} />
-          <Route path="formFill" element={<FormInput studentEmail={emailId}/>} />
-          {/* <Route path="formFill" element={<FormInput />} /> */}
-          <Route path = "profile" element={<Profile studentEmail={emailId} />} />
+          <Route index element={<StudentHome />} />
+          <Route path="formFill" element={<FormInput />} />
+          <Route path = "profile" element={<Profile  />} />
           <Route path = "application" element={<Application studentEmail={emailId} />} />
         </Route>
 
