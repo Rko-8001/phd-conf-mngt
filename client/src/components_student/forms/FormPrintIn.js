@@ -52,7 +52,12 @@ function FormPrintIn(props) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({email,status,  mobileNo, bankAccountNo, nameOfConference, venueOfConference, periodOfConference, paperInConference, financialSupport, advance, finances, coaa, coaba, cocba })
+            body: JSON.stringify({  email, status,  
+                                    mobileNo, bankAccountNo, 
+                                    nameOfConference, venueOfConference, periodOfConference, paperInConference, 
+                                    financialSupport, 
+                                    advance, finances, 
+                                    coaa, coaba, cocba })
         });
 
         //logic

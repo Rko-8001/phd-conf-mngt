@@ -1,29 +1,44 @@
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import user from './user.png';
+import { removeUserToken } from '../../components_login/Tokens';
 
-const user = {
-  
-}
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Applications', href: '#', current: false },
-  { name: 'Fill Form', href: '#', current: false },
+  { name: 'Home', href: '/studentLogin', current: false },
+  { name: 'Applications', href: '/studentLogin/application', current: false },
+  { name: 'Fill Form', href: '/studentLogin/formFill', current: false },
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', click: '/studentLogin/profile' },
+  { name: 'Sign out', click: '/' },
 ]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+
+export default function NavBar() {
+  const navigate = useNavigate();
+
+  const navigationFunction = (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+
+    if (name === "Sign out") {
+      removeUserToken();
+      navigate('/');
+    }
+    else {
+      navigate('/studentLogin/Profile');
+    }
+  }
   return (
     <>
-      
+
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-black">
           {({ open }) => (
@@ -41,9 +56,9 @@ export default function Example() {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation.map((item) => (
-                          <a
+                          <Link
                             key={item.name}
-                            href={item.href}
+                            to={item.href}
                             className={classNames(
                               item.current
                                 ? 'bg-gray-900 text-white'
@@ -53,7 +68,7 @@ export default function Example() {
                             aria-current={item.current ? 'page' : undefined}
                           >
                             {item.name}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </div>
@@ -65,7 +80,6 @@ export default function Example() {
                         className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
                         <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
 
                       {/* Profile dropdown */}
@@ -73,7 +87,7 @@ export default function Example() {
                         <div>
                           <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
+                            <img className="h-8 w-8 rounded-full" src={user} alt="" />
                           </Menu.Button>
                         </div>
                         <Transition
@@ -89,15 +103,16 @@ export default function Example() {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
-                                    href={item.href}
+                                  <button
+                                    name={item.name}
+                                    onClick={navigationFunction}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
                                     )}
                                   >
                                     {item.name}
-                                  </a>
+                                  </button>
                                 )}
                               </Menu.Item>
                             ))}
@@ -140,10 +155,10 @@ export default function Example() {
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
+                      <img className="h-10 w-10 rounded-full" src={user} alt="" />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{user.name}</div>
+                      <div className="text-base font-medium leading-none text-white">User</div>
                       <div className="text-sm font-medium leading-none text-gray-400">{user.email}</div>
                     </div>
                     <button
@@ -151,7 +166,6 @@ export default function Example() {
                       className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
                       <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
@@ -172,7 +186,7 @@ export default function Example() {
           )}
         </Disclosure>
 
-        
+
       </div>
     </>
   )

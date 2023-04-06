@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const nodemailer = require('nodemailer');
 
 const mongoose = require('mongoose');
-const Mail = require('nodemailer/lib/mailer');
 
+// generate tokens
+const { genUserToken } = require('../tokens/generateToken')
 
 // connection established
 require('../mongoDb/connection');
@@ -41,7 +41,6 @@ router.post('/login', async (req, res) => {
         return res.status(422).json({ error: "Invalid Credientials." });
     }
     if (mssg == "otp") {
-        console.log("idr");
         loginOtp = Math.random();
         loginOtp = loginOtp * 1000000;
         loginOtp = parseInt(loginOtp);
@@ -60,8 +59,11 @@ router.post('/login', async (req, res) => {
         }
     }
     else {
-        if(loginOtp === otp){
-            return res.status(200).json( role + " " + id);
+        console.log(loginOtp);
+        if(loginOtp == otp){
+            const token = await genUserToken(email, role);
+            // console.log("Login Token: " + token);
+            return res.status(200).json({role: role, token: token});
         }
         else {
             return res.status(422).json({ message: "Invalid OTP" });

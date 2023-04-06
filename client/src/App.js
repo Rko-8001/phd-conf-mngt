@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-//                    Components Maintained
-import Login from './Login';
-import FormInput from './studentSide/forms/FormInput';
-import StudentHome from './studentSide/StudentHome';
-import FacultyHome from './components_faculty/Faculty_dashboard';
-import Accounts_dashboard from './components_accounts/Accounts_dashboard';
-import Research_dashboard from './components_research/Research_dashboard';
-import LandingPage from './components/LandingPage';
+
+//                  Other Components
+import LoginN from './components_login/LoginN';
+import Team from './components/team/Team';
 import ErrorPage from './components/ErrorPage';
+import LandingPage from './components/LandingPage';
+import ContactUs from './components/ContactUs';
+
+//                 Student Side Components
+import StudentHome from './components_student/mainPage/StudentHome';
+import Application from './components_student/applications/Application';
+import FormInput from './components_student/forms/FormInput';
+import StudentProfile from './components_student/profile/Profile';
+
+//                  Faculty Side Components
+import FacultyHome from './components_faculty/Faculty_dashboard';
+
+//                  Research Section Components 
+import ResearchDashboard from './components_research/Research_dashboard';
+
+//                  Account Section Components 
+import AccountsDashboard from './components_accounts/Accounts_dashboard';
+
 
 
 function App() {
@@ -23,25 +37,29 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<LandingPage/>} />
-        <Route path='/login' element={<Login getEmailIdLogin={getEmailId} />} />
-        
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/login' element={<LoginN getEmailIdLogin={getEmailId} />} />
+
         <Route path='/studentLogin' >
-          <Route index element={<StudentHome studentEmail={emailId} />} />
-          <Route path="formFill" element={<FormInput studentEmail={emailId} />} />
+          <Route index element={<StudentHome />} />
+          <Route path="formFill" element={<FormInput />} />
+          <Route path="profile" element={<StudentProfile />} />
+          <Route path="application" element={<Application />} />
         </Route>
 
-        <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId}/>} />
+        <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />
 
-        <Route path='/researchLogin' element={<Research_dashboard adminEmail={emailId} />} />
+        <Route path='/researchLogin' element={<ResearchDashboard adminEmail={emailId} />} />
 
 
-        
+
         <Route path='/accountLogin'>
-          <Route index element={<Accounts_dashboard accountsEmail={emailId}/>}/>
+          <Route index element={<AccountsDashboard accountsEmail={emailId} />} />
         </Route>
+        <Route path='/meetTheTeam' element={<Team />} />
+        <Route path='/contactUs' element={<ContactUs />} />
 
-        <Route  path='*' element={<ErrorPage/>} />
+        <Route path='*' element={<ErrorPage />} />
 
       </Routes>
     </>

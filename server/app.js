@@ -30,6 +30,6 @@ app.get('/login', (req,res) => {
     res.send(`Hi`);
 })
 
-app.listen(5000, () =>{
-    console.log(`server is running at`)
+app.listen(process.env.NODE_PORT, () =>{
+    console.log('server is running at ' + process.env.NODE_PORT)
 })

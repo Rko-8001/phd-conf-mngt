@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // applicationData Schema
 const applicationData = new mongoose.Schema({
-    
+
     email: {
         type: String,
         required: true
@@ -36,34 +36,38 @@ const applicationData = new mongoose.Schema({
         type: String,
         require: true
     },
-    periodOfConference: {
-        type: String,
-        require: true
-    },
     paperInConference: {
         type: String,
         // require: true
     },
+    conferenceStarts: {
+        type: String,
+        // require: true
+    },
+    conferenceEnds: {
+        type: String,
+        // require: true
+    },
     financialSupport: {
+        type: String,
+        // require: true
+    },
+    advanceS: {
         type: Boolean,
         // require: true
     },
-    advance: {
-        type: Boolean,
-        // require: true
-    },  
     finances: {
         type: Array,
     },
-    coaa: {
-        type: Boolean,
+    studentLeaveStarts: {
+        type: String,
+        // require: true
     },
-    cocba: {
-        type: Boolean,
+    studentLeaveEnds: {
+        type: String,
+        // require: true
     },
-    coaba: {
-        type: Boolean,
-    },
+    
     remarksResearch: {
         type: String
     },
@@ -73,7 +77,10 @@ const applicationData = new mongoose.Schema({
     remarksDean: {
         type: String
     }
-});
+},
+    {
+        timestamps: true
+    });
 
 
 const AppData = mongoose.model('APPDATA', applicationData);
