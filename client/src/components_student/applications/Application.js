@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { PaperClipIcon } from '@heroicons/react/20/solid'
 import NavBar from '../studentNav/NavBar';
-import { getToken } from '../../components_login/Tokens';
-import { Container, Grid } from '@mui/material';
-
+import { getUserToken, setAppToken } from '../../components_login/Tokens';
+import { Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const data = [];
 function Application() {
+  const navigate = useNavigate();
   const [apps, setApps] = useState(data);
   // const [apps, setApps] = useState([{
   //   "_id": "",
@@ -32,7 +32,7 @@ function Application() {
 
   const getBasicInfo = async (req, res) => {
     try {
-      const token = getToken();
+      const token = getUserToken();
       const resp = await fetch("/studentApplicationView", {
         method: "POST",
         headers: {
@@ -41,7 +41,6 @@ function Application() {
         },
       });
       const data = await resp.json();
-      // console.log(resp);
       return data;
     } catch (error) {
       console.log(error);
@@ -88,6 +87,38 @@ function Application() {
     });
     return totalAmount;
   }
+
+  const getAppToken = async (id) => {
+    try {
+      const aisehi = "abcd";
+      const resp = await fetch("/createApplicationToken", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({id, aisehi})
+      });
+      const data = await resp.json();
+      const appToken = data.appToken;
+      setAppToken(appToken);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const viewSpecficApplication = async (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+    try {
+      await getAppToken(name);
+      navigate('/studentLogin/viewApplication');
+      
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   const renderApps = apps.map((item, index) =>
     <>
       <div key={index}>
@@ -108,6 +139,8 @@ function Application() {
             </p>
           </div>
           <button
+            name={item._id}
+            onClick={viewSpecficApplication}
             className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Vew Full Application
@@ -129,9 +162,9 @@ function Application() {
       <NavBar />
       <br />
       <Container>
-      <div class="flex flex-wrap justify-center gap-4">
-        {apps && renderApps}
-      </div>
+        <div class="flex flex-wrap justify-center gap-4">
+          {apps && renderApps}
+        </div>
       </Container>
 
     </>

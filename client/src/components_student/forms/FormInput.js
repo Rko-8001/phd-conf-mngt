@@ -6,7 +6,7 @@ import NavBar from '../studentNav/NavBar';
 import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
-import { getToken } from '../../components_login/Tokens';
+import { getUserToken } from '../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from './checkFunctions';
 
 
@@ -195,7 +195,7 @@ function FormInput() {
 
     const getBasicInfo = async (req, res) => {
         try {
-            const token = getToken();
+            const token = getUserToken();
             // console.log(token);
             const resp = await fetch("/studentInfoLoading", {
                 method: "POST",

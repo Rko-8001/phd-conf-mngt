@@ -14,6 +14,7 @@ import StudentHome from './components_student/mainPage/StudentHome';
 import Application from './components_student/applications/Application';
 import FormInput from './components_student/forms/FormInput';
 import StudentProfile from './components_student/profile/Profile';
+import ViewApplication from './components_student/applications/ViewApplication';
 
 //                  Faculty Side Components
 import FacultyHome from './components_faculty/Faculty_dashboard';
@@ -45,6 +46,7 @@ function App() {
           <Route path="formFill" element={<FormInput />} />
           <Route path="profile" element={<StudentProfile />} />
           <Route path="application" element={<Application />} />
+          <Route path="viewApplication" element={<ViewApplication />} />
         </Route>
 
         <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />

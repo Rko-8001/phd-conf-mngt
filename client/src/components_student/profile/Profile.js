@@ -1,7 +1,7 @@
 import { Container } from '@mui/material'
 import NavBar from '../studentNav/NavBar';
 import { useState, useEffect} from 'react';
-import { getToken } from '../../components_login/Tokens';
+import { getUserToken } from '../../components_login/Tokens';
 
 export default function Profile() {
 
@@ -32,7 +32,7 @@ export default function Profile() {
       })
       const getBasicInfo = async (req, res) => {
         try {
-          const token = getToken();
+          const token = getUserToken();
           // console.log(token);
           const resp = await fetch("/studentInfoLoading", {
             method: "POST",
