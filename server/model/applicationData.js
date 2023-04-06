@@ -36,19 +36,23 @@ const applicationData = new mongoose.Schema({
         type: String,
         require: true
     },
-    periodOfConference: {
-        type: String,
-        require: true
-    },
     paperInConference: {
         type: String,
         // require: true
     },
-    financialSupport: {
-        type: Boolean,
+    conferenceStarts: {
+        type: String,
         // require: true
     },
-    advance: {
+    conferenceEnds: {
+        type: String,
+        // require: true
+    },
+    financialSupport: {
+        type: String,
+        // require: true
+    },
+    advanceS: {
         type: Boolean,
         // require: true
     },
@@ -64,6 +68,15 @@ const applicationData = new mongoose.Schema({
     coaba: {
         type: Boolean,
     },
+    studentLeaveStarts: {
+        type: String,
+        // require: true
+    },
+    studentLeaveEnds: {
+        type: String,
+        // require: true
+    },
+    
     remarksResearch: {
         type: String
     },

@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import img1 from './img1.png';
+// import img1 from './img1.png';
+import img1 from './img1.jpg';
 import './Carousal.css';
 
 function UncontrolledExample() {

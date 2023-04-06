@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Card, ListGroup, ProgressBar } from 'react-bootstrap';
-import './Home.css';
+// import './Home.css';
 import Carousal from './Carousal'
 
 const StudentDashboard = () => {

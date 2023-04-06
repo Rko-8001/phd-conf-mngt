@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Navbar, Card, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { setUserToken } from './Tokens';
+import { Link } from 'react-router-dom';
+
 
 
 function Login(props) {
@@ -83,10 +85,11 @@ function Login(props) {
             const data = await res.json();
             const role = data.role;
             const token = data.token;
+            props.getEmailIdLogin(email);
             console.log(token);
             if (role === "0") {
                 setUserToken(token);
-                navigate('/studentLogin/formFill');
+                navigate('/studentLogin');
             }
             else if (role === "1") {
                 navigate('/facultyLogin');
@@ -119,6 +122,7 @@ function Login(props) {
         const role = data.split(' ')[0];
         const email = data.split(' ')[1];
         console.log(email);
+
         if (res.status === 200) {
             if (role === "0") {
                 navigate('/studentLogin');

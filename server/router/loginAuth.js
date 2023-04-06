@@ -60,7 +60,8 @@ router.post('/login', async (req, res) => {
         }
     }
     else {
-        if(loginOtp === otp){
+        console.log(loginOtp);
+        if(loginOtp == otp){
             const token = await genUserToken(email, role);
             // console.log(token);
             return res.status(200).json({role: role, token: token});

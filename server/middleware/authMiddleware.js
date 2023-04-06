@@ -36,12 +36,15 @@ async function verifyStudentToken(req, res, next) {
   var bearerToken;
 
   const bearerHeader = await req.headers["authorization"];
+
   if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
+    bearerHeader
   ) {
     bearerToken = bearerHeader.split(" ")[1];
 
+    if (!bearerToken) {
+      res.sendStatus(401);
+    }
     // verfiy the token
     const decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
 
@@ -62,10 +65,61 @@ async function verifyStudentToken(req, res, next) {
     res.sendStatus(403).json("Error MW...")
   }
 
-  if (!bearerToken) {
-        res.sendStatus(401).json({error: "empty token"})
-      }
+
 
 }
+//   const bearerHeader = await req.headers["authorization"];
 
+//   if (
+//     req.headers.authorization &&
+//     req.headers.authorization.startsWith('Bearer')
+//   ) {
+//     bearerToken = bearerHeader.split(" ")[1];
+
+//     if (!bearerToken) {
+//       res.sendStatus(401);
+//     }
+//     // verfiy the token
+//     const decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+
+//     // debug purpose
+//     // console.log(decode);
+
+
+//     // set up the req.body
+//     req.body.email = decode.email;
+
+//     // check whether it is student or not
+//     if (decode.role !== "0") {
+//       res.sendStatus(422).json({ error: "Not a Student" })
+//     }
+//     next();
+
+//   } else {
+//     res.sendStatus(403).json("Error MW...")
+//   }
+
+
+
+// }
+
+
+const authenticateJWT = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (authHeader) {
+      const token = authHeader.split(' ')[1];
+
+      jwt.verify(token, accessTokenSecret, (err, user) => {
+          if (err) {
+              return res.sendStatus(403);
+          }
+
+          req.user = user;
+          next();
+      });
+  } else {
+      res.sendStatus(401);
+  }
+};
 module.exports = { verifyStudentToken }

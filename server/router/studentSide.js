@@ -11,7 +11,8 @@ const { verifyStudentToken } = require('../middleware/authMiddleware');
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
 
-router.post('/studentInfoLoading',verifyStudentToken,  async (req, res) => {
+// router.post('/studentInfoLoading',verifyStudentToken,  async (req, res) => {
+router.post('/studentInfoLoading', async (req, res) => {
 
     const { email, role } = req.body;
 
@@ -28,31 +29,52 @@ router.post('/studentInfoLoading',verifyStudentToken,  async (req, res) => {
 // submitting application 
 // Statuses
 router.post('/studentApplicationSubmit', async (req, res) => {
-    const { email,status,  mobileNo, bankAccountNo, nameOfConference, venueOfConference, periodOfConference, paperInConference, financialSupport, advance, finances, coaa, coaba, cocba } = req.body;
+    const { email, status,
+        mobileNo, bankAccountNo,
+        nameOfConference, venueOfConference, paperInConference,
+        conferenceStarts, conferenceEnds,
+        financialSupport,
+        advances, finances,
+        coaa, coaba, cocba,
+        studentLeaveStarts, studentLeaveEnds } = req.body;
+
     // console.log(email + " " + financialSupport + " " + coaa);
     // console.log(mobileNo + " " + bankAccountNo);
-    // console.log(nameOfConference + " " + venueOfConference + " " + periodOfConference + " " + paperInConference);
+    // console.log(nameOfConference + " " + venueOfConference + " " + paperInConference);
+    // console.log(conferenceStarts + " " + conferenceEnds);
+    // console.log(studentLeaveStarts + " " + studentLeaveEnds);
     try {
-        const data = new AppData({email,status, mobileNo, bankAccountNo, nameOfConference, venueOfConference, periodOfConference, paperInConference, financialSupport, advance, finances, coaa, coaba, cocba});
+        const data = new AppData(
+            {
+                email, status,
+                mobileNo, bankAccountNo, 
+                nameOfConference, venueOfConference, paperInConference, 
+                conferenceStarts, conferenceEnds,
+                financialSupport, 
+                advances, finances, 
+                coaa, coaba, cocba,
+                studentLeaveStarts, studentLeaveEnds 
+            });
         await data.save();
 
-        return res.status(200).json({message: "Application Submitted.."});
+        return res.status(200).json({ message: "Application Submitted.." });
     } catch (error) {
         console.log(error);
-        return res.status(422).json({message: "Can't submit application. Try Again.."})
+        return res.status(422).json({ message: "Can't submit application. Try Again.." })
     }
 
 });
 
 
-router.post('/studentApplicationView', verifyStudentToken, async(req, res) => {
+// router.post('/studentApplicationView', verifyStudentToken, async(req, res) => {
+router.post('/studentApplicationView', async (req, res) => {
     const { email } = req.body;
 
     try {
-        const data = await AppData.find({email: email});
+        const data = await AppData.find({ email: email });
 
         return res.status(200).json(data);
-        
+
     } catch (error) {
         console.log(error);
     }
