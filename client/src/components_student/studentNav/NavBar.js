@@ -2,7 +2,6 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
-import { FamilyRestroomOutlined } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import user from './user.png';
 import { removeUserToken } from '../../components_login/Tokens';
@@ -26,14 +25,14 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   const navigationFunction = (e) => {
+    e.preventDefault();
     const { name } = e.target;
 
     if (name === "Sign out") {
       removeUserToken();
       navigate('/');
     }
-    else 
-    {
+    else {
       navigate('/studentLogin/Profile');
     }
   }
@@ -104,7 +103,7 @@ export default function NavBar() {
                             {userNavigation.map((item) => (
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
-                                  <a
+                                  <button
                                     name={item.name}
                                     onClick={navigationFunction}
                                     className={classNames(
@@ -113,7 +112,7 @@ export default function NavBar() {
                                     )}
                                   >
                                     {item.name}
-                                  </a>
+                                  </button>
                                 )}
                               </Menu.Item>
                             ))}

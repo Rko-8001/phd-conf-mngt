@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import img1 from './images/img1.jpeg';
 import img2 from './images/img2.jpg';
-import img from './images/img.png';
 import img3 from './images/img3.jpg';
 import img4 from './images/img4.jpg'
 import img7 from './images/img7.png';
@@ -11,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function Login(props) {
+function Team() {
 
   const navigate = useNavigate();
 
@@ -23,12 +22,7 @@ function Login(props) {
         <h1 class="text-xl font-bold">PCMP :: PhD Conference Management Portal</h1>
         <div class="flex items-center space-x-5 text-xs">
           <ul class="flex space-x-10 text-gray-300">
-            {/* <li>
-                <a href="#">Store</a>
-            </li>
-            <li>
-                <a href="#">Collection</a>
-            </li> */}
+
             <li>
               <Link to="/meetTheTeam">Team</Link>
             </li>
@@ -165,4 +159,4 @@ function Login(props) {
 
 }
 
-export default Login
+export default Team

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Tab, Tabs } from 'react-bootstrap';
 
 
 // importing Components
@@ -10,10 +9,9 @@ import dayjs from 'dayjs';
 import { getToken } from '../../components_login/Tokens';
 
 
-function FormInput(props) {
+function FormInput() {
 
 
-    const [key, setKey] = useState('genInfo');
     const [generalInfo, setGeneralInfo] = useState({
         name: "",
         mobileNo: "",
@@ -53,7 +51,7 @@ function FormInput(props) {
 
 
     const getCopyInfo = ((e) => {
-        const { name, value } = e.target;
+        const { name } = e.target;
 
         if (name === "coa") {
             setcoa(!coa)
@@ -182,7 +180,6 @@ function FormInput(props) {
         });
 
         // logic
-        const data = await res.json();
 
         if (res.status === 422) {
             window.alert("UnSubmitted..");
@@ -192,24 +189,7 @@ function FormInput(props) {
         }
     }
 
-    // const getBasicInfo = async (req, res) => {
-    //     try {
-    //         const data = "sending request";
-    //         const token = getToken();
-    //         console.log(token);
-    //         const resp = await fetch("/studentInfoLoading", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "authorization": `${token}`
-    //             },
-    //         });
-    //         return resp.json();
-    //         // console.log(resp);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    
     const getBasicInfo = async (req, res) => {
         try {
           const token = getToken();

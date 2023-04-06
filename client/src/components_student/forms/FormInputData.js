@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { Container } from '@mui/material'
-import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -9,7 +7,6 @@ import { Switch } from '@headlessui/react'
 
 export default function InputData(props) {
 
-  const [value, setValue] = useState(dayjs('2023-01-01'));
   const tableRows = props.tableData.map((info) => {
     return (
       <tr key={info.particular} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -24,11 +21,11 @@ export default function InputData(props) {
     <Container>
 
       <form>
-
+        <br/>
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
                 Mobile No
@@ -63,8 +60,6 @@ export default function InputData(props) {
 
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">Conference Details</h2>
-
-
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label htmlFor="nameOfConference" className="block text-sm font-medium leading-6 text-gray-900">
@@ -119,7 +114,7 @@ export default function InputData(props) {
           <br />
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="to"
+              label="From"
               name="periodOfConferenceStarts"
               value={props.dateStarts}
               onChange={(newvalue) => {
@@ -129,7 +124,7 @@ export default function InputData(props) {
             />
             <span>      </span>
             <DatePicker
-              label="to"
+              label="To"
               name="periodOfConferenceEnds"
               value={props.dateEnds}
               onChange={(newvalue) => {

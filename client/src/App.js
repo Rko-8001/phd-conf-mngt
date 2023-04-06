@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-//                    Components Maintained
-import Login from './components_login/Login'; 
-import LoginN from './components_login/LoginN'; 
-import Team from './components_login/Team'; 
-import FormInput from './studentSide/forms/FormInput';
-import StudentHome from './studentSide/mainPage/StudentHome';
-import FacultyHome from './components_faculty/Faculty_dashboard';
-import Accounts_dashboard from './components_accounts/Accounts_dashboard';
-import Research_dashboard from './components_research/Research_dashboard';
-import LandingPage from './components/LandingPage';
+
+//                  Other Components
+import LoginN from './components_login/LoginN';
+import Team from './components/team/Team';
 import ErrorPage from './components/ErrorPage';
-import Profile from './studentSide/profile/Profile';
-import ContactUs from './components_login/ContactUs';
-import Application from './studentSide/applications/Application';
+import LandingPage from './components/LandingPage';
+import ContactUs from './components/ContactUs';
+
+//                 Student Side Components
+import StudentHome from './components_student/mainPage/StudentHome';
+import Application from './components_student/applications/Application';
+import FormInput from './components_student/forms/FormInput';
+import StudentProfile from './components_student/profile/Profile';
+
+//                  Faculty Side Components
+import FacultyHome from './components_faculty/Faculty_dashboard';
+
+//                  Research Section Components 
+import ResearchDashboard from './components_research/Research_dashboard';
+
+//                  Account Section Components 
+import AccountsDashboard from './components_accounts/Accounts_dashboard';
 
 
 
@@ -29,29 +37,29 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<LandingPage/>} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginN getEmailIdLogin={getEmailId} />} />
-        
+
         <Route path='/studentLogin' >
           <Route index element={<StudentHome />} />
           <Route path="formFill" element={<FormInput />} />
-          <Route path = "profile" element={<Profile  />} />
-          <Route path = "application" element={<Application studentEmail={emailId} />} />
+          <Route path="profile" element={<StudentProfile />} />
+          <Route path="application" element={<Application studentEmail={emailId} />} />
         </Route>
 
-        <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId}/>} />
+        <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />
 
-        <Route path='/researchLogin' element={<Research_dashboard adminEmail={emailId} />} />
+        <Route path='/researchLogin' element={<ResearchDashboard adminEmail={emailId} />} />
 
 
-        
+
         <Route path='/accountLogin'>
-          <Route index element={<Accounts_dashboard accountsEmail={emailId}/>}/>
+          <Route index element={<AccountsDashboard accountsEmail={emailId} />} />
         </Route>
         <Route path='/meetTheTeam' element={<Team />} />
         <Route path='/contactUs' element={<ContactUs />} />
 
-        <Route  path='*' element={<ErrorPage/>} />
+        <Route path='*' element={<ErrorPage />} />
 
       </Routes>
     </>
