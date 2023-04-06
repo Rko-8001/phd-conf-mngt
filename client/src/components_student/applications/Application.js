@@ -1,19 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import {PaperClipIcon} from '@heroicons/react/20/solid'
 import NavBar from '../studentNav/NavBar';
-function Application(props) {
+import { getToken } from '../../components_login/Tokens';
+
+
+function Application() {
 
   const [apps, setapps] = useState([]);
 
   const getBasicInfo = async (req, res) => {
     try {
-      const email = props.studentEmail;
+      const token = getToken();
+      // console.log(token);
       const resp = await fetch("/studentApplicationView", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({ email })
       });
       return resp.json();
       // console.log(resp);

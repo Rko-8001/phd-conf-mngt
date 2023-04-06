@@ -44,7 +44,7 @@ function App() {
           <Route index element={<StudentHome />} />
           <Route path="formFill" element={<FormInput />} />
           <Route path="profile" element={<StudentProfile />} />
-          <Route path="application" element={<Application studentEmail={emailId} />} />
+          <Route path="application" element={<Application />} />
         </Route>
 
         <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />

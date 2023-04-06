@@ -25,7 +25,7 @@ router.post('/studentInfoLoading', async (req, res) => {
         return res.status(422).json({ error: "No Header" });
     }
     var bearerToken = bearerHeader.split(" ")[1];
-    
+
     // console.log( "Student Side Token: " + bearerToken);
 
     if (!bearerToken) {
@@ -40,12 +40,12 @@ router.post('/studentInfoLoading', async (req, res) => {
         console.log(error);
         return res.status(422).json({ error: error });
     }
-    
+
 
     //setting email and role from decode
     const role = decode.role;
     const email = decode.email;
-    
+
 
     // fetching data from mongo
     try {
@@ -100,7 +100,34 @@ router.post('/studentApplicationSubmit', async (req, res) => {
 
 // router.post('/studentApplicationView', verifyStudentToken, async(req, res) => {
 router.post('/studentApplicationView', async (req, res) => {
-    const { email } = req.body;
+
+    // bearer header 'Bearer token'
+    const bearerHeader = await req.headers["authorization"];
+
+    if (!bearerHeader) {
+        return res.status(422).json({ error: "No Header" });
+    }
+    var bearerToken = bearerHeader.split(" ")[1];
+
+    // console.log( "Student Side Token: " + bearerToken);
+
+    if (!bearerToken) {
+        return res.status(422).json({ error: "No Token" });
+    }
+
+    // verfiy the token
+    var decode
+    try {
+        decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
+
+
+    //setting email and role from decode
+    const role = decode.role;
+    const email = decode.email;
 
     try {
         const data = await AppData.find({ email: email });
