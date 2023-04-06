@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from 'react'
-import {PaperClipIcon} from '@heroicons/react/20/solid'
+import { PaperClipIcon } from '@heroicons/react/20/solid'
 import NavBar from '../studentNav/NavBar';
 import { getToken } from '../../components_login/Tokens';
+import { Container, Grid } from '@mui/material';
 
 
+const data = [];
 function Application() {
-
-  const [apps, setapps] = useState([]);
+  const [apps, setApps] = useState(data);
+  // const [apps, setApps] = useState([{
+  //   "_id": "",
+  //   "email": "",
+  //   "status": "",
+  //   "mobileNo": "",
+  //   "bankAccountNo": "",
+  //   "nameOfConference": "",
+  //   "venueOfConference": "",
+  //   "paperInConference": "",
+  //   "conferenceStarts": "",
+  //   "conferenceEnds": "",
+  //   "financialSupport": "",
+  //   "finances": [],
+  //   "coaa": "",
+  //   "cocba": "",
+  //   "coaba": "",
+  //   "studentLeaveStarts": "",
+  //   "studentLeaveEnds": "",
+  //   "createdAt": "",
+  //   "updatedAt": ""
+  // }]);
 
   const getBasicInfo = async (req, res) => {
     try {
       const token = getToken();
-      // console.log(token);
       const resp = await fetch("/studentApplicationView", {
         method: "POST",
         headers: {
@@ -19,8 +40,9 @@ function Application() {
           "authorization": `Bearer ${token}`
         },
       });
-      return resp.json();
+      const data = await resp.json();
       // console.log(resp);
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -28,82 +50,92 @@ function Application() {
 
   useEffect(() => {
     getBasicInfo().then((resp) => {
-      setapps(resp)
-      console.log(resp);
-
+      setApps(resp);
     }).catch((e) => {
       console.log(e.message)
     });
   }, []);
+
+  const getStatus = (code) => {
+    if (code === "0")
+      return "Pending Faculty Approval";
+    else if (code === "1")
+      return "Pending Research Section Approval";
+    else if (code === "2")
+      return "Pending Account Section Approval";
+    else
+      return "Application Approved";
+  }
+
+  const getDays = (subDate) => {
+    const today = new Date();
+    const submitDate = new Date(subDate);
+
+    const days = Math.floor((today - submitDate) / (1000 * 3600 * 24));
+
+    if (days < 1)
+      return "Submitted Recently";
+    else
+      return (days + " day ago");
+
+  }
+
+  const getFinances = (finance) => {
+    var totalAmount = 0;
+
+    finance.forEach(element => {
+      totalAmount = totalAmount + Number(element.amount);
+    });
+    return totalAmount;
+  }
+  const renderApps = apps.map((item, index) =>
+    <>
+      <div key={index}>
+        <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
+          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+            {getStatus(item.status)}
+          </div>
+          <div className="p-4">
+            <h5
+              className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+              {item.nameOfConference}
+            </h5>
+            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+              Amount Needed: {getFinances(item.finances)} Rs
+            </p>
+            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+              Venue: {item.venueOfConference}
+            </p>
+          </div>
+          <button
+            className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Vew Full Application
+          </button>
+          <div
+            className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+            {getDays(item.createdAt)}
+          </div>
+        </div>
+
+      </div>
+
+      <br />
+    </>
+  );
   return (
     <>
       <NavBar />
+      <br />
+      <Container>
+
+      <div class="flex flex-wrap justify-center gap-4">
 
 
-      <div className="overflow-hidden bg-white shadow sm:rounded-lg">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-base font-semibold leading-6 text-gray-900">Applicant Information</h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
-        </div>
-        <div className="border-t border-gray-200">
-          <dl>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Full name</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Margot Foster</dd>
-            </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Application for</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Backend Developer</dd>
-            </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Email address</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">margotfoster@example.com</dd>
-            </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Salary expectation</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">$120,000</dd>
-            </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">About</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
-                qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
-                pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-              </dd>
-            </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                  <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                    <div className="flex w-0 flex-1 items-center">
-                      <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                      <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
-                    </div>
-                    <div className="ml-4 flex-shrink-0">
-                      <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        Download
-                      </a>
-                    </div>
-                  </li>
-                  <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                    <div className="flex w-0 flex-1 items-center">
-                      <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                      <span className="ml-2 w-0 flex-1 truncate">coverletter_back_end_developer.pdf</span>
-                    </div>
-                    <div className="ml-4 flex-shrink-0">
-                      <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
-                        Download
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
-        </div>
+        {apps && renderApps}
       </div>
-      
+      </Container>
+
     </>
   )
 }

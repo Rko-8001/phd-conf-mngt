@@ -125,13 +125,13 @@ router.post('/studentApplicationView', async (req, res) => {
     }
 
 
-    //setting email and role from decode
-    const role = decode.role;
+    //setting email from decode
     const email = decode.email;
-
+    const status = "0";
     try {
-        const data = await AppData.find({ email: email });
+        const data = await AppData.find({ email: email, status: status});
 
+        // console.log(data);
         return res.status(200).json(data);
 
     } catch (error) {

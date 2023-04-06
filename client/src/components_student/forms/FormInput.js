@@ -136,14 +136,12 @@ function FormInput() {
     })
 
     const checkData = () => {
-        if(!checkConfDetails(conferenceInfo))
-        {
+        if (!checkConfDetails(conferenceInfo)) {
             window.alert('Please fill conference Details properly.');
             return false;
         }
         const fin = checkFinances(travel, food, stay, tableData);
-        if(fin === "0")
-        {
+        if (fin === "0") {
             window.alert("Your Expenses Sum is zero. please review the form.");
             return false;
         }
@@ -170,16 +168,24 @@ function FormInput() {
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
         const finances = [...tableData];
-        finances.push({ "travel": travel });
-        finances.push({ "food": food });
-        finances.push({ "stay": stay });
+        finances.push({
+            "particular": "travel",
+            "amount": travel
+        });
+        finances.push({
+            "particular": "food",
+            "amount": food
+        });
+        finances.push({
+            "particular": "stay",
+            "amount": stay
+        });
 
         const coaa = coa;
         const coaba = coab;
         const cocba = cocb;
 
-        if(!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds))
-        {
+        if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
         }
         const res = await fetch("/studentApplicationSubmit", {
@@ -246,8 +252,8 @@ function FormInput() {
     return (
         <>
             <NavBar />
-            
-            <div style={{"marginTop": "5rem", "marginLeft": "30rem"}} id="successModal" tabindex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-10 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
+
+            <div style={{ "marginTop": "5rem", "marginLeft": "30rem" }} id="successModal" tabindex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-10 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                 <div className="relative p-4 w-full max-w-md h-full md:h-auto">
                     <div className="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
                         <button type="button" className="text-gray-400 absolute top-2.5 right-2.5 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="successModal">
@@ -259,7 +265,6 @@ function FormInput() {
                             <span className="sr-only">Success</span>
                         </div>
                         <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Successfully removed product.</p>
-
                     </div>
                 </div>
             </div>
