@@ -21,7 +21,7 @@ export default function InputData(props) {
     <Container>
 
       <form>
-        <br/>
+        <br />
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
 
@@ -297,15 +297,6 @@ export default function InputData(props) {
 
 
                 <div className="relative flex gap-x-3">
-                  <div className="flex h-6 items-center">
-                    <input
-                      id="coa"
-                      name="coa"
-                      type="checkbox"
-                      onClick={props.getCopyInfo}
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    />
-                  </div>
                   <div className="text-sm leading-6">
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Acceptance</label>
                     <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
@@ -314,32 +305,14 @@ export default function InputData(props) {
                 </div>
 
                 <div className="relative flex gap-x-3">
-                  <div className="flex h-6 items-center">
-                    <input
-                      id="cocb"
-                      type="checkbox"
-                      name="cocb"
-                      onClick={props.getCopyInfo}
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    />
-                  </div>
+
                   <div className="text-sm leading-6">
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Conference Brochure</label>
                     <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                    <p className="text-gray-500"></p>
                   </div>
                 </div>
 
                 <div className="relative flex gap-x-3">
-                  <div className="flex h-6 items-center">
-                    <input
-                      id="coab"
-                      type="checkbox"
-                      name="coab"
-                      onClick={props.getCopyInfo}
-                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                    />
-                  </div>
                   <div className="text-sm leading-6">
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Abstract</label>
                     <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
@@ -375,7 +348,7 @@ export default function InputData(props) {
         <div className="mt-6 flex items-center justify-end gap-x-6">
 
           <button
-          onClick={props.requestGrant}
+            onClick={props.requestGrant}
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Request Grant

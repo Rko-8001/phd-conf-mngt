@@ -59,15 +59,6 @@ const applicationData = new mongoose.Schema({
     finances: {
         type: Array,
     },
-    coaa: {
-        type: Boolean,
-    },
-    cocba: {
-        type: Boolean,
-    },
-    coaba: {
-        type: Boolean,
-    },
     studentLeaveStarts: {
         type: String,
         // require: true

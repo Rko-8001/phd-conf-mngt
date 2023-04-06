@@ -129,7 +129,8 @@ router.post('/studentApplicationView', async (req, res) => {
     const email = decode.email;
     const status = "0";
     try {
-        const data = await AppData.find({ email: email, status: status});
+        // const data = await AppData.find({ email: email, status: status});
+        const data = await AppData.find({ email: email});
 
         // console.log(data);
         return res.status(200).json(data);

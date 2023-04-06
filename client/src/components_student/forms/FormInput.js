@@ -50,25 +50,6 @@ function FormInput() {
     });
 
 
-    const [coa, setcoa] = useState(false);
-    const [cocb, setcocb] = useState(false);
-    const [coab, setcoab] = useState(false);
-
-
-    const getCopyInfo = ((e) => {
-        const { name } = e.target;
-
-        if (name === "coa") {
-            setcoa(!coa)
-        }
-        else if (name === "coab") {
-            setcoab(!coab);
-        }
-        else {
-            setcocb(!cocb);
-        }
-    })
-
     const getFixedParts = ((e) => {
         const { name, value } = e.target;
 
@@ -147,6 +128,7 @@ function FormInput() {
         }
         return true;
     }
+    
     const requestGrant = async (e) => {
         e.preventDefault();
 
@@ -181,9 +163,6 @@ function FormInput() {
             "amount": stay
         });
 
-        const coaa = coa;
-        const coaba = coab;
-        const cocba = cocb;
 
         if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
@@ -199,7 +178,6 @@ function FormInput() {
                 nameOfConference, venueOfConference, paperInConference,
                 financialSupport,
                 advances, finances,
-                coaa, coaba, cocba,
                 conferenceStarts, conferenceEnds,
                 studentLeaveStarts, studentLeaveEnds,
             })
@@ -279,7 +257,6 @@ function FormInput() {
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay}
-                getCopyInfo={getCopyInfo}
                 requestGrant={requestGrant}
             />
         </>

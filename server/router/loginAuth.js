@@ -41,7 +41,6 @@ router.post('/login', async (req, res) => {
         return res.status(422).json({ error: "Invalid Credientials." });
     }
     if (mssg == "otp") {
-        console.log("idr");
         loginOtp = Math.random();
         loginOtp = loginOtp * 1000000;
         loginOtp = parseInt(loginOtp);
@@ -63,9 +62,7 @@ router.post('/login', async (req, res) => {
         console.log(loginOtp);
         if(loginOtp == otp){
             const token = await genUserToken(email, role);
-            
             // console.log("Login Token: " + token);
-            
             return res.status(200).json({role: role, token: token});
         }
         else {

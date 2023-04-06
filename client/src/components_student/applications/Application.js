@@ -123,15 +123,13 @@ function Application() {
       <br />
     </>
   );
+
   return (
     <>
       <NavBar />
       <br />
       <Container>
-
       <div class="flex flex-wrap justify-center gap-4">
-
-
         {apps && renderApps}
       </div>
       </Container>
