@@ -3,9 +3,11 @@ import NavBar from '../studentNav/NavBar';
 import { getUserToken, setAppToken } from '../../components_login/Tokens';
 import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import LoaderCard from '../../components//loading/LoaderCard';
 
 const data = [];
 function Application() {
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [apps, setApps] = useState(data);
   // const [apps, setApps] = useState([{
@@ -50,6 +52,7 @@ function Application() {
   useEffect(() => {
     getBasicInfo().then((resp) => {
       setApps(resp);
+      setIsLoading(false);
     }).catch((e) => {
       console.log(e.message)
     });
@@ -96,7 +99,7 @@ function Application() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({id, aisehi})
+        body: JSON.stringify({ id, aisehi })
       });
       const data = await resp.json();
       const appToken = data.appToken;
@@ -106,13 +109,14 @@ function Application() {
       console.log(error);
     }
   }
+
   const viewSpecficApplication = async (e) => {
     e.preventDefault();
     const { name } = e.target;
     try {
       await getAppToken(name);
       navigate('/studentLogin/viewApplication');
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -158,14 +162,20 @@ function Application() {
   );
 
   return (
+
     <>
       <NavBar />
       <br />
-      <Container>
-        <div class="flex flex-wrap justify-center gap-4">
-          {apps && renderApps}
-        </div>
-      </Container>
+      {isLoading ?
+        <LoaderCard />
+        :
+        <Container>
+          <div class="flex flex-wrap justify-center gap-4">
+            {apps && renderApps}
+          </div>
+        </Container>
+      }
+
 
     </>
   )

@@ -23,7 +23,6 @@ require('dotenv').config();
 router.post('/studentInfoLoading', async (req, res) => {
 
     const bearerHeader = await req.headers["authorization"];
-    console.log();
     if (!bearerHeader) {
         return res.status(422).json({ error: "No Header" });
     }
@@ -180,7 +179,7 @@ router.post('/viewAnApplication', async (req, res) => {
     }
 
     const id = decode.id;
-
+    
     try {
         const data = await AppData.findById(id);
         return res.status(200).json(data);
