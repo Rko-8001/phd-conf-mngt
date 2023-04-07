@@ -61,7 +61,7 @@ router.post('/studentInfoLoading', async (req, res) => {
 
 
 // submitting application 
-// Statuses
+// Status
 router.post('/studentApplicationSubmit', async (req, res) => {
     const { email, status,
         mobileNo, bankAccountNo,

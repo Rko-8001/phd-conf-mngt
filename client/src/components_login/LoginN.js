@@ -84,9 +84,8 @@ function Login(props) {
             const role = data.role;
             const token = data.token;
             props.getEmailIdLogin(email);
-            console.log(token);
+            setUserToken(token);
             if (role === "0") {
-                setUserToken(token);
                 navigate('/studentLogin');
             }
             else if (role === "1") {
@@ -147,7 +146,7 @@ function Login(props) {
                 <h1 class="text-xl font-bold">PCMP :: PhD Conference Management Portal</h1>
                 <div class="flex items-center space-x-5 text-xs">
                     <ul class="flex space-x-10 text-gray-300">
-                        
+
                         <li>
                             <Link to="/meetTheTeam">Team</Link>
                         </li>
@@ -217,7 +216,7 @@ function Login(props) {
 
                     {/* <!-- image --> */}
                     <div class="md:block hidden w-1/2">
-                        <img class="rounded-2xl" src={img} alt='iitrpr pic'/>
+                        <img class="rounded-2xl" src={img} alt='iitrpr pic' />
                     </div>
                 </div>
             </section>

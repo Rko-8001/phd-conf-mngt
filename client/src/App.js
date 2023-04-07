@@ -20,7 +20,7 @@ import ViewApplication from './components_student/applications/ViewApplication';
 import FacultyHome from './components_faculty/Faculty_dashboard';
 
 //                  Research Section Components 
-import ResearchDashboard from './components_research/Research_dashboard';
+import ResearchHome from './components_research//mainPage/ResearchHome';
 
 //                  Account Section Components 
 import AccountsDashboard from './components_accounts/Accounts_dashboard';
@@ -51,7 +51,10 @@ function App() {
 
         <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />
 
-        <Route path='/researchLogin' element={<ResearchDashboard adminEmail={emailId} />} />
+        <Route path='/researchLogin'>
+          <Route index element={<ResearchHome />} />
+
+        </Route>
 
 
 
