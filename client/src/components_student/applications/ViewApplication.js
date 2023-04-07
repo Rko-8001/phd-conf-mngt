@@ -48,7 +48,7 @@ function ViewApplication() {
   return (
     <>
       {isLoading ?
-        <LoaderContent/>
+        <LoaderContent />
         :
         <>
           < Container style={{ "marginTop": "2rem" }}>
@@ -84,6 +84,7 @@ function ViewApplication() {
               </div>
 
             </div>
+            <LoaderContent />
           </Container>
         </>}
     </>

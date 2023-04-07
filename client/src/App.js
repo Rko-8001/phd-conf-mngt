@@ -5,9 +5,9 @@ import { Route, Routes } from 'react-router-dom';
 //                  Other Components
 import LoginN from './components_login/LoginN';
 import Team from './components/team/Team';
-import ErrorPage from './components/ErrorPage';
-import LandingPage from './components/LandingPage';
-import ContactUs from './components/ContactUs';
+import ErrorPage from './components/sidePages/ErrorPage';
+import LandingPage from './components/sidePages/LandingPage';
+import ContactUs from './components/sidePages/ContactUs';
 
 //                 Student Side Components
 import StudentHome from './components_student/mainPage/StudentHome';

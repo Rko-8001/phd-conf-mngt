@@ -167,7 +167,9 @@ function Application() {
       <NavBar />
       <br />
       {isLoading ?
-        <LoaderCard />
+        <Container>
+          <LoaderCard />
+        </Container>
         :
         <Container>
           <div class="flex flex-wrap justify-center gap-4">
