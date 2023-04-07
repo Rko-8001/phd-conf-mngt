@@ -13,6 +13,9 @@ const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
 
 
+const { genAppToken } = require('../tokens/generateToken');
+
+
 // credentials import
 require('dotenv').config();
 
@@ -20,7 +23,6 @@ require('dotenv').config();
 router.post('/studentInfoLoading', async (req, res) => {
 
     const bearerHeader = await req.headers["authorization"];
-    console.log();
     if (!bearerHeader) {
         return res.status(422).json({ error: "No Header" });
     }
@@ -59,7 +61,7 @@ router.post('/studentInfoLoading', async (req, res) => {
 
 
 // submitting application 
-// Statuses
+// Status
 router.post('/studentApplicationSubmit', async (req, res) => {
     const { email, status,
         mobileNo, bankAccountNo,
@@ -98,7 +100,6 @@ router.post('/studentApplicationSubmit', async (req, res) => {
 });
 
 
-// router.post('/studentApplicationView', verifyStudentToken, async(req, res) => {
 router.post('/studentApplicationView', async (req, res) => {
 
     // bearer header 'Bearer token'
@@ -130,13 +131,61 @@ router.post('/studentApplicationView', async (req, res) => {
     const status = "0";
     try {
         // const data = await AppData.find({ email: email, status: status});
-        const data = await AppData.find({ email: email});
+        const data = await AppData.find({ email: email });
 
         // console.log(data);
         return res.status(200).json(data);
 
     } catch (error) {
         console.log(error);
+    }
+})
+
+router.post('/createApplicationToken', async (req, res) => {
+
+    const id = req.body.id;
+    try {
+        const token = await genAppToken(id);
+        return res.status(200).json({ appToken: token });
+    } catch (error) {
+        return res.status(422).json({ error: "cant generate token.." });
+    }
+    // return res.status(200).json({id: id});
+})
+
+router.post('/viewAnApplication', async (req, res) => {
+
+    // bearer header 'Bearer token'
+    const bearerHeader = await req.headers["authorization"];
+
+    if (!bearerHeader) {
+        return res.status(422).json({ error: "No Header" });
+    }
+    var bearerToken = bearerHeader.split(" ")[1];
+
+    // console.log( "App Side Token: " + bearerToken);
+
+    if (!bearerToken) {
+        return res.status(422).json({ error: "No Token" });
+    }
+
+    // verfiy the token
+    var decode;
+    try {
+        decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
+
+    const id = decode.id;
+    
+    try {
+        const data = await AppData.findById(id);
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(422).json({ error: error });
+
     }
 })
 

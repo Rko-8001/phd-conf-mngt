@@ -59,7 +59,6 @@ router.post('/login', async (req, res) => {
         }
     }
     else {
-        console.log(loginOtp);
         if(loginOtp == otp){
             const token = await genUserToken(email, role);
             // console.log("Login Token: " + token);
