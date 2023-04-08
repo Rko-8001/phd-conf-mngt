@@ -3,6 +3,7 @@ import { getUserToken } from '../../components_login/Tokens';
 import LoaderContent from '../../components/loading/LoaderContent';
 import { Container } from '@mui/material';
 import ResearchNav from '../researchNav/ResearchNav';
+import Team from '../../components/team/Team';
 
 export default function ResearchHome() {
   const [user, setUser] = useState();
@@ -31,18 +32,16 @@ export default function ResearchHome() {
     }).catch((error) => {
       console.log(error);
     })
-  }, [])
+  }, []);
+  
   return (
     <>
-      <ResearchNav/>
-      {isLoading ?
-        <>
-          <Container>
-            <LoaderContent />
-          </Container>
-        </>
+      {isLoading
+        ?
+        <LoaderContent />
         :
-        <> </>}
+        <LoaderContent />
+      }
     </>
   )
 }
