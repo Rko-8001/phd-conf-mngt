@@ -91,7 +91,7 @@ function Application() {
     return totalAmount;
   }
 
-  const getAppToken = async (id) => {
+  const createAppToken = async (id) => {
     try {
       const aisehi = "abcd";
       const resp = await fetch("/createApplicationToken", {
@@ -114,7 +114,7 @@ function Application() {
     e.preventDefault();
     const { name } = e.target;
     try {
-      await getAppToken(name);
+      await createAppToken(name);
       navigate('/studentLogin/viewApplication');
 
     } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 
@@ -20,7 +20,13 @@ import ViewApplication from './components_student/applications/ViewApplication';
 import FacultyHome from './components_faculty/Faculty_dashboard';
 
 //                  Research Section Components 
+import ResearchNav from './components_research/researchNav/ResearchNav';
+import UpperNav from './components_research/researchNav/UpperNav';
 import ResearchHome from './components_research//mainPage/ResearchHome';
+import ResearchApplication from './components_research/applications/ResearchApplication';
+import ResearchStudent from './components_research/users/ResearchStudent';
+import ResearchFaculty from './components_research/users/ResearchFaculty';
+import StudentApplication from './components_research/applications/StudentApplication';
 
 //                  Account Section Components 
 import AccountsDashboard from './components_accounts/Accounts_dashboard';
@@ -35,6 +41,9 @@ function App() {
     setEmailId(e);
     // console.log(e);
   }
+
+
+
   return (
     <>
       <Routes>
@@ -52,8 +61,35 @@ function App() {
         <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />
 
         <Route path='/researchLogin'>
-          <Route index element={<ResearchHome />} />
-
+          <Route index element={
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <ResearchNav />
+              <ResearchHome />
+            </div>} />
+          <Route path="application" element={
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <ResearchNav />
+              <ResearchApplication />
+            </div>} />
+          <Route path="student" element={
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <ResearchNav />
+              <ResearchStudent />
+            </div>} />
+          <Route path="faculty" element={
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <ResearchNav />
+              <ResearchFaculty />
+            </div>} />
+          <Route path="studentApplication" element={
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <StudentApplication />
+            </div>} />
         </Route>
 
 

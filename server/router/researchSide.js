@@ -42,6 +42,20 @@ router.post('/researchApproveOrDisapprove', async (req , res) => {
     }
 })
 
+router.get("/viewUsers" , async (req, res) => {
+
+    try {
+        var role;
+        role = "0"; const studentUser = await User.find({role: role});
+        role = "1"; const facultyUser = await User.find({role: role});
+
+        return res.status(200).json({studentUser: studentUser, facultyUser: facultyUser});
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 
 
 module.exports = router;

@@ -153,41 +153,6 @@ router.post('/createApplicationToken', async (req, res) => {
     // return res.status(200).json({id: id});
 })
 
-router.post('/viewAnApplication', async (req, res) => {
-
-    // bearer header 'Bearer token'
-    const bearerHeader = await req.headers["authorization"];
-
-    if (!bearerHeader) {
-        return res.status(422).json({ error: "No Header" });
-    }
-    var bearerToken = bearerHeader.split(" ")[1];
-
-    // console.log( "App Side Token: " + bearerToken);
-
-    if (!bearerToken) {
-        return res.status(422).json({ error: "No Token" });
-    }
-
-    // verfiy the token
-    var decode;
-    try {
-        decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
-    } catch (error) {
-        console.log(error);
-        return res.status(422).json({ error: error });
-    }
-
-    const id = decode.id;
-    
-    try {
-        const data = await AppData.findById(id);
-        return res.status(200).json(data);
-    } catch (error) {
-        return res.status(422).json({ error: error });
-
-    }
-})
 
 
 

@@ -36,12 +36,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    emailOfSuperVisor: {
+        type: String,
+        // required: true
+    },
     role: {
         type: String,
         required: true
         // 0 for student
         // 1 for faculty
-        // 2 for admin       
+        // 2 for research
+        // 3 for accounts      
     }
 });
 
@@ -70,9 +75,10 @@ module.exports = User;
 
 {    
     "_id":{"$oid":"63eba5a2540a443fd5f34388"},
-    "name":"Tanuj",
-    "email":"2020csb1134@iitrpr.ac.in",
-    "role" : "3"
+    "name":"Test Faculty1",
+    "email":"testfaculty1@iitrpr.ac.in",
+    "role" : "1",
+    "department": "CSE"
 }
 
 */

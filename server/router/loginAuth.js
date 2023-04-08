@@ -18,9 +18,9 @@ const User = require('../model/userSchema');
 // credentials import
 require('dotenv').config();
 
-
-
 var loginOtp = "696969";
+
+// login API
 router.post('/login', async (req, res) => {
 
     const { email, mssg, otp } = req.body;
@@ -61,7 +61,6 @@ router.post('/login', async (req, res) => {
     else {
         if(loginOtp == otp){
             const token = await genUserToken(email, role);
-            // console.log("Login Token: " + token);
             return res.status(200).json({role: role, token: token});
         }
         else {

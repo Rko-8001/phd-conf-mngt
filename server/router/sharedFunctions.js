@@ -14,7 +14,6 @@ const AppData = require('../model/applicationData');
 // credentials import
 require('dotenv').config();
 
-
 // info Loading 
 router.post('/infoLoading', async (req, res) => {
 
@@ -55,8 +54,6 @@ router.post('/infoLoading', async (req, res) => {
     }
 })
 
-
-
 //  status: Application Submitted       0
 router.post('/applicationPendingFaculty', async (req, res) => {
 
@@ -77,7 +74,6 @@ router.post('/applicationPendingFaculty', async (req, res) => {
         return res.status(422).json("Error Occurred..");
     }
 });
-
 
 // status: Faculty DisApproval          -1
 router.post('/applicationDisapprovedFaculty', async (req, res) => {
@@ -121,8 +117,6 @@ router.post('/applicationApprovedFaculty', async (req, res) => {
     }
 })
 
-
-
 //  status: Research Approval            2
 router.post('/applicationApprovedResearch', async (req, res) => {
 
@@ -143,7 +137,6 @@ router.post('/applicationApprovedResearch', async (req, res) => {
         return res.status(422).json("Error Occurred..");
     }
 });
-
 
 //  status: Research DisApproval            -2
 router.post('/applicationDisapprovedResearch', async (req, res) => {
@@ -177,5 +170,54 @@ router.post('/studentInfoAdmin', async (req, res) => {
         return res.status(422).json("Error Occurred..");
     }
 });
+
+router.get('/viewAllApplication', async (req, res) => {
+
+    try {
+        const data = await AppData.find();
+        return res.status(200).json({data: data});
+
+    } catch (error) {
+        return res.status(422).json({ error: error })
+    }
+})
+
+router.post('/viewAnApplication', async (req, res) => {
+
+    // bearer header 'Bearer token'
+    const bearerHeader = await req.headers["authorization"];
+
+    if (!bearerHeader) {
+        return res.status(422).json({ error: "No Header" });
+    }
+    var bearerToken = bearerHeader.split(" ")[1];
+
+    // console.log( "App Side Token: " + bearerToken);
+
+    if (!bearerToken) {
+        return res.status(422).json({ error: "No Token" });
+    }
+
+    // verfiy the token
+    var decode;
+    try {
+        decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
+
+    const id = decode.id;
+
+    try {
+        const data = await AppData.findById(id);
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(422).json({ error: error });
+
+    }
+})
+
+
 
 module.exports = router;
