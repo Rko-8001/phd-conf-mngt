@@ -11,7 +11,6 @@ const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
 
 
-
 // Approve or Disapprove Logic
 router.post('/researchApproveOrDisapprove', async (req, res) => {
     // const {id, status, remarks} = req.body;
@@ -85,7 +84,7 @@ router.post("/addStudent", async (req, res) => {
                 });
                 await newUser.save();
                 mssg = "user added.";
-                
+
 
             }
         } catch (error) {
@@ -98,7 +97,45 @@ router.post("/addStudent", async (req, res) => {
             "remarks": mssg,
         })
     }
-    return res.status(200).json({update: updates});
+    return res.status(200).json({ update: updates });
+})
+
+// adding faculty
+router.post("/addFaculty", async (req, res) => {
+    const data = req.body;
+    const updates = [];
+    for (const faculty of data) {
+        var name = faculty.name;
+        var email = faculty.email;
+        var department = faculty.department;
+        var role = "1";
+        var mssg = "";
+        try {
+            const user = await User.findOne({ email: email });
+            if (user) {
+                mssg = "Already Exist..";
+            }
+            else {
+                const newUser = new User({
+                    name, email,
+                    department, role
+                });
+                await newUser.save();
+                mssg = "user added.";
+
+
+            }
+        } catch (error) {
+            mssg = "Error Occured while Adding";
+            console.log(error);
+        }
+        updates.push({
+            "name": name,
+            "email": email,
+            "remarks": mssg,
+        })
+    }
+    return res.status(200).json({ update: updates });
 })
 
 

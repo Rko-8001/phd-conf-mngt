@@ -159,7 +159,7 @@ router.post('/applicationDisapprovedResearch', async (req, res) => {
     }
 });
 
-
+// student Info 
 router.post('/studentInfoAdmin', async (req, res) => {
     const { semail, femail } = req.body;
     try {
@@ -171,6 +171,7 @@ router.post('/studentInfoAdmin', async (req, res) => {
     }
 });
 
+// view applications
 router.get('/viewAllApplication', async (req, res) => {
 
     try {
@@ -182,6 +183,7 @@ router.get('/viewAllApplication', async (req, res) => {
     }
 })
 
+// view specfic application
 router.post('/viewAnApplication', async (req, res) => {
 
     // bearer header 'Bearer token'

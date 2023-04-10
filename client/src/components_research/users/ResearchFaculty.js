@@ -7,7 +7,7 @@ export default function ResearchFaculty() {
 
     const [faculty, setFaculty] = useState();
     const [isLoadingHome, setIsLoadingHome] = useState(true);
-    const [refresh,setRefresh] = useState(false);
+    const [refresh, setRefresh] = useState(false);
 
     const [fileName, setFileName] = useState("Faculty Data Excel File");
     const [uploadFaculty, setUploadFaculty] = useState([]);
@@ -34,7 +34,11 @@ export default function ResearchFaculty() {
         }).catch((error) => {
             console.log(error);
         })
-    }, []);
+    }, [refresh]);
+
+    const delay = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
 
     async function handleFile(e) {
         setFileName(e.target.files[0].name);
@@ -70,9 +74,16 @@ export default function ResearchFaculty() {
         var ws = XLSX.utils.json_to_sheet(data.update);
         XLSX.utils.book_append_sheet(wb, ws, "updates");
         XLSX.writeFile(wb, "facultyUploadUpdates.xlsx");
+
+
+        // logic for auto refreshing the page
         setFileName("Data Uploaded..");
+        // delay of 3 seconds to refresh..
+        await delay(3000);
         setRefresh(!refresh);
-        
+        setIsLoadingHome(true);
+        setFileName("Faculty Data Excel File");
+
     }
 
     return (
