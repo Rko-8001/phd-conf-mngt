@@ -55,7 +55,11 @@ function App() {
           <Route path="formFill" element={<FormInput />} />
           <Route path="profile" element={<StudentProfile />} />
           <Route path="application" element={<Application />} />
-          <Route path="viewApplication" element={<ViewApplication />} />
+          <Route path="viewApplication" element={
+            <>
+              <UpperNav />
+              <ViewApplication />
+            </>} />
         </Route>
 
         <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />

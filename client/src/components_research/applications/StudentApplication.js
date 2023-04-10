@@ -3,11 +3,12 @@ import { getAppToken, removeAppToken } from '../../components_login/Tokens';
 import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoaderContent from '../../components/loading/LoaderContent';
+import { delay } from '../../components/loading/Delay';
 
 export default function StudentApplication() {
 
   const navigate = useNavigate();
-  
+
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,7 +39,14 @@ export default function StudentApplication() {
   useEffect(() => {
     getBasicInfo().then((resp) => {
       setData(resp);
-      setIsLoading(false);
+
+      // delay of 2 seconds
+      delay(500).then(() => {
+        setIsLoading(false);
+        
+      }).catch((error) => {
+        console.log(error);
+      })
 
     }).catch((e) => {
       console.log(e.message)

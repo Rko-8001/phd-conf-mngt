@@ -3,6 +3,7 @@ import NavBar from '../studentNav/NavBar';
 import { useState, useEffect } from 'react';
 import { getUserToken } from '../../components_login/Tokens';
 import LoaderContent from '../../components/loading/LoaderContent';
+import { delay } from '../../components/loading/Delay';
 
 export default function Profile() {
 
@@ -18,6 +19,7 @@ export default function Profile() {
     aos: "",
     supervisor: ""
   });
+  
   const getGeneralInfo = ((e) => {
     const { name, value } = e.target;
     // console.log(name + " " + value);
@@ -33,6 +35,7 @@ export default function Profile() {
       [name]: value
     }));
   })
+
   const getBasicInfo = async (req, res) => {
     try {
       const token = getUserToken();
@@ -62,7 +65,16 @@ export default function Profile() {
       setFetchData("aos", resp.areaOfSpecialisation);
       setFetchData("supervisor", resp.nameOfSupervisor);
       setFetchData("email", resp.email);
-      setIsLoading(false);
+
+    
+      // delay of 2 seconds
+      delay(500).then(() => {
+        setIsLoading(false);
+      }).catch((error) => {
+        console.log(error);
+      })
+
+
     }).catch((e) => {
       console.log(e.message)
     });

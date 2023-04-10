@@ -25,12 +25,10 @@ router.use(cookieSession({
 router.use(passport.initialize());
 router.use(passport.session());
 
-
-            // for testing google auth
+// for testing google auth
 router.get('/', (req, res) => {
     res.send("<a href='/auth'>Login With Google</a>")
 });
-
 
 // Auth logic
 router.get('/auth', passport.authenticate('google', {
@@ -61,10 +59,9 @@ router.get('/auth/callback/success', async (req, res) => {
         }
         else {
             const token = await genUserToken(email, loginuser.role);
-            return res.status(200).json({token: token});
+            return res.status(200).json({ token: token });
             // return res.status(200).json(loginuser.role + " " + req.user.email);
             // res.send("<h1>Hello</h1>");
-
         }
     } catch (error) {
         console.log(error);
