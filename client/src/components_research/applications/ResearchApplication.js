@@ -55,8 +55,10 @@ function ResearchApplication() {
 
         if (days < 1)
             return "Submitted Recently";
+        else if (days === 1)
+            return ("1 Day Ago");
         else
-            return (days + " day ago");
+            return (days + " Days ago");
 
     }
 
@@ -139,9 +141,10 @@ function ResearchApplication() {
             <br />
         </>
     );
+    
     return (
         <>
-            <br/>
+            <br />
             {isLoading ?
                 <Container>
                     <LoaderCard />
