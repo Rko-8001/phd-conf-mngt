@@ -11,6 +11,7 @@ const navigation = [
   { name: 'Applications', href: '/studentLogin/application', current: false },
   { name: 'Fill Form', href: '/studentLogin/formFill', current: false },
 ]
+
 const userNavigation = [
   { name: 'Your Profile', click: '/studentLogin/profile' },
   { name: 'Sign out', click: '/' },
@@ -36,6 +37,7 @@ export default function NavBar() {
       navigate('/studentLogin/Profile');
     }
   }
+
   return (
     <>
 

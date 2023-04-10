@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import LoaderContent from '../../components/loading/LoaderContent';
 import FacultyUser from './FacultyUser';
 import * as XLSX from 'xlsx';
+import { delay } from '../../components/loading/Delay';
 
 export default function ResearchFaculty() {
 
@@ -30,15 +31,19 @@ export default function ResearchFaculty() {
     useEffect(() => {
         getUserInfo().then((resp) => {
             setFaculty(resp.facultyUser);
-            setIsLoadingHome(false);
+
+            // delay of 2 seconds
+            delay(500).then(() => {
+                setIsLoadingHome(false);
+            }).catch((error) => {
+                console.log(error);
+            })
+
+
         }).catch((error) => {
             console.log(error);
         })
     }, [refresh]);
-
-    const delay = ms => new Promise(
-        resolve => setTimeout(resolve, ms)
-    );
 
     async function handleFile(e) {
         setFileName(e.target.files[0].name);

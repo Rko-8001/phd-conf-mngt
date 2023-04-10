@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { removeAppToken, setAppToken } from '../../components_login/Tokens';
 import LoaderCard from '../../components/loading/LoaderCard';
 import { Container } from '@mui/material';
+import { delay } from '../../components/loading/Delay';
 
 const data = [];
 function ResearchApplication() {
@@ -30,7 +31,14 @@ function ResearchApplication() {
     useEffect(() => {
         getAppInfo().then((resp) => {
             setApps(resp.data);
-            setIsLoading(false);
+
+            delay(500).then(() => {
+                //good
+                setIsLoading(false);
+            }).catch((error) => {
+                console.log(error);
+            })
+
         }).catch((e) => {
             console.log(e.message)
         });
@@ -141,7 +149,7 @@ function ResearchApplication() {
             <br />
         </>
     );
-    
+
     return (
         <>
             <br />

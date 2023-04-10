@@ -3,6 +3,7 @@ import { getAppToken, removeAppToken } from '../../components_login/Tokens';
 import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoaderContent from '../../components/loading/LoaderContent';
+import { delay } from '../../components/loading/Delay';
 
 function ViewApplication() {
 
@@ -37,7 +38,13 @@ function ViewApplication() {
   useEffect(() => {
     getBasicInfo().then((resp) => {
       setData(resp);
-      setIsLoading(false);
+
+      // delay of 0.5 seconds
+      delay(500).then(() => {
+        setIsLoading(false);
+      }).catch((error) => {
+        console.log(error);
+      })
 
     }).catch((e) => {
       console.log(e.message)

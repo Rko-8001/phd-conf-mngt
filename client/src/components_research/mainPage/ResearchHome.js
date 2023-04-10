@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getUserToken } from '../../components_login/Tokens';
 import LoaderContent from '../../components/loading/LoaderContent';
-import { Container } from '@mui/material';
-import ResearchNav from '../researchNav/ResearchNav';
-import Team from '../../components/team/Team';
+import { delay } from '../../components/loading/Delay';
 
 export default function ResearchHome() {
   const [user, setUser] = useState();
@@ -28,12 +26,19 @@ export default function ResearchHome() {
   useEffect(() => {
     getUserInfo().then((resp) => {
       setUser(resp);
-      setIsLoading(false);
+
+      delay(500).then(() => {
+        setIsLoading(false);
+      }).catch((error) => {
+        console.log(error);
+      })
+
+
     }).catch((error) => {
       console.log(error);
     })
   }, []);
-  
+
   return (
     <>
       {isLoading

@@ -3,6 +3,7 @@ import ResearchNav from '../researchNav/ResearchNav'
 import LoaderContent from '../../components/loading/LoaderContent';
 import StudentUser from './StudentUser';
 import * as XLSX from 'xlsx';
+import { delay } from '../../components/loading/Delay';
 
 export default function ResearchStudent() {
 
@@ -13,10 +14,6 @@ export default function ResearchStudent() {
     const [fileName, setFileName] = useState("Student Data Excel File");
     const [uploadStudent, setUploadStudent] = useState([]);
 
-
-    const delay = ms => new Promise(
-        resolve => setTimeout(resolve, ms)
-    );
 
     const getUserInfo = async (req, res) => {
         try {
@@ -35,7 +32,14 @@ export default function ResearchStudent() {
     useEffect(() => {
         getUserInfo().then((resp) => {
             setStudent(resp.studentUser);
-            setIsLoadingHome(false);
+
+            // delay of 2 seconds
+            delay(500).then(() => {
+                setIsLoadingHome(false);
+            }).catch((error) => {
+                console.log(error);
+            })
+
         }).catch((error) => {
             console.log(error);
         })

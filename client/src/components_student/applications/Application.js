@@ -4,33 +4,14 @@ import { getUserToken, setAppToken } from '../../components_login/Tokens';
 import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoaderCard from '../../components//loading/LoaderCard';
+import { delay } from '../../components/loading/Delay';
 
 const data = [];
 function Application() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [apps, setApps] = useState(data);
-  // const [apps, setApps] = useState([{
-  //   "_id": "",
-  //   "email": "",
-  //   "status": "",
-  //   "mobileNo": "",
-  //   "bankAccountNo": "",
-  //   "nameOfConference": "",
-  //   "venueOfConference": "",
-  //   "paperInConference": "",
-  //   "conferenceStarts": "",
-  //   "conferenceEnds": "",
-  //   "financialSupport": "",
-  //   "finances": [],
-  //   "coaa": "",
-  //   "cocba": "",
-  //   "coaba": "",
-  //   "studentLeaveStarts": "",
-  //   "studentLeaveEnds": "",
-  //   "createdAt": "",
-  //   "updatedAt": ""
-  // }]);
+  
 
   const getBasicInfo = async (req, res) => {
     try {
@@ -52,7 +33,15 @@ function Application() {
   useEffect(() => {
     getBasicInfo().then((resp) => {
       setApps(resp);
-      setIsLoading(false);
+
+      // delay of 2 seconds
+      delay(500).then(() => {
+        setIsLoading(false);
+      }).catch((error) => {
+        console.log(error);
+      })
+
+
     }).catch((e) => {
       console.log(e.message)
     });
