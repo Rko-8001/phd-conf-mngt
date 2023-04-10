@@ -4,6 +4,7 @@ import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
+import ApplicationData from '../../components/applicationStudent/ApplicationData';
 
 export default function StudentApplication() {
 
@@ -11,6 +12,7 @@ export default function StudentApplication() {
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const[applicantInfo, setApplicantInfo] = useState();
 
   const goBack = e => {
     console.log(data);
@@ -35,15 +37,16 @@ export default function StudentApplication() {
       console.log(error);
     }
   }
-
+  
   useEffect(() => {
     getBasicInfo().then((resp) => {
-      setData(resp);
 
+      setData(resp.data);
+      setApplicantInfo(resp.applicantInfo)
       // delay of 2 seconds
       delay(500).then(() => {
         setIsLoading(false);
-        
+
       }).catch((error) => {
         console.log(error);
       })
@@ -93,7 +96,8 @@ export default function StudentApplication() {
               </div>
 
             </div>
-            <LoaderContent />
+
+            <ApplicationData data={data} user={applicantInfo}/>
           </Container>
         </>}
     </>

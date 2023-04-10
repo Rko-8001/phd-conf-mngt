@@ -52,7 +52,7 @@ const applicationData = new mongoose.Schema({
         type: String,
         // require: true
     },
-    advanceS: {
+    advances: {
         type: Boolean,
         // require: true
     },
