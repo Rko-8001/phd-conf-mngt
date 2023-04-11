@@ -13,7 +13,6 @@ function FormPrintIn(props) {
         documentTitle: 'New_Application for Participating in Conference, Workshop, Seminar (within India)',
     })
 
-
     const tableRows = props.partC.map((info) => {
         return (
             <tr key={info.particular}>
@@ -22,7 +21,6 @@ function FormPrintIn(props) {
             </tr>
         );
     });
-
 
     const submitApplication = async (e) => {
         e.preventDefault();
@@ -70,6 +68,7 @@ function FormPrintIn(props) {
             window.alert("Application Submitted");
         }
     }
+    
     return (
         <>
             <Row>

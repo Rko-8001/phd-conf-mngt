@@ -213,7 +213,8 @@ router.post('/viewAnApplication', async (req, res) => {
 
     try {
         const data = await AppData.findById(id);
-        return res.status(200).json(data);
+        const user = await User.findOne({email: data.email});
+        return res.status(200).json({data: data, applicantInfo: user});
     } catch (error) {
         return res.status(422).json({ error: error });
 
