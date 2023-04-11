@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 
 
 // connection established
@@ -10,34 +11,53 @@ require('../mongoDb/connection');
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
 
+// credentials import
+require('dotenv').config();
 
 // Approve or Disapprove Logic
 router.post('/researchApproveOrDisapprove', async (req, res) => {
     // const {id, status, remarks} = req.body;
-    const { id, status } = req.body;
+    const { id, status, grantEligibility, researchRemarks } = req.body;
 
     // Debug Purpose
-    // console.log(id);    console.log(status);
+    // console.log(id); console.log(status);
+    // console.log(grantEligibility); console.log(researchRemarks);
+    try {
 
-    // try {
+        const bearerHeader = await req.headers["authorization"];
 
-    //     const appData = await AppData.findById(id);
+        if (!bearerHeader) {
+            return res.status(422).json({ error: "No Header" });
+        }
+        var bearerToken = bearerHeader.split(" ")[1];
 
-    //     if (appData.status !== "1") {
-    //         return res.status(422).json("Can't Approve Or Disapprove..");
-    //     }
+        // console.log( "Student Side Token: " + bearerToken);
 
-    //     // await AppData.findByIdAndUpdate(id, {status: status, remarksResearch: remarks});
-    //     await AppData.findByIdAndUpdate(id, { status: status });
+        if (!bearerToken) {
+            return res.status(422).json({ error: "No Token" });
+        }
 
-    //     //             Debug Purpose
-    //     // const appData2 = await AppData.findById(id);
-    //     // console.log(appData2.status);
+        // verfiy the token
+        var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
 
-    //     return res.status(200).json("updated");
-    // } catch (error) {
-    //     console.log(error);
-    // }
+        //setting email from decode
+        const userEmail = decode.email;
+
+        const appData = await AppData.findById(id);
+        if (appData.status !== "1")
+            return res.status(422).json("Can't Approve Or Disapprove..");
+
+        await AppData.findByIdAndUpdate(id, {
+            status: status,
+            grantEligibility: grantEligibility,
+            remarksResearch: researchRemarks,
+            lastModified: userEmail,
+        });
+        return res.status(200).json("Updated..");
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
 })
 
 // viewing users - student/ faculty

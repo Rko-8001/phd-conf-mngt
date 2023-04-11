@@ -59,6 +59,7 @@ export default function ResearchAction({ user, data }) {
         id: data._id,
       })
     })
+    setAction("Please Refresh the page..");
   }
 
 

@@ -67,7 +67,9 @@ const applicationData = new mongoose.Schema({
         type: String,
         // require: true
     },
-    
+    grantEligibility: {
+        type: String
+    },
     remarksResearch: {
         type: String
     },
@@ -76,6 +78,9 @@ const applicationData = new mongoose.Schema({
     },
     remarksDean: {
         type: String
+    },
+    lastModified: {
+        type: String,   
     }
 },
     {

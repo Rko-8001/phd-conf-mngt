@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PersonalDetails from './Tabs/PersonalDetails';
 import ConferenceDetails from './Tabs/ConferenceDetails';
+import ResearchSection from './Tabs/ResearchSection';
 import FinanceDetails from './Tabs/FinanceDetails';
 import ResearchAction from './Actions/ResearchAction';
 
@@ -40,7 +41,7 @@ function ApplicationData({ data, user }) {
                             {showClass(data.status, "1") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }
-                            {(showClass(data.status, "2"), showClass(data.status, "3")) &&
+                            {(showClass(data.status, "2") || showClass(data.status, "3")) &&
                                 <Tab value="research section approved" label="Research Section" />
                             }
                         </TabList>
@@ -63,7 +64,7 @@ function ApplicationData({ data, user }) {
                     </TabPanel>
 
                     <TabPanel value="research section approved">
-
+                        <ResearchSection data = {data}/>
                     </TabPanel>
                 </TabContext >
             </Box >
