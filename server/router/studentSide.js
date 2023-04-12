@@ -61,7 +61,6 @@ router.post('/studentInfoLoading', async (req, res) => {
 
 
 // submitting application 
-// Status
 router.post('/studentApplicationSubmit', async (req, res) => {
     const { email, status,
         mobileNo, bankAccountNo,
@@ -99,7 +98,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
 
 });
 
-
+// apps view
 router.post('/studentApplicationView', async (req, res) => {
 
     // bearer header 'Bearer token'
@@ -131,7 +130,8 @@ router.post('/studentApplicationView', async (req, res) => {
     const status = "0";
     try {
         // const data = await AppData.find({ email: email, status: status});
-        const data = await AppData.find({ email: email });
+        // sorting acc to latest updated.. 
+        const data = await AppData.find({ email: email }).sort({ "updatedAt": -1 });
 
         // console.log(data);
         return res.status(200).json(data);
@@ -141,6 +141,7 @@ router.post('/studentApplicationView', async (req, res) => {
     }
 })
 
+//creating application token for viewing..
 router.post('/createApplicationToken', async (req, res) => {
 
     const id = req.body.id;

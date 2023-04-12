@@ -175,7 +175,9 @@ router.post('/studentInfoAdmin', async (req, res) => {
 router.get('/viewAllApplication', async (req, res) => {
 
     try {
-        const data = await AppData.find();
+        // sorting using last updated 
+        // recently updated somes first --
+        const data = await AppData.find().sort({ "updatedAt": -1 });
         return res.status(200).json({ data: data });
 
     } catch (error) {
@@ -223,9 +225,17 @@ router.post('/viewAnApplication', async (req, res) => {
 
 
 
-// Experimental *** 
+// Experimental ***     Success 
 router.get('/aisehi', async (req, res) => {
-    
+    try {
+        // can be used -- 
+        // -1 print lastest first 
+        // 1 print oldest first
+        const appData = await AppData.find().sort({ "updatedAt": 1 });
+        return res.status(200).json({ "Data": appData });
+    } catch (error) {
+        return res.status(422).json({ "error": error });
+    }
 })
 
 
