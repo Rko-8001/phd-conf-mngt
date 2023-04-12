@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { removeAppToken, setAppToken } from '../../components_login/Tokens';
+import { removeAppToken, setAppToken, getUserToken } from '../../components_login/Tokens';
 import LoaderCard from '../../components/loading/LoaderCard';
 import { Container } from '@mui/material';
 import { delay } from '../../components/loading/Delay';
 
 const data = [];
-export function FacultyApplications() {
+export default function FacultyApplication() {
 
     const navigate = useNavigate();
 
@@ -15,6 +15,8 @@ export function FacultyApplications() {
 
     const getAppInfo = async (req, res) => {
         try {
+            const token = getUserToken();
+            console.log("hello");
             const resp = await fetch("/viewFacultyApplications", {
                 method: "POST",
                 headers: {
@@ -22,8 +24,8 @@ export function FacultyApplications() {
                     "authorization": `Bearer ${token}`
                 },
             });
-            const data = await resp.json();
-            return data;
+            console.log("hi");
+            return resp.json();
         } catch (error) {
             console.log(error);
         }

@@ -20,6 +20,7 @@ import ViewApplication from './components_student/applications/ViewApplication';
 //                  Faculty Side Components
 import FacultyNav from './components_faculty/facultyNav/FacultyNav';
 import FacultyHome from './components_faculty/mainPage/FacultyHome';
+import FacultyApplication from './components_faculty/applications/Application';
 
 //                  Research Section Components 
 import ResearchNav from './components_research/researchNav/ResearchNav';
@@ -68,6 +69,12 @@ function App() {
             <UpperNav />
             <FacultyNav />
             <FacultyHome />
+          </div>} />
+
+          <Route path='/facultyLogin/application' element={<div class="min-h-screen w-full relative">
+            <UpperNav />
+            <FacultyNav />
+            <FacultyApplication />
           </div>} />
         </Route>
 
