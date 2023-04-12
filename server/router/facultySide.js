@@ -102,24 +102,53 @@ router.post('/studentInfoFaculty', async (req, res) => {
     }
 });
 
-router.post('/applicationApproveOrDisapprove', async (req, res) => {
+
+// Approve or Disapprove Logic
+router.post('/facultyApproveOrDisapprove', async (req, res) => {
+    // const {id, status, remarks} = req.body;
     const { id, status } = req.body;
 
+    // Debug Purpose
+    // console.log(id); console.log(status);
+    // console.log(grantEligibility); console.log(researchRemarks);
     try {
-        const appData = await AppData.findById(id);
 
-        if (appData.status !== "0") {
-            return res.status(422).json("Can't Approve Or Disapprove..");
+        const bearerHeader = await req.headers["authorization"];
+
+        if (!bearerHeader) {
+            return res.status(422).json({ error: "No Header" });
+        }
+        var bearerToken = bearerHeader.split(" ")[1];
+
+        // console.log( "Student Side Token: " + bearerToken);
+
+        if (!bearerToken) {
+            return res.status(422).json({ error: "No Token" });
         }
 
-        await AppData.findByIdAndUpdate(id, { status: status });
-        return res.status(200).json("Done")
+        // verfiy the token
+        var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+
+        //setting email from decode
+        const userEmail = decode.email;
+
+        const appData = await AppData.findById(id);
+        if (appData.status !== "0")
+            return res.status(422).json("Can't Approve Or Disapprove..");
+
+        // console.log(appData);
+        // console.log(userEmail);
+
+        await AppData.findByIdAndUpdate(id, {
+            lastModified: userEmail,
+            status: status,
+        });
+        return res.status(200).json("Updated..");
     } catch (error) {
         console.log(error);
-        return res.status(422).json("Error Occurred..");
-
+        return res.status(422).json({ error: error });
     }
-});
+})
 
 // viewing application for supervisor of students under him.
 router.post('/viewFacultyApplications', async (req, res) => {
@@ -157,7 +186,7 @@ router.post('/viewFacultyApplications', async (req, res) => {
                     });
                 }
             }
-        }        
+        }
         return res.status(200).json({ data: filteredData });
     } catch (error) {
         console.log(error);

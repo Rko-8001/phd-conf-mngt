@@ -102,7 +102,7 @@ export default function ViewApplicationFaculty() {
                             </div>
                         </div>
 
-                        <ApplicationData data={data} user={applicantInfo} role="0" />
+                        <ApplicationData data={data} user={applicantInfo} role="1" />
 
                         {/* <FormPrint data={data} /> */}
                         <div className="hidden">
