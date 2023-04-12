@@ -15,12 +15,13 @@ import StudentHome from './components_student/mainPage/StudentHome';
 import Application from './components_student/applications/Applications';
 import FormInput from './components_student/forms/FormInput';
 import StudentProfile from './components_student/profile/Profile';
-import ViewApplication from './components_student/applications/ViewApplication';
+import ViewApplicationStudent from './components_student/applications/ViewApplication';
 
 //                  Faculty Side Components
 import FacultyNav from './components_faculty/facultyNav/FacultyNav';
 import FacultyHome from './components_faculty/mainPage/FacultyHome';
 import FacultyApplication from './components_faculty/applications/Application';
+import ViewApplicationFaculty from './components_faculty/applications/ViewApplication';
 
 //                  Research Section Components 
 import ResearchNav from './components_research/researchNav/ResearchNav';
@@ -28,7 +29,7 @@ import ResearchHome from './components_research//mainPage/ResearchHome';
 import ResearchApplication from './components_research/applications/Application';
 import ResearchStudent from './components_research/users/ResearchStudent';
 import ResearchFaculty from './components_research/users/ResearchFaculty';
-import StudentApplication from './components_research/applications/StudentApplication';
+import ViewApplicationResearch from './components_research/applications/ViewApplication';
 
 //                  Account Section Components 
 import AccountsDashboard from './components_accounts/Accounts_dashboard';
@@ -60,7 +61,7 @@ function App() {
           <Route path="viewApplication" element={
             <>
               <UpperNav />
-              <ViewApplication />
+              <ViewApplicationStudent />
             </>} />
         </Route>
 
@@ -71,10 +72,17 @@ function App() {
             <FacultyHome />
           </div>} />
 
-          <Route path='/facultyLogin/application' element={<div class="min-h-screen w-full relative">
+          <Route path='application' element={
+          <div class="min-h-screen w-full relative">
             <UpperNav />
             <FacultyNav />
             <FacultyApplication />
+          </div>} />
+          
+          <Route path='studentApplication' element={
+          <div class="min-h-screen w-full relative">
+            <UpperNav />
+            <ViewApplicationFaculty />
           </div>} />
         </Route>
 
@@ -106,7 +114,7 @@ function App() {
           <Route path="studentApplication" element={
             <div class="min-h-screen w-full relative">
               <UpperNav />
-              <StudentApplication />
+              <ViewApplicationResearch />
             </div>} />
         </Route>
 

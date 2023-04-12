@@ -107,7 +107,7 @@ export default function FacultyApplication() {
         removeAppToken();
         try {
             await createAppToken(name);
-            navigate('');
+            navigate('/facultyLogin/studentApplication');
 
         } catch (error) {
             console.log(error);

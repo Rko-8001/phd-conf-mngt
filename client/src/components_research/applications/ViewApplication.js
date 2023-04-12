@@ -6,7 +6,7 @@ import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
 
-export default function StudentApplication() {
+export default function ViewApplicationResearch() {
 
   const navigate = useNavigate();
 
