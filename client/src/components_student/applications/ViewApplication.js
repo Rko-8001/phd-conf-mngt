@@ -102,7 +102,7 @@ function ViewApplication() {
               </div>
             </div>
 
-            <ApplicationData data={data} user={applicantInfo} />
+            <ApplicationData data={data} user={applicantInfo} role="0"/>
 
             {/* <FormPrint data={data} /> */}
             <div className="hidden">

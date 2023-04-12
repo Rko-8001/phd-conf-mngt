@@ -128,7 +128,7 @@ function ResearchApplication() {
                             Amount Needed: {getFinances(item.finances)} Rs
                         </p>
                         <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Venue: {item.venueOfConference}
+                            Submitted By: {item.email}
                         </p>
                     </div>
                     <button

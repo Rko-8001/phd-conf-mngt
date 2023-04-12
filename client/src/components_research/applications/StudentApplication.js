@@ -97,7 +97,7 @@ export default function StudentApplication() {
 
             </div>
 
-            <ApplicationData data={data} user={applicantInfo}/>
+            <ApplicationData data={data} user={applicantInfo} role="2"/>
           </Container>
         </>}
     </>

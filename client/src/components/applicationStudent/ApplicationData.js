@@ -11,7 +11,7 @@ import FinanceDetails from './Tabs/FinanceDetails';
 import ResearchAction from './Actions/ResearchAction';
 
 
-function ApplicationData({ data, user }) {
+function ApplicationData({ data, user, role }) {
     const [value, setValue] = useState('one');
 
 
@@ -38,7 +38,7 @@ function ApplicationData({ data, user }) {
                             <Tab value="personal details" label="Personal Details" />
                             <Tab value="conference details" label="Conference Details" />
                             <Tab value="finance details" label="Finance Details" />
-                            {showClass(data.status, "1") &&
+                            {(showClass(data.status, "1") && role == "2") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }
                             {(showClass(data.status, "2") || showClass(data.status, "3")) &&
