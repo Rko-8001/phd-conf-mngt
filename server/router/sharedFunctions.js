@@ -176,7 +176,7 @@ router.get('/viewAllApplication', async (req, res) => {
 
     try {
         const data = await AppData.find();
-        return res.status(200).json({data: data});
+        return res.status(200).json({ data: data });
 
     } catch (error) {
         return res.status(422).json({ error: error })
@@ -213,14 +213,20 @@ router.post('/viewAnApplication', async (req, res) => {
 
     try {
         const data = await AppData.findById(id);
-        const user = await User.findOne({email: data.email});
-        return res.status(200).json({data: data, applicantInfo: user});
+        const user = await User.findOne({ email: data.email });
+        return res.status(200).json({ data: data, applicantInfo: user });
     } catch (error) {
         return res.status(422).json({ error: error });
 
     }
 })
 
+
+
+// Experimental *** 
+router.get('/aisehi', async (req, res) => {
+    
+})
 
 
 module.exports = router;

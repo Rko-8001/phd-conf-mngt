@@ -38,7 +38,7 @@ function ApplicationData({ data, user, role }) {
                             <Tab value="personal details" label="Personal Details" />
                             <Tab value="conference details" label="Conference Details" />
                             <Tab value="finance details" label="Finance Details" />
-                            {(showClass(data.status, "1") && role == "2") &&
+                            {(showClass(data.status, "1") && role === "2") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }
                             {(showClass(data.status, "2") || showClass(data.status, "3")) &&
