@@ -3,7 +3,7 @@ import NavBar from '../studentNav/NavBar';
 import { getUserToken, setAppToken } from '../../components_login/Tokens';
 import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import LoaderCard from '../../components//loading/LoaderCard';
+import LoaderCard from '../../components/loading/LoaderCard';
 import { delay } from '../../components/loading/Delay';
 
 const data = [];

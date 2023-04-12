@@ -7,7 +7,7 @@ import { delay } from '../../components/loading/Delay';
 import { useReactToPrint } from 'react-to-print';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
 
-function ViewApplication() {
+export default function ViewApplicationStudent() {
 
   const componentRef = useRef();
   const navigate = useNavigate();
@@ -102,7 +102,7 @@ function ViewApplication() {
               </div>
             </div>
 
-            <ApplicationData data={data} user={applicantInfo} />
+            <ApplicationData data={data} user={applicantInfo} role="0" />
 
             {/* <FormPrint data={data} /> */}
             <div className="hidden">
@@ -113,5 +113,3 @@ function ViewApplication() {
     </>
   )
 }
-
-export default ViewApplication

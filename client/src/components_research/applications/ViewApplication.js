@@ -6,7 +6,7 @@ import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
 
-export default function StudentApplication() {
+export default function ViewApplicationResearch() {
 
   const navigate = useNavigate();
 
@@ -97,7 +97,7 @@ export default function StudentApplication() {
 
             </div>
 
-            <ApplicationData data={data} user={applicantInfo}/>
+            <ApplicationData data={data} user={applicantInfo} role="2"/>
           </Container>
         </>}
     </>

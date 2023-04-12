@@ -138,7 +138,7 @@ router.post('/applicationApprovedResearch', async (req, res) => {
     }
 });
 
-//  status: Research DisApproval            -2
+//  status: Research DisApproval         -2
 router.post('/applicationDisapprovedResearch', async (req, res) => {
 
     try {
@@ -175,8 +175,10 @@ router.post('/studentInfoAdmin', async (req, res) => {
 router.get('/viewAllApplication', async (req, res) => {
 
     try {
-        const data = await AppData.find();
-        return res.status(200).json({data: data});
+        // sorting using last updated 
+        // recently updated somes first --
+        const data = await AppData.find().sort({ "updatedAt": -1 });
+        return res.status(200).json({ data: data });
 
     } catch (error) {
         return res.status(422).json({ error: error })
@@ -213,14 +215,28 @@ router.post('/viewAnApplication', async (req, res) => {
 
     try {
         const data = await AppData.findById(id);
-        const user = await User.findOne({email: data.email});
-        return res.status(200).json({data: data, applicantInfo: user});
+        const user = await User.findOne({ email: data.email });
+        return res.status(200).json({ data: data, applicantInfo: user });
     } catch (error) {
         return res.status(422).json({ error: error });
 
     }
 })
 
+
+
+// Experimental ***     Success 
+router.get('/aisehi', async (req, res) => {
+    try {
+        // can be used -- 
+        // -1 print lastest first 
+        // 1 print oldest first
+        const appData = await AppData.find().sort({ "updatedAt": 1 });
+        return res.status(200).json({ "Data": appData });
+    } catch (error) {
+        return res.status(422).json({ "error": error });
+    }
+})
 
 
 module.exports = router;

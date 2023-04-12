@@ -6,20 +6,19 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PersonalDetails from './Tabs/PersonalDetails';
 import ConferenceDetails from './Tabs/ConferenceDetails';
+import FacultyDetails from './Tabs/FacultyDetails'
 import ResearchSection from './Tabs/ResearchSection';
 import FinanceDetails from './Tabs/FinanceDetails';
 import ResearchAction from './Actions/ResearchAction';
+import FacultyAction from './Actions/FacultyAction';
 
 
-function ApplicationData({ data, user }) {
-    const [value, setValue] = useState('one');
-
+function ApplicationData({ data, user, role }) {
+    const [value, setValue] = useState('personal details');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
-
 
     const showClass = (status, needed) => {
         if (status == needed)
@@ -38,12 +37,21 @@ function ApplicationData({ data, user }) {
                             <Tab value="personal details" label="Personal Details" />
                             <Tab value="conference details" label="Conference Details" />
                             <Tab value="finance details" label="Finance Details" />
-                            {showClass(data.status, "1") &&
+
+                            {(showClass(data.status, "0") && role === "1") &&
+                                <Tab value="faculty approval" label="Take Action" />
+                            }
+                            {(showClass(data.status, "1") || showClass(data.status, "2") || showClass(data.status, "3")) &&
+                                <Tab value="faculty approved" label="Supervisor" />
+                            }
+
+                            {(showClass(data.status, "1") && role === "2") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }
                             {(showClass(data.status, "2") || showClass(data.status, "3")) &&
                                 <Tab value="research section approved" label="Research Section" />
                             }
+
                         </TabList>
                     </Box>
 
@@ -59,12 +67,19 @@ function ApplicationData({ data, user }) {
                         <FinanceDetails user={user} data={data} />
                     </TabPanel>
 
+                    <TabPanel value="faculty approval">
+                        <FacultyAction user={user} data={data} />
+                    </TabPanel>
+                    <TabPanel value="faculty approved">
+                        <FacultyDetails data={data} user={user} />
+                    </TabPanel>
+
                     <TabPanel value="research section approval">
                         <ResearchAction user={user} data={data} />
                     </TabPanel>
 
                     <TabPanel value="research section approved">
-                        <ResearchSection data = {data}/>
+                        <ResearchSection data={data} />
                     </TabPanel>
                 </TabContext >
             </Box >
