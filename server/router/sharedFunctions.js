@@ -138,7 +138,7 @@ router.post('/applicationApprovedResearch', async (req, res) => {
     }
 });
 
-//  status: Research DisApproval            -2
+//  status: Research DisApproval         -2
 router.post('/applicationDisapprovedResearch', async (req, res) => {
 
     try {

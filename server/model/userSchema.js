@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
-    emailOfSuperVisor: {
+    emailOfSupervisor: {
         type: String,
         // required: true
     },
