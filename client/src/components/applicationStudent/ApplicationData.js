@@ -14,7 +14,7 @@ import FacultyAction from './Actions/FacultyAction';
 
 
 function ApplicationData({ data, user, role }) {
-    const [value, setValue] = useState('one');
+    const [value, setValue] = useState('personal details');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
