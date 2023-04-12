@@ -44,6 +44,9 @@ export default function ResearchAction({ user, data }) {
   }
 
   const updateStatus = async (status) => {
+    if (!checks()) {
+      return;
+    }
     const token = getUserToken();
 
     const res = await fetch("/researchApproveOrDisapprove", {
@@ -116,7 +119,7 @@ export default function ResearchAction({ user, data }) {
             <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Remarks</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0">
-                <textarea onChange={getRemarks} className="block  mt-2 w-auto  placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"/>
+                <textarea onChange={getRemarks} className="block  mt-2 w-auto  placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300" />
               </dd>
             </div>
           </dl>
