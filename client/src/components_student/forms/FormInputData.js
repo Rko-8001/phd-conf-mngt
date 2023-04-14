@@ -3,6 +3,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Switch } from '@headlessui/react'
+import { useState } from 'react';
 
 
 export default function InputData(props) {
@@ -15,7 +16,16 @@ export default function InputData(props) {
       </tr>
     );
   });
+  const [image, setImage] = useState("");
+  console.log(image,12);
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+  const Upload1 = () => {
 
+  }
 
   return (
     <Container>
@@ -297,12 +307,37 @@ export default function InputData(props) {
 
 
                 <div className="relative flex gap-x-3">
-                  <div className="text-sm leading-6">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Acceptance</label>
+                  {/* <div className="text-sm leading-6">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input" value={props.image} onChange={props.handleImageChange}>Copy of Acceptance</label>
                     <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                     <p className="text-gray-500"></p>
-                  </div>
+                  </div> */}
+                  <input onchange={(e) => setImage(e.target.files[0])} type="file"/>
                 </div>
+                {/* <div className="max-w-md mx-auto">
+                  <div className="bg-white rounded-lg p-6 shadow-md">
+                    <h2 className="text-2xl font-medium mb-4">Copy of Acceptance</h2>
+                    <div className="flex justify-center">
+                      <label
+                        className="cursor-pointer bg-gray-100 hover:bg-gray-200 py-2 px-4 rounded-md"
+                        htmlFor="file"
+                      >
+                        Choose a file
+                      </label>
+                      <input
+                        type="file"
+                        className="hidden"
+                        id="file"
+                        onChange={handleImageChange}
+                      />
+                    </div>
+                    {image && (
+                      <div className="mt-4">
+                        <img src={image} alt="Uploaded Image" className="rounded-md" />
+                      </div>
+                    )}
+                  </div>
+                </div> */}
 
                 <div className="relative flex gap-x-3">
 
@@ -348,7 +383,7 @@ export default function InputData(props) {
         <div className="mt-6 flex items-center justify-end gap-x-6">
 
           <button
-            onClick={props.requestGrant}
+            onClick={console.log(image,12)}
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
             Request Grant

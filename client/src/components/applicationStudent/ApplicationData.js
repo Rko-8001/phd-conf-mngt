@@ -12,7 +12,7 @@ import ResearchAction from './Actions/ResearchAction';
 
 
 function ApplicationData({ data, user }) {
-    const [value, setValue] = useState('one');
+    const [value, setValue] = useState("personal details");
 
 
     const handleChange = (event, newValue) => {

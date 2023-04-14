@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import UpperNav from './components/navBars/UpperNav';
 
 
 //                  Other Components
@@ -8,6 +9,7 @@ import Team from './components/team/Team';
 import ErrorPage from './components/sidePages/ErrorPage';
 import LandingPage from './components/sidePages/LandingPage';
 import ContactUs from './components/sidePages/ContactUs';
+import Heading from './components/navBars/Heading';
 
 //                 Student Side Components
 import StudentHome from './components_student/mainPage/StudentHome';
@@ -15,21 +17,23 @@ import Application from './components_student/applications/Application';
 import FormInput from './components_student/forms/FormInput';
 import StudentProfile from './components_student/profile/Profile';
 import ViewApplication from './components_student/applications/ViewApplication';
+import SideBar0 from './components/navBars/Sidebar0';
 
 //                  Faculty Side Components
 import FacultyHome from './components_faculty/Faculty_dashboard';
+import SideBar1 from './components/navBars/Sidebar1';
 
 //                  Research Section Components 
-import ResearchNav from './components_research/researchNav/ResearchNav';
-import UpperNav from './components_research/researchNav/UpperNav';
 import ResearchHome from './components_research//mainPage/ResearchHome';
 import ResearchApplication from './components_research/applications/ResearchApplication';
 import ResearchStudent from './components_research/users/ResearchStudent';
 import ResearchFaculty from './components_research/users/ResearchFaculty';
 import StudentApplication from './components_research/applications/StudentApplication';
+import SideBar2 from './components/navBars/Sidebar2';
 
 //                  Account Section Components 
 import AccountsDashboard from './components_accounts/Accounts_dashboard';
+import FacultyUser from './components_research/users/FacultyUser';
 
 
 
@@ -51,10 +55,42 @@ function App() {
         <Route path='/login' element={<LoginN getEmailIdLogin={getEmailId} />} />
 
         <Route path='/studentLogin' >
-          <Route index element={<StudentHome />} />
-          <Route path="formFill" element={<FormInput />} />
-          <Route path="profile" element={<StudentProfile />} />
-          <Route path="application" element={<Application />} />
+          <Route index element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar0 />
+                <div>
+                  <Heading />
+                  <StudentHome />
+                </div>
+              </div>
+            </>} />
+          <Route path="formFill" element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar0 />
+                <FormInput />
+              </div>
+            </>} />
+          <Route path="profile" element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar0 />
+                <StudentProfile />
+              </div>
+            </>} />
+
+          <Route path="application" element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar0 />
+                <Application />
+              </div>
+            </>} />
           <Route path="viewApplication" element={
             <>
               <UpperNav />
@@ -66,29 +102,37 @@ function App() {
 
         <Route path='/researchLogin'>
           <Route index element={
-            <div class="min-h-screen w-full relative">
+            <>
               <UpperNav />
-              <ResearchNav />
-              <ResearchHome />
-            </div>} />
+              <div className='flex'>
+                <SideBar2 />
+                <ResearchHome />
+              </div>
+            </>} />
           <Route path="application" element={
-            <div class="min-h-screen w-full relative">
+            <>
               <UpperNav />
-              <ResearchNav />
-              <ResearchApplication />
-            </div>} />
+              <div className='flex'>
+                <SideBar2 />
+                <ResearchApplication />
+              </div>
+            </>} />
           <Route path="student" element={
-            <div class="min-h-screen w-full relative">
+            <>
               <UpperNav />
-              <ResearchNav />
-              <ResearchStudent />
-            </div>} />
+              <div className='flex'>
+                <SideBar2 />
+                <ResearchStudent />
+              </div>
+            </>} />
           <Route path="faculty" element={
-            <div class="min-h-screen w-full relative">
+            <>
               <UpperNav />
-              <ResearchNav />
-              <ResearchFaculty />
-            </div>} />
+              <div className='flex'>
+                <SideBar2 />
+                <ResearchFaculty />
+              </div>
+            </>} />
           <Route path="studentApplication" element={
             <div class="min-h-screen w-full relative">
               <UpperNav />
@@ -106,7 +150,7 @@ function App() {
 
         <Route path='*' element={<ErrorPage />} />
 
-      </Routes>
+      </Routes >
     </>
   );
 }

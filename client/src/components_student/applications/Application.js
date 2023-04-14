@@ -155,7 +155,6 @@ function Application() {
   return (
 
     <>
-      <NavBar />
       <br />
       {isLoading ?
         <Container>

@@ -44,10 +44,18 @@ function FormInput() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
+    const [image, setImage] = useState("");
     const [rowData, setRowData] = useState({
         particular: "",
         amount: ""
     });
+
+    const handleImageChange = (e) => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0])
+        }
+        // setImage(image);
+      };
 
 
     const getFixedParts = ((e) => {
@@ -135,6 +143,7 @@ function FormInput() {
 
         // save all data
         const email = generalInfo.email;
+        // const image = image;
         const status = "0";
         const mobileNo = generalInfo.mobileNo;
         const bankAccountNo = generalInfo.bankAccNo;
@@ -163,34 +172,34 @@ function FormInput() {
             "amount": stay
         });
 
-
+        console.log(image,12);
         if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
         }
-        const res = await fetch("/studentApplicationSubmit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, status,
-                mobileNo, bankAccountNo,
-                nameOfConference, venueOfConference, paperInConference,
-                financialSupport,
-                advances, finances,
-                conferenceStarts, conferenceEnds,
-                studentLeaveStarts, studentLeaveEnds,
-            })
-        });
+        // const res = await fetch("/studentApplicationSubmit", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         email, status,
+        //         mobileNo, bankAccountNo,
+        //         nameOfConference, venueOfConference, paperInConference,
+        //         financialSupport,
+        //         advances, finances,
+        //         conferenceStarts, conferenceEnds,
+        //         studentLeaveStarts, studentLeaveEnds, image,
+        //     })
+        // });
 
         // logic
 
-        if (res.status === 422) {
-            window.alert("Error Occurred! Please Try Again.");
-        }
-        else {
-            window.alert("Application Submitted");
-        }
+        // if (res.status === 422) {
+        //     window.alert("Error Occurred! Please Try Again.");
+        // }
+        // else {
+        //     window.alert("Application Submitted");
+        // }
     }
 
     const getBasicInfo = async (req, res) => {
@@ -222,6 +231,7 @@ function FormInput() {
             setFetchData("aos", resp.areaOfSpecialisation);
             setFetchData("supervisor", resp.nameOfSupervisor);
             setFetchData("email", resp.email);
+            // setFetchData("image",resp.image);
         }).catch((e) => {
             // console.log(e.message)
         });
@@ -229,7 +239,6 @@ function FormInput() {
 
     return (
         <>
-            <NavBar />
 
             <div style={{ "marginTop": "5rem", "marginLeft": "30rem" }} id="successModal" tabindex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-10 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                 <div className="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -258,6 +267,8 @@ function FormInput() {
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay}
                 requestGrant={requestGrant}
+                image={image}
+                handleImageChange={handleImageChange}
             />
         </>
     )

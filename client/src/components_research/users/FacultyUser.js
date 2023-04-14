@@ -26,14 +26,14 @@ export default function FacultyUser({ users }) {
 
     return (
         <>
-            <section className="bg-white dark:bg-gray-900">
+            <section className="bg-white dark:bg-gray-900 ">
                 <div className=" px-4 mx-auto max-w-screen-xl  ">
-                    <div className="mx-auto max-w-screen-sm text-center ">
+                    <div className="mx-auto max-w-screen-md text-center ">
                         <h2 className="mb-1 text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white"> Faculty Info</h2>
                     </div>
 
                     <section className="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
-                        <div className="mx-auto max-w-screen-xl pl-20 lg:pl-20">
+                        <div className="mx-auto max-w-screen-3xl ">
                             <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
                                 <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                                     <div className="w-full md:w-1/2">
