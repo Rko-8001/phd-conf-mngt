@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 
 // importing Components
-import NavBar from '../studentNav/NavBar';
+import NavBar from '../../studentNav/NavBar';
 import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
-import { getUserToken } from '../../components_login/Tokens';
-import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from './checkFunctions';
+import { getUserToken } from '../../../components_login/Tokens';
+import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 
 
-function FormInput() {
+export default function FormInputAbroad() {
 
 
     const [generalInfo, setGeneralInfo] = useState({
@@ -30,8 +30,18 @@ function FormInput() {
         venueOfConference: "",
         paperInConference: "",
         financialSupport: "",
+        nameOfSociety: "",
+        societyRecognized: "",
+        reasonToAttend: "",
+        fundingSources: "",
+        purpose: "",
+        justification: "",
+        sponsorship: "",
+
     });
 
+    const [eventStarts, setEventStarts] = useState(dayjs('2023-01-01'));
+    const [eventEnds, setEventEnds] = useState(dayjs('2023-01-01'));
     const [dateStarts, setDateStarts] = useState(dayjs('2023-01-01'));
     const [dateEnds, setDateEnds] = useState(dayjs('2023-01-01'));
     const [leaveStarts, setLeaveStarts] = useState(dayjs('2023-01-01'));
@@ -128,7 +138,7 @@ function FormInput() {
         }
         return true;
     }
-    
+
     const requestGrant = async (e) => {
         e.preventDefault();
 
@@ -249,6 +259,8 @@ function FormInput() {
             <FormInputGenData
                 getGeneralInfo={getGeneralInfo}
                 getConferenceInfo={getConferenceInfo}
+                eventStarts={dateStarts} setEventStarts={setDateStarts}
+                eventEnds={dateEnds} setEventEnds={setDateEnds}
                 dateStarts={dateStarts} setDateStarts={setDateStarts}
                 dateEnds={dateEnds} setDateEnds={setDateEnds}
                 advance={advance} getAdvance={getAdvance}
@@ -262,5 +274,3 @@ function FormInput() {
         </>
     )
 }
-
-export default FormInput;

@@ -13,7 +13,9 @@ import UpperNav from './components/sidePages/UpperNav';
 //                 Student Side Components
 import StudentHome from './components_student/mainPage/StudentHome';
 import Application from './components_student/applications/Applications';
-import FormInput from './components_student/forms/FormInput';
+import FormOption from './components_student/forms/FormOption';
+import FormInputAbroad from './components_student/forms/abroad/FormInputAbroad';
+import FormInputIndia from './components_student/forms/india/FormInputIndia'
 import StudentProfile from './components_student/profile/Profile';
 import ViewApplicationStudent from './components_student/applications/ViewApplication';
 
@@ -55,7 +57,11 @@ function App() {
 
         <Route path='/studentLogin' >
           <Route index element={<StudentHome />} />
-          <Route path="formFill" element={<FormInput />} />
+          {/* <Route path="fillForm" element={<FormInput />} /> */}
+          <Route path="formFill" element={<FormOption />} />
+          <Route path="formAbroad" element={<FormInputAbroad />} />
+          <Route path="formIndia" element={<FormInputIndia />} />
+
           <Route path="profile" element={<StudentProfile />} />
           <Route path="application" element={<Application />} />
           <Route path="viewApplication" element={
@@ -73,17 +79,17 @@ function App() {
           </div>} />
 
           <Route path='application' element={
-          <div class="min-h-screen w-full relative">
-            <UpperNav />
-            <FacultyNav />
-            <FacultyApplication />
-          </div>} />
-          
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <FacultyNav />
+              <FacultyApplication />
+            </div>} />
+
           <Route path='studentApplication' element={
-          <div class="min-h-screen w-full relative">
-            <UpperNav />
-            <ViewApplicationFaculty />
-          </div>} />
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <ViewApplicationFaculty />
+            </div>} />
         </Route>
 
         <Route path='/researchLogin'>
