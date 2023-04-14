@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { removeAppToken, setAppToken } from '../../components_login/Tokens';
+import { removeAppToken, setAppToken, getUserToken } from '../../components_login/Tokens';
 import LoaderCard from '../../components/loading/LoaderCard';
 import { Container } from '@mui/material';
 import { delay } from '../../components/loading/Delay';
 
 const data = [];
-function ResearchApplication() {
+export default function FacultyApplication() {
 
     const navigate = useNavigate();
 
@@ -15,14 +15,17 @@ function ResearchApplication() {
 
     const getAppInfo = async (req, res) => {
         try {
-            const resp = await fetch("/viewAllApplication", {
-                method: "GET",
+            const token = getUserToken();
+            console.log("hello");
+            const resp = await fetch("/viewFacultyApplications", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
                 },
             });
-            const data = await resp.json();
-            return data;
+            console.log("hi");
+            return resp.json();
         } catch (error) {
             console.log(error);
         }
@@ -31,7 +34,7 @@ function ResearchApplication() {
     useEffect(() => {
         getAppInfo().then((resp) => {
             setApps(resp.data);
-
+            console.log(apps);
             delay(100).then(() => {
                 //good
                 setIsLoading(false);
@@ -104,7 +107,7 @@ function ResearchApplication() {
         removeAppToken();
         try {
             await createAppToken(name);
-            navigate('/researchLogin/studentApplication');
+            navigate('/facultyLogin/studentApplication');
 
         } catch (error) {
             console.log(error);
@@ -128,7 +131,7 @@ function ResearchApplication() {
                             Amount Needed: {getFinances(item.finances)} Rs
                         </p>
                         <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Venue: {item.venueOfConference}
+                            Submitted By: {item.email}
                         </p>
                     </div>
                     <button
@@ -168,4 +171,3 @@ function ResearchApplication() {
     )
 }
 
-export default ResearchApplication

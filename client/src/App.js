@@ -14,13 +14,18 @@ import Heading from './components/navBars/Heading';
 //                 Student Side Components
 import StudentHome from './components_student/mainPage/StudentHome';
 import Application from './components_student/applications/Application';
-import FormInput from './components_student/forms/FormInput';
+import FormInputAbroad from './components_student/forms/abroad/FormInputAbroad';
+import FormInputIndia from './components_student/forms/india/FormInputIndia';
+import FormOption from './components_student/forms/FormOption';
 import StudentProfile from './components_student/profile/Profile';
 import ViewApplication from './components_student/applications/ViewApplication';
 import SideBar0 from './components/navBars/Sidebar0';
 
 //                  Faculty Side Components
-import FacultyHome from './components_faculty/Faculty_dashboard';
+import FacultyNav from './components_faculty/facultyNav/FacultyNav';
+import FacultyHome from './components_faculty/mainPage/FacultyHome';
+import FacultyApplication from './components_faculty/applications/Application';
+import ViewApplicationFaculty from './components_faculty/applications/ViewApplication';
 import SideBar1 from './components/navBars/Sidebar1';
 
 //                  Research Section Components 
@@ -71,7 +76,23 @@ function App() {
               <UpperNav />
               <div className='flex'>
                 <SideBar0 />
-                <FormInput />
+                <FormOption />
+              </div>
+            </>} />
+          <Route path="formIndia" element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar0 />
+                <FormInputIndia />
+              </div>
+            </>} />
+          <Route path="formAbroad" element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar0 />
+                <FormInputAbroad />
               </div>
             </>} />
           <Route path="profile" element={
@@ -98,7 +119,31 @@ function App() {
             </>} />
         </Route>
 
-        <Route path='/facultyLogin' element={<FacultyHome facultyEmail={emailId} />} />
+        <Route path='/facultyLogin'>
+          <Route index element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar1 />
+              <FacultyHome />
+            </div>
+          </>} />
+
+          <Route path='application' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar1 />
+              <FacultyApplication />
+            </div>
+          </>} />
+
+          <Route path='studentApplication' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar1 />
+              <ViewApplicationFaculty />
+            </div>
+          </>} />
+        </Route>
 
         <Route path='/researchLogin'>
           <Route index element={
