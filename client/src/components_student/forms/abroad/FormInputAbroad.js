@@ -53,6 +53,9 @@ export default function FormInputAbroad() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
+    const [visaCharges, setVisaCharges] = useState(0);
+    const [registrationFee, setRegistrationFee] = useState(0);
+
     const [rowData, setRowData] = useState({
         particular: "",
         amount: ""
@@ -67,6 +70,12 @@ export default function FormInputAbroad() {
         }
         else if (name === "stay") {
             setStay(value);
+        }
+        else if (name === "visaCharges") {
+            setVisaCharges(value);
+        }
+        else if (name === "registrationFee") {
+            setRegistrationFee(value)
         }
         else {
             setFood(value);
@@ -266,7 +275,7 @@ export default function FormInputAbroad() {
                 leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
                 getFixedParts={getFixedParts}
-                food={food} travel={travel} stay={stay}
+                food={food} travel={travel} stay={stay} visaCharges={visaCharges} registrationFee={registrationFee}
                 requestGrant={requestGrant}
             />
         </>

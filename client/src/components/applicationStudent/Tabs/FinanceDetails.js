@@ -15,7 +15,7 @@ export default function FinanceDetails({ user, data }) {
     }
 
     const viewFinances = data.finances.map((element, index) =>
-        <tr>
+        <tr key={index}>
             <td scope="col" className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
                 <div className="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                     {element.particular}

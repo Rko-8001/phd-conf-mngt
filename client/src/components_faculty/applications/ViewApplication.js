@@ -6,6 +6,7 @@ import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
 import { useReactToPrint } from 'react-to-print';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
+import FormPrint from '../../components/applicationStudent/FormPrint';
 
 export default function ViewApplicationFaculty() {
 
@@ -17,7 +18,7 @@ export default function ViewApplicationFaculty() {
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
-        documentTitle: 'New_Application for Participating in Conference, Workshop, Seminar (within India)',
+        documentTitle: "Application"
     })
 
     const goBack = e => {
@@ -106,7 +107,9 @@ export default function ViewApplicationFaculty() {
 
                         {/* <FormPrint data={data} /> */}
                         <div className="hidden">
-
+                            <div ref={componentRef}>
+                                <FormPrint data={data} user={applicantInfo} />
+                            </div>
                         </div>
                     </Container>
                 </>}

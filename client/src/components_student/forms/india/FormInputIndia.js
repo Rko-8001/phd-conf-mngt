@@ -43,6 +43,9 @@ function FormInput() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
+    
+    const [registrationFee, setRegistrationFee] = useState(0);
+
     const [rowData, setRowData] = useState({
         particular: "",
         amount: ""
@@ -57,6 +60,9 @@ function FormInput() {
         }
         else if (name === "stay") {
             setStay(value);
+        }
+        else if (name === "registrationFee") {
+            setRegistrationFee(value)
         }
         else {
             setFood(value);
@@ -127,7 +133,7 @@ function FormInput() {
         }
         return true;
     }
-    
+
     const requestGrant = async (e) => {
         e.preventDefault();
 
@@ -149,9 +155,16 @@ function FormInput() {
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
         const finances = [...tableData];
+
+
         finances.push({
             "particular": "travel",
             "amount": travel
+        });
+
+        finances.push({
+            "particular": "Registration Fee",
+            "amount": registrationFee
         });
         finances.push({
             "particular": "food",
@@ -254,7 +267,7 @@ function FormInput() {
                 leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
                 getFixedParts={getFixedParts}
-                food={food} travel={travel} stay={stay}
+                food={food} travel={travel} stay={stay} registrationFee={registrationFee}
                 requestGrant={requestGrant}
             />
         </>

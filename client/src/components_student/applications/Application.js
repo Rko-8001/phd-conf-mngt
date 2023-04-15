@@ -35,7 +35,7 @@ function Application() {
       setApps(resp);
 
       // delay of 2 seconds
-      delay(500).then(() => {
+      delay(100).then(() => {
         setIsLoading(false);
       }).catch((error) => {
         console.log(error);
@@ -118,7 +118,7 @@ function Application() {
     <>
       <div key={index}>
         <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
             {getStatus(item.status)}
           </div>
           <div className="p-4">
