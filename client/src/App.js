@@ -9,59 +9,33 @@ import Team from './components/team/Team';
 import ErrorPage from './components/sidePages/ErrorPage';
 import LandingPage from './components/sidePages/LandingPage';
 import ContactUs from './components/sidePages/ContactUs';
-<<<<<<< HEAD
 import Heading from './components/navBars/Heading';
 
 //                 Student Side Components
 import StudentHome from './components_student/mainPage/StudentHome';
-import Application from './components_student/applications/Application';
+import Application from './components_student/applications/Applications';
 import FormInputAbroad from './components_student/forms/abroad/FormInputAbroad';
 import FormInputIndia from './components_student/forms/india/FormInputIndia';
 import FormOption from './components_student/forms/FormOption';
 import StudentProfile from './components_student/profile/Profile';
-import ViewApplication from './components_student/applications/ViewApplication';
-import SideBar0 from './components/navBars/Sidebar0';
-=======
-import UpperNav from './components/sidePages/UpperNav';
-
-//                 Student Side Components
-import StudentHome from './components_student/mainPage/StudentHome';
-import Application from './components_student/applications/Applications';
-import FormOption from './components_student/forms/FormOption';
-import FormInputAbroad from './components_student/forms/abroad/FormInputAbroad';
-import FormInputIndia from './components_student/forms/india/FormInputIndia'
-import StudentProfile from './components_student/profile/Profile';
 import ViewApplicationStudent from './components_student/applications/ViewApplication';
->>>>>>> maste
+import SideBar0 from './components/navBars/Sidebar0';
 
 //                  Faculty Side Components
-import FacultyNav from './components_faculty/facultyNav/FacultyNav';
 import FacultyHome from './components_faculty/mainPage/FacultyHome';
 import FacultyApplication from './components_faculty/applications/Application';
 import ViewApplicationFaculty from './components_faculty/applications/ViewApplication';
-<<<<<<< HEAD
 import SideBar1 from './components/navBars/Sidebar1';
 
 //                  Research Section Components 
-=======
-
-//                  Research Section Components 
-import ResearchNav from './components_research/researchNav/ResearchNav';
->>>>>>> master
 import ResearchHome from './components_research//mainPage/ResearchHome';
 import ResearchApplication from './components_research/applications/Application';
 import ResearchStudent from './components_research/users/ResearchStudent';
 import ResearchFaculty from './components_research/users/ResearchFaculty';
-<<<<<<< HEAD
-import StudentApplication from './components_research/applications/StudentApplication';
-import SideBar2 from './components/navBars/Sidebar2';
-=======
 import ViewApplicationResearch from './components_research/applications/ViewApplication';
->>>>>>> master
+import SideBar2 from './components/navBars/Sidebar2';
 
-//                  Account Section Components 
-import AccountsDashboard from './components_accounts/Accounts_dashboard';
-import FacultyUser from './components_research/users/FacultyUser';
+
 
 
 
@@ -83,7 +57,6 @@ function App() {
         <Route path='/login' element={<LoginN getEmailIdLogin={getEmailId} />} />
 
         <Route path='/studentLogin' >
-<<<<<<< HEAD
           <Route index element={
             <>
               <UpperNav />
@@ -136,16 +109,6 @@ function App() {
                 <Application />
               </div>
             </>} />
-=======
-          <Route index element={<StudentHome />} />
-          {/* <Route path="fillForm" element={<FormInput />} /> */}
-          <Route path="formFill" element={<FormOption />} />
-          <Route path="formAbroad" element={<FormInputAbroad />} />
-          <Route path="formIndia" element={<FormInputIndia />} />
-
-          <Route path="profile" element={<StudentProfile />} />
-          <Route path="application" element={<Application />} />
->>>>>>> master
           <Route path="viewApplication" element={
             <>
               <UpperNav />
@@ -154,7 +117,6 @@ function App() {
         </Route>
 
         <Route path='/facultyLogin'>
-<<<<<<< HEAD
           <Route index element={<>
             <UpperNav />
             <div className='flex'>
@@ -178,26 +140,6 @@ function App() {
               <ViewApplicationFaculty />
             </div>
           </>} />
-=======
-          <Route index element={<div class="min-h-screen w-full relative">
-            <UpperNav />
-            <FacultyNav />
-            <FacultyHome />
-          </div>} />
-
-          <Route path='application' element={
-            <div class="min-h-screen w-full relative">
-              <UpperNav />
-              <FacultyNav />
-              <FacultyApplication />
-            </div>} />
-
-          <Route path='studentApplication' element={
-            <div class="min-h-screen w-full relative">
-              <UpperNav />
-              <ViewApplicationFaculty />
-            </div>} />
->>>>>>> master
         </Route>
 
         <Route path='/researchLogin'>
@@ -242,9 +184,7 @@ function App() {
 
 
 
-        <Route path='/accountLogin'>
-          <Route index element={<AccountsDashboard accountsEmail={emailId} />} />
-        </Route>
+       
         <Route path='/meetTheTeam' element={<Team />} />
         <Route path='/contactUs' element={<ContactUs />} />
 

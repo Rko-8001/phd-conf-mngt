@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 
 // importing Components
-<<<<<<< HEAD
-=======
-import NavBar from '../../studentNav/NavBar';
->>>>>>> master
 import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
@@ -47,28 +43,14 @@ function FormInput() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
-<<<<<<< HEAD
     
     const [registrationFee, setRegistrationFee] = useState(0);
 
-=======
-    const [image, setImage] = useState("");
->>>>>>> master
     const [rowData, setRowData] = useState({
         particular: "",
         amount: ""
     });
 
-<<<<<<< HEAD
-=======
-    const handleImageChange = (e) => {
-        if (e.target.files[0]) {
-            setImage(e.target.files[0])
-        }
-        // setImage(image);
-      };
-
->>>>>>> master
 
     const getFixedParts = ((e) => {
         const { name, value } = e.target;
@@ -79,12 +61,9 @@ function FormInput() {
         else if (name === "stay") {
             setStay(value);
         }
-<<<<<<< HEAD
         else if (name === "registrationFee") {
             setRegistrationFee(value)
         }
-=======
->>>>>>> master
         else {
             setFood(value);
         }
@@ -154,21 +133,12 @@ function FormInput() {
         }
         return true;
     }
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> master
     const requestGrant = async (e) => {
         e.preventDefault();
 
 
         // save all data
         const email = generalInfo.email;
-<<<<<<< HEAD
-=======
-        // const image = image;
->>>>>>> master
         const status = "0";
         const mobileNo = generalInfo.mobileNo;
         const bankAccountNo = generalInfo.bankAccNo;
@@ -184,23 +154,17 @@ function FormInput() {
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
         const finances = [...tableData];
-<<<<<<< HEAD
 
 
-=======
->>>>>>> master
         finances.push({
             "particular": "travel",
             "amount": travel
         });
-<<<<<<< HEAD
 
         finances.push({
             "particular": "Registration Fee",
             "amount": registrationFee
         });
-=======
->>>>>>> master
         finances.push({
             "particular": "food",
             "amount": food
@@ -210,7 +174,6 @@ function FormInput() {
             "amount": stay
         });
 
-<<<<<<< HEAD
 
         if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
@@ -239,36 +202,6 @@ function FormInput() {
         else {
             window.alert("Application Submitted");
         }
-=======
-        console.log(image,12);
-        if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
-            return;
-        }
-        // const res = await fetch("/studentApplicationSubmit", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         email, status,
-        //         mobileNo, bankAccountNo,
-        //         nameOfConference, venueOfConference, paperInConference,
-        //         financialSupport,
-        //         advances, finances,
-        //         conferenceStarts, conferenceEnds,
-        //         studentLeaveStarts, studentLeaveEnds, image,
-        //     })
-        // });
-
-        // logic
-
-        // if (res.status === 422) {
-        //     window.alert("Error Occurred! Please Try Again.");
-        // }
-        // else {
-        //     window.alert("Application Submitted");
-        // }
->>>>>>> master
     }
 
     const getBasicInfo = async (req, res) => {
@@ -300,10 +233,6 @@ function FormInput() {
             setFetchData("aos", resp.areaOfSpecialisation);
             setFetchData("supervisor", resp.nameOfSupervisor);
             setFetchData("email", resp.email);
-<<<<<<< HEAD
-=======
-            // setFetchData("image",resp.image);
->>>>>>> master
         }).catch((e) => {
             // console.log(e.message)
         });
@@ -337,15 +266,8 @@ function FormInput() {
                 leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
                 getFixedParts={getFixedParts}
-<<<<<<< HEAD
                 food={food} travel={travel} stay={stay} registrationFee={registrationFee}
                 requestGrant={requestGrant}
-=======
-                food={food} travel={travel} stay={stay}
-                requestGrant={requestGrant}
-                image={image}
-                handleImageChange={handleImageChange}
->>>>>>> master
             />
         </>
     )

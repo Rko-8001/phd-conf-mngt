@@ -27,11 +27,7 @@ export default function FacultyHome() {
     getUserInfo().then((resp) => {
       setUser(resp);
 
-<<<<<<< HEAD
       delay(100).then(() => {
-=======
-      delay(500).then(() => {
->>>>>>> master
         setIsLoading(false);
       }).catch((error) => {
         console.log(error);

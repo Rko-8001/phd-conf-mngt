@@ -1,9 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-import NavBar from '../studentNav/NavBar';
->>>>>>> master
 
 const formOptions = [
     {
@@ -42,10 +38,6 @@ export default function FormOption() {
 
     return (
         <>
-<<<<<<< HEAD
-=======
-            <NavBar />
->>>>>>> master
             <div className="bg-white content-center py-10 sm:py-15">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-20 px-10 w-full lg:mx-0">
