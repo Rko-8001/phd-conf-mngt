@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 
 // importing Components
+<<<<<<< HEAD
+=======
 import NavBar from '../../studentNav/NavBar';
+>>>>>>> master
 import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
@@ -54,6 +57,12 @@ export default function FormInputAbroad() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
+<<<<<<< HEAD
+    const [visaCharges, setVisaCharges] = useState(0);
+    const [registrationFee, setRegistrationFee] = useState(0);
+
+=======
+>>>>>>> master
     const [rowData, setRowData] = useState({
         particular: "",
         amount: ""
@@ -69,6 +78,15 @@ export default function FormInputAbroad() {
         else if (name === "stay") {
             setStay(value);
         }
+<<<<<<< HEAD
+        else if (name === "visaCharges") {
+            setVisaCharges(value);
+        }
+        else if (name === "registrationFee") {
+            setRegistrationFee(value)
+        }
+=======
+>>>>>>> master
         else {
             setFood(value);
         }
@@ -239,7 +257,10 @@ export default function FormInputAbroad() {
 
     return (
         <>
+<<<<<<< HEAD
+=======
             <NavBar />
+>>>>>>> master
 
             <div style={{ "marginTop": "5rem", "marginLeft": "30rem" }} id="successModal" tabindex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-10 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                 <div className="relative p-4 w-full max-w-md h-full md:h-auto">
@@ -268,7 +289,11 @@ export default function FormInputAbroad() {
                 leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
                 getFixedParts={getFixedParts}
+<<<<<<< HEAD
+                food={food} travel={travel} stay={stay} visaCharges={visaCharges} registrationFee={registrationFee}
+=======
                 food={food} travel={travel} stay={stay}
+>>>>>>> master
                 requestGrant={requestGrant}
             />
         </>

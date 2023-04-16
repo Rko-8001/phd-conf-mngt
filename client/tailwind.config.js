@@ -4,6 +4,8 @@ module.exports = {
     extend: {
       colors: {
         "custom-purple": "#4f46e5",
+        "dark-purple": "#081A51",
+        "light-white": "rgba(255,255,255,0.17)",
       },
       fontFamily: {
         montserrat: ["Montserrat"],

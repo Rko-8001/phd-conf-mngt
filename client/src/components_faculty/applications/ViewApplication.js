@@ -17,7 +17,11 @@ export default function ViewApplicationFaculty() {
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
+<<<<<<< HEAD
+        documentTitle: "Application"
+=======
         documentTitle: 'New_Application for Participating in Conference, Workshop, Seminar (within India)',
+>>>>>>> master
     })
 
     const goBack = e => {
@@ -106,7 +110,13 @@ export default function ViewApplicationFaculty() {
 
                         {/* <FormPrint data={data} /> */}
                         <div className="hidden">
+<<<<<<< HEAD
+                            <div ref={componentRef}>
+                                <FormPrint data={data} user={applicantInfo} />
+                            </div>
+=======
 
+>>>>>>> master
                         </div>
                     </Container>
                 </>}

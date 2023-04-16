@@ -213,7 +213,11 @@ export default function InputData(props) {
               />
             </div>
           </div>
+<<<<<<< HEAD
+
+=======
           
+>>>>>>> master
           <br />
           <div className="col-span-full">
             <label htmlFor="fundingSources" className="block text-sm font-medium leading-6 text-gray-900">
@@ -402,6 +406,39 @@ export default function InputData(props) {
                 </tr>
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+<<<<<<< HEAD
+                    Visa Charges
+                  </th>
+                  <td className="px-6 py-2">
+                    <input
+                      type="text"
+                      name="visaCharges"
+                      value={props.visaCharges}
+                      className=""
+                      onChange={props.getFixedParts}
+                    />
+                  </td>
+
+                </tr>
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Registraton Fee
+                  </th>
+                  <td className="px-6 py-2">
+                    <input
+                      type="text"
+                      name="registrationFee"
+                      value={props.registrationFee}
+                      className=""
+                      onChange={props.getFixedParts}
+                    />
+                  </td>
+
+                </tr>
+                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+=======
+>>>>>>> master
                     Food
                   </th>
                   <td className="px-6 py-2">

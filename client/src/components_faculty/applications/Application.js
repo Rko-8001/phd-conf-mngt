@@ -34,8 +34,8 @@ export default function FacultyApplication() {
     useEffect(() => {
         getAppInfo().then((resp) => {
             setApps(resp.data);
-
-            delay(500).then(() => {
+            console.log(apps);
+            delay(100).then(() => {
                 //good
                 setIsLoading(false);
             }).catch((error) => {

@@ -32,7 +32,7 @@ function ResearchApplication() {
         getAppInfo().then((resp) => {
             setApps(resp.data);
 
-            delay(500).then(() => {
+            delay(100).then(() => {
                 //good
                 setIsLoading(false);
             }).catch((error) => {

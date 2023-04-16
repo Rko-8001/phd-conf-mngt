@@ -45,8 +45,12 @@ export default function ResearchHome() {
         ?
         <LoaderContent />
         :
-        <LoaderContent />
+        // <LoaderContent />
+        <>
+          
+        </>
       }
+      {/* Hello */}
     </>
   )
 }
