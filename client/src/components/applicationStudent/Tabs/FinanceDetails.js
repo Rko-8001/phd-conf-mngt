@@ -16,19 +16,23 @@ export default function FinanceDetails({ user, data }) {
 
     const viewFinances = data.finances.map((element, index) =>
         <tr key={index}>
-            <td scope="col" className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
-                <div className="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                    {element.particular}
-                </div>
-            </td>
-            <td scope="col" className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
-                <div className="inline px-3 py-1 text-sm font-normal text-gray-500 bg-gray-100 rounded-full dark:text-gray-400 gap-x-2 dark:bg-gray-800">
-                    {element.amount} Rs
-                </div>
-            </td>
-        </tr>
+            <th scope="col">
+                <td className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
+                    <div className="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+                        {element.particular}
+                    </div>
+                </td>
+            </th>
+            <th scope="col">
+                <td  className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
+                    <div className="inline px-3 py-1 text-sm font-normal text-gray-500 bg-gray-100 rounded-full dark:text-gray-400 gap-x-2 dark:bg-gray-800">
+                        {element.amount} Rs
+                    </div>
+                </td>
+            </th>
+        </tr >
     )
-    
+
     return (
         <>
             <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">

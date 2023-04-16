@@ -21,7 +21,7 @@ function ApplicationData({ data, user, role }) {
     };
 
     const showClass = (status, needed) => {
-        if (status == needed)
+        if (status === needed)
             return true;
         else
             return false;

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import NavBar from '../studentNav/NavBar';
 import { getUserToken, setAppToken } from '../../components_login/Tokens';
 import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';

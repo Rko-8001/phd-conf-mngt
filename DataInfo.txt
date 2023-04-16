@@ -25,7 +25,7 @@ Tasks to done:
 implement hod
 implement ac
 implement dean
-implement print form
+implement print form  (done)
 implement upload form and signs
 implement other features like updating student fellowship, Protected Routes, or fancy transitions.
 minor changes in form 

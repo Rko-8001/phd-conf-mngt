@@ -5,7 +5,7 @@ import { setUserToken } from './Tokens';
 import { Link } from 'react-router-dom';
 
 
-function Login(props) {
+function Login() {
 
     const navigate = useNavigate();
 
@@ -83,7 +83,6 @@ function Login(props) {
             const data = await res.json();
             const role = data.role;
             const token = data.token;
-            props.getEmailIdLogin(email);
             setUserToken(token);
             if (role === "0") {
                 navigate('/studentLogin');

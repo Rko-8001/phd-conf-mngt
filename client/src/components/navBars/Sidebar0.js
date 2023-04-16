@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import img1 from './assets/logo.png';
 import img2 from './assets/control.png'
 import Chart_fill from './assets/Chart_fill.png'
@@ -6,7 +6,7 @@ import Chat from './assets/Chart.png';
 import Calendar from './assets/Calendar.png';
 import Folder from './assets/Folder.png';
 import User from './assets/User.png';
-import { getUserToken, removeAppToken, removeUserToken } from '../../components_login/Tokens';
+import {removeAppToken, removeUserToken } from '../../components_login/Tokens';
 import { useNavigate } from 'react-router-dom';
 
 const App = () => {
@@ -20,8 +20,6 @@ const App = () => {
   ];
 
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const handleClick = (link) => {
     if (link === "logout") {
@@ -76,6 +74,7 @@ const App = () => {
         >
           <img
             src={img2}
+            alt=".."
             className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
             border-2 rounded-full  ${!open && "rotate-180"}`}
             onClick={() => setOpen(!open)}
@@ -83,6 +82,7 @@ const App = () => {
           <div className="flex gap-x-4 items-center">
             <img
               src={img1}
+              alt='..'
               className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"
                 }`}
             />
@@ -105,7 +105,7 @@ const App = () => {
                   className={`flex rounded-md p-2 cursor-pointer hover:bg-gray-100 text-white text-sm items-center gap-x-4 
                   ${Menu.gap ? "mt-9" : "mt-2"} `}
                 >
-                  <img src={Menu.src} />
+                  <img src={Menu.src} alt='..' />
                   <span className={`${!open && "hidden"} origin-left duration-200`}>
                     {Menu.title}
                   </span>
