@@ -8,6 +8,7 @@ import { useReactToPrint } from 'react-to-print';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
 import FormPrint from '../../components/applicationStudent/FormPrint';
 
+
 function ViewApplication() {
 
   const componentRef = useRef();
@@ -108,7 +109,7 @@ function ViewApplication() {
               </div>
             </div>
 
-            <ApplicationData data={data} user={applicantInfo} />
+            <ApplicationData data={data} user={applicantInfo} role="0" />
             <div className='hidden'>
               <div ref={componentRef} >
                 <FormPrint data={data} user={applicantInfo} />

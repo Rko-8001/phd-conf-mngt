@@ -12,7 +12,7 @@ export default function StudentApplication() {
 
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
-  const[applicantInfo, setApplicantInfo] = useState();
+  const [applicantInfo, setApplicantInfo] = useState();
 
   const goBack = e => {
     console.log(data);
@@ -37,7 +37,7 @@ export default function StudentApplication() {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     getBasicInfo().then((resp) => {
 
@@ -97,7 +97,7 @@ export default function StudentApplication() {
 
             </div>
 
-            <ApplicationData data={data} user={applicantInfo}/>
+            <ApplicationData data={data} user={applicantInfo} role="2" />
           </Container>
         </>}
     </>

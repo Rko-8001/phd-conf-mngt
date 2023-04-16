@@ -9,9 +9,10 @@ import ConferenceDetails from './Tabs/ConferenceDetails';
 import ResearchSection from './Tabs/ResearchSection';
 import FinanceDetails from './Tabs/FinanceDetails';
 import ResearchAction from './Actions/ResearchAction';
+import FacultyAction from './Actions/FacultyAction';
+import FacultyDetails from './Tabs/FacultyDetails';
 
-
-function ApplicationData({ data, user }) {
+function ApplicationData({ data, user, role }) {
     const [value, setValue] = useState("personal details");
 
 
@@ -38,7 +39,14 @@ function ApplicationData({ data, user }) {
                             <Tab value="personal details" label="Personal Details" />
                             <Tab value="conference details" label="Conference Details" />
                             <Tab value="finance details" label="Finance Details" />
-                            {showClass(data.status, "1") &&
+
+                            {(showClass(data.status, "0") && role === "1") &&
+                                <Tab value="faculty approval" label="Take Action" />
+                            }
+                            {(showClass(data.status, "1") || showClass(data.status, "2") || showClass(data.status, "3")) &&
+                                <Tab value="faculty approved" label="Supervisor" />
+                            }
+                            {(showClass(data.status, "1") && role === "2") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }
                             {(showClass(data.status, "2") || showClass(data.status, "3")) &&
@@ -59,12 +67,19 @@ function ApplicationData({ data, user }) {
                         <FinanceDetails user={user} data={data} />
                     </TabPanel>
 
+                    <TabPanel value="faculty approval">
+                        <FacultyAction user={user} data={data} />
+                    </TabPanel>
+                    <TabPanel value="faculty approved">
+                        <FacultyDetails data={data} user={user} />
+                    </TabPanel>
+
                     <TabPanel value="research section approval">
                         <ResearchAction user={user} data={data} />
                     </TabPanel>
 
                     <TabPanel value="research section approved">
-                        <ResearchSection data = {data}/>
+                        <ResearchSection data={data} />
                     </TabPanel>
                 </TabContext >
             </Box >
