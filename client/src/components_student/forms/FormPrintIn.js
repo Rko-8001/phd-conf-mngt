@@ -3,7 +3,7 @@ import { Button, Card, Table, Row, Col, Container, ListGroup } from 'react-boots
 import { useReactToPrint } from 'react-to-print';
 
 
-function FormPrintIn(props) {
+function FormPrintIn() {
 
     const componentRef = useRef();
 
@@ -13,62 +13,54 @@ function FormPrintIn(props) {
         documentTitle: 'New_Application for Participating in Conference, Workshop, Seminar (within India)',
     })
 
-    const tableRows = props.partC.map((info) => {
-        return (
-            <tr key={info.particular}>
-                <th>{info.particular}</th>
-                <th>{info.amount}</th>
-            </tr>
-        );
-    });
 
-    const submitApplication = async (e) => {
-        e.preventDefault();
-        
+    // const submitApplication = async (e) => {
+    //     e.preventDefault();
 
-        // save all data
-        const email = props.partA.email ;
-        const status = "0";
-        const mobileNo = props.partA.mobileNo ;
-        const bankAccountNo = props.partA.bankAccNo ;
-        const nameOfConference = props.partB.nameOfConference ;
-        const venueOfConference = props.partB.venueOfConference ;
-        const periodOfConference = props.partB.periodOfConference ;
-        const paperInConference = props.partB.paperInConference ;
-        
-        //                      To be Fixed.. 
-        // const financialSupport = props.partB.financialSupport ;
-        const financialSupport = true;
-        const advance = props.advance ;
-        const finances = props.partC;
-        const coaa =   true ;
-        const coaba =  true;
-        const cocba  =   true;
 
-        const res = await fetch("/studentApplicationSubmit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({  email, status,  
-                                    mobileNo, bankAccountNo, 
-                                    nameOfConference, venueOfConference, periodOfConference, paperInConference, 
-                                    financialSupport, 
-                                    advance, finances, 
-                                    coaa, coaba, cocba })
-        });
+    //     // save all data
+    //     const email = props.partA.email ;
+    //     const status = "0";
+    //     const mobileNo = props.partA.mobileNo ;
+    //     const bankAccountNo = props.partA.bankAccNo ;
+    //     const nameOfConference = props.partB.nameOfConference ;
+    //     const venueOfConference = props.partB.venueOfConference ;
+    //     const periodOfConference = props.partB.periodOfConference ;
+    //     const paperInConference = props.partB.paperInConference ;
 
-        //logic
-        // const data = await res.json();
+    //     //                      To be Fixed.. 
+    //     // const financialSupport = props.partB.financialSupport ;
+    //     const financialSupport = true;
+    //     const advance = props.advance ;
+    //     const finances = props.partC;
+    //     const coaa =   true ;
+    //     const coaba =  true;
+    //     const cocba  =   true;
 
-        if (res.status === 422) {
-            window.alert("Loda lele");
-        }
-        else {
-            window.alert("Application Submitted");
-        }
-    }
-    
+    //     const res = await fetch("/studentApplicationSubmit", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({  email, status,  
+    //                                 mobileNo, bankAccountNo, 
+    //                                 nameOfConference, venueOfConference, periodOfConference, paperInConference, 
+    //                                 financialSupport, 
+    //                                 advance, finances, 
+    //                                 coaa, coaba, cocba })
+    //     });
+
+    //     //logic
+    //     // const data = await res.json();
+
+    //     if (res.status === 422) {
+    //         window.alert("Loda lele");
+    //     }
+    //     else {
+    //         window.alert("Application Submitted");
+    //     }
+    // }
+
     return (
         <>
             <Row>
@@ -76,7 +68,7 @@ function FormPrintIn(props) {
                     <Button variant='outline-dark' onClick={handlePrint}> Print Form</Button>
                 </Col>
                 <Col>
-                    <Button variant='outline-dark' onClick={submitApplication}>Request Grant</Button>
+                    {/* <Button variant='outline-dark' onClick={submitApplication}>Request Grant</Button> */}
                 </Col>
             </Row>
             <br /> <br />
@@ -94,14 +86,14 @@ function FormPrintIn(props) {
                 <div className="text-center" style={{ "fontSize": "30px" }}>PART A: GENERAL INFORMATION</div>
                 <br />
                 <Row>
-                    <Col style={{ "fontSize": "18px" }} sm={7}><pre>1. Name of PhD Scholar    : {props.partA.name}</pre></Col>
-                    <Col style={{ "fontSize": "18px" }} sm={5}><pre>Mobile No: {props.partA.mobileNo}</pre></Col>
+                    <Col style={{ "fontSize": "18px" }} sm={7}><pre>1. Name of PhD Scholar    : </pre></Col>
+                    <Col style={{ "fontSize": "18px" }} sm={5}><pre>Mobile No: </pre></Col>
                 </Row>
                 <Row>
-                    <Col style={{ "fontSize": "18px" }} sm={7}><pre>2. Department/Centre      : {props.partA.dept}</pre></Col>
-                    <Col style={{ "fontSize": "18px" }} sm={5}><pre>Email: {props.partA.email}</pre></Col>
+                    <Col style={{ "fontSize": "18px" }} sm={7}><pre>2. Department/Centre      : </pre></Col>
+                    <Col style={{ "fontSize": "18px" }} sm={5}><pre>Email: </pre></Col>
                 </Row>
-                <Row>
+                {/* <Row>
                     <Col style={{ "fontSize": "18px" }} sm={7}><pre>3. Entry No.              : {props.partA.entryNo}</pre></Col>
                     <Col style={{ "fontSize": "18px" }} sm={5}><pre>Bank A/c No: {props.partA.bankAccNo}</pre></Col>
                 </Row>
@@ -187,7 +179,7 @@ function FormPrintIn(props) {
 
                     </Card.Body>
                 </Card>
-                <br /> <br />
+                <br /> <br /> */}
 
             </Container>
         </>
