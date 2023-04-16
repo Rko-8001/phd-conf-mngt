@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import UpperNav from './components/navBars/UpperNav';
 
@@ -41,20 +41,11 @@ import SideBar2 from './components/navBars/Sidebar2';
 
 function App() {
 
-  const [emailId, setEmailId] = useState("");
-
-  const getEmailId = e => {
-    setEmailId(e);
-    // console.log(e);
-  }
-
-
-
   return (
     <>
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/login' element={<LoginN getEmailIdLogin={getEmailId} />} />
+        <Route path='/login' element={<LoginN />} />
 
         <Route path='/studentLogin' >
           <Route index element={
@@ -184,7 +175,6 @@ function App() {
 
 
 
-       
         <Route path='/meetTheTeam' element={<Team />} />
         <Route path='/contactUs' element={<ContactUs />} />
 
