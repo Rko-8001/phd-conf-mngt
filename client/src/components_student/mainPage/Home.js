@@ -1,7 +1,7 @@
 import React from 'react'
 import Sidebar from '../Side/Sidebar';
 import Newcomp from '../Side/Newcomp';
-import Newcomp3 from '../Side//Newcomp3';
+import Newcomp3 from '../Side/Newcomp3';
 function Home(props) {
 
     return (

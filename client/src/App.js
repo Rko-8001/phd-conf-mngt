@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import UpperNav from './components/navBars/UpperNav';
 
+//          Protected Routes
+import StudentRoute from './routes/StudentRoute';
 
 //                  Other Components
 import LoginN from './components_login/LoginN';
@@ -10,16 +11,8 @@ import ErrorPage from './components/sidePages/ErrorPage';
 import LandingPage from './components/sidePages/LandingPage';
 import ContactUs from './components/sidePages/ContactUs';
 import Heading from './components/navBars/Heading';
+import UpperNav from './components/navBars/UpperNav';
 
-//                 Student Side Components
-import StudentHome from './components_student/mainPage/StudentHome';
-import Application from './components_student/applications/Applications';
-import FormInputAbroad from './components_student/forms/abroad/FormInputAbroad';
-import FormInputIndia from './components_student/forms/india/FormInputIndia';
-import FormOption from './components_student/forms/FormOption';
-import StudentProfile from './components_student/profile/Profile';
-import ViewApplicationStudent from './components_student/applications/ViewApplication';
-import SideBar0 from './components/navBars/Sidebar0';
 
 //                  Faculty Side Components
 import FacultyHome from './components_faculty/mainPage/FacultyHome';
@@ -36,7 +29,7 @@ import ViewApplicationResearch from './components_research/applications/ViewAppl
 import SideBar2 from './components/navBars/Sidebar2';
 
 
-
+import { StudentFormAbroad, StudentFormIndia, StudentFormOption, StudentHomePage, StudentProfile, StudentApplicationsPage, StudentSpecficApplication } from './routes/StudentComponent';
 
 
 function App() {
@@ -48,63 +41,13 @@ function App() {
         <Route path='/login' element={<LoginN />} />
 
         <Route path='/studentLogin' >
-          <Route index element={
-            <>
-              <UpperNav />
-              <div className='flex'>
-                <SideBar0 />
-                <div>
-                  <Heading />
-                  <StudentHome />
-                </div>
-              </div>
-            </>} />
-          <Route path="formFill" element={
-            <>
-              <UpperNav />
-              <div className='flex'>
-                <SideBar0 />
-                <FormOption />
-              </div>
-            </>} />
-          <Route path="formIndia" element={
-            <>
-              <UpperNav />
-              <div className='flex'>
-                <SideBar0 />
-                <FormInputIndia />
-              </div>
-            </>} />
-          <Route path="formAbroad" element={
-            <>
-              <UpperNav />
-              <div className='flex'>
-                <SideBar0 />
-                <FormInputAbroad />
-              </div>
-            </>} />
-          <Route path="profile" element={
-            <>
-              <UpperNav />
-              <div className='flex'>
-                <SideBar0 />
-                <StudentProfile />
-              </div>
-            </>} />
-
-          <Route path="application" element={
-            <>
-              <UpperNav />
-              <div className='flex'>
-                <SideBar0 />
-                <Application />
-              </div>
-            </>} />
-          <Route path="viewApplication" element={
-            <>
-              <UpperNav />
-              <ViewApplicationStudent />
-            </>} />
+          <Route index element={<StudentRoute Component={StudentHomePage} />} />
+          <Route path="formFill" element={<StudentRoute Component={StudentFormOption} />} />
+          <Route path="formIndia" element={<StudentRoute Component={StudentFormIndia} />} />
+          <Route path="formAbroad" element={<StudentRoute Component={StudentFormAbroad} />} />
+          <Route path="profile" element={<StudentRoute Component={StudentProfile} />} />
+          <Route path="application" element={<StudentRoute Component={StudentApplicationsPage} />} />
+          <Route path="viewApplication" element={<StudentRoute Component={StudentSpecficApplication} />} />
         </Route>
 
         <Route path='/facultyLogin'>
