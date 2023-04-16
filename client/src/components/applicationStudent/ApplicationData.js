@@ -11,18 +11,10 @@ import ResearchSection from './Tabs/ResearchSection';
 import FinanceDetails from './Tabs/FinanceDetails';
 import ResearchAction from './Actions/ResearchAction';
 import FacultyAction from './Actions/FacultyAction';
-<<<<<<< HEAD
-import FacultyDetails from './Tabs/FacultyDetails';
 
 function ApplicationData({ data, user, role }) {
     const [value, setValue] = useState("personal details");
 
-=======
-
-
-function ApplicationData({ data, user, role }) {
-    const [value, setValue] = useState('personal details');
->>>>>>> master
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -52,10 +44,6 @@ function ApplicationData({ data, user, role }) {
                             {(showClass(data.status, "1") || showClass(data.status, "2") || showClass(data.status, "3")) &&
                                 <Tab value="faculty approved" label="Supervisor" />
                             }
-<<<<<<< HEAD
-=======
-
->>>>>>> master
                             {(showClass(data.status, "1") && role === "2") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }

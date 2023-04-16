@@ -97,11 +97,7 @@ export default function ViewApplicationResearch() {
 
             </div>
 
-<<<<<<< HEAD:client/src/components_research/applications/StudentApplication.js
-            <ApplicationData data={data} user={applicantInfo} role="2" />
-=======
             <ApplicationData data={data} user={applicantInfo} role="2"/>
->>>>>>> master:client/src/components_research/applications/ViewApplication.js
           </Container>
         </>}
     </>

@@ -9,30 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//         padding: theme.spacing(2),
-//         fontFamily: "sans-serif",
-//     },
-//     header: {
-//         textAlign: "center",
-//         fontFamily: "Arial",
-//         fontSize: 30,
-//     },
-//     header1: {
-//         textAlign: "center",
-//         fontFamily: "Arial",
-//         fontSize: 24,
-//     },
-//     form: {
-//         fontFamily: "Arial",
-//         fontSize: 18,
-//         marginBottom: 20,
-//     },
-//     button: {
-//         marginTop: theme.spacing(2),
-//     },
-// }));
+
 
 function FormPrint({ data, user }) {
     const classes = "";
