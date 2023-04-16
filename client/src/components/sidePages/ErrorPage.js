@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { removeUserToken } from "../../components_login/Tokens";
+import { removeAppToken, removeUserToken } from "../../components_login/Tokens";
 
 
 
@@ -8,6 +8,7 @@ function ErrorPage() {
     const gotoHome = (e) => {
         e.preventDefault();
         removeUserToken();
+        removeAppToken();
         navigate('/');
     }
     return (

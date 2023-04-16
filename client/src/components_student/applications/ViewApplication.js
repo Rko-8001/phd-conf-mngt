@@ -6,10 +6,15 @@ import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
 import { useReactToPrint } from 'react-to-print';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
+<<<<<<< HEAD
 import FormPrint from '../../components/applicationStudent/FormPrint';
 
+=======
+import FormPrint from './FormPrint';
+>>>>>>> master
 
-function ViewApplication() {
+
+export default function ViewApplicationStudent() {
 
   const componentRef = useRef();
   const navigate = useNavigate();
@@ -19,7 +24,6 @@ function ViewApplication() {
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    documentTitle: 'New_Application for Participating in Conference, Workshop, Seminar (within India)',
   })
 
   const goBack = e => {
@@ -90,9 +94,15 @@ function ViewApplication() {
                 <span className="ml-3 hidden sm:block">
                   <button type="button" onClick={(e) => {
                     e.preventDefault();
+<<<<<<< HEAD
                     console.log("printing..")
                     handlePrint();
                     console.log("print done")
+=======
+                    console.log("clicked");
+                    handlePrint();
+
+>>>>>>> master
                   }} className="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
                     <svg className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
@@ -110,10 +120,16 @@ function ViewApplication() {
             </div>
 
             <ApplicationData data={data} user={applicantInfo} role="0" />
+<<<<<<< HEAD
             <div className='hidden'>
               <div ref={componentRef} >
                 <FormPrint data={data} user={applicantInfo} />
               </div>
+=======
+
+            <div className="hidden">
+              <FormPrint ref={componentRef} data={data} />
+>>>>>>> master
             </div>
 
 
@@ -122,5 +138,3 @@ function ViewApplication() {
     </>
   )
 }
-
-export default ViewApplication

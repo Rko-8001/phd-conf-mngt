@@ -19,7 +19,8 @@
 .env.test.local
 .env.production.local
 /server/.env
-/dummy_data
+# /dummy_data
+# /DataInfo.txt
 
 npm-debug.log*
 yarn-debug.log*

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 
 // importing Components
-import NavBar from '../studentNav/NavBar';
+import NavBar from '../../studentNav/NavBar';
 import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
-import { getUserToken } from '../../components_login/Tokens';
-import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from './checkFunctions';
+import { getUserToken } from '../../../components_login/Tokens';
+import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 
 
 function FormInput() {
