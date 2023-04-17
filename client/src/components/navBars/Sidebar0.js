@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import img1 from './assets/logo.png';
 import img2 from './assets/control.png'
 import Chart_fill from './assets/Chart_fill.png'
@@ -6,13 +6,14 @@ import Chat from './assets/Chart.png';
 import Calendar from './assets/Calendar.png';
 import Folder from './assets/Folder.png';
 import User from './assets/User.png';
-import {removeAppToken, removeUserToken } from '../../components_login/Tokens';
+import { removeAppToken, removeUserToken } from '../../components_login/Tokens';
 import { useNavigate } from 'react-router-dom';
 
 const App = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "Dashboard", src: Chart_fill, link: "/studentLogin" },
+    { title: "Profile", src: Chart_fill, link: "/studentLogin/Profile" },
     { title: "TBD", src: Chat, link: '/studentLogin' },
     { title: "Applications", src: User, gap: true, link: "/studentLogin/application" },
     { title: "Fill Form", src: Calendar, link: "/studentLogin/formFill" },

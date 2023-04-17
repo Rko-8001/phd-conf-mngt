@@ -4,6 +4,8 @@ import img from './images/iitrpr.jpeg';
 import { setUserToken } from './Tokens';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../components/requests/URL';
+import { delay } from '../components/loading/Delay';
+import Alert from '../components/alerts/Alert';
 
 function Login() {
 
@@ -13,6 +15,14 @@ function Login() {
     //                      States Maintained
     const [emailId, setEmailId] = useState("");
     const [otpLogin, setOtp] = useState("");
+
+    const [optButtonMssg, setOtpButtonMssg] = useState("Request Otp");
+    const [optButton, setOtpButton] = useState(false);
+    const [otpMssg, setOtpMssg] = useState("");
+    const [alertType, setAlertType] = useState("");
+
+    const [loginButtonMssg, setLoginButtonMssg] = useState("Log In.");
+    const [loginButton, setLoginButton] = useState(false);
 
     //                       Updating States Function
     const getEmailId = e => {
@@ -29,6 +39,7 @@ function Login() {
         const mssg = "otp";
         const otp = otpLogin;
         const email = emailId;
+        setOtpButtonMssg("Sending Otp...");
         const res = await fetch(`${BASE_URL}/login`, {
             method: "POST",
             headers: {
@@ -36,14 +47,25 @@ function Login() {
             },
             body: JSON.stringify({ email, mssg, otp })
         });
-        //logic
-        // const data = await res.json();
 
         if (res.status === 422 || res.status === 423) {
-            window.alert("Invalid Creds");
+            setOtpMssg("Try Again..")
+            setAlertType("danger");
+            setOtpButton(true);
+
+            delay(1000).then(() => {
+                setEmailId("");
+                setOtpButton(false);
+                setOtpButtonMssg("Request Otp");
+
+            }).catch((error) => {
+                console.log(error);
+            })
         }
         else {
-            window.alert("OTP Sent to your " + email);
+            setOtpMssg("Otp Sent");
+            setAlertType("success");
+            setOtpButton(true);
         }
     }
 
@@ -54,7 +76,7 @@ function Login() {
         const email = emailId;
         const otp = otpLogin;
 
-
+        setLoginButtonMssg("Logging In...")
         const res = await fetch(`${BASE_URL}/login`, {
             method: "POST",
             headers: {
@@ -63,13 +85,6 @@ function Login() {
             body: JSON.stringify({ email, mssg, otp })
         });
 
-        // const id = data.split(' ')[1];
-
-
-        // console.log(role);
-        // console.log(id);
-        // console.log(data);
-        console.log(res.status);
         if (res.status === 422) {
             window.alert("Wrong OTP Entered!! Try Again..");
         }
@@ -98,6 +113,7 @@ function Login() {
             else {
             }
         }
+        setLoginButtonMssg("Log In.")
     }
 
     const loginWithGoogle = async (e) => {
@@ -166,24 +182,24 @@ function Login() {
 
 
             <section class="bg-gray-50 min-h-screen flex items-center justify-center">
-                {/* <!-- login container --> */}
                 <div class="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
-                    {/* </div><!-- form --> */}
                     <div class="md:w-1/2 px-8 md:px-16">
                         <h2 class="font-bold text-2xl text-[#002D74]">Login with PCMP credentials</h2>
                         <p class="text-xs mt-4 text-[#002D74]">Please enter your email and OTP to Log In</p>
 
                         <form action="" class="flex flex-col gap-4">
                             <input class="p-2 mt-8 rounded-xl border" type="email" name="email" placeholder="Email" onChange={getEmailId} />
-                            <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300 " onClick={requestOtp}>Request OTP</button>
+                            {optButton
+                                ?
+                                <Alert mssg={otpMssg} type={alertType} />
+                                :
+                                <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300 " onClick={requestOtp}>{optButtonMssg}</button>
+                            }
+
                             <div class="relative">
-                                <input class="p-2 rounded-xl border w-full" type="password" name="password" placeholder="OTP" onChange={getOtp} />
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2" viewBox="0 0 16 16">
-                                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
-                                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
-                                </svg>
+                                <input class="p-2 rounded-xl border w-full" name="password" placeholder="OTP" onChange={getOtp} />
                             </div>
-                            <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300" onClick={requestLogIn}>Login</button>
+                            <button class="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300" onClick={requestLogIn}>{loginButtonMssg}</button>
                         </form>
 
                         <div class="mt-6 grid grid-cols-3 items-center text-gray-400">
