@@ -12,6 +12,7 @@ require('./mongoDb/connection');
 // requiring user Schema 
 const User = require('./model/userSchema');
 
+const PORT = process.env.PORT || 5000
 
 // components Maintained
 app.use(express.json());
@@ -26,10 +27,10 @@ app.use(require('./router/accountSide.js'))
 
 
 
-app.get('/login', (req,res) => {
+app.get('/login', (req, res) => {
     res.send(`Hi`);
 })
 
-app.listen(process.env.NODE_PORT, () =>{
-    console.log('server is running at ' + process.env.NODE_PORT)
+app.listen(PORT, () => {
+    console.log('server is running at ' + PORT)
 })
