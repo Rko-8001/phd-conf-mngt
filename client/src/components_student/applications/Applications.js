@@ -4,18 +4,19 @@ import { Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LoaderCard from '../../components/loading/LoaderCard';
 import { delay } from '../../components/loading/Delay';
+import { BASE_URL } from '../../components/requests/URL';
 
 const data = [];
 function Application() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [apps, setApps] = useState(data);
-  
+
 
   const getBasicInfo = async (req, res) => {
     try {
       const token = getUserToken();
-      const resp = await fetch("/studentApplicationView", {
+      const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +85,7 @@ function Application() {
   const createAppToken = async (id) => {
     try {
       const aisehi = "abcd";
-      const resp = await fetch("/createApplicationToken", {
+      const resp = await fetch(`${BASE_URL}/createApplicationToken`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

@@ -4,6 +4,7 @@ import { removeAppToken, setAppToken } from '../../components_login/Tokens';
 import LoaderCard from '../../components/loading/LoaderCard';
 import { Container } from '@mui/material';
 import { delay } from '../../components/loading/Delay';
+import { BASE_URL } from '../../components/requests/URL';
 
 const data = [];
 function ResearchApplication() {
@@ -15,7 +16,7 @@ function ResearchApplication() {
 
     const getAppInfo = async (req, res) => {
         try {
-            const resp = await fetch("/viewAllApplication", {
+            const resp = await fetch(`${BASE_URL}/viewAllApplication`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -82,7 +83,7 @@ function ResearchApplication() {
     const createAppToken = async (id) => {
         try {
             const aisehi = "abcd";
-            const resp = await fetch("/createApplicationToken", {
+            const resp = await fetch(`${BASE_URL}/createApplicationToken`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

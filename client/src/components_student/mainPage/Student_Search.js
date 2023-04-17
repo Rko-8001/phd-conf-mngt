@@ -8,6 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import OpenSearch from './OpenSearch';
+import { BASE_URL } from '../../components/requests/URL';
 
 export default function CustomizedInputBase(props) {
   var femail = props.email;
@@ -18,7 +19,7 @@ export default function CustomizedInputBase(props) {
     console.log(obj);
   }
 
-  const [curInput,setcurInput] = useState('');
+  const [curInput, setcurInput] = useState('');
   const handleInputChange = (event) => {
     setcurInput(event.target.value);
   };
@@ -36,38 +37,35 @@ export default function CustomizedInputBase(props) {
       const semail = curInput;
       // console.log(email);
       const role = 0;
-      const resp = await fetch("/studentInfoFaculty", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ semail, femail })
+      const resp = await fetch(`${BASE_URL}/studentInfoFaculty`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ semail, femail })
       });
       const dat = await resp.json();
       var curpos = 0;
 
-      if(resp.status === 200)
-      {
-          console.log(dat);
-          curpos = 1;
-          handleClick(1);
-          handleChangeData(dat);
+      if (resp.status === 200) {
+        console.log(dat);
+        curpos = 1;
+        handleClick(1);
+        handleChangeData(dat);
       }
-      else if(resp.status === 421)
-      {
-          curpos = 2;
-          handleClick(2);
+      else if (resp.status === 421) {
+        curpos = 2;
+        handleClick(2);
       }
-      else 
-      {
-         curpos = 3;
-         handleClick(3);
+      else {
+        curpos = 3;
+        handleClick(3);
         //  handleChangeData()
       }
       // console.log(resp);
-  } catch (error) {
+    } catch (error) {
       console.log(error);
-  }
+    }
 
   };
   return (
@@ -94,9 +92,9 @@ export default function CustomizedInputBase(props) {
         <DirectionsIcon />
       </IconButton>
       {activeTab === 0 && <div>0</div>}
-    {activeTab === 1 && <div><OpenSearch data = {data}/></div>}
-    {activeTab === 2 && <div>2</div>}
-    {activeTab === 3 && <div>3</div>}
+      {activeTab === 1 && <div><OpenSearch data={data} /></div>}
+      {activeTab === 2 && <div>2</div>}
+      {activeTab === 3 && <div>3</div>}
 
     </Paper>
   );

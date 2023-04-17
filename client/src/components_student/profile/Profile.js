@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { getUserToken } from '../../components_login/Tokens';
 import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
+import { BASE_URL } from '../../components/requests/URL';
 
 export default function Profile() {
 
@@ -19,7 +20,7 @@ export default function Profile() {
     aos: "",
     supervisor: ""
   });
-  
+
   const getGeneralInfo = ((e) => {
     const { name, value } = e.target;
     // console.log(name + " " + value);
@@ -40,7 +41,7 @@ export default function Profile() {
     try {
       const token = getUserToken();
       // console.log(token);
-      const resp = await fetch("/studentInfoLoading", {
+      const resp = await fetch(`${BASE_URL}/studentInfoLoading`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +67,7 @@ export default function Profile() {
       setFetchData("supervisor", resp.nameOfSupervisor);
       setFetchData("email", resp.email);
 
-    
+
       // delay of 2 seconds
       delay(500).then(() => {
         setIsLoading(false);

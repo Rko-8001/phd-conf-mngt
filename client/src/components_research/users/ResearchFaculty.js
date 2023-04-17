@@ -3,6 +3,7 @@ import LoaderContent from '../../components/loading/LoaderContent';
 import FacultyUser from './FacultyUser';
 import * as XLSX from 'xlsx';
 import { delay } from '../../components/loading/Delay';
+import { BASE_URL } from '../../components/requests/URL';
 
 export default function ResearchFaculty() {
 
@@ -16,7 +17,7 @@ export default function ResearchFaculty() {
 
     const getUserInfo = async (req, res) => {
         try {
-            const resp = await fetch("/viewUsers", {
+            const resp = await fetch(`${BASE_URL}/viewUsers`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -63,7 +64,7 @@ export default function ResearchFaculty() {
         setFileName("Uploading Faculty Data. Please Wait");
         var data;
         try {
-            const resp = await fetch("/addFaculty", {
+            const resp = await fetch(`${BASE_URL}/addFaculty`, {
                 method: "POSt",
                 headers: {
                     "Content-Type": "application/json",

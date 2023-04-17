@@ -3,6 +3,7 @@ import { getUserToken, removeAppToken, removeUserToken } from '../../components_
 import userPhoto from './user.png';
 
 import { useNavigate, Link } from 'react-router-dom';
+import { BASE_URL } from '../../components/requests/URL';
 
 function FacultyNav() {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ function FacultyNav() {
     const getUserInfo = async (req, res) => {
         try {
             const token = getUserToken();
-            const resp = await fetch("/infoLoading", {
+            const resp = await fetch(`${BASE_URL}/infoLoading`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

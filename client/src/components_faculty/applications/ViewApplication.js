@@ -7,6 +7,7 @@ import { delay } from '../../components/loading/Delay';
 import { useReactToPrint } from 'react-to-print';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
 import FormPrint from '../../components/applicationStudent/FormPrint';
+import { BASE_URL } from '../../components/requests/URL';
 
 
 export default function ViewApplicationFaculty() {
@@ -32,7 +33,7 @@ export default function ViewApplicationFaculty() {
     const getBasicInfo = async (req, res) => {
         try {
             const token = getAppToken();
-            const resp = await fetch("/viewAnApplication", {
+            const resp = await fetch(`${BASE_URL}/viewAnApplication`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

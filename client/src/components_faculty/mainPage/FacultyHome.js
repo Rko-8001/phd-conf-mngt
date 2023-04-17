@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getUserToken } from '../../components_login/Tokens';
 import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
+import { BASE_URL } from '../../components/requests/URL';
 
 export default function FacultyHome() {
   const [user, setUser] = useState();
@@ -10,7 +11,7 @@ export default function FacultyHome() {
   const getUserInfo = async (req, res) => {
     try {
       const token = getUserToken();
-      const resp = await fetch("/infoLoading", {
+      const resp = await fetch(`${BASE_URL}/infoLoading`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

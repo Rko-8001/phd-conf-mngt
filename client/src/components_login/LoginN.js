@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import img from './images/iitrpr.jpeg';
 import { setUserToken } from './Tokens';
 import { Link } from 'react-router-dom';
-
+import { BASE_URL } from '../components/requests/URL';
 
 function Login() {
 
@@ -29,14 +29,13 @@ function Login() {
         const mssg = "otp";
         const otp = otpLogin;
         const email = emailId;
-        const res = await fetch("/login", {
+        const res = await fetch(`${BASE_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ email, mssg, otp })
         });
-
         //logic
         // const data = await res.json();
 
@@ -56,7 +55,7 @@ function Login() {
         const otp = otpLogin;
 
 
-        const res = await fetch("/login", {
+        const res = await fetch(`${BASE_URL}/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
