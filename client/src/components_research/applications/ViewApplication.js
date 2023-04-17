@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
+import { BASE_URL } from '../../components/requests/URL';
 
 export default function ViewApplicationResearch() {
 
@@ -24,7 +25,7 @@ export default function ViewApplicationResearch() {
   const getBasicInfo = async (req, res) => {
     try {
       const token = getAppToken();
-      const resp = await fetch("/viewAnApplication", {
+      const resp = await fetch(`${BASE_URL}/viewAnApplication`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,7 +98,7 @@ export default function ViewApplicationResearch() {
 
             </div>
 
-            <ApplicationData data={data} user={applicantInfo} role="2"/>
+            <ApplicationData data={data} user={applicantInfo} role="2" />
           </Container>
         </>}
     </>

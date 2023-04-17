@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { getUserToken } from '../../../components_login/Tokens.js';
+import { BASE_URL } from '../../requests/URL.js';
 
 export default function ResearchAction({ user, data }) {
 
@@ -49,7 +50,7 @@ export default function ResearchAction({ user, data }) {
     }
     const token = getUserToken();
 
-    const res = await fetch("/researchApproveOrDisapprove", {
+    const res = await fetch(`${BASE_URL}/researchApproveOrDisapprove`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

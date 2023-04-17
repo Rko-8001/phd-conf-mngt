@@ -7,7 +7,7 @@ import dayjs from 'dayjs';
 
 import { getUserToken } from '../../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
-
+import { BASE_URL } from '../../../components/requests/URL';
 
 export default function FormInputAbroad() {
 
@@ -185,37 +185,37 @@ export default function FormInputAbroad() {
         if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
         }
-        const res = await fetch("/studentApplicationSubmit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, status,
-                mobileNo, bankAccountNo,
-                nameOfConference, venueOfConference, paperInConference,
-                financialSupport,
-                advances, finances,
-                conferenceStarts, conferenceEnds,
-                studentLeaveStarts, studentLeaveEnds,
-            })
-        });
+        // const res = await fetch("/studentApplicationSubmit", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         email, status,
+        //         mobileNo, bankAccountNo,
+        //         nameOfConference, venueOfConference, paperInConference,
+        //         financialSupport,
+        //         advances, finances,
+        //         conferenceStarts, conferenceEnds,
+        //         studentLeaveStarts, studentLeaveEnds,
+        //     })
+        // });
 
         // logic
 
-        if (res.status === 422) {
-            window.alert("Error Occurred! Please Try Again.");
-        }
-        else {
-            window.alert("Application Submitted");
-        }
+        // if (res.status === 422) {
+        //     window.alert("Error Occurred! Please Try Again.");
+        // }
+        // else {
+        //     window.alert("Application Submitted");
+        // }
     }
 
     const getBasicInfo = async (req, res) => {
         try {
             const token = getUserToken();
             // console.log(token);
-            const resp = await fetch("/studentInfoLoading", {
+            const resp = await fetch(`${BASE_URL}/studentInfoLoading`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

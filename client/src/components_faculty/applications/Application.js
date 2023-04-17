@@ -4,6 +4,7 @@ import { removeAppToken, setAppToken, getUserToken } from '../../components_logi
 import LoaderCard from '../../components/loading/LoaderCard';
 import { Container } from '@mui/material';
 import { delay } from '../../components/loading/Delay';
+import { BASE_URL } from '../../components/requests/URL';
 
 const data = [];
 export default function FacultyApplication() {
@@ -17,7 +18,7 @@ export default function FacultyApplication() {
         try {
             const token = getUserToken();
             console.log("hello");
-            const resp = await fetch("/viewFacultyApplications", {
+            const resp = await fetch(`${BASE_URL}/viewFacultyApplications`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -85,7 +86,7 @@ export default function FacultyApplication() {
     const createAppToken = async (id) => {
         try {
             const aisehi = "abcd";
-            const resp = await fetch("/createApplicationToken", {
+            const resp = await fetch(`${BASE_URL}/createApplicationToken`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

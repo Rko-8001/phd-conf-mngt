@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { getUserToken } from '../../../components_login/Tokens.js';
+import { BASE_URL } from '../../requests/URL.js';
 
 export default function FacultyAction({ user, data }) {
 
@@ -29,7 +30,7 @@ export default function FacultyAction({ user, data }) {
     const updateStatus = async (status) => {
         const token = getUserToken();
 
-        const res = await fetch("/facultyApproveOrDisapprove", {
+        const res = await fetch(`${BASE_URL}/facultyApproveOrDisapprove`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -3,6 +3,7 @@ import LoaderContent from '../../components/loading/LoaderContent';
 import StudentUser from './StudentUser';
 import * as XLSX from 'xlsx';
 import { delay } from '../../components/loading/Delay';
+import { BASE_URL } from '../../components/requests/URL';
 
 export default function ResearchStudent() {
 
@@ -16,7 +17,7 @@ export default function ResearchStudent() {
 
     const getUserInfo = async (req, res) => {
         try {
-            const resp = await fetch("/viewUsers", {
+            const resp = await fetch(`${BASE_URL}/viewUsers`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -33,7 +34,7 @@ export default function ResearchStudent() {
             setStudent(resp.studentUser);
 
             // delay of 2 seconds
-            delay(500).then(() => {
+            delay(100).then(() => {
                 setIsLoadingHome(false);
             }).catch((error) => {
                 console.log(error);
@@ -62,7 +63,7 @@ export default function ResearchStudent() {
         setFileName("Uploading Student Data. Please Wait");
         var data;
         try {
-            const resp = await fetch("/addStudent", {
+            const resp = await fetch(`${BASE_URL}/addStudent`, {
                 method: "POSt",
                 headers: {
                     "Content-Type": "application/json",

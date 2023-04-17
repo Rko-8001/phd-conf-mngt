@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 
 import { getUserToken } from '../../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
+import { BASE_URL } from '../../../components/requests/URL';
 
 
 function FormInput() {
@@ -43,7 +44,7 @@ function FormInput() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
-    
+
     const [registrationFee, setRegistrationFee] = useState(0);
 
     const [rowData, setRowData] = useState({
@@ -178,7 +179,7 @@ function FormInput() {
         if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
         }
-        const res = await fetch("/studentApplicationSubmit", {
+        const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -208,7 +209,7 @@ function FormInput() {
         try {
             const token = getUserToken();
             // console.log(token);
-            const resp = await fetch("/studentInfoLoading", {
+            const resp = await fetch(`${BASE_URL}/studentInfoLoading`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
