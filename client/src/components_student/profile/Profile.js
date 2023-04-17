@@ -1,5 +1,4 @@
 import { Container } from '@mui/material'
-import NavBar from '../studentNav/NavBar';
 import { useState, useEffect } from 'react';
 import { getUserToken } from '../../components_login/Tokens';
 import LoaderContent from '../../components/loading/LoaderContent';
@@ -83,7 +82,6 @@ export default function Profile() {
 
   return (
     <>
-      <NavBar />
       {isLoading ?
         <LoaderContent />
         :
