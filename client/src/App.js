@@ -69,10 +69,7 @@ function App() {
 
           <Route path='studentApplication' element={<>
             <UpperNav />
-            <div className='flex'>
-              <SideBar1 />
-              <ViewApplicationFaculty />
-            </div>
+            <ViewApplicationFaculty />
           </>} />
         </Route>
 
