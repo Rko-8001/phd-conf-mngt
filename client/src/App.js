@@ -29,6 +29,13 @@ import ViewApplicationResearch from './components_research/applications/ViewAppl
 import SideBar2 from './components/navBars/Sidebar2';
 
 
+//                Accounts Section Components
+import AccountHome from './components_account/mainPage/Home';
+import AccountApplication from './components_account/applications/Application';
+import ViewApplicationAccount from './components_account/applications/ViewApplication';
+import SideBar3 from './components/navBars/Sidebar3';
+
+
 import { StudentFormAbroad, StudentFormIndia, StudentFormOption, StudentHomePage, StudentProfile, StudentApplicationsPage, StudentSpecficApplication } from './routes/StudentComponent';
 
 
@@ -110,6 +117,32 @@ function App() {
             <div class="min-h-screen w-full relative">
               <UpperNav />
               <ViewApplicationResearch />
+            </div>} />
+        </Route>
+
+
+        <Route path='/accountLogin'>
+          <Route index element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar3 />
+                <AccountHome />
+              </div>
+            </>} />
+          <Route path="application" element={
+            <>
+              <UpperNav />
+              <div className='flex'>
+                <SideBar3 />
+                <AccountApplication />
+              </div>
+            </>} />
+
+          <Route path="studentApplication" element={
+            <div class="min-h-screen w-full relative">
+              <UpperNav />
+              <ViewApplicationAccount />
             </div>} />
         </Route>
 
