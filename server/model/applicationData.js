@@ -73,6 +73,15 @@ const applicationData = new mongoose.Schema({
     remarksResearch: {
         type: String
     },
+    balanceAvailable: {
+        type: String
+    },
+    grantUtilized: {
+        type: String
+    },
+    passedForPayment: {
+        type: String
+    },
     remarksAccounts: {
         type: String
     },
@@ -80,7 +89,7 @@ const applicationData = new mongoose.Schema({
         type: String
     },
     lastModified: {
-        type: String,   
+        type: String,
     }
 },
     {

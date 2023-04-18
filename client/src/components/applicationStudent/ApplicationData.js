@@ -5,12 +5,15 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PersonalDetails from './Tabs/PersonalDetails';
+import FinanceDetails from './Tabs/FinanceDetails';
 import ConferenceDetails from './Tabs/ConferenceDetails';
 import FacultyDetails from './Tabs/FacultyDetails'
 import ResearchSection from './Tabs/ResearchSection';
-import FinanceDetails from './Tabs/FinanceDetails';
+import AccountSection from './Tabs/AccountSection';
+
 import ResearchAction from './Actions/ResearchAction';
 import FacultyAction from './Actions/FacultyAction';
+import AccountAction from './Actions/AccountAction';
 
 function ApplicationData({ data, user, role }) {
     const [value, setValue] = useState("personal details");
@@ -51,6 +54,13 @@ function ApplicationData({ data, user, role }) {
                                 <Tab value="research section approved" label="Research Section" />
                             }
 
+                            {(showClass(data.status, "2") && role === "3") &&
+                                <Tab value="account section approval" label="Take Action" />
+                            }
+                            {(showClass(data.status, "3") || showClass(data.status, "4")) &&
+                                <Tab value="account section approved" label="Account Section" />
+                            }
+
                         </TabList>
                     </Box>
 
@@ -79,6 +89,14 @@ function ApplicationData({ data, user, role }) {
 
                     <TabPanel value="research section approved">
                         <ResearchSection data={data} />
+                    </TabPanel>
+
+                    <TabPanel value="account section approval">
+                        <AccountAction data={data} user={user} />
+                    </TabPanel>
+
+                    <TabPanel value="account section approved">
+                        <AccountSection data={data} />
                     </TabPanel>
                 </TabContext >
             </Box >
