@@ -3,7 +3,6 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Switch } from '@headlessui/react'
-import { useState } from 'react';
 
 
 export default function InputData(props) {
@@ -16,21 +15,6 @@ export default function InputData(props) {
       </tr>
     );
   });
-  // const [image,setImage] = useState("");
-
-  // function convertToBase64(e) {
-  //   console.log(e)
-  //   var reader = new FileReader();
-  //   reader.readAsDataURL(e.target.files[0]);
-  //   reader.onload = () => {
-  //     console.log("The value of image:")
-  //     console.log(reader.result);
-  //     setImage(reader.result)
-  //   };
-  //   reader.onerror = error => {
-  //     console.log("Error: ", error);
-  //   };
-  // }
 
 
   return (
@@ -330,23 +314,10 @@ export default function InputData(props) {
                 <div className="relative flex gap-x-3">
                   <div className="text-sm leading-6">
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Copy of Acceptance</label>
-                    <input value={props.image} onChange={props.setimage} className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
+                    <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                     <p className="text-gray-500"></p>
                   </div>
                 </div>
-                
-                {/* <div className='auth-wrapper'>
-                  <div className='auth-inner' style={{width: "auto"}}>
-                    upload..
-                    <input
-                      accept='image/*'
-                      type='file'
-                      onChange={props.convertToBase64}
-                    />
-                  </div>
-                </div> */}
-
-                {props.img==""||props.img==null?"":<img width={100} height={100} src={props.img}/>}
 
                 <div className="relative flex gap-x-3">
 

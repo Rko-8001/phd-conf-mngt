@@ -8,8 +8,6 @@ import dayjs from 'dayjs';
 import { getUserToken } from '../../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
-// import {use} from ../../../../../../server/
-// import { use } from '../../../../../server/credentials/nodeMailerCreds';
 
 
 function FormInput() {
@@ -41,8 +39,6 @@ function FormInput() {
 
 
     const [advance, setAdvance] = useState(false);
-    const [img, setImg] = useState();
-    // const [image,setImage] = useState();
     const dataInTable = [];
     const [tableData, setTableData] = useState(dataInTable);
     const [travel, setTravel] = useState(0);
@@ -55,9 +51,7 @@ function FormInput() {
         particular: "",
         amount: ""
     });
-    const setimage =()=>{
-        setImg(img);
-    }
+
 
     const getFixedParts = ((e) => {
         const { name, value } = e.target;
@@ -99,20 +93,6 @@ function FormInput() {
         console.log("aaya");
         setAdvance(!advance);
     }
-
-    // function convertToBase64(e) {
-    //     console.log(e)
-    //     var reader = new FileReader();
-    //     reader.readAsDataURL(e.target.files[0]);
-    //     reader.onload = () => {
-    //         console.log("The value of image:")
-    //         console.log(reader.result);
-    //         setImg(reader.result)
-    //     };
-    //     reader.onerror = error => {
-    //         console.log("Error: ", error);
-    //     };
-    // }
 
     const addRowData = (e) => {
         e.preventDefault();
@@ -157,8 +137,8 @@ function FormInput() {
     const requestGrant = async (e) => {
         e.preventDefault();
 
+
         // save all data
-        const image = img;
         const email = generalInfo.email;
         const status = "0";
         const mobileNo = generalInfo.mobileNo;
@@ -175,9 +155,6 @@ function FormInput() {
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
         const finances = [...tableData];
-        // console.log("image: "+image)
-        // alert(image)
-        // const image = image;
 
 
         finances.push({
@@ -214,7 +191,7 @@ function FormInput() {
                 financialSupport,
                 advances, finances,
                 conferenceStarts, conferenceEnds,
-                studentLeaveStarts, studentLeaveEnds, image,
+                studentLeaveStarts, studentLeaveEnds,
             })
         });
 
@@ -292,9 +269,6 @@ function FormInput() {
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay} registrationFee={registrationFee}
                 requestGrant={requestGrant}
-                img={img}
-                // convertToBase64={convertToBase64}
-                setimage={setimage}
             />
         </>
     )

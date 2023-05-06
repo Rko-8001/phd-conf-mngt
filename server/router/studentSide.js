@@ -77,9 +77,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         financialSupport,
         advances, finances,
         coaa, coaba, cocba,
-        studentLeaveStarts, studentLeaveEnds, image} = req.body;
-        console.log("image is: "+image)
-        // const file = 
+        studentLeaveStarts, studentLeaveEnds } = req.body;
 
     // console.log(email + " " + financialSupport + " " + coaa);
     // console.log(mobileNo + " " + bankAccountNo);
@@ -96,7 +94,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
                 financialSupport,
                 advances, finances,
                 coaa, coaba, cocba,
-                studentLeaveStarts, studentLeaveEnds, image
+                studentLeaveStarts, studentLeaveEnds
             });
         await data.save();
 
