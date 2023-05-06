@@ -240,7 +240,7 @@ function Application() {
         </Container>
         :
         <Container>
-          <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="my-2 max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
             <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
               <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1>
               <div className="flex">
