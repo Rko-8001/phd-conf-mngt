@@ -26,3 +26,17 @@ export const removeAppToken = () => {
   sessionStorage.removeItem("appToken");
 };
 
+export const setroleToken = (roleToken) => {
+  sessionStorage.setItem("roleToken", roleToken);
+  // console.log(" Token Set: " + token);
+};
+
+export const getroleToken = () => {
+  return sessionStorage.getItem("roleToken") || null;
+
+};
+
+export const removeroleToken = () => {
+  sessionStorage.removeItem("roleToken");
+};
+

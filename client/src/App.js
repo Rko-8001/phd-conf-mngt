@@ -10,15 +10,14 @@ import Team from './components/team/Team';
 import ErrorPage from './components/sidePages/ErrorPage';
 import LandingPage from './components/sidePages/LandingPage';
 import ContactUs from './components/sidePages/ContactUs';
-import Heading from './components/navBars/Heading';
 import UpperNav from './components/navBars/UpperNav';
+import SideBar from './components/navBars/Sidebar';
 
 
 //                  Faculty Side Components
 import FacultyHome from './components_faculty/mainPage/FacultyHome';
 import FacultyApplication from './components_faculty/applications/Application';
 import ViewApplicationFaculty from './components_faculty/applications/ViewApplication';
-import SideBar1 from './components/navBars/Sidebar1';
 
 //                  Research Section Components 
 import ResearchHome from './components_research//mainPage/ResearchHome';
@@ -26,14 +25,12 @@ import ResearchApplication from './components_research/applications/Application'
 import ResearchStudent from './components_research/users/ResearchStudent';
 import ResearchFaculty from './components_research/users/ResearchFaculty';
 import ViewApplicationResearch from './components_research/applications/ViewApplication';
-import SideBar2 from './components/navBars/Sidebar2';
 
 
 //                Accounts Section Components
 import AccountHome from './components_account/mainPage/Home';
 import AccountApplication from './components_account/applications/Application';
 import ViewApplicationAccount from './components_account/applications/ViewApplication';
-import SideBar3 from './components/navBars/Sidebar3';
 
 
 import { StudentFormAbroad, StudentFormIndia, StudentFormOption, StudentHomePage, StudentProfile, StudentApplicationsPage, StudentSpecficApplication } from './routes/StudentComponent';
@@ -61,7 +58,7 @@ function App() {
           <Route index element={<>
             <UpperNav />
             <div className='flex'>
-              <SideBar1 />
+              <SideBar />
               <FacultyHome />
             </div>
             <Footer/>
@@ -70,7 +67,7 @@ function App() {
           <Route path='application' element={<>
             <UpperNav />
             <div className='flex'>
-              <SideBar1 />
+              <SideBar />
               <FacultyApplication />
             </div>
             <Footer/>
@@ -88,7 +85,7 @@ function App() {
             <>
               <UpperNav />
               <div className='flex'>
-                <SideBar2 />
+                <SideBar />
                 <ResearchHome />
               </div>
               <Footer/>
@@ -97,7 +94,7 @@ function App() {
             <>
               <UpperNav />
               <div className='flex'>
-                <SideBar2 />
+                <SideBar />
                 <ResearchApplication />
               </div>
             </>} />
@@ -105,7 +102,7 @@ function App() {
             <>
               <UpperNav />
               <div className='flex'>
-                <SideBar2 />
+                <SideBar />
                 <ResearchStudent />
               </div>
               <Footer/>
@@ -114,7 +111,7 @@ function App() {
             <>
               <UpperNav />
               <div className='flex'>
-                <SideBar2 />
+                <SideBar />
                 <ResearchFaculty />
               </div>
               <Footer/>
@@ -133,7 +130,7 @@ function App() {
             <>
               <UpperNav />
               <div className='flex'>
-                <SideBar3 />
+                <SideBar />
                 <AccountHome />
               </div>
               <Footer/>
@@ -142,7 +139,7 @@ function App() {
             <>
               <UpperNav />
               <div className='flex'>
-                <SideBar3 />
+                <SideBar />
                 <AccountApplication />
               </div>
               <Footer/>

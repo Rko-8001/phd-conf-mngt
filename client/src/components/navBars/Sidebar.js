@@ -1,30 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from './assets/logo.png';
 import arrow from './assets/control.png'
-import Chart_fill from './assets/Chart_fill.png'
-import Chat from './assets/Chart.png';
-import Calendar from './assets/Calendar.png';
-import Folder from './assets/Folder.png';
-import User from './assets/User.png';
-import { removeAppToken, removeUserToken } from '../../components_login/Tokens';
+
+import { getroleToken, removeAppToken, removeUserToken, removeroleToken } from '../../components_login/Tokens';
 import { useNavigate } from 'react-router-dom';
+import { AccountSideBar, FacultySideBar, ResarchSideBar, StudentSideBar } from './SideBarRoutes';
+
 
 const App = () => {
   const [open, setOpen] = useState(true);
-  const Menus = [
-    { title: "Dashboard", src: Chart_fill, link: "/studentLogin" },
-    { title: "Profile", src: Chart_fill, link: "/studentLogin/Profile" },
-    { title: "Settlement", src: Chat, link: '/studentLogin', gap: true },
-    { title: "Applications", src: User, link: "/studentLogin/application" },
-    { title: "Fill Form", src: Calendar, link: "/studentLogin/formFill" },
-    { title: "Logout ", src: Folder, gap: true, link: "logout" },
-  ];
+  const [menu, setMenu] = useState([]);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const role = getroleToken();
+    if (role === "0")
+      setMenu(StudentSideBar);
+    else if (role === "1")
+      setMenu(FacultySideBar);
+    else if (role === "2")
+      setMenu(ResarchSideBar);
+    else if (role === "3")
+      setMenu(AccountSideBar);
+
+  }, [])
+
+  function nameType() {
+    const role = getroleToken();
+    console.log(role);
+    if (role === "0")
+      return "Student";
+    else if (role === "1")
+      return "Supervisor";
+    else if (role === "2")
+      return "Research Section";
+    else if (role === "3")
+      return "Account Section";
+    else {
+    }
+
+  }
   const handleClick = (link) => {
     if (link === "logout") {
-
+      removeroleToken();
       removeAppToken();
       removeUserToken();
       navigate("/");
@@ -58,11 +77,11 @@ const App = () => {
             className={`text-white origin-left font-medium text-xl duration-200 ${!open && "scale-0"
               }`}
           >
-            Student
+            {nameType()}
           </h1>
         </div>
         <ul className="pt-6">
-          {Menus.map((Menu, index) => (
+          {menu.map((Menu, index) => (
             <li
               key={index}
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
@@ -72,7 +91,7 @@ const App = () => {
                 handleClick(Menu.link);
               }}
             >
-              <img src={`${Menu.src}`} />
+              <img src={`${Menu.src}`} alt="." />
               <span className={`${!open && "hidden"} origin-left duration-200`}>
                 {Menu.title}
               </span>

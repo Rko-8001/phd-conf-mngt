@@ -37,7 +37,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-4xl py-12 sm:py-24 lg:py-34">
           <div className="text-center">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              PhD Conference Management Portal
+              PhD Conference Grant Management Portal
             </h2>
             <br />
             <h2 className="text-xl font-bold tracking-tight text-gray-900 sm:text-6xl">
