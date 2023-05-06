@@ -9,24 +9,15 @@ function Home(props) {
             <div>
                 <div className='px-2 w-full'>
                     <Newcomp />
-                    {/* <div className='fl'>
-
-                </div> */}
-                    {/* <Newcomp2/> */}
                     <div className='mx-auto'></div>
                     <Newcomp3 />
                     <br />
                     <br />
-                    {/* <br/> */}
-                    {/* <Cards/> */}
-                    {/* <Student_Search/> */}
-
 
                 </div>
             </div>
 
 
-            {/* <LoaderContent /> */}
         </>
     )
 }

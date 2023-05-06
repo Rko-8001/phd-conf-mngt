@@ -153,6 +153,7 @@ export default function InputData(props) {
                 <BsAsterisk className='text-[#FF0000] h-2' />
               </legend>
               <div className="mt-6 space-y-6">
+
                 <Enclosures
                   title="Copy of Acceptance"
                   onChangeFunction={fileFunction}
@@ -165,6 +166,7 @@ export default function InputData(props) {
                   title="Copy of Abstract"
                   onChangeFunction={fileFunction}
                 />
+
 
               </div>
             </fieldset>

@@ -34,6 +34,7 @@ function FormInput() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
+    const [img,setImg] = useState("");
 
     const [registrationFee, setRegistrationFee] = useState(0);
 
@@ -41,6 +42,12 @@ function FormInput() {
         particular: "",
         amount: ""
     });
+    const handleSetImage = (e) =>{
+        setImg(e.target.value);
+        console.log("image set..");
+        console.log(img);
+    }   
+
 
 
     const getFixedParts = ((e) => {
@@ -85,6 +92,7 @@ function FormInput() {
     }
 
     const addRowData = (e) => {
+        console.log("here1");
         e.preventDefault();
         if (!rowData.particular || !rowData.amount) {
             window.alert("Fill all the fields!");
@@ -97,6 +105,7 @@ function FormInput() {
     }
 
     const getRowData = (e) => {
+        console.log("here1");
         const { name, value } = e.target;
         // console.log(name + " " + value);
         setRowData(prevState => ({
@@ -104,6 +113,7 @@ function FormInput() {
             [name]: value
         }));
     }
+
 
 
     const checkData = () => {
@@ -141,6 +151,8 @@ function FormInput() {
         const advances = advance;
         const finances = [...tableData];
         const numberOfDays = conferenceInfo.numberOfDays;
+        const image = img;
+        const ig = "adada";
 
 
         finances.push({
@@ -169,6 +181,7 @@ function FormInput() {
             return;
         }
         const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
+            
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -180,8 +193,8 @@ function FormInput() {
                 financialSupport,
                 advances, finances,
                 conferenceStarts, conferenceEnds,
-                studentLeaveStarts, studentLeaveEnds,
-                numberOfDays
+                numberOfDays,
+                studentLeaveStarts, studentLeaveEnds, image
             })
         });
 
@@ -252,6 +265,8 @@ function FormInput() {
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay} registrationFee={registrationFee}
                 requestGrant={requestGrant}
+                img={img}
+                handleSetImage={handleSetImage}
             />
         </>
     )

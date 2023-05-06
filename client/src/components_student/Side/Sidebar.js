@@ -106,9 +106,6 @@ const App = () => {
           ))}
         </ul>
       </div>
-      {/* <div className="w-100">
-        <Newcomp/>
-      </div> */}
       
     </div>
   );

@@ -3,6 +3,8 @@ import { getUserToken } from '../../components_login/Tokens';
 import LoaderContent from '../../components/loading/LoaderContent';
 import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
+import Heading from '../../components/navBars/Heading';
+import img from './research.png';
 
 export default function ResearchHome() {
   const [user, setUser] = useState();
@@ -48,10 +50,17 @@ export default function ResearchHome() {
         :
         // <LoaderContent />
         <>
+          <div className='display-flex justify-center'>
+            <Heading />
+            <div className='ml-10 pl-10 h-1/4 w-3/4 display-flex items-center'>
+              <img src={img} />
+              
+
+            </div>
+          </div>
 
         </>
       }
-      {/* Hello */}
     </>
   )
 }

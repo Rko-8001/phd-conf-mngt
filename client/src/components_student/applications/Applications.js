@@ -11,7 +11,41 @@ function Application() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [apps, setApps] = useState(data);
+  const [apps2, setApps2] = useState(data);
+  const [st, setSt] = useState(1);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
 
+  const tabs = [
+    { label: 'Time', content: 'Applications are being displayed based on Time of the conference.' },
+    { label: 'Name', content: 'Applications are being displayed based on Name of the conference.' },
+    { label: 'Place', content: 'Applications are being displayed based on Place of the conference.' },
+  ];
+  function handleTabClick(index) {
+    setActiveTabIndex(index);
+    if(index===0){
+      apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
+    }
+    else if(index===1){
+      apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+    }
+    else if(index===2){
+      apps.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
+    }
+  }
+  // unsorted
+  const handleChange = () => {
+    console.log("clicked")
+    if (st === 1) {
+      // sorted
+      setSt(2);
+    }
+    else {
+      setSt(1);
+    }
+    console.log(apps);
+    apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+    console.log(apps);
+  }
 
   const getBasicInfo = async (req, res) => {
     try {
@@ -33,6 +67,13 @@ function Application() {
   useEffect(() => {
     getBasicInfo().then((resp) => {
       setApps(resp);
+      setApps2(resp);
+      console.log(resp);
+      apps2.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
+      console.log("unsorted");
+      console.log(apps);
+      console.log("sorted");
+      console.log(apps2);
 
       // delay of 2 seconds
       delay(100).then(() => {
@@ -114,7 +155,44 @@ function Application() {
 
   }
 
-  const renderApps = apps.map((item, index) =>
+  const renderApps1 = apps.map((item, index) =>
+    <>
+      <div key={index}>
+        <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
+          <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
+            {getStatus(item.status)}
+          </div>
+          <div className="p-4">
+            <h5
+              className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+              {item.nameOfConference}
+            </h5>
+            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+              Amount Needed: {getFinances(item.finances)} Rs
+            </p>
+            <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+              Venue: {item.venueOfConference}
+            </p>
+          </div>
+          <button
+            name={item._id}
+            onClick={viewSpecficApplication}
+            className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Vew Full Application
+          </button>
+          <div
+            className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+            {getDays(item.createdAt)}
+          </div>
+        </div>
+
+      </div>
+
+      <br />
+    </>
+  );
+  const renderApps2 = apps2.map((item, index) =>
     <>
       <div key={index}>
         <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
@@ -162,8 +240,29 @@ function Application() {
         </Container>
         :
         <Container>
-          <div class="flex flex-wrap justify-center gap-4">
-            {apps && renderApps}
+          <div className="my-2 max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
+              <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1>
+              <div className="flex">
+                {tabs.map((tab, index) => (
+                  <button
+                    key={tab.label}
+                    className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-gray-400 text-white' : 'bg-gray-200 text-gray-600'
+                      }`}
+                    onClick={() => handleTabClick(index)}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="p-4">
+              <p className="text-gray-700">{tabs[activeTabIndex].content}</p>
+            </div>
+          </div>
+          <div class="my-3 flex flex-wrap justify-center gap-4">
+            {apps && renderApps1}
+
           </div>
         </Container>
       }

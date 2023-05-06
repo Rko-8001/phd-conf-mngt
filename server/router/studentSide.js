@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: "debg9ye95",
+    api_key: "412159183898988",
+    api_secret: "3brAt7NKIbPQY9rtvg0civZf5j0"
+  });
 
 
 // connection established
@@ -14,6 +21,7 @@ const AppData = require('../model/applicationData');
 
 
 const { genAppToken } = require('../tokens/generateToken');
+const fileUpload = require('express-fileupload')
 
 
 // credentials import
@@ -101,6 +109,12 @@ router.post('/updateInfo', async (req, res) => {
 })
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
+    const file = req.files.image;
+    console.log("printing here...");
+    cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
+        console.log("result here..");
+        console.log(result);
+    })
     const { email, status,
         mobileNo, bankAccountNo,
         nameOfConference, venueOfConference, paperInConference,
@@ -108,7 +122,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         financialSupport,
         advances, finances,
         coaa, coaba, cocba,
-        studentLeaveStarts, studentLeaveEnds, numberOfDays } = req.body;
+        studentLeaveStarts, studentLeaveEnds, numberOfDays , img} = req.body;
 
     // console.log(email + " " + financialSupport + " " + coaa);
     // console.log(mobileNo + " " + bankAccountNo);
@@ -125,8 +139,8 @@ router.post('/studentApplicationSubmit', async (req, res) => {
                 financialSupport,
                 advances, finances,
                 coaa, coaba, cocba,
-                studentLeaveStarts, studentLeaveEnds,
-                numberOfDays
+                numberOfDays,
+                studentLeaveStarts, studentLeaveEnds, image
             });
         await data.save();
 

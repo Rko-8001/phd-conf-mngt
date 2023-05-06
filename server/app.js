@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 var cors = require('cors')
+const fileUpload = require('express-fileupload')
 
 app.use(cors())
 
@@ -17,6 +18,10 @@ const User = require('./model/userSchema');
 
 const PORT = process.env.PORT || 5000
 
+app.use(fileUpload({
+    useTempFiles:true
+}))
+
 // components Maintained
 app.use(express.json());
 app.use(require('./router/loginAuth'));
@@ -26,8 +31,8 @@ app.use(require('./router/researchSide'));
 app.use(require('./router/researchSide'));
 app.use(require('./router/facultySide'));
 app.use(require('./router/sharedFunctions'));
-app.use(require('./router/accountSide.js'))
-
+app.use(require('./router/accountSide.js'));
+app.use(require('./router/loginAuth'));
 
 
 app.get('/login', (req, res) => {
