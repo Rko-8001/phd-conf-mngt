@@ -59,7 +59,46 @@ router.post('/studentInfoLoading', async (req, res) => {
     }
 });
 
+router.post('/updateInfo', async (req, res) => {
 
+    const bearerHeader = await req.headers["authorization"];
+    if (!bearerHeader) {
+        return res.status(422).json({ error: "No Header" });
+    }
+    var bearerToken = bearerHeader.split(" ")[1];
+
+    // console.log( "Student Side Token: " + bearerToken);
+
+    if (!bearerToken) {
+        return res.status(422).json({ error: "No Token" });
+    }
+    // verfiy the token
+    var decode
+    try {
+        decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
+
+
+    //setting email and role from decode
+    const role = decode.role;
+    const email = decode.email;
+    const { mobileNo } = req.body;
+
+    try {
+        await User.updateOne({ email: email }, {
+            mobileNo: mobileNo
+        });
+
+        return res.status(200).json({ message: "Updated" });
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ message: "Erorr" });
+    }
+
+})
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
     const { email, status,
