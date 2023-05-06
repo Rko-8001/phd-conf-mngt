@@ -1,4 +1,4 @@
-import SideBar0 from '../components/navBars/Sidebar0';
+import SideBar from '../components/navBars/Sidebar';
 import Heading from '../components/navBars/Heading';
 import UpperNav from '../components/navBars/UpperNav';
 
@@ -15,7 +15,7 @@ export const StudentHomePage =
     <>
         <UpperNav />
         <div className='flex'>
-            <SideBar0 />
+            <SideBar />
             <div>
                 <Heading />
                 <Home />
@@ -27,7 +27,7 @@ export const StudentFormOption =
     <>
         <UpperNav />
         <div className='flex'>
-            <SideBar0 />
+            <SideBar />
             <FormOption />
         </div>
     </>
@@ -36,7 +36,7 @@ export const StudentFormIndia =
     <>
         <UpperNav />
         <div className='flex'>
-            <SideBar0 />
+            <SideBar />
             <FormInputIndia />
         </div>
     </>
@@ -45,7 +45,7 @@ export const StudentFormAbroad =
     <>
         <UpperNav />
         <div className='flex'>
-            <SideBar0 />
+            <SideBar />
             <FormInputAbroad />
         </div>
     </>
@@ -53,7 +53,7 @@ export const StudentProfile =
     <>
         <UpperNav />
         <div className='flex'>
-            <SideBar0 />
+            <SideBar />
             <Profile />
         </div>
     </>
@@ -62,7 +62,7 @@ export const StudentApplicationsPage =
     <>
         <UpperNav />
         <div className='flex'>
-            <SideBar0 />
+            <SideBar />
             <Applications />
         </div>
     </>

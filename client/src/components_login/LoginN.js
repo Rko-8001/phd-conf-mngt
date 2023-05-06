@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import img from './images/iitrpr.jpeg';
-import { setUserToken } from './Tokens';
+import { setUserToken, setroleToken } from './Tokens';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../components/requests/URL';
 import { delay } from '../components/loading/Delay';
@@ -98,6 +98,7 @@ function Login() {
             const role = data.role;
             const token = data.token;
             setUserToken(token);
+            setroleToken(role);
             if (role === "0") {
                 navigate('/studentLogin');
             }
