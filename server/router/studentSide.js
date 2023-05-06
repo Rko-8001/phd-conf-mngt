@@ -7,7 +7,7 @@ cloudinary.config({
     cloud_name: "debg9ye95",
     api_key: "412159183898988",
     api_secret: "3brAt7NKIbPQY9rtvg0civZf5j0"
-  });
+});
 
 
 // connection established
@@ -107,14 +107,15 @@ router.post('/updateInfo', async (req, res) => {
     }
 
 })
+
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
-    const file = req.files.image;
-    console.log("printing here...");
-    cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
-        console.log("result here..");
-        console.log(result);
-    })
+    // const file = req.files.image;
+    // console.log("printing here...");
+    // cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
+    //     console.log("result here..");
+    //     console.log(result);
+    // })
     const { email, status,
         mobileNo, bankAccountNo,
         nameOfConference, venueOfConference, paperInConference,
@@ -122,8 +123,10 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         financialSupport,
         advances, finances,
         coaa, coaba, cocba,
-        studentLeaveStarts, studentLeaveEnds, numberOfDays , img} = req.body;
+        studentLeaveStarts, studentLeaveEnds, numberOfDays, image } = req.body;
 
+    console.log("Hiiii");
+    console.log("Image:" + image);
     // console.log(email + " " + financialSupport + " " + coaa);
     // console.log(mobileNo + " " + bankAccountNo);
     // console.log(nameOfConference + " " + venueOfConference + " " + paperInConference);

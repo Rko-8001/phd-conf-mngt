@@ -43,6 +43,7 @@ function FormInput() {
         amount: ""
     });
     const handleSetImage = (e) =>{
+        e.preventDefault();
         setImg(e.target.value);
         console.log("image set..");
         console.log(img);

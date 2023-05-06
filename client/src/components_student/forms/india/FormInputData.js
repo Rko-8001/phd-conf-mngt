@@ -157,14 +157,17 @@ export default function InputData(props) {
                 <Enclosures
                   title="Copy of Acceptance"
                   onChangeFunction={fileFunction}
+                  type="file"
                 />
                 <Enclosures
                   title="Copy of Conference Brochure"
-                  onChangeFunction={fileFunction}
+                  onChangeFunction={props.handleSetImage}
+                  type="file"
                 />
                 <Enclosures
                   title="Copy of Abstract"
                   onChangeFunction={fileFunction}
+                  type="file"
                 />
 
 
