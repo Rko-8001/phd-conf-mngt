@@ -22,11 +22,15 @@ export default function InputData(props) {
         <br />
         <div className="border-b border-gray-900/10 pb-12">
 
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Bank Details</h2>
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Details</h2>
 
-          <div className="mt-8 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
-            <TextField name="mobileNo" title="Mobile No." onChangeFunction={props.getGeneralInfo} type="text" />
-            <TextField name="accountNo" title="Account Number" onChangeFunction={props.getGeneralInfo} type="text" />
+          <div className="mt-8 grid  grid-cols-3 gap-x-6  sm:grid-cols-6">
+            <TextField name="mobileNo" title="Mobile Number" onChangeFunction={props.getGeneralInfo} value={props.generalInfo.mobileNo} type="text" />
+          </div>
+
+          <div className="mt-8 grid grid-cols-3 gap-x-6 gap-y-6 sm:grid-cols-6">
+            <TextField name="accountNo" title="Account Number" onChangeFunction={props.getGeneralInfo} value='' type="text" />
+            <TextField name="ifsc" title="IFSC Code" onChangeFunction={props.getGeneralInfo} value='' type="text" />
           </div>
 
         </div>
@@ -146,7 +150,7 @@ export default function InputData(props) {
           <br /> <br />
           <h3 className="text-base font-semibold leading-7 text-gray-900">Duty Leave</h3>
           <br />
-          
+
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="From"

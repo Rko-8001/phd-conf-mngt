@@ -9,32 +9,7 @@ export default function Profile() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  const [generalInfo, setGeneralInfo] = useState({
-    name: "",
-    dept: "",
-    email: "",
-    entryNo: "",
-    doj: "",
-    fellowshipCat: "",
-    aos: "",
-    supervisor: ""
-  });
-
-  const getGeneralInfo = ((e) => {
-    const { name, value } = e.target;
-    // console.log(name + " " + value);
-    setGeneralInfo(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  });
-
-  const setFetchData = ((name, value) => {
-    setGeneralInfo(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  })
+  const [profileInfo, setProfileInfo] = useState({});
 
   const getBasicInfo = async (req, res) => {
     try {
@@ -55,20 +30,11 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    getBasicInfo().then((resp) => {
-      // console.log(resp);
-      setFetchData("name", resp.name);
-      setFetchData("entryNo", resp.entryNo);
-      setFetchData("dept", resp.department);
-      setFetchData("doj", resp.dateOfJoining);
-      setFetchData("fellowshipCat", resp.fellowshipCategory);
-      setFetchData("aos", resp.areaOfSpecialisation);
-      setFetchData("supervisor", resp.nameOfSupervisor);
-      setFetchData("email", resp.email);
+    getBasicInfo().then((data) => {
 
-
+      setProfileInfo(data);
       // delay of 2 seconds
-      delay(500).then(() => {
+      delay(50).then(() => {
         setIsLoading(false);
       }).catch((error) => {
         console.log(error);
@@ -96,35 +62,39 @@ export default function Profile() {
               <dl>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Full name</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.name}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.name}</dd>
                 </div>
                 <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Entry Number</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.entryNo}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.entryNo}</dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Email</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.email}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.email}</dd>
                 </div>
                 <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Department</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.dept}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.department}</dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Date of Joining</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.doj}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.dateOfJoining}</dd>
                 </div>
                 <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Fellowship Category</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.fellowshipCat}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.fellowshipCategory}</dd>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Area of Specialisation</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.aos}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.areaOfSpecialisation}</dd>
                 </div>
                 <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">Name of Supervisor</dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{generalInfo.supervisor}</dd>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.nameOfSupervisor} ({profileInfo.emailOfSupervisor})</dd>
+                </div>
+                <div className="bg-white px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                  <dt className="text-sm font-medium text-gray-500">Mobile Number</dt>
+                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{profileInfo.mobileNo}</dd>
                 </div>
               </dl>
             </div>

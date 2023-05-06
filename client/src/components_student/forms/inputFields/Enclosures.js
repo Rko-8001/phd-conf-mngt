@@ -8,7 +8,10 @@ export default function Enclosures(props) {
 
             <div className="relative flex gap-x-3">
                 <div className="text-sm leading-6">
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">
+                    <label
+                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        htmlFor="file_input"
+                    >
                         {title}
                     </label>
                     <input

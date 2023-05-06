@@ -6,7 +6,10 @@ export default function TextArea(props) {
     return (
         <>
             <div className="col-span-full">
-                <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                    htmlFor={name}
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                >
                     {title}
                 </label>
                 <div className="mt-2">
