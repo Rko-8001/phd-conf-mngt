@@ -13,6 +13,26 @@ function ResearchApplication() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [apps, setApps] = useState(data);
+    const [activeTabIndex, setActiveTabIndex] = useState(0);
+
+    const tabs = [
+        { label: 'Time', content: 'Applications are being displayed based on Time of the conference.' },
+        { label: 'Entry No.', content: 'Applications are being displayed based on Entry No of the conference.' },
+        { label: 'Name', content: 'Applications are being displayed based on Name of the conference.' },
+    ];
+    function handleTabClick(index) {
+        setActiveTabIndex(index);
+        if (index === 0) {
+            apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
+        }
+        else if (index === 1) {
+            apps.sort((a, b) => a.email.localeCompare(b.email));
+        }
+        else if (index === 2) {
+            apps.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
+        }
+        console.log(apps)
+    }
 
     const getAppInfo = async (req, res) => {
         try {
@@ -160,7 +180,27 @@ function ResearchApplication() {
                 </Container>
                 :
                 <Container>
-                    <div class="flex flex-wrap justify-center gap-4">
+                    <div className="max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+                        <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
+                            <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1>
+                            <div className="flex">
+                                {tabs.map((tab, index) => (
+                                    <button
+                                        key={tab.label}
+                                        className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-gray-400 text-white' : 'bg-gray-200 text-gray-600'
+                                            }`}
+                                        onClick={() => handleTabClick(index)}
+                                    >
+                                        {tab.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="p-4">
+                            <p className="text-gray-700">{tabs[activeTabIndex].content}</p>
+                        </div>
+                    </div>
+                    <div class="my-3 flex flex-wrap justify-center gap-4">
                         {apps && renderApps}
                     </div>
                 </Container>
