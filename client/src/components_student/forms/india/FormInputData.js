@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Alert, AlertTitle, Container } from '@mui/material'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -8,9 +8,12 @@ import TextField from '../inputFields/TextField';
 import TextArea from '../inputFields/TextArea';
 import Particulars from '../inputFields/Particulars';
 import Enclosures from '../inputFields/Enclosures';
+import { BsAsterisk } from 'react-icons/bs';
+import { useState } from 'react';
 
 export default function InputData(props) {
 
+  const [alert, setAlert] = useState(true);
   function fileFunction() {
     console.log("hi");
   }
@@ -21,6 +24,19 @@ export default function InputData(props) {
       <form>
         <br />
         <div className="border-b border-gray-900/10 pb-12">
+          {alert &&
+            <Alert
+              severity="warning"
+              onClose={() => {
+                setAlert(false);
+              }}
+            >
+              <AlertTitle>Important</AlertTitle>
+              <div className="flex">
+                Fields with <BsAsterisk className='text-[#FF0000] mx-2 h-2' />  are Required.
+              </div>
+            </Alert>
+          }
 
           <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Details</h2>
 
@@ -44,6 +60,7 @@ export default function InputData(props) {
             <TextField name="venueOfConference" title="Venue of Conference" onChangeFunction={props.getConferenceInfo} type="text" />
           </div>
 
+          <br />
           <TextArea name="paperInConference"
             title="Papers / Posters"
             subtitle="Write all paper(s)/ poster(s) to be present in the conference."
@@ -54,6 +71,11 @@ export default function InputData(props) {
 
 
           <br />
+          <p className='m-3 flex'>
+            Period of Conference
+            <BsAsterisk className='text-[#FF0000] h-2' />
+
+          </p>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="From"
@@ -126,9 +148,11 @@ export default function InputData(props) {
 
           <div className="mt-10 space-y-10">
             <fieldset>
-              <legend className="text-sm font-semibold leading-6 text-gray-900">Enclosures Attached</legend>
+              <legend className="text-sm flex font-semibold leading-6 text-gray-900">
+                Enclosures Attached
+                <BsAsterisk className='text-[#FF0000] h-2' />
+              </legend>
               <div className="mt-6 space-y-6">
-
                 <Enclosures
                   title="Copy of Acceptance"
                   onChangeFunction={fileFunction}
@@ -148,7 +172,10 @@ export default function InputData(props) {
           </div>
 
           <br /> <br />
-          <h3 className="text-base font-semibold leading-7 text-gray-900">Duty Leave</h3>
+          <h3 className="flex text-base font-semibold leading-7 text-gray-900">
+            Duty Leave
+            <BsAsterisk className='text-[#FF0000] h-2' />
+          </h3>
           <br />
 
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -167,8 +194,9 @@ export default function InputData(props) {
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
-              <label htmlFor="numberOfDays" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="numberOfDays" className=" flex block text-sm font-medium leading-6 text-gray-900">
                 Number of Days
+                <BsAsterisk className='text-[#FF0000] h-2' />
               </label>
               <div className="mt-2">
                 <input

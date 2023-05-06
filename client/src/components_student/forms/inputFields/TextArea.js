@@ -1,4 +1,5 @@
 import React from 'react'
+import { BsAsterisk } from 'react-icons/bs';
 
 export default function TextArea(props) {
 
@@ -10,7 +11,11 @@ export default function TextArea(props) {
                     htmlFor={name}
                     className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                    {title}
+                    <div className="flex">
+                        {title}
+                        <BsAsterisk className='h-2 w-auto text-[#FF0000] mx-1' />
+                    </div>
+
                 </label>
                 <div className="mt-2">
                     <textarea
