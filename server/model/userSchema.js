@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    mobileNo:
+    {
+        type: String,
+    },
     role: {
         type: String,
         required: true

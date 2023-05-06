@@ -67,6 +67,9 @@ const applicationData = new mongoose.Schema({
         type: String,
         // require: true
     },
+    numberOfDays: {
+        type: String,
+    },
     grantEligibility: {
         type: String
     },

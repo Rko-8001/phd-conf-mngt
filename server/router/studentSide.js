@@ -69,7 +69,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         financialSupport,
         advances, finances,
         coaa, coaba, cocba,
-        studentLeaveStarts, studentLeaveEnds } = req.body;
+        studentLeaveStarts, studentLeaveEnds, numberOfDays } = req.body;
 
     // console.log(email + " " + financialSupport + " " + coaa);
     // console.log(mobileNo + " " + bankAccountNo);
@@ -86,7 +86,8 @@ router.post('/studentApplicationSubmit', async (req, res) => {
                 financialSupport,
                 advances, finances,
                 coaa, coaba, cocba,
-                studentLeaveStarts, studentLeaveEnds
+                studentLeaveStarts, studentLeaveEnds,
+                numberOfDays
             });
         await data.save();
 

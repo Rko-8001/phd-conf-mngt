@@ -6,7 +6,7 @@ import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
 import { getUserToken } from '../../../components_login/Tokens';
-import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
+import { checkConfAndLeaveTime, checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
 
 
@@ -19,6 +19,7 @@ function FormInput() {
         venueOfConference: "",
         paperInConference: "",
         financialSupport: "",
+        numberOfDays: ""
     });
 
     const [dateStarts, setDateStarts] = useState(dayjs('2023-01-01'));
@@ -117,7 +118,7 @@ function FormInput() {
         }
         return true;
     }
-    
+
     const requestGrant = async (e) => {
         e.preventDefault();
 
@@ -139,6 +140,7 @@ function FormInput() {
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
         const finances = [...tableData];
+        const numberOfDays = conferenceInfo.numberOfDays;
 
 
         finances.push({
@@ -160,7 +162,10 @@ function FormInput() {
         });
 
 
-        if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
+        if (!checkData() ||
+            !checkConferenceTime(conferenceStarts, conferenceEnds) ||
+            !checkLeaveTime(leaveStarts, leaveEnds) ||
+            !checkConfAndLeaveTime(conferenceStarts, conferenceEnds, leaveStarts, leaveEnds)) {
             return;
         }
         const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
@@ -176,6 +181,7 @@ function FormInput() {
                 advances, finances,
                 conferenceStarts, conferenceEnds,
                 studentLeaveStarts, studentLeaveEnds,
+                numberOfDays
             })
         });
 
