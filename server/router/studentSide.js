@@ -1,6 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: "debg9ye95",
+    api_key: "412159183898988",
+    api_secret: "3brAt7NKIbPQY9rtvg0civZf5j0"
+  });
 
 
 // connection established
@@ -14,6 +21,7 @@ const AppData = require('../model/applicationData');
 
 
 const { genAppToken } = require('../tokens/generateToken');
+const fileUpload = require('express-fileupload')
 
 
 // credentials import
@@ -69,7 +77,9 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         financialSupport,
         advances, finances,
         coaa, coaba, cocba,
-        studentLeaveStarts, studentLeaveEnds } = req.body;
+        studentLeaveStarts, studentLeaveEnds, image} = req.body;
+        console.log("image is: "+image)
+        // const file = 
 
     // console.log(email + " " + financialSupport + " " + coaa);
     // console.log(mobileNo + " " + bankAccountNo);
@@ -86,7 +96,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
                 financialSupport,
                 advances, finances,
                 coaa, coaba, cocba,
-                studentLeaveStarts, studentLeaveEnds
+                studentLeaveStarts, studentLeaveEnds, image
             });
         await data.save();
 

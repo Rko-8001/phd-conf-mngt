@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 var cors = require('cors')
+const fileUpload = require('express-fileupload')
 
 app.use(cors())
 
@@ -16,6 +17,10 @@ require('./mongoDb/connection');
 const User = require('./model/userSchema');
 
 const PORT = process.env.PORT || 5000
+
+app.use(fileUpload({
+    useTempFiles:true
+}))
 
 // components Maintained
 app.use(express.json());
