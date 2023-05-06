@@ -52,7 +52,7 @@ export default function ResearchHome() {
         <>
           <div className='display-flex justify-center'>
             <Heading />
-            <div className='w-3/4 display-flex items-center'>
+            <div className='ml-10 pl-10 h-1/4 w-3/4 display-flex items-center'>
               <img src={img} />
               
 

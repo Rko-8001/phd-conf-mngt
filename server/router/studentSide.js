@@ -70,6 +70,12 @@ router.post('/studentInfoLoading', async (req, res) => {
 
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
+    const file = req.files.image;
+    console.log("printing here...");
+    cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
+        console.log("result here..");
+        console.log(result);
+    })
     const { email, status,
         mobileNo, bankAccountNo,
         nameOfConference, venueOfConference, paperInConference,
@@ -77,13 +83,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         financialSupport,
         advances, finances,
         coaa, coaba, cocba,
-        studentLeaveStarts, studentLeaveEnds } = req.body;
-
-    // console.log(email + " " + financialSupport + " " + coaa);
-    // console.log(mobileNo + " " + bankAccountNo);
-    // console.log(nameOfConference + " " + venueOfConference + " " + paperInConference);
-    // console.log(conferenceStarts + " " + conferenceEnds);
-    // console.log(studentLeaveStarts + " " + studentLeaveEnds);
+        studentLeaveStarts, studentLeaveEnds, image} = req.body;
     try {
         const data = new AppData(
             {
@@ -94,7 +94,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
                 financialSupport,
                 advances, finances,
                 coaa, coaba, cocba,
-                studentLeaveStarts, studentLeaveEnds
+                studentLeaveStarts, studentLeaveEnds, image
             });
         await data.save();
 
