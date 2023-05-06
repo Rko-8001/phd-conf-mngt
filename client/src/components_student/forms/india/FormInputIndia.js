@@ -6,30 +6,20 @@ import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
 import { getUserToken } from '../../../components_login/Tokens';
-import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
+import { checkConfAndLeaveTime, checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
 
 
 function FormInput() {
 
 
-    const [generalInfo, setGeneralInfo] = useState({
-        name: "",
-        mobileNo: "",
-        dept: "",
-        email: "",
-        entryNo: "",
-        bankAccNo: "",
-        doj: "",
-        fellowshipCat: "",
-        aos: "",
-        supervisor: ""
-    });
+    const [generalInfo, setGeneralInfo] = useState({});
     const [conferenceInfo, setConferenceInfo] = useState({
         nameOfConference: "",
         venueOfConference: "",
         paperInConference: "",
         financialSupport: "",
+        numberOfDays: ""
     });
 
     const [dateStarts, setDateStarts] = useState(dayjs('2023-01-01'));
@@ -124,13 +114,7 @@ function FormInput() {
         }));
     }
 
-    const setFetchData = ((name, value) => {
-        console.log("here2");
-        setGeneralInfo(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    })
+
 
     const checkData = () => {
         if (!checkConfDetails(conferenceInfo)) {
@@ -144,6 +128,7 @@ function FormInput() {
         }
         return true;
     }
+
     const requestGrant = async (e) => {
         e.preventDefault();
 
@@ -165,6 +150,7 @@ function FormInput() {
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
         const finances = [...tableData];
+        const numberOfDays = conferenceInfo.numberOfDays;
         const image = img;
         const ig = "adada";
 
@@ -188,7 +174,10 @@ function FormInput() {
         });
 
 
-        if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
+        if (!checkData() ||
+            !checkConferenceTime(conferenceStarts, conferenceEnds) ||
+            !checkLeaveTime(leaveStarts, leaveEnds) ||
+            !checkConfAndLeaveTime(conferenceStarts, conferenceEnds, leaveStarts, leaveEnds)) {
             return;
         }
         const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
@@ -204,6 +193,7 @@ function FormInput() {
                 financialSupport,
                 advances, finances,
                 conferenceStarts, conferenceEnds,
+                numberOfDays,
                 studentLeaveStarts, studentLeaveEnds, image
             })
         });
@@ -237,18 +227,10 @@ function FormInput() {
     }
 
     useEffect(() => {
-        getBasicInfo().then((resp) => {
-            console.log(resp);
-            setFetchData("name", resp.name);
-            setFetchData("entryNo", resp.entryNo);
-            setFetchData("dept", resp.department);
-            setFetchData("doj", resp.dateOfJoining);
-            setFetchData("fellowshipCat", resp.fellowshipCategory);
-            setFetchData("aos", resp.areaOfSpecialisation);
-            setFetchData("supervisor", resp.nameOfSupervisor);
-            setFetchData("email", resp.email);
+        getBasicInfo().then((data) => {
+            setGeneralInfo(data)
         }).catch((e) => {
-            // console.log(e.message)
+            console.log(e);
         });
     }, []);
 
@@ -271,6 +253,7 @@ function FormInput() {
                 </div>
             </div>
             <FormInputGenData
+                generalInfo={generalInfo}
                 getGeneralInfo={getGeneralInfo}
                 getConferenceInfo={getConferenceInfo}
                 dateStarts={dateStarts} setDateStarts={setDateStarts}
