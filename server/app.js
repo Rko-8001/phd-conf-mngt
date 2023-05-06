@@ -26,8 +26,8 @@ app.use(require('./router/researchSide'));
 app.use(require('./router/researchSide'));
 app.use(require('./router/facultySide'));
 app.use(require('./router/sharedFunctions'));
-app.use(require('./router/accountSide.js'))
-
+app.use(require('./router/accountSide.js'));
+app.use(require('./router/loginAuth'));
 
 
 app.get('/login', (req, res) => {

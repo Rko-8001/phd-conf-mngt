@@ -3,6 +3,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Switch } from '@headlessui/react'
+import { useState } from 'react';
 
 
 export default function InputData(props) {
@@ -15,6 +16,21 @@ export default function InputData(props) {
       </tr>
     );
   });
+  // const [image,setImage] = useState("");
+
+  // function convertToBase64(e) {
+  //   console.log(e)
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(e.target.files[0]);
+  //   reader.onload = () => {
+  //     console.log("The value of image:")
+  //     console.log(reader.result);
+  //     setImage(reader.result)
+  //   };
+  //   reader.onerror = error => {
+  //     console.log("Error: ", error);
+  //   };
+  // }
 
 
   return (
@@ -318,6 +334,19 @@ export default function InputData(props) {
                     <p className="text-gray-500"></p>
                   </div>
                 </div>
+                
+                <div className='auth-wrapper'>
+                  <div className='auth-inner' style={{width: "auto"}}>
+                    upload..
+                    <input
+                      accept='image/*'
+                      type='file'
+                      onChange={props.convertToBase64}
+                    />
+                  </div>
+                </div>
+
+                {props.img==""||props.img==null?"":<img width={100} height={100} src={props.img}/>}
 
                 <div className="relative flex gap-x-3">
 

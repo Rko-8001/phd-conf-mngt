@@ -37,7 +37,7 @@ import SideBar3 from './components/navBars/Sidebar3';
 
 
 import { StudentFormAbroad, StudentFormIndia, StudentFormOption, StudentHomePage, StudentProfile, StudentApplicationsPage, StudentSpecficApplication } from './routes/StudentComponent';
-
+import Footer from './components_student/Side/Footer';
 
 function App() {
 
@@ -64,6 +64,7 @@ function App() {
               <SideBar1 />
               <FacultyHome />
             </div>
+            <Footer/>
           </>} />
 
           <Route path='application' element={<>
@@ -72,11 +73,13 @@ function App() {
               <SideBar1 />
               <FacultyApplication />
             </div>
+            <Footer/>
           </>} />
 
           <Route path='studentApplication' element={<>
             <UpperNav />
             <ViewApplicationFaculty />
+            <Footer/>
           </>} />
         </Route>
 
@@ -88,6 +91,7 @@ function App() {
                 <SideBar2 />
                 <ResearchHome />
               </div>
+              <Footer/>
             </>} />
           <Route path="application" element={
             <>
@@ -104,6 +108,7 @@ function App() {
                 <SideBar2 />
                 <ResearchStudent />
               </div>
+              <Footer/>
             </>} />
           <Route path="faculty" element={
             <>
@@ -112,11 +117,13 @@ function App() {
                 <SideBar2 />
                 <ResearchFaculty />
               </div>
+              <Footer/>
             </>} />
           <Route path="studentApplication" element={
             <div class="min-h-screen w-full relative">
               <UpperNav />
               <ViewApplicationResearch />
+              <Footer/>
             </div>} />
         </Route>
 
@@ -129,6 +136,7 @@ function App() {
                 <SideBar3 />
                 <AccountHome />
               </div>
+              <Footer/>
             </>} />
           <Route path="application" element={
             <>
@@ -137,12 +145,14 @@ function App() {
                 <SideBar3 />
                 <AccountApplication />
               </div>
+              <Footer/>
             </>} />
 
           <Route path="studentApplication" element={
             <div class="min-h-screen w-full relative">
               <UpperNav />
               <ViewApplicationAccount />
+              <Footer/>
             </div>} />
         </Route>
 

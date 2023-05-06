@@ -34,16 +34,6 @@ const App = () => {
     }
   }
 
-  // const setNavStudent = () => {
-  //   setMenus([
-  //     { title: "Dashboard", src: Chart_fill, link: "/studentLogin" },
-  //     { title: "TBD", src: Chat, link: '/studentLogin' },
-  //     { title: "Applications", src: User, gap: true, link: "/studentLogin/application" },
-  //     { title: "Fill Form", src: Calendar, link: "/studentLogin/formFill" },
-  //     { title: "Logout ", src: Folder, gap: true, link: "logout" },
-  //   ])
-  // }
-
   return (
     <div className="flex">
       <div

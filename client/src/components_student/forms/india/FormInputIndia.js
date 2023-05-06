@@ -39,6 +39,7 @@ function FormInput() {
 
 
     const [advance, setAdvance] = useState(false);
+    const [img, setImg] = useState("");
     const dataInTable = [];
     const [tableData, setTableData] = useState(dataInTable);
     const [travel, setTravel] = useState(0);
@@ -51,6 +52,7 @@ function FormInput() {
         particular: "",
         amount: ""
     });
+
 
 
     const getFixedParts = ((e) => {
@@ -92,6 +94,20 @@ function FormInput() {
     const getAdvance = e => {
         console.log("aaya");
         setAdvance(!advance);
+    }
+
+    function convertToBase64(e) {
+        console.log(e)
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            console.log("The value of image:")
+            console.log(reader.result);
+            setImg(reader.result)
+        };
+        reader.onerror = error => {
+            console.log("Error: ", error);
+        };
     }
 
     const addRowData = (e) => {
@@ -139,6 +155,7 @@ function FormInput() {
 
 
         // save all data
+        const image = img;
         const email = generalInfo.email;
         const status = "0";
         const mobileNo = generalInfo.mobileNo;
@@ -155,6 +172,7 @@ function FormInput() {
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
         const finances = [...tableData];
+        // const image = image;
 
 
         finances.push({
@@ -191,7 +209,7 @@ function FormInput() {
                 financialSupport,
                 advances, finances,
                 conferenceStarts, conferenceEnds,
-                studentLeaveStarts, studentLeaveEnds,
+                studentLeaveStarts, studentLeaveEnds, image,
             })
         });
 
@@ -269,6 +287,8 @@ function FormInput() {
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay} registrationFee={registrationFee}
                 requestGrant={requestGrant}
+                img={img}
+                convertToBase64={convertToBase64}
             />
         </>
     )

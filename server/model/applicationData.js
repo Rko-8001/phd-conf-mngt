@@ -90,6 +90,9 @@ const applicationData = new mongoose.Schema({
     },
     lastModified: {
         type: String,
+    },
+    image: {
+        type: String,
     }
 },
     {
