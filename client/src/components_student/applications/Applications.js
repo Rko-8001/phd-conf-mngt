@@ -7,6 +7,12 @@ import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
 
 const data = [];
+const data1 = {
+  john: { id: 1, age: 35 },
+  jane: { id: 2, age: 28 },
+  bob: { id: 3, age: 42 },
+  alice: { id: 4, age: 31 },
+};
 function Application() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -14,6 +20,18 @@ function Application() {
   const [apps2, setApps2] = useState(data);
   const [st, setSt] = useState(1);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // const filteredData = Object.keys(data1).reduce((acc, key) => {
+  //   if (data1[key].name.toLowerCase().includes(searchQuery.toLowerCase())) {
+  //     acc[key] = data1[key];
+  //   }
+  //   return acc;
+  // }, {});
+
+  function handleSearchInputChange(event) {
+    setSearchQuery(event.target.value);
+  }
 
   const tabs = [
     { label: 'Time', content: 'Applications are being displayed based on Time of the conference.' },
@@ -22,13 +40,13 @@ function Application() {
   ];
   function handleTabClick(index) {
     setActiveTabIndex(index);
-    if(index===0){
+    if (index === 0) {
       apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
     }
-    else if(index===1){
+    else if (index === 1) {
       apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
     }
-    else if(index===2){
+    else if (index === 2) {
       apps.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
     }
   }
@@ -240,6 +258,17 @@ function Application() {
         </Container>
         :
         <Container>
+          {/* <div>
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={handleSearchInputChange}
+            />
+            {Object.keys(filteredData).map((key) => (
+              <div key={filteredData[key].id}>{filteredData[key].name}</div>
+            ))}
+          </div> */}
           <div className="my-2 max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
             <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
               <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1>

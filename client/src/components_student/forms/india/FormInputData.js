@@ -14,6 +14,23 @@ import { useState } from 'react';
 export default function InputData(props) {
 
   const [alert, setAlert] = useState(true);
+  const [image1, setImage1] = useState(null);
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
+
+  const handleImageUpload1 = (event) => {
+    const file = event.target.files[0];
+    setImage1(URL.createObjectURL(file));
+  };
+  const handleImageUpload2 = (event) => {
+    const file = event.target.files[0];
+    setImage2(URL.createObjectURL(file));
+  };
+  const handleImageUpload3 = (event) => {
+    const file = event.target.files[0];
+    setImage3(URL.createObjectURL(file));
+  };
+
   function fileFunction() {
     console.log("hi");
   }
@@ -156,19 +173,22 @@ export default function InputData(props) {
 
                 <Enclosures
                   title="Copy of Acceptance"
-                  onChangeFunction={fileFunction}
+                  onChangeFunction={handleImageUpload1}
                   type="file"
                 />
+                {image1 && <img src={image1} alt="Uploaded Image" className="mt-4 max-w-xs max-h-xs"/>}
                 <Enclosures
                   title="Copy of Conference Brochure"
-                  onChangeFunction={props.handleSetImage}
+                  onChangeFunction={handleImageUpload2}
                   type="file"
                 />
+                {image2 && <img src={image2} alt="Uploaded Image" className="mt-4 max-w-xs max-h-xs"/>}
                 <Enclosures
                   title="Copy of Abstract"
-                  onChangeFunction={fileFunction}
+                  onChangeFunction={handleImageUpload3}
                   type="file"
                 />
+                {image3 && <img src={image3} alt="Uploaded Image" className="mt-4 max-w-xs max-h-xs"/>}
 
 
               </div>
