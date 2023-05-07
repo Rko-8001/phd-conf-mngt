@@ -51,7 +51,7 @@ function Team() {
               Meet Our Team
             </h2>
             <p className="text-gray-600 text-center dark:text-gray-300 lg:mx-auto lg:w-5/12">
-              Here is our team, comprising Members with diverse skills and experiences each of their's contribution made this site possible
+              We are thankful to IIT Ropar for giving us this wonderful opportunity. We would also like to thank our mentor Dr Puneet Goyal for guiding us throughout and giving us regular feedback.
             </p>
             <div className='abc'>
 
@@ -75,7 +75,10 @@ function Team() {
               </div>
             </div>
           </div>
-          <div className="grid gap-6 px-4 sm:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <p className="text-gray-600 text-center dark:text-gray-300 lg:mx-auto lg:w-5/12">
+              Here is our team, comprising Members with diverse skills and experiences each of their's contribution made this site possible
+            </p>
+          <div className="my-5 grid gap-6 px-4 sm:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
