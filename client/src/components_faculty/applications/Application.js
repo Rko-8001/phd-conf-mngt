@@ -78,6 +78,8 @@ export default function FacultyApplication() {
             return "Pending Research Section Approval";
         else if (code === "3")
             return "Pending Account Section Approval";
+        else if (code === "4")
+            return "Pending Dean Approval";
         else
             return "Application Approved";
     }

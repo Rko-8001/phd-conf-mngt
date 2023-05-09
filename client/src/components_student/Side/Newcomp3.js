@@ -5,7 +5,7 @@ const Newcomp3 = () => {
         <div>
             <section class="bg-white dark:bg-gray-900">
                 <div class="container px-6 py-10 mx-auto">
-                    <h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">Welcome to <br />  <span class="underline decoration-blue-500">Student Portal</span></h1>
+                    {/* <h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">Welcome to <br />  <span class="underline decoration-blue-500">Student Portal</span></h1> */}
 
                     <p class="mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">
                         Please Check here your recent applications and their status
@@ -19,7 +19,7 @@ const Newcomp3 = () => {
                                 </svg>
                             </span>
 
-                            <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Easy to customiztions</h1>
+                            <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Check Your Archived Applications here</h1>
 
                             <p class="text-gray-500 dark:text-gray-300">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet

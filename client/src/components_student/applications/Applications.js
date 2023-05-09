@@ -106,9 +106,13 @@ function Application() {
     if (code === "0")
       return "Pending Faculty Approval";
     else if (code === "1")
-      return "Pending Research Section Approval";
+      return "Pending Hod Section Approval";
     else if (code === "2")
+      return "Pending Research Section Approval";
+    else if (code === "3")
       return "Pending Account Section Approval";
+    else if (code === "4")
+      return "Pending Dean Approval";
     else
       return "Application Approved";
   }

@@ -6,6 +6,7 @@ import LoaderCard from '../../components/loading/LoaderCard';
 import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
+import { FaPaperPlane } from 'react-icons/fa';
 
 const data = [];
 
@@ -106,9 +107,13 @@ function ApplicationsHome() {
         if (code === "0")
             return "Pending Faculty Approval";
         else if (code === "1")
-            return "Pending Research Section Approval";
+            return "Pending Hod Section Approval";
         else if (code === "2")
+            return "Pending Research Section Approval";
+        else if (code === "3")
             return "Pending Account Section Approval";
+        else if (code === "4")
+            return "Pending Dean Approval";
         else
             return "Application Approved";
     }
@@ -172,34 +177,38 @@ function ApplicationsHome() {
     const renderApps1 = apps.map((item, index) =>
         <>
             <div key={index}>
-                <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
-                    <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
-                        {getStatus(item.status)}
+                <section class="bg-white dark:bg-gray-900">
+                    <div class="">
+                        <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">{item.nameOfConference}</h2>
+                        <p class="mb-4 text-xl font-extrabold leading-none text-gray-900 md:text-2xl dark:text-white"></p>
+                        <dl>
+                            <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">{getStatus(item.status)}</dt>
+                            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Venue: {item.venueOfConference}</dd>
+                            <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Amount Needed: {getFinances(item.finances)} Rs</dd>
+                        </dl>
+                        <dl class="flex items-center space-x-6">
+                            <div>
+                                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Submission status</dt>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{getDays(item.createdAt)}</dd>
+                            </div>
+                            <div>
+                                <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt>
+                                <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">India</dd>
+                            </div>
+                        </dl>
+                        <div class="pb-4 flex items-center space-x-4">
+                            <button type="button" class="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                <svg aria-hidden="true" class="mr-1 -ml-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                Edit
+                            </button>
+                            <button type="button" name={item._id}
+                                onClick={viewSpecficApplication} class="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                <FaPaperPlane style={{ marginRight: '0.5rem' }} />
+                                View Full Application
+                            </button>
+                        </div>
                     </div>
-                    <div className="p-4">
-                        <h5
-                            className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                            {item.nameOfConference}
-                        </h5>
-                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Amount Needed: {getFinances(item.finances)} Rs
-                        </p>
-                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
-                            Venue: {item.venueOfConference}
-                        </p>
-                    </div>
-                    <button
-                        name={item._id}
-                        onClick={viewSpecficApplication}
-                        className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        View Full Application
-                    </button>
-                    <div
-                        className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-                        {getDays(item.createdAt)}
-                    </div>
-                </div>
+                </section>
 
             </div>
 
@@ -209,6 +218,7 @@ function ApplicationsHome() {
     const renderApps2 = apps2.map((item, index) =>
         <>
             <div key={index}>
+
                 <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
                     <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-gray-600 dark:text-neutral-50">
                         {getStatus(item.status)}
@@ -254,28 +264,6 @@ function ApplicationsHome() {
                 </Container>
                 :
                 <Container>
-                    {/* <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
-                        <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
-                            <span style={{ display: 'flex', alignItems: 'center' }}>
-                                <FaSort color="red" style={{ marginRight: '0.5rem' }} />
-                                <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
-                            </span>
-                            <div className="flex">
-                                {tabs.map((tab, index) => (
-                                    <button
-                                        key={tab.label}
-                                        className={`mx-2 py-1 px-4 rounded-lg font-medium ${index === activeTabIndex ? 'bg-gray-400 text-white' : 'bg-gray-200 text-gray-600'
-                                            }`}
-                                        onClick={() => handleTabClick(index)}
-                                    >
-                                        {tab.label}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="p-2">
-                        </div>
-                    </div> */}
                     <div class="my-3 flex flex-wrap justify-center gap-4">
                         {apps && renderApps1}
 
