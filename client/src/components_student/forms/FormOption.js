@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IoMdFlag } from 'react-icons/io';
+import Flag from 'react-world-flags'
 import { FaGlobe } from 'react-icons/fa';
 
 const formOptions = [
@@ -68,7 +68,7 @@ export default function FormOption() {
                                         >
                                             {post.category.title}
                                         </div>
-                                            {post.title==='Wanna Attend within India?'?<IoMdFlag color="#FF9933" size={32} />:<FaGlobe color="green" size={32} />}
+                                            {post.title==='Wanna Attend within India?'?<Flag className='h-8 w-auto' code='IN'/>:<FaGlobe color="green" size={32} />}
                                     </div>
                                     <div className="group relative">
                                         <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
