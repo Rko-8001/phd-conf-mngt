@@ -5,6 +5,7 @@ import LoaderCard from '../../components/loading/LoaderCard';
 import { Container } from '@mui/material';
 import { delay } from '../../components/loading/Delay';
 import { BASE_URL } from '../../components/requests/URL';
+import { FaSort } from 'react-icons/fa';
 
 const data = [];
 export default function FacultyApplication() {
@@ -70,15 +71,15 @@ export default function FacultyApplication() {
 
     const getStatus = (code) => {
         if (code === "0")
-      return "Pending Faculty Approval";
-    else if (code === "1")
-      return "Pending Hod Section Approval";
-    else if (code === "2")
-      return "Pending Research Section Approval";
-    else if (code === "3")
-      return "Pending Account Section Approval";
-    else
-      return "Application Approved";
+            return "Pending Faculty Approval";
+        else if (code === "1")
+            return "Pending Hod Section Approval";
+        else if (code === "2")
+            return "Pending Research Section Approval";
+        else if (code === "3")
+            return "Pending Account Section Approval";
+        else
+            return "Application Approved";
     }
 
     const getDays = (subDate) => {
@@ -162,7 +163,7 @@ export default function FacultyApplication() {
                         onClick={viewSpecficApplication}
                         className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
-                        Vew Full Application
+                        View Full Application
                     </button>
                     <div
                         className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
@@ -185,9 +186,14 @@ export default function FacultyApplication() {
                 </Container>
                 :
                 <Container>
-                    <div className="my-2 max-w-md mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+
+                    <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
                         <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
-                            <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1>
+                            <span style={{ display: 'flex', alignItems: 'center' }}>
+                                <FaSort color="red" style={{ marginRight: '0.5rem' }} />
+                                <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
+                            </span>
+                            {/* <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1> */}
                             <div className="flex">
                                 {tabs.map((tab, index) => (
                                     <button
@@ -201,8 +207,8 @@ export default function FacultyApplication() {
                                 ))}
                             </div>
                         </div>
-                        <div className="p-4">
-                            <p className="text-gray-700">{tabs[activeTabIndex].content}</p>
+                        <div className="p-2">
+                            {/* <p className="text-gray-700">{tabs[activeTabIndex].content}</p> */}
                         </div>
                     </div>
                     <div class="my-3 flex flex-wrap justify-center gap-4">
