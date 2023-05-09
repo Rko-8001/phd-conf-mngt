@@ -1,5 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoMdFlag } from 'react-icons/io';
+import { FaGlobe } from 'react-icons/fa';
 
 const formOptions = [
     {
@@ -20,6 +22,7 @@ const formOptions = [
             "If you want to attend the conference within india, You need to fill this application form with supporting doucment attached. First Time, Please refer to User Guide. ",
         category: { title: 'Application', href: '#' },
         function: "goIndia"
+        // <IoMdFlag color="#FF9933" size={32} />
 
     },
 ]
@@ -59,12 +62,13 @@ export default function FormOption() {
                                 }
                             }} className=" tracking-wide  transition-colors duration-300 transform  rounded-lg hover:bg-gray-50 focus:outline-none focus:ring focus:ring-gray-100 focus:ring-opacity-80">
 
-                                <article key={post.id} className="flex max-w-xl flex-col items-start justify-between">
+                                <article key={post.id} className="mx-2 flex max-w-xl flex-col items-start justify-between">
                                     <div className="flex items-center gap-x-4 text-xs">
                                         <div className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                                         >
                                             {post.category.title}
                                         </div>
+                                            {post.title==='Wanna Attend within India?'?<IoMdFlag color="#FF9933" size={32} />:<FaGlobe color="green" size={32} />}
                                     </div>
                                     <div className="group relative">
                                         <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
