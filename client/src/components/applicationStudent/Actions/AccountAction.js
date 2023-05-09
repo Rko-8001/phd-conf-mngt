@@ -40,7 +40,7 @@ export default function AccountAction({ user, data }) {
         if (!disable) {
             setDisable(true);
             setAction("Rejecting")
-            updateStatus("-3");
+            updateStatus("-4");
         }
     }
 
@@ -50,7 +50,7 @@ export default function AccountAction({ user, data }) {
         if (!disable) {
             setDisable(true);
             setAction("Approving")
-            updateStatus("3");
+            updateStatus("4");
         }
     }
 

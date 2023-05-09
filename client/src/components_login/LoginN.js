@@ -106,9 +106,12 @@ function Login() {
                 navigate('/facultyLogin');
             }
             else if (role === "2") {
-                navigate('/researchLogin');
+                navigate('/hodLogin');
             }
             else if (role === "3") {
+                navigate('/researchLogin');
+            }
+            else if (role === "4") {
                 navigate('/accountLogin');
             }
             else {

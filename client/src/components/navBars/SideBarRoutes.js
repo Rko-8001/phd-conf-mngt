@@ -39,3 +39,17 @@ export const AccountSideBar = [
     { title: "Settlement", src: User, gap: false, link: "/accountLogin/" },
     { title: "Logout ", src: Folder, gap: true, link: "logout" },
 ];
+
+export const HodSideBar = [
+    { title: "Dashboard", src: Chart_fill, link: "/hodLogin" },
+    { title: "TBD", src: Chat, link: '/hodLogin' },
+    { title: "Applications", src: User, gap: true, link: "/hodLogin/application" },
+    { title: "Logout ", src: Folder, gap: true, link: "logout" },
+];
+
+export const DeanSideBar = [
+    { title: "Dashboard", src: Chart_fill, link: "/deanLogin" },
+    { title: "TBD", src: Chat, link: '/deanLogin' },
+    { title: "Applications", src: User, gap: true, link: "/deanLogin/application" },
+    { title: "Logout ", src: Folder, gap: true, link: "logout" },
+];

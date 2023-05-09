@@ -44,7 +44,7 @@ router.post('/researchApproveOrDisapprove', async (req, res) => {
         const userEmail = decode.email;
 
         const appData = await AppData.findById(id);
-        if (appData.status !== "1")
+        if (appData.status !== "2")
             return res.status(422).json("Can't Approve Or Disapprove..");
 
         await AppData.findByIdAndUpdate(id, {

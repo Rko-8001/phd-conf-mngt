@@ -4,7 +4,7 @@ import arrow from './assets/control.png'
 
 import { getroleToken, removeAppToken, removeUserToken, removeroleToken } from '../../components_login/Tokens';
 import { useNavigate } from 'react-router-dom';
-import { AccountSideBar, FacultySideBar, ResarchSideBar, StudentSideBar } from './SideBarRoutes';
+import { AccountSideBar, FacultySideBar, ResarchSideBar, StudentSideBar, DeanSideBar, HodSideBar } from './SideBarRoutes';
 
 
 const App = () => {
@@ -19,10 +19,14 @@ const App = () => {
       setMenu(StudentSideBar);
     else if (role === "1")
       setMenu(FacultySideBar);
-    else if (role === "2")
-      setMenu(ResarchSideBar);
+    else if (role === '2')
+      setMenu(HodSideBar);
     else if (role === "3")
+      setMenu(ResarchSideBar);
+    else if (role === "4")
       setMenu(AccountSideBar);
+    else if (role === '5')
+      setMenu(DeanSideBar);
 
   }, [])
 
@@ -34,10 +38,15 @@ const App = () => {
     else if (role === "1")
       return "Supervisor";
     else if (role === "2")
-      return "Research Section";
+      return "Hod";
     else if (role === "3")
+      return "Research Section";
+    else if (role === "4")
       return "Account Section";
+    else if (role === "5")
+      return "Dean"
     else {
+
     }
 
   }

@@ -98,7 +98,7 @@ export default function ViewApplicationResearch() {
 
             </div>
 
-            <ApplicationData data={data} user={applicantInfo} role="2" />
+            <ApplicationData data={data} user={applicantInfo} role="3" />
           </Container>
         </>}
     </>

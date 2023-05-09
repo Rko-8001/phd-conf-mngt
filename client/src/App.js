@@ -19,6 +19,11 @@ import FacultyHome from './components_faculty/mainPage/FacultyHome';
 import FacultyApplication from './components_faculty/applications/Application';
 import ViewApplicationFaculty from './components_faculty/applications/ViewApplication';
 
+//                  HOD side Components
+import HodHome from './components_hod/mainPage/HodHome';
+import HodApplication from './components_hod/applications/Application';
+import ViewApplicationHod from './components_hod/applications/ViewApplication';
+
 //                  Research Section Components 
 import ResearchHome from './components_research//mainPage/ResearchHome';
 import ResearchApplication from './components_research/applications/Application';
@@ -77,6 +82,31 @@ function App() {
             <UpperNav />
             <ViewApplicationFaculty />
             <Footer/>
+          </>} />
+        </Route>
+        <Route path='/hodLogin'>
+          <Route index element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <HodHome />
+            </div>
+            <Footer />
+          </>} />
+
+          <Route path='application' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <HodApplication />
+            </div>
+            <Footer />
+          </>} />
+
+          <Route path='studentApplication' element={<>
+            <UpperNav />
+            <ViewApplicationHod />
+            <Footer />
           </>} />
         </Route>
 

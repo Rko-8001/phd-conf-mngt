@@ -30,7 +30,7 @@ export default function ResearchAction({ data }) {
     if (!disable) {
       setDisable(true);
       setAction("Rejecting")
-      updateStatus("-2");
+      updateStatus("-3");
     }
   }
 
@@ -40,7 +40,7 @@ export default function ResearchAction({ data }) {
     if (!disable) {
       setDisable(true);
       setAction("Approving")
-      updateStatus("2");
+      updateStatus("3");
     }
   }
 
