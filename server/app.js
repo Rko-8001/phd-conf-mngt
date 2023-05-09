@@ -34,7 +34,7 @@ app.use(require('./router/sharedFunctions'));
 app.use(require('./router/accountSide.js'));
 app.use(require('./router/loginAuth'));
 app.use(require('./router/hodSide'));
-// app.use(require('./router/deanSide'));
+app.use(require('./router/deanSide'));
 
 
 app.get('/login', (req, res) => {

@@ -11,6 +11,8 @@ import FacultyDetails from './Tabs/FacultyDetails'
 import ResearchSection from './Tabs/ResearchSection';
 import AccountSection from './Tabs/AccountSection';
 import HodDetails from './Tabs/HodDetails';
+import DeanDetails from './Tabs/DeanDetails';
+import DeanAction from './Actions/DeanAction';
 
 import ResearchAction from './Actions/ResearchAction';
 import FacultyAction from './Actions/FacultyAction';
@@ -61,12 +63,17 @@ function ApplicationData({ data, user, role }) {
                             {(showClass(data.status, "3") || showClass(data.status, "4")) &&
                                 <Tab value="research section approved" label="Research Section" />
                             }
-
                             {(showClass(data.status, "3") && role === "4") &&
                                 <Tab value="account section approval" label="Take Action" />
                             }
                             {(showClass(data.status, "4") || showClass(data.status, "5")) &&
                                 <Tab value="account section approved" label="Account Section" />
+                            }
+                            {(showClass(data.status, "4") && role === "5") &&
+                                <Tab value="Dean approval" label="Take Action" />
+                            }
+                            {(showClass(data.status, "5") || showClass(data.status, "6")) &&
+                                <Tab value="Dean approved" label="Dean" />
                             }
 
                         </TabList>
@@ -112,6 +119,14 @@ function ApplicationData({ data, user, role }) {
 
                     <TabPanel value="account section approved">
                         <AccountSection data={data} />
+                    </TabPanel>
+
+                    <TabPanel value="Dean approval">
+                        <DeanAction data={data} user={user} />
+                    </TabPanel>
+
+                    <TabPanel value="Dean approved">
+                        <DeanDetails data={data} />
                     </TabPanel>
                 </TabContext >
             </Box >

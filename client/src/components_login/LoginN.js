@@ -114,6 +114,9 @@ function Login() {
             else if (role === "4") {
                 navigate('/accountLogin');
             }
+            else if (role === "5") {
+                navigate('/deanLogin');
+            }
             else {
             }
         }

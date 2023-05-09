@@ -37,6 +37,10 @@ import AccountHome from './components_account/mainPage/Home';
 import AccountApplication from './components_account/applications/Application';
 import ViewApplicationAccount from './components_account/applications/ViewApplication';
 
+//                Dean Components
+import DeanHome from './components_dean/mainPage/DeanHome';
+import DeanApplication from './components_dean/applications/Application';
+import ViewApplicationDean from './components_dean/applications/ViewApplication';
 
 import { StudentFormAbroad, StudentFormIndia, StudentFormOption, StudentHomePage, StudentProfile, StudentApplicationsPage, StudentSpecficApplication } from './routes/StudentComponent';
 import Footer from './components_student/Side/Footer';
@@ -66,7 +70,7 @@ function App() {
               <SideBar />
               <FacultyHome />
             </div>
-            <Footer/>
+            <Footer />
           </>} />
 
           <Route path='application' element={<>
@@ -75,13 +79,13 @@ function App() {
               <SideBar />
               <FacultyApplication />
             </div>
-            <Footer/>
+            <Footer />
           </>} />
 
           <Route path='studentApplication' element={<>
             <UpperNav />
             <ViewApplicationFaculty />
-            <Footer/>
+            <Footer />
           </>} />
         </Route>
         <Route path='/hodLogin'>
@@ -118,7 +122,7 @@ function App() {
                 <SideBar />
                 <ResearchHome />
               </div>
-              <Footer/>
+              <Footer />
             </>} />
           <Route path="application" element={
             <>
@@ -135,7 +139,7 @@ function App() {
                 <SideBar />
                 <ResearchStudent />
               </div>
-              <Footer/>
+              <Footer />
             </>} />
           <Route path="faculty" element={
             <>
@@ -144,13 +148,13 @@ function App() {
                 <SideBar />
                 <ResearchFaculty />
               </div>
-              <Footer/>
+              <Footer />
             </>} />
           <Route path="studentApplication" element={
             <div class="min-h-screen w-full relative">
               <UpperNav />
               <ViewApplicationResearch />
-              <Footer/>
+              <Footer />
             </div>} />
         </Route>
 
@@ -163,7 +167,7 @@ function App() {
                 <SideBar />
                 <AccountHome />
               </div>
-              <Footer/>
+              <Footer />
             </>} />
           <Route path="application" element={
             <>
@@ -172,15 +176,41 @@ function App() {
                 <SideBar />
                 <AccountApplication />
               </div>
-              <Footer/>
+              <Footer />
             </>} />
 
           <Route path="studentApplication" element={
             <div class="min-h-screen w-full relative">
               <UpperNav />
               <ViewApplicationAccount />
-              <Footer/>
+              <Footer />
             </div>} />
+        </Route>
+
+        <Route path='/deanLogin'>
+          <Route index element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <DeanHome />
+            </div>
+            <Footer />
+          </>} />
+
+          <Route path='application' element={<>
+            <UpperNav />
+            <div className='flex'>
+              <SideBar />
+              <DeanApplication />
+            </div>
+            <Footer />
+          </>} />
+
+          <Route path='studentApplication' element={<>
+            <UpperNav />
+            <ViewApplicationDean />
+            <Footer />
+          </>} />
         </Route>
 
 
