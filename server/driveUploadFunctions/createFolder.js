@@ -1,25 +1,31 @@
-const {google} = require('googleapis');
+const { google } = require('googleapis');
 const express = require("express");
 const router = express.Router();
 const clientDrive = require('./configDriveClient');
 
 
 // function for creating a folder in google drive
-async function createDriveFolder(folderName, parentId){
-    const drive = clientDrive();
+// pass parentId for nested folders and null for root folder
+async function createDriveFolder(folderName, parentId) {
+    try {
 
-    const fileMetadata = {
-        'name': folderName,
-        'mimeType': 'application/vnd.google-apps.folder',
-        'parents': [parentId]
-    };
+        const drive = clientDrive();
 
-    const res = await drive.files.create({
-        resource: fileMetadata,
-        fields: 'id'
-    });
+        const fileMetadata = {
+            'name': folderName,
+            'mimeType': 'application/vnd.google-apps.folder',
+            'parents': [parentId]
+        };
 
-    return res.data.id;
+        const res = await drive.files.create({
+            resource: fileMetadata,
+            fields: 'id'
+        });
+
+        return res.data.id;
+    } catch (error) {
+        return false;
+    }
 }
 
 module.exports = createDriveFolder;

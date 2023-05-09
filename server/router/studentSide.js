@@ -125,7 +125,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         coaa, coaba, cocba,
         studentLeaveStarts, studentLeaveEnds, numberOfDays, image } = req.body;
 
-    console.log("Hiiii");
+    // console.log("Hiiii");
     console.log("Image:" + image);
     // console.log(email + " " + financialSupport + " " + coaa);
     // console.log(mobileNo + " " + bankAccountNo);

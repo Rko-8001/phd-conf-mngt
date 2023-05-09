@@ -10,6 +10,8 @@ require('../mongoDb/connection');
 // requiring user Schema                
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
+const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
+const createDriveFolder = require('../driveUploadFunctions/createFolder');
 
 // credentials import
 require('dotenv').config();
@@ -89,22 +91,39 @@ router.post("/addStudent", async (req, res) => {
         var areaOfSpecialisation = student.areaOfSpecialisation;
         var nameOfSupervisor = student.nameOfSupervisor;
         var emailOfSuperVisor = student.emailOfSuperVisor;
+        var mobileNo = student.mobileNo;
         var role = "0";
         var mssg = "";
         try {
             const user = await User.findOne({ email: email });
             if (user) {
+                // await User.findOneAndDelete({email:email});
                 mssg = "Already Exist..";
             }
             else {
                 const newUser = new User({
                     name, email, entryNo, dateOfJoining,
                     department, fellowshipCategory, areaOfSpecialisation,
-                    nameOfSupervisor, emailOfSuperVisor, role
+                    nameOfSupervisor, emailOfSuperVisor, role, mobileNo
                 });
-                await newUser.save();
-                mssg = "user added.";
+                const parentId = await searchDriveFolder(department);
+                // console.log(parentId);
 
+                var folderCreatedOrNot = 0;
+                while (folderCreatedOrNot <= 10) {
+                    const res = await createDriveFolder(entryNo, parentId);
+                    if (res)
+                        break;
+                    else
+                        folderCreatedOrNot++;
+                }
+                if (folderCreatedOrNot > 10) {
+                    mssg = "Error Occured creating Drive Folder..";
+                }
+                else {
+                    await newUser.save();
+                    mssg = "user added.";
+                }
 
             }
         } catch (error) {
@@ -114,6 +133,8 @@ router.post("/addStudent", async (req, res) => {
         updates.push({
             "name": name,
             "email": email,
+            "department": department,
+            "entryNo": entryNo,
             "remarks": mssg,
         })
     }

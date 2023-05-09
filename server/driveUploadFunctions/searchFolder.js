@@ -8,7 +8,7 @@ const router = express.Router();
 const clientDrive = require('./configDriveClient');
 
 // for searching a folder in google drive
-async function searchDriveFolder (folderName){
+async function searchDriveFolder(folderName) {
     const drive = clientDrive();
 
     const res = await drive.files.list({
@@ -16,8 +16,8 @@ async function searchDriveFolder (folderName){
         fields: 'files(id, name)',
         spaces: 'drive'
     });
-    console.log(res.data.files);
-    return res.data.files;
+    // console.log(res.data.files[0]);
+    return res.data.files[0].id;
 }
 
 module.exports = searchDriveFolder;
