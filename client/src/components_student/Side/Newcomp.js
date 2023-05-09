@@ -90,11 +90,11 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 const handleClick = (event) => {
   event.preventDefault();
-  window.open("https://academicworldresearch.org/scientific-event.php?search=India&gclid=CjwKCAjwiOCgBhAgEiwAjv5whKNwi_2bkEyG7Zu5fGOvMtfXcAyntR8Ie6R9ORlBp-lVJEilcO7E4xoCHvQQAvD_BwE", '_blank');
+  window.open("https://icssr.org/", '_blank');
 };
 const handleClick2 = (event) => {
   event.preventDefault();
-  window.open("https://www.questjournals.org/?gclid=CjwKCAjwiOCgBhAgEiwAjv5whCKYIZ3yFIVptDRFlFJqiEXA1yowIcm7z_LLwBkdwhGnaWnxRqoJNhoC7BkQAvD_BwE");
+  window.open("https://nij.ojp.gov/events/conference");
 };
 export default function ButtonBases() {
   return (

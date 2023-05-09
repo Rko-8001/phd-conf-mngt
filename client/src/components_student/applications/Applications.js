@@ -8,12 +8,7 @@ import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
 
 const data = [];
-const data1 = {
-  john: { id: 1, age: 35 },
-  jane: { id: 2, age: 28 },
-  bob: { id: 3, age: 42 },
-  alice: { id: 4, age: 31 },
-};
+
 function Application() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
