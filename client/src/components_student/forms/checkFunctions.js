@@ -59,3 +59,21 @@ export function checkConfAndLeaveTime(sc, ec, sl, el) {
     return false;
 
 }
+
+export function checkEnclosures(enclosures) {
+    if (enclosures.copyOfAcceptance === null && enclosures.copyOfAcceptance === undefined) {
+        window.alert("Please attached given enclosures")
+        return false;
+    }
+    if (enclosures.copyOfAbstract === null && enclosures.copyOfAbstract === undefined) {
+
+        window.alert("Please attached given enclosures")
+        return false;
+    }
+    if (enclosures.copyOfConferenceBrochure === null && enclosures.copyOfConferenceBrochure === undefined) {
+        window.alert("Please attached given enclosures")
+        return false;
+    }
+
+    return true;
+}

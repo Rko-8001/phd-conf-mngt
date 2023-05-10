@@ -14,6 +14,12 @@ export default function ApplicationMainPage({ role, goBack }) {
     const [data, setData] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [applicantInfo, setApplicantInfo] = useState();
+    const [links, setLinks] = useState({
+        abstractUrl: "",
+        acceptanceUrl: "",
+        conferenceBrochureUrl: ""
+    });
+
 
     const handlePrint = useReactToPrint({
         content: () => componentRef.current,
@@ -33,15 +39,32 @@ export default function ApplicationMainPage({ role, goBack }) {
             return resp.json();
         } catch (error) {
             console.log(error);
+            return null
         }
+    }
+
+    function getlinks(name, value) {
+
+        setLinks(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     }
 
     useEffect(() => {
         getBasicInfo().then((resp) => {
-            setData(resp.data);
-            setApplicantInfo(resp.applicantInfo)
-            setIsLoading(false);
+            if (resp !== null) {
 
+                setData(resp.data);
+                setApplicantInfo(resp.applicantInfo)
+                getlinks("abstractUrl", resp.abstractUrl);
+                getlinks("acceptanceUrl", resp.acceptanceUrl);
+                getlinks("conferenceBrochureUrl", resp.conferenceBrochureUrl);
+                setIsLoading(false);
+            }
+            else {
+                window.alert("Internal Server Error Occured! Please refresh the page.");
+            }
         }).catch((e) => {
             console.log(e.message)
         });
@@ -89,13 +112,12 @@ export default function ApplicationMainPage({ role, goBack }) {
                             </div>
                         </div>
 
-                        <ApplicationData data={data} user={applicantInfo} role={role} />
+                        <ApplicationData data={data} user={applicantInfo} role={role} links={links} />
                         <div className='hidden'>
                             <div ref={componentRef} >
                                 <FormPrint data={data} user={applicantInfo} />
                             </div>
                         </div>
-
 
                     </Container>
                 </>

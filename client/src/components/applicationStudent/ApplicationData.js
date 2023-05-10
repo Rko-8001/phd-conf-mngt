@@ -19,7 +19,7 @@ import FacultyAction from './Actions/FacultyAction';
 import AccountAction from './Actions/AccountAction';
 import HodAction from './Actions/HodAction';
 
-function ApplicationData({ data, user, role }) {
+function ApplicationData({ data, user, role, links }) {
     const [value, setValue] = useState("personal details");
 
 
@@ -84,7 +84,7 @@ function ApplicationData({ data, user, role }) {
                     </TabPanel>
 
                     <TabPanel value="conference details">
-                        <ConferenceDetails user={user} data={data} />
+                        <ConferenceDetails user={user} data={data} links={links} />
                     </TabPanel>
 
                     <TabPanel value="finance details">

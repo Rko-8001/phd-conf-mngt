@@ -6,7 +6,7 @@ import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
 
 import { getUserToken } from '../../../components_login/Tokens';
-import { checkConfAndLeaveTime, checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
+import { checkConfAndLeaveTime, checkConfDetails, checkConferenceTime, checkEnclosures, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
 
 
@@ -195,12 +195,13 @@ function FormInput() {
         formData.append("copyOfConferenceBrochure", enclosures.copyOfConferenceBrochure);
         formData.append("copyOfAbstract", enclosures.copyOfAbstract);
 
-
+        console.log(enclosures);
         // checking all data entered
         if (!checkData() ||
             !checkConferenceTime(formData.conferenceStarts, formData.conferenceEnds) ||
             !checkLeaveTime(leaveStarts, leaveEnds) ||
-            !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds)) {
+            !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds)
+            || !checkEnclosures(enclosures)) {
             return;
         }
 
