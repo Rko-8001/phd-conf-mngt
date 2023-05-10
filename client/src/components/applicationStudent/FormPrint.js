@@ -33,7 +33,7 @@ function FormPrint({ data, user }) {
     </TableRow>
   ));
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
   return (
     <div>
       <Paper className="item-center">
@@ -83,7 +83,7 @@ function FormPrint({ data, user }) {
               </Grid>
               <pre></pre>
             </Grid>
-=======
+{/* ======= */}
             <Paper className="items-center">
                 <div className={classes.header}>
                     <h2>
@@ -127,7 +127,9 @@ function FormPrint({ data, user }) {
                             </Grid>
                             <pre></pre>
                         </Grid>
->>>>>>> 52d26b6edbf38a8f01c02765716138492d2d8594
+                    </div>
+                </Container>
+{/* >>>>>>> 52d26b6edbf38a8f01c02765716138492d2d8594 */}
 
             <Grid className="py-2" container spacing={2}>
               <Grid item xs={7}>
@@ -177,6 +179,7 @@ function FormPrint({ data, user }) {
               </Grid>
               <pre></pre>
             </Grid>
+          </Paper>
           </div>
         </Container>
         <Container>
