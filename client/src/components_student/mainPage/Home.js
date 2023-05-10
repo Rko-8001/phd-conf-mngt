@@ -6,6 +6,7 @@ import { FaSort } from 'react-icons/fa';
 import { FaMoneyBillAlt } from 'react-icons/fa';
 import ApplicationsHome from '../applications/ApplicationsHome';
 import { FaChartLine } from 'react-icons/fa';
+import FlexPage from '../../components/commonPages/FlexPage';
 
 function Home(props) {
 
@@ -77,7 +78,8 @@ function Home(props) {
                         </div>
                     </div>
                     {/* <div className='mx-auto'></div> */}
-                    <Newcomp3 />
+                    {/* <Newcomp3 /> */}
+                    <FlexPage/>
                     <br />
                     <br />
 

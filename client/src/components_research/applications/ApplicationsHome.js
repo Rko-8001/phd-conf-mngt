@@ -15,6 +15,7 @@ function ResearchApplication() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [apps, setApps] = useState(data);
+    const [apps2,setApps2] = useState(data);
 
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
@@ -55,6 +56,7 @@ function ResearchApplication() {
     useEffect(() => {
         getAppInfo().then((resp) => {
             setApps(resp.data);
+            setApps2(resp.slice(0,1)) 
 
             delay(100).then(() => {
                 //good
@@ -138,7 +140,7 @@ function ResearchApplication() {
 
     }
 
-    const renderApps = apps.map((item, index) =>
+    const renderApps = apps2.map((item, index) =>
         <>
             <div key={index}>
                 <section class="bg-white dark:bg-gray-900">

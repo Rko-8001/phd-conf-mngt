@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import img1 from './images/img1.jpeg';
-import img2 from './images/img2.jpg';
-import img3 from './images/img3.jpg';
-import img4 from './images/img4.jpg'
-import img7 from './images/img7.png';
+import Puneet from './images/puneet.png';
+import adish from './images/adish.jpg';
+import vinay from './images/vinay.jpg';
+import yadwinder from './images/yadwinder.jpeg';
+import tanuj from './images/tanuj.jpg';
 import './Team.css';
 import { Link } from 'react-router-dom';
 
@@ -58,7 +58,7 @@ function Team() {
               <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
                 <img
                   className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                  src={img7}
+                  src={Puneet}
                   alt="woman"
                   loading="lazy"
                   width="64"
@@ -76,13 +76,13 @@ function Team() {
             </div>
           </div>
           <p className="text-gray-600 text-center dark:text-gray-300 lg:mx-auto lg:w-5/12">
-              Here is our team, comprising Members with diverse skills and experiences each of their's contribution made this site possible
-            </p>
+            Here is our team, comprising Members with diverse skills and experiences each of their's contribution made this site possible
+          </p>
           <div className="my-5 grid gap-6 px-4 sm:px-0 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={img4}
+                src={yadwinder}
                 alt="woman"
                 loading="lazy"
                 width="640"
@@ -100,7 +100,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={img1}
+                src={adish}
                 alt="woman"
                 loading="lazy"
                 width="640"
@@ -118,7 +118,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={img3}
+                src={vinay}
                 alt="woman"
                 loading="lazy"
                 width="640"
@@ -136,7 +136,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={img2}
+                src={tanuj}
                 alt="woman"
                 loading="lazy"
                 width="640"
