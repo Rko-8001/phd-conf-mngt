@@ -33,7 +33,7 @@ function FormPrint({ data, user }) {
     </TableRow>
   ));
 
-// <<<<<<< HEAD
+  // <<<<<<< HEAD
   return (
     <div>
       <Paper className="item-center">
@@ -46,7 +46,7 @@ function FormPrint({ data, user }) {
           </Grid>
           <Grid item xs={10}>
             <div className={classes.header}>
-              <h2 className="text-center" style={{ fontSize: "36px" }}>
+              <h2 className="text-center " style={{ fontSize: "36px" }}>
                 <b>INDIAN INSTITUTE OF TECHNOLOGY ROPAR</b>
               </h2>
             </div>
@@ -83,103 +83,94 @@ function FormPrint({ data, user }) {
               </Grid>
               <pre></pre>
             </Grid>
-{/* ======= */}
+            {/* ======= */}
             <Paper className="items-center">
-                <div className={classes.header}>
-                    <h2>
-                        <b>INDIAN INSTITUTE OF TECHNOLOGY ROPAR</b>
-                    </h2>
-                    {/* <h4>
-            APPLICATION FORM FOR PARTICIPATING IN CONFERENCE/WORKSHOP/SEMINAR
-          </h4>
-          <h4>(within India)</h4> */}
+              {/* <div className={classes.header}>
+                <h2>
+                  <b>INDIAN INSTITUTE OF TECHNOLOGY ROPAR</b>
+                </h2>
+              </div>
+              <br /> <br />
+              <div className={classes.header1}>
+                <h4>
+                  <b>
+                    APPLICATION FORM FOR PARTICIPATING IN <br></br>
+                    CONFERENCE/WORKSHOP/SEMINAR
+                  </b>
+                </h4>
+                <h4>
+                  <b>(within India)</b>
+                </h4>
+              </div> */}
+              {/* <br /> <br />  */}
+              {/* <Container>
+                <div className={classes.form}>
+                  <Grid className="py-2" container spacing={2}>
+                    <Grid item xs={7}>
+                      <pre>1. Name of PhD Scholar : {user.name} </pre>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <pre>Mobile No: {data.mobileNo} </pre>
+                    </Grid>
+                    <pre></pre>
+                  </Grid>
+                  <Grid className="py-2" container spacing={2}>
+                    <Grid item xs={7}>
+                      <pre>2. Department/Centre : {user.department} </pre>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <pre>Email: {user.email} </pre>
+                    </Grid>
+                    <pre></pre>
+                  </Grid>
                 </div>
-                <br /> <br />
-                <div className={classes.header1}>
-                    <h4>
-                        <b>
-                            APPLICATION FORM FOR PARTICIPATING IN <br></br>
-                            CONFERENCE/WORKSHOP/SEMINAR
-                        </b>
-                    </h4>
-                    <h4>
-                        <b>(within India)</b>
-                    </h4>
-                </div>
-                <br /> <br />
-                <Container>
-                    <div className={classes.form}>
-                        <Grid className="py-2" container spacing={2}>
-                            <Grid item xs={7}>
-                                <pre>1. Name of PhD Scholar : {user.name} </pre>
-                            </Grid>
-                            <Grid item xs={5}>
-                                <pre>Mobile No: {data.mobileNo}  </pre>
-                            </Grid>
-                            <pre></pre>
-                        </Grid>
-                        <Grid className="py-2" container spacing={2}>
-                            <Grid item xs={7}>
-                                <pre>2. Department/Centre : {user.department} </pre>
-                            </Grid>
-                            <Grid item xs={5}>
-                                <pre>Email: {user.email} </pre>
-                            </Grid>
-                            <pre></pre>
-                        </Grid>
-                    </div>
-                </Container>
-{/* >>>>>>> 52d26b6edbf38a8f01c02765716138492d2d8594 */}
-
-            <Grid className="py-2" container spacing={2}>
-              <Grid item xs={7}>
-                <pre>3. Entry No. : {user?.entryNo} </pre>
+              </Container> */}
+              {/* >>>>>>> 52d26b6edbf38a8f01c02765716138492d2d8594 */}
+              <Grid className="py-2" container spacing={2}>
+                <Grid item xs={7}>
+                  <pre>3. Entry No. : {user?.entryNo} </pre>
+                </Grid>
+                <Grid item xs={5}>
+                  <pre>Bank A/c No. : {data?.bankAccountNo} </pre>
+                </Grid>
+                <pre></pre>
               </Grid>
-              <Grid item xs={5}>
-                <pre>Bank A/c No. : {data?.bankAccountNo} </pre>
+              <Grid className="py-2" container spacing={2}>
+                <Grid item xs={7}>
+                  <pre>4. Date of Joining : {user?.dateOfJoining}</pre>
+                </Grid>
+                <pre></pre>
               </Grid>
-              <pre></pre>
-            </Grid>
-
-            <Grid className="py-2" container spacing={2}>
-              <Grid item xs={7}>
-                <pre>4. Date of Joining : {user?.dateOfJoining}</pre>
+              <Grid className="py-2" container spacing={2}>
+                <Grid item xs={7}>
+                  <pre>
+                    5. Fellowship Category (Institute/CSIR/UGC/NBHM/Any other
+                    ,please specify) : {user?.fellowshipCategory}
+                  </pre>
+                </Grid>
+                <pre></pre>
               </Grid>
-              <pre></pre>
-            </Grid>
+              <Grid className="py-2" container spacing={2}>
+                <Grid item xs={7}>
+                  {/* <div style={{border: '3px solid black', padding: '10px'}}> */}
+                  <pre>
+                    6. Area of Specialization : {user?.areaOfSpecialisation}{" "}
+                  </pre>
+                  {/* </div> */}
+                </Grid>
 
-            <Grid className="py-2" container spacing={2}>
-              <Grid item xs={7}>
-                <pre>
-                  5. Fellowship Category (Institute/CSIR/UGC/NBHM/Any other
-                  ,please specify) : {user?.fellowshipCategory}
-                </pre>
+                <pre></pre>
               </Grid>
-              <pre></pre>
-            </Grid>
-
-            <Grid className="py-2" container spacing={2}>
-              <Grid item xs={7}>
-                {/* <div style={{border: '3px solid black', padding: '10px'}}> */}
-                <pre>
-                  6. Area of Specialization : {user?.areaOfSpecialisation}{" "}
-                </pre>
-                {/* </div> */}
+              <Grid className="py-2" container spacing={2}>
+                <Grid item xs={7}>
+                  <pre>
+                    7. Name of Supervisor(s) : {user?.nameOfSupervisor} (
+                    {user?.emailOfSupervisor})
+                  </pre>
+                </Grid>
+                <pre></pre>
               </Grid>
-
-              <pre></pre>
-            </Grid>
-
-            <Grid className="py-2" container spacing={2}>
-              <Grid item xs={7}>
-                <pre>
-                  7. Name of Supervisor(s) : {user?.nameOfSupervisor} (
-                  {user?.emailOfSupervisor})
-                </pre>
-              </Grid>
-              <pre></pre>
-            </Grid>
-          </Paper>
+            </Paper>
           </div>
         </Container>
         <Container>
@@ -236,7 +227,7 @@ function FormPrint({ data, user }) {
               <Grid item xs={7}>
                 <pre>
                   Financial support required (if any) from institute fund/
-                  project/ any other (please specify) : {data?.financialSupport}
+                  project/ any other (please specify)<br></br> : {data?.financialSupport}
                 </pre>
               </Grid>
               <pre></pre>
@@ -287,7 +278,7 @@ function FormPrint({ data, user }) {
         </Container>
         <Container>
           <div className={classes.form}>
-            <Grid className="py-2" container spacing={2}>
+            <Grid className="py-2 mt-2" container spacing={2}>
               <Grid item xs={7}>
                 <pre>Enclosures Attached (Please tick):</pre>
                 <pre>
