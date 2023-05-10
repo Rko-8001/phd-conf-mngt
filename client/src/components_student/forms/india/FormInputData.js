@@ -14,26 +14,6 @@ import { useState } from 'react';
 export default function InputData(props) {
 
   const [alert, setAlert] = useState(true);
-  const [image1, setImage1] = useState(null);
-  const [image2, setImage2] = useState(null);
-  const [image3, setImage3] = useState(null);
-
-  const handleImageUpload1 = (event) => {
-    const file = event.target.files[0];
-    setImage1(URL.createObjectURL(file));
-  };
-  const handleImageUpload2 = (event) => {
-    const file = event.target.files[0];
-    setImage2(URL.createObjectURL(file));
-  };
-  const handleImageUpload3 = (event) => {
-    const file = event.target.files[0];
-    setImage3(URL.createObjectURL(file));
-  };
-
-  function fileFunction() {
-    console.log("hi");
-  }
 
   return (
     <Container>
@@ -161,6 +141,8 @@ export default function InputData(props) {
             stay={props.stay}
             registrationFee={props.registrationFee}
             tableData={props.tableData}
+            addRowData={props.addRowData}
+            getRowData={props.getRowData}
           />
 
           <div className="mt-10 space-y-10">
@@ -173,24 +155,22 @@ export default function InputData(props) {
 
                 <Enclosures
                   title="Copy of Acceptance"
-                  onChangeFunction={handleImageUpload1}
+                  onChangeFunction={props.fileFunction}
+                  name="copyOfAcceptance"
                   type="file"
                 />
-                {image1 && <img src={image1} alt="Uploaded Image" className="mt-4 max-w-xs max-h-xs"/>}
                 <Enclosures
                   title="Copy of Conference Brochure"
-                  onChangeFunction={handleImageUpload2}
+                  onChangeFunction={props.fileFunction}
+                  name="copyOfConferenceBrochure"
                   type="file"
                 />
-                {image2 && <img src={image2} alt="Uploaded Image" className="mt-4 max-w-xs max-h-xs"/>}
                 <Enclosures
                   title="Copy of Abstract"
-                  onChangeFunction={handleImageUpload3}
+                  name="copyOfAbstract"
+                  onChangeFunction={props.fileFunction}
                   type="file"
                 />
-                {image3 && <img src={image3} alt="Uploaded Image" className="mt-4 max-w-xs max-h-xs"/>}
-
-
               </div>
             </fieldset>
 

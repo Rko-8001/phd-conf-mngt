@@ -45,10 +45,16 @@ export function checkConfAndLeaveTime(sc, ec, sl, el) {
     const slc = new Date(sl);
     const elc = new Date(el);
 
+    // console.log(stc);
+    // console.log(etc);
+    // console.log(stc - slc >= 0);
+    // console.log(slc);
+    // console.log(elc);
+    // console.log(elc - etc >= 0);
     if ((stc - slc >= 0) && (elc - etc >= 0)) {
-        window.alert("Please Check your Conference and Duty Leave Time");
-        return false;
+        return true;
     }
-    return true;
+    window.alert("Please Check your Conference and Duty Leave Time");
+    return false;
 
 }

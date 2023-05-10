@@ -34,7 +34,6 @@ function FormInput() {
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
-    const [img,setImg] = useState("");
 
     const [registrationFee, setRegistrationFee] = useState(0);
 
@@ -42,14 +41,12 @@ function FormInput() {
         particular: "",
         amount: ""
     });
-    const handleSetImage = (e) =>{
-        e.preventDefault();
-        setImg(e.target.value);
-        console.log("image set..");
-        console.log(img);
-    }   
 
-
+    const [enclosures, setEnclosures] = useState({
+        "copyOfAcceptance": "",
+        "copyOfConferenceBrochure": "",
+        "copyOfAbstract": "",
+    })
 
     const getFixedParts = ((e) => {
         const { name, value } = e.target;
@@ -88,12 +85,10 @@ function FormInput() {
     });
 
     const getAdvance = e => {
-        console.log("aaya");
         setAdvance(!advance);
     }
 
     const addRowData = (e) => {
-        console.log("here1");
         e.preventDefault();
         if (!rowData.particular || !rowData.amount) {
             window.alert("Fill all the fields!");
@@ -106,7 +101,6 @@ function FormInput() {
     }
 
     const getRowData = (e) => {
-        console.log("here1");
         const { name, value } = e.target;
         // console.log(name + " " + value);
         setRowData(prevState => ({
@@ -114,8 +108,6 @@ function FormInput() {
             [name]: value
         }));
     }
-
-
 
     const checkData = () => {
         if (!checkConfDetails(conferenceInfo)) {
@@ -130,32 +122,18 @@ function FormInput() {
         return true;
     }
 
-    const requestGrant = async (e) => {
+    const fileFunction = (e) => {
         e.preventDefault();
 
+        const { name } = e.target;
+        setEnclosures(prevState => ({
+            ...prevState,
+            [name]: e.target.files[0]
+        }));
+    }
 
-        // save all data
-        const email = generalInfo.email;
-        const status = "0";
-        const mobileNo = generalInfo.mobileNo;
-        const bankAccountNo = generalInfo.bankAccNo;
-        const nameOfConference = conferenceInfo.nameOfConference;
-        const venueOfConference = conferenceInfo.venueOfConference;
-        const paperInConference = conferenceInfo.paperInConference;
-        const conferenceStarts = dayjs(dateStarts).format('DD/MM/YYYY')
-        const conferenceEnds = dayjs(dateEnds).format('DD/MM/YYYY')
-
-        const studentLeaveStarts = dayjs(leaveStarts).format('DD/MM/YYYY')
-        const studentLeaveEnds = dayjs(leaveEnds).format('DD/MM/YYYY')
-
-        const financialSupport = conferenceInfo.financialSupport;
-        const advances = advance;
+    const finalFinances = () => {
         const finances = [...tableData];
-        const numberOfDays = conferenceInfo.numberOfDays;
-        const image = img;
-        const ig = "adada";
-
-
         finances.push({
             "particular": "travel",
             "amount": travel
@@ -174,32 +152,60 @@ function FormInput() {
             "amount": stay
         });
 
+        return finances;
+    }
+    const requestGrant = async (e) => {
+        e.preventDefault();
+
+
+        // save all data
+        const formData = new FormData();
+
+        formData.append("email", generalInfo.email);
+        formData.append("entryNo", generalInfo.entryNo);
+        formData.append("status", "0");
+
+        formData.append("mobileNo", generalInfo.mobileNo);
+        formData.append("ifscCode", generalInfo.ifsc);
+        formData.append("bankAccountNo", generalInfo.accountNo);
+
+        formData.append("nameOfConference", conferenceInfo.nameOfConference);
+        formData.append("venueOfConference", conferenceInfo.venueOfConference);
+        formData.append("paperInConference", conferenceInfo.paperInConference);
+
+        formData.append("conferenceStarts", dayjs(dateStarts).format('DD/MM/YYYY'));
+        formData.append("conferenceEnds", dayjs(dateEnds).format('DD/MM/YYYY'));
+
+        formData.append("studentLeaveStarts", dayjs(leaveStarts).format('DD/MM/YYYY'));
+        formData.append("studentLeaveEnds", dayjs(leaveEnds).format('DD/MM/YYYY'));
+
+        formData.append("financialSupport", conferenceInfo.financialSupport);
+        formData.append("advances", advance);
+        formData.append("numberOfDays", conferenceInfo.numberOfDays);
+
+        const finances = finalFinances();
+        formData.append("finances", finances);
+
+        //appending enclosures
+        formData.append("copyOfAcceptance", enclosures.copyOfAcceptance);
+        formData.append("copyOfConferenceBrochure", enclosures.copyOfConferenceBrochure);
+        formData.append("copyOfAbstract", enclosures.copyOfAbstract);
+
+
+
 
         if (!checkData() ||
-            !checkConferenceTime(conferenceStarts, conferenceEnds) ||
+            !checkConferenceTime(formData.conferenceStarts, formData.conferenceEnds) ||
             !checkLeaveTime(leaveStarts, leaveEnds) ||
-            !checkConfAndLeaveTime(conferenceStarts, conferenceEnds, leaveStarts, leaveEnds)) {
+            !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds)) {
             return;
         }
         const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
-            
+
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email, status,
-                mobileNo, bankAccountNo,
-                nameOfConference, venueOfConference, paperInConference,
-                financialSupport,
-                advances, finances,
-                conferenceStarts, conferenceEnds,
-                numberOfDays,
-                studentLeaveStarts, studentLeaveEnds, image
-            })
+            body: formData
         });
 
-        // logic
 
         if (res.status === 422) {
             window.alert("Error Occurred! Please Try Again.");
@@ -237,7 +243,7 @@ function FormInput() {
 
     return (
         <>
-
+            {/* replacement of window.alert */}
             <div style={{ "marginTop": "5rem", "marginLeft": "30rem" }} id="successModal" tabindex="-1" aria-hidden="true" className="hidden overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-10 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
                 <div className="relative p-4 w-full max-w-md h-full md:h-auto">
                     <div className="relative p-4 text-center bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -253,6 +259,7 @@ function FormInput() {
                     </div>
                 </div>
             </div>
+
             <FormInputGenData
                 generalInfo={generalInfo}
                 getGeneralInfo={getGeneralInfo}
@@ -266,8 +273,7 @@ function FormInput() {
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay} registrationFee={registrationFee}
                 requestGrant={requestGrant}
-                img={img}
-                handleSetImage={handleSetImage}
+                fileFunction={fileFunction}
             />
         </>
     )
