@@ -195,7 +195,7 @@ function FormPrint({ data, user }) {
                                 <Table>
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell style={{ fontSize: "16px"}}>
+                                            <TableCell style={{ fontSize: "16px" }}>
                                                 <b>Sr. No.</b>
                                             </TableCell>
                                             <TableCell style={{ fontSize: "16px" }}>
@@ -213,7 +213,7 @@ function FormPrint({ data, user }) {
                                             <TableCell style={{ fontSize: "16px" }}>
                                                 <b>Total</b>
                                             </TableCell>
-                                            <TableCell style={{ fontSize: "16px" }}>{ getFinances(data.finances) } RS</TableCell>
+                                            <TableCell style={{ fontSize: "16px" }}>{getFinances(data.finances)} RS</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
