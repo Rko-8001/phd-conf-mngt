@@ -28,6 +28,10 @@ const applicationData = new mongoose.Schema({
         type: String,
         require: true
     },
+    ifscCode: {
+        type: String,
+        require: true
+    },
     nameOfConference: {
         type: String,
         require: true
@@ -68,6 +72,15 @@ const applicationData = new mongoose.Schema({
         // require: true
     },
     numberOfDays: {
+        type: String,
+    },
+    abstractFileId: {
+        type: String,
+    },
+    brochureFileId: {
+        type: String,  
+    },
+    acceptanceFileId: {
         type: String,
     },
     grantEligibility: {

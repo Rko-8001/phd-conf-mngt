@@ -1,19 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
-const cloudinary = require('cloudinary').v2;
-
-cloudinary.config({
-    cloud_name: "debg9ye95",
-    api_key: "412159183898988",
-    api_secret: "3brAt7NKIbPQY9rtvg0civZf5j0"
-});
 
 
 // connection established
 require('../mongoDb/connection');
-
-
 
 // requiring user Schema 
 const User = require('../model/userSchema');
@@ -21,8 +12,9 @@ const AppData = require('../model/applicationData');
 
 
 const { genAppToken } = require('../tokens/generateToken');
-const fileUpload = require('express-fileupload')
-
+const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
+const createDriveFolder = require('../driveUploadFunctions/createFolder');
+const uploadPdf = require('../driveUploadFunctions/uploadPdf');
 
 // credentials import
 require('dotenv').config();
@@ -110,40 +102,57 @@ router.post('/updateInfo', async (req, res) => {
 
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
-    // const file = req.files.image;
-    // console.log("printing here...");
-    // cloudinary.uploader.upload(file.tempFilePath,(err,result)=>{
-    //     console.log("result here..");
-    //     console.log(result);
-    // })
-    const { email, status,
-        mobileNo, bankAccountNo,
+
+    const {
+        email, entryNo,
+        status, mobileNo,
+        bankAccountNo, ifscCode,
         nameOfConference, venueOfConference, paperInConference,
         conferenceStarts, conferenceEnds,
         financialSupport,
         advances, finances,
         coaa, coaba, cocba,
-        studentLeaveStarts, studentLeaveEnds, numberOfDays, image } = req.body;
+        studentLeaveStarts, studentLeaveEnds, numberOfDays } = req.body;
 
-    // console.log("Hiiii");
-    console.log("Image:" + image);
-    // console.log(email + " " + financialSupport + " " + coaa);
-    // console.log(mobileNo + " " + bankAccountNo);
-    // console.log(nameOfConference + " " + venueOfConference + " " + paperInConference);
-    // console.log(conferenceStarts + " " + conferenceEnds);
-    // console.log(studentLeaveStarts + " " + studentLeaveEnds);
+
+    const { copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
+
+
     try {
+
+        // searching for student folder
+        const parentId = await searchDriveFolder(entryNo);
+        // creating application folder inside student folder
+        var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
+        const applicationFolderId = await createDriveFolder(applicationFolderName, parentId);
+
+        // uploading files to application folder
+        var abstractFileId = null;
+        if (copyOfAbstract)
+            abstractFileId = await uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId);
+
+        var brochureFileId = null;
+        if (copyOfConferenceBrochure)
+            brochureFileId = await uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId);
+
+        var acceptanceFileId = null;
+        if (copyOfAcceptance)
+            acceptanceFileId = await uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId);
+
+        // saving data to mongo
         const data = new AppData(
             {
                 email, status,
-                mobileNo, bankAccountNo,
+                mobileNo,
+                bankAccountNo, ifscCode,
                 nameOfConference, venueOfConference, paperInConference,
                 conferenceStarts, conferenceEnds,
                 financialSupport,
                 advances, finances,
                 coaa, coaba, cocba,
                 numberOfDays,
-                studentLeaveStarts, studentLeaveEnds, image
+                studentLeaveStarts, studentLeaveEnds,
+                abstractFileId, brochureFileId, acceptanceFileId
             });
         await data.save();
 

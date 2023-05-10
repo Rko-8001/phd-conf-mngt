@@ -1,9 +1,3 @@
-// importing google for using google apis
-const { google } = require('googleapis');
-
-// requiring express for using it
-const express = require("express");
-const router = express.Router();
 
 const clientDrive = require('./configDriveClient');
 
@@ -11,13 +5,19 @@ const clientDrive = require('./configDriveClient');
 async function searchDriveFolder(folderName) {
     const drive = clientDrive();
 
-    const res = await drive.files.list({
-        q: `name = '${folderName}' and trashed=false and mimeType = 'application/vnd.google-apps.folder'`,
-        fields: 'files(id, name)',
-        spaces: 'drive'
-    });
-    // console.log(res.data.files[0]);
-    return res.data.files[0].id;
+    try {
+        const res = await drive.files.list({
+            q: `name = '${folderName}' and trashed=false and mimeType = 'application/vnd.google-apps.folder'`,
+            fields: 'files(id, name)',
+            spaces: 'drive'
+        });
+
+        // console.log(res.data.files[0]);
+        return res.data.files[0].id;
+    } catch (error) {
+    
+        return false;
+    }
 }
 
 module.exports = searchDriveFolder;

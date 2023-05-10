@@ -3,7 +3,6 @@ const { google } = require('googleapis');
 
 // requiring express for using it
 const express = require("express");
-const router = express.Router();
 
 
 require('dotenv').config();
