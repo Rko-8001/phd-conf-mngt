@@ -56,7 +56,7 @@ function ResearchApplication() {
     useEffect(() => {
         getAppInfo().then((resp) => {
             setApps(resp.data);
-            setApps2(resp.slice(0,1)) 
+            setApps2(resp.data.slice(0,1)) 
 
             delay(100).then(() => {
                 //good
