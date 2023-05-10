@@ -33,6 +33,7 @@ function FormPrint({ data, user }) {
     </TableRow>
   ));
 
+<<<<<<< HEAD
   return (
     <div>
       <Paper className="item-center">
@@ -82,6 +83,51 @@ function FormPrint({ data, user }) {
               </Grid>
               <pre></pre>
             </Grid>
+=======
+            <Paper className="items-center">
+                <div className={classes.header}>
+                    <h2>
+                        <b>INDIAN INSTITUTE OF TECHNOLOGY ROPAR</b>
+                    </h2>
+                    {/* <h4>
+            APPLICATION FORM FOR PARTICIPATING IN CONFERENCE/WORKSHOP/SEMINAR
+          </h4>
+          <h4>(within India)</h4> */}
+                </div>
+                <br /> <br />
+                <div className={classes.header1}>
+                    <h4>
+                        <b>
+                            APPLICATION FORM FOR PARTICIPATING IN <br></br>
+                            CONFERENCE/WORKSHOP/SEMINAR
+                        </b>
+                    </h4>
+                    <h4>
+                        <b>(within India)</b>
+                    </h4>
+                </div>
+                <br /> <br />
+                <Container>
+                    <div className={classes.form}>
+                        <Grid className="py-2" container spacing={2}>
+                            <Grid item xs={7}>
+                                <pre>1. Name of PhD Scholar : {user.name} </pre>
+                            </Grid>
+                            <Grid item xs={5}>
+                                <pre>Mobile No: {data.mobileNo}  </pre>
+                            </Grid>
+                            <pre></pre>
+                        </Grid>
+                        <Grid className="py-2" container spacing={2}>
+                            <Grid item xs={7}>
+                                <pre>2. Department/Centre : {user.department} </pre>
+                            </Grid>
+                            <Grid item xs={5}>
+                                <pre>Email: {user.email} </pre>
+                            </Grid>
+                            <pre></pre>
+                        </Grid>
+>>>>>>> 52d26b6edbf38a8f01c02765716138492d2d8594
 
             <Grid className="py-2" container spacing={2}>
               <Grid item xs={7}>

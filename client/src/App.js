@@ -42,7 +42,12 @@ import DeanHome from './components_dean/mainPage/DeanHome';
 import DeanApplication from './components_dean/applications/Application';
 import ViewApplicationDean from './components_dean/applications/ViewApplication';
 
-import { StudentFormAbroad, StudentFormIndia, StudentFormOption, StudentHomePage, StudentProfile, StudentApplicationsPage, StudentSpecficApplication } from './routes/StudentComponent';
+import {
+  StudentFormAbroad, StudentFormIndia,
+  StudentFormOption,
+  StudentHomePage, StudentProfile,
+  StudentApplicationsPage, StudentSpecficApplication
+} from './routes/StudentComponent';
 import Footer from './components_student/Side/Footer';
 
 function App() {

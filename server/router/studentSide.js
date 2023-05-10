@@ -103,7 +103,7 @@ router.post('/updateInfo', async (req, res) => {
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
 
-    const {
+    var {
         email, entryNo,
         status, mobileNo,
         bankAccountNo, ifscCode,
@@ -114,9 +114,17 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         coaa, coaba, cocba,
         studentLeaveStarts, studentLeaveEnds, numberOfDays } = req.body;
 
+    var copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance;
 
-    const { copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
+    if (coaa === true)
+        copyOfAcceptance = req.files.copyOfAcceptance;
+    if (cocba === true)
+        copyOfConferenceBrochure = req.files.copyOfConferenceBrochure;
+    if (coaba === true)
+        copyOfAbstract = req.files.copyOfAbstract;
 
+
+    finances = JSON.parse(finances);
 
     try {
 
