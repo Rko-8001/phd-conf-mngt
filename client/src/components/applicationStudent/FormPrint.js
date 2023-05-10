@@ -34,7 +34,7 @@ function FormPrint({ data, user }) {
     return (
         <div>
 
-            <Paper className="item-center">
+            <Paper className="items-center">
                 <div className={classes.header}>
                     <h2>
                         <b>INDIAN INSTITUTE OF TECHNOLOGY ROPAR</b>

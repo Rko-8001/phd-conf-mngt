@@ -38,7 +38,7 @@ export default function InputData(props) {
           <h2 className="text-base font-semibold leading-7 text-gray-900">Personal Details</h2>
 
           <div className="mt-8 grid  grid-cols-3 gap-x-6  sm:grid-cols-6">
-            <TextField name="mobileNo" title="Mobile Number" onChangeFunction={props.getGeneralInfo} value={props.generalInfo.mobileNo} type="text" />
+            <TextField name="mobileNo" title="Mobile Number" onChangeFunction={props.getGeneralInfo} value={props.generalInfo?.mobileNo} type="text" />
           </div>
 
           <div className="mt-8 grid grid-cols-3 gap-x-6 gap-y-6 sm:grid-cols-6">

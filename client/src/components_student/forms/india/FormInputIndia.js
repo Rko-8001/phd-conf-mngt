@@ -21,7 +21,7 @@ function FormInput() {
     const [generalInfo, setGeneralInfo] = useState({});
     const [conferenceInfo, setConferenceInfo] = useState({});
 
-    const [dateStarts, setDateStarts] = useState(dayjs('2023-01-01'));
+    const [dateStarts, setDateStarts] = useState(dayjs('2023-01-03'));
     const [dateEnds, setDateEnds] = useState(dayjs('2023-01-01'));
     const [leaveStarts, setLeaveStarts] = useState(dayjs('2023-01-01'));
     const [leaveEnds, setLeaveEnds] = useState(dayjs('2023-01-01'));
@@ -42,9 +42,9 @@ function FormInput() {
     });
 
     const [enclosures, setEnclosures] = useState({
-        "copyOfAcceptance": "",
-        "copyOfConferenceBrochure": "",
-        "copyOfAbstract": "",
+        "copyOfAcceptance": null,
+        "copyOfConferenceBrochure": null,
+        "copyOfAbstract": null,
     })
 
     const getFixedParts = ((e) => {
@@ -184,7 +184,11 @@ function FormInput() {
         formData.append("numberOfDays", conferenceInfo.numberOfDays);
 
         const finances = finalFinances();
-        formData.append("finances", finances);
+        formData.append("finances", JSON.stringify(finances));
+
+        formData.append("coaa", enclosures.copyOfAcceptance !== null && enclosures.copyOfAcceptance !== undefined);
+        formData.append("coaba", enclosures.copyOfAbstract !== null && enclosures.copyOfAbstract !== undefined);
+        formData.append("cocba", enclosures.copyOfConferenceBrochure !== null && enclosures.copyOfConferenceBrochure !== undefined);
 
         //appending enclosures
         formData.append("copyOfAcceptance", enclosures.copyOfAcceptance);
@@ -235,7 +239,21 @@ function FormInput() {
         }
     }
 
+    function getTodayDate() {
+        const date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate() + 1;
+
+        const ymd = `${year}-${month}-${day}`;
+        setDateStarts(dayjs(ymd));
+        setDateEnds(dayjs(ymd));
+        setLeaveStarts(dayjs(ymd));
+        setLeaveEnds(dayjs(ymd));
+    }
+
     useEffect(() => {
+        getTodayDate();
         getBasicInfo().then((data) => {
             setGeneralInfo(data)
         }).catch((e) => {
