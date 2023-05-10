@@ -14,6 +14,9 @@ const AppData = require('../model/applicationData');
 // credentials import
 require('dotenv').config();
 
+const createPublicUrl = require('../driveUploadFunctions/uploadPdf');
+
+
 // info Loading 
 router.post('/infoLoading', async (req, res) => {
 
@@ -226,15 +229,16 @@ router.post('/viewAnApplication', async (req, res) => {
 
 
 // Experimental ***     Success 
-router.get('/aisehi', async (req, res) => {
+router.post('/aisehi', async (req, res) => {
+
+    const fileId = req.body.fileId
+    console.log(fileId);
     try {
-        // can be used -- 
-        // -1 print lastest first 
-        // 1 print oldest first
-        const appData = await AppData.find().sort({ "updatedAt": 1 });
-        return res.status(200).json({ "Data": appData });
+        const data = await createPublicUrl(fileId);
+        res.send({ "data": data });
     } catch (error) {
-        return res.status(422).json({ "error": error });
+        console.log(error);
+        return res.status(422).json({ "error": "error" });
     }
 })
 
