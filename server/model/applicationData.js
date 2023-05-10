@@ -78,10 +78,22 @@ const applicationData = new mongoose.Schema({
         type: String,
     },
     brochureFileId: {
-        type: String,  
+        type: String,
     },
     acceptanceFileId: {
         type: String,
+    },
+    coaa: {
+        type: Boolean,
+        // require: true
+    },
+    coaba: {
+        type: Boolean,
+        // require: true
+    },
+    cocba: {
+        type: Boolean,
+        // require: true
     },
     grantEligibility: {
         type: String
@@ -96,7 +108,7 @@ const applicationData = new mongoose.Schema({
         type: String
     },
     lastModified: {
-        type: String,   
+        type: String,
     },
     image: {
         type: String,
@@ -110,8 +122,6 @@ const applicationData = new mongoose.Schema({
 const AppData = mongoose.model('APPDATA', applicationData);
 
 module.exports = AppData;
-
-
 
 
 /* 

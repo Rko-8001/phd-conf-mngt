@@ -114,15 +114,7 @@ router.post('/studentApplicationSubmit', async (req, res) => {
         coaa, coaba, cocba,
         studentLeaveStarts, studentLeaveEnds, numberOfDays } = req.body;
 
-    var copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance;
-
-    if (coaa === true)
-        copyOfAcceptance = req.files.copyOfAcceptance;
-    if (cocba === true)
-        copyOfConferenceBrochure = req.files.copyOfConferenceBrochure;
-    if (coaba === true)
-        copyOfAbstract = req.files.copyOfAbstract;
-
+    var { copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
 
     finances = JSON.parse(finances);
 
@@ -136,16 +128,13 @@ router.post('/studentApplicationSubmit', async (req, res) => {
 
         // uploading files to application folder
         var abstractFileId = null;
-        if (copyOfAbstract)
-            abstractFileId = await uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId);
+        abstractFileId = await uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId);
 
         var brochureFileId = null;
-        if (copyOfConferenceBrochure)
-            brochureFileId = await uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId);
+        brochureFileId = await uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId);
 
         var acceptanceFileId = null;
-        if (copyOfAcceptance)
-            acceptanceFileId = await uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId);
+        acceptanceFileId = await uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId);
 
         // saving data to mongo
         const data = new AppData(

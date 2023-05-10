@@ -14,8 +14,7 @@ const AppData = require('../model/applicationData');
 // credentials import
 require('dotenv').config();
 
-const createPublicUrl = require('../driveUploadFunctions/uploadPdf');
-
+const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
 
 // info Loading 
 router.post('/infoLoading', async (req, res) => {
@@ -219,8 +218,14 @@ router.post('/viewAnApplication', async (req, res) => {
     try {
         const data = await AppData.findById(id);
         const user = await User.findOne({ email: data.email });
-        return res.status(200).json({ data: data, applicantInfo: user });
+
+        const copyofAbstractUrl = await createPublicUrl(data.abstractFileId);
+        const copyOfAcceptanceUrl = await createPublicUrl(data.acceptanceFileId);
+        const copyOfConferenceBrochureUrl = await createPublicUrl(data.brochureFileId);
+
+        return res.status(200).json({data: data, applicantInfo: user, abstractUrl: copyofAbstractUrl, acceptanceUrl: copyOfAcceptanceUrl, conferenceBrochureUrl: copyOfConferenceBrochureUrl });
     } catch (error) {
+        console.log(error);
         return res.status(422).json({ error: error });
 
     }
@@ -228,19 +233,7 @@ router.post('/viewAnApplication', async (req, res) => {
 
 
 
-// Experimental ***     Success 
-router.post('/aisehi', async (req, res) => {
 
-    const fileId = req.body.fileId
-    console.log(fileId);
-    try {
-        const data = await createPublicUrl(fileId);
-        res.send({ "data": data });
-    } catch (error) {
-        console.log(error);
-        return res.status(422).json({ "error": "error" });
-    }
-})
 
 
 module.exports = router;
