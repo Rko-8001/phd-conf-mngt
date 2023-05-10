@@ -158,18 +158,21 @@ export default function InputData(props) {
                   onChangeFunction={props.fileFunction}
                   name="copyOfAcceptance"
                   type="file"
+                  acceptType="application/pdf"
                 />
                 <Enclosures
                   title="Copy of Conference Brochure"
                   onChangeFunction={props.fileFunction}
                   name="copyOfConferenceBrochure"
                   type="file"
+                  acceptType="application/pdf"
                 />
                 <Enclosures
                   title="Copy of Abstract"
                   name="copyOfAbstract"
                   onChangeFunction={props.fileFunction}
                   type="file"
+                  acceptType="application/pdf"
                 />
               </div>
             </fieldset>

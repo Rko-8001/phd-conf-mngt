@@ -154,6 +154,7 @@ function FormInput() {
 
         return finances;
     }
+    
     const requestGrant = async (e) => {
         e.preventDefault();
 
@@ -192,20 +193,19 @@ function FormInput() {
         formData.append("copyOfAbstract", enclosures.copyOfAbstract);
 
 
-
-
+        // checking all data entered
         if (!checkData() ||
             !checkConferenceTime(formData.conferenceStarts, formData.conferenceEnds) ||
             !checkLeaveTime(leaveStarts, leaveEnds) ||
             !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds)) {
             return;
         }
-        const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
 
+        // request to server to save application data
+        const res = await fetch(`${BASE_URL}/studentApplicationSubmit`, {
             method: "POST",
             body: formData
         });
-
 
         if (res.status === 422) {
             window.alert("Error Occurred! Please Try Again.");

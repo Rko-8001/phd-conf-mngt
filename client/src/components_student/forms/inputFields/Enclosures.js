@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Enclosures(props) {
 
-    const { title, onChangeFunction, type, name} = props;
+    const { title, onChangeFunction, type, name, acceptType } = props;
     return (
         <>
 
@@ -20,7 +20,7 @@ export default function Enclosures(props) {
                         id={title}
                         name={name}
                         type={type}
-                        accept='pdf/*'
+                        accept={acceptType}
                     />
                 </div>
             </div>
