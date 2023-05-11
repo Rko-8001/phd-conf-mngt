@@ -138,7 +138,7 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
 
         const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
         const applicationFolderId = await searchDriveFolder(applicationFolderName);
-        const facultySignId = await uploadImageDrive(image, applicationFolderId, userEmail);
+        const facultySignId = await uploadImageDrive(image, applicationFolderId, userEmail, "facultySign.jpg");
 
         if (facultySignId === null) {
             return res.status(422).json("Error Occurred..");

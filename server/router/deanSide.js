@@ -13,15 +13,13 @@ const AppData = require('../model/applicationData');
 // credentials import
 require('dotenv').config();
 
+const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
+const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
+const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
 
 router.post('/deanApproveOrDisapprove', async (req, res) => {
-    // const {id, status, remarks} = req.body;
-    console.log("here")
-    const { id, status } = req.body;
+    var { id, status, image } = req.body;
 
-    // Debug Purpose
-    // console.log(id); console.log(status);
-    // console.log(grantEligibility); console.log(researchRemarks);
     try {
 
         const bearerHeader = await req.headers["authorization"];
@@ -32,28 +30,38 @@ router.post('/deanApproveOrDisapprove', async (req, res) => {
         var bearerToken = bearerHeader.split(" ")[1];
 
         // console.log( "Student Side Token: " + bearerToken);
-
         if (!bearerToken) {
+            console.log("No Token");
             return res.status(422).json({ error: "No Token" });
         }
 
         // verfiy the token
         var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
-
         //setting email from decode
         const userEmail = decode.email;
 
         const appData = await AppData.findById(id);
+
         if (appData.status !== "4")
             return res.status(422).json("Can't Approve Or Disapprove..");
 
-        // console.log(appData);
-        // console.log(userEmail);
 
+        const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+        const applicationFolderId = await searchDriveFolder(applicationFolderName);
+        const deanSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "deanSign.jpg");
+
+        if (deanSignId === null) {
+            return res.status(422).json("Error Occurred..");
+        }
+
+        const deanSignLink = await createPublicUrl(deanSignId);
+        console.log(deanSignLink);
         await AppData.findByIdAndUpdate(id, {
             lastModified: userEmail,
+            deanSignLink: deanSignLink,
             status: status,
         });
+
         return res.status(200).json("Updated..");
     } catch (error) {
         console.log(error);

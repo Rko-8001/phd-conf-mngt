@@ -10,20 +10,17 @@ require('../mongoDb/connection');
 // requiring user Schema                
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
+
 const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
-const createDriveFolder = require('../driveUploadFunctions/createFolder');
+const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
+const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
 
 // credentials import
 require('dotenv').config();
 
 // Approve or Disapprove Logic
 router.post('/researchApproveOrDisapprove', async (req, res) => {
-    // const {id, status, remarks} = req.body;
-    const { id, status, grantEligibility, researchRemarks } = req.body;
-
-    // Debug Purpose
-    // console.log(id); console.log(status);
-    // console.log(grantEligibility); console.log(researchRemarks);
+    var { id, status, image, grantEligibility, remarksResearch } = req.body;
     try {
 
         const bearerHeader = await req.headers["authorization"];
@@ -33,26 +30,37 @@ router.post('/researchApproveOrDisapprove', async (req, res) => {
         }
         var bearerToken = bearerHeader.split(" ")[1];
 
-        // console.log( "Student Side Token: " + bearerToken);
-
         if (!bearerToken) {
+            console.log("No Token");
             return res.status(422).json({ error: "No Token" });
         }
-
         // verfiy the token
         var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
-
         //setting email from decode
         const userEmail = decode.email;
 
         const appData = await AppData.findById(id);
+
         if (appData.status !== "2")
             return res.status(422).json("Can't Approve Or Disapprove..");
 
+
+        const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+        const applicationFolderId = await searchDriveFolder(applicationFolderName);
+        const researchSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "researchSign.jpg");
+
+        if (researchSignId === null) {
+            conso
+            return res.status(422).json("Error Occurred..");
+        }
+
+        const researchSignLink = await createPublicUrl(researchSignId);
+        // console.log(researchSignLink);
         await AppData.findByIdAndUpdate(id, {
             status: status,
             grantEligibility: grantEligibility,
-            remarksResearch: researchRemarks,
+            remarksResearch: remarksResearch,
+            researchSignLink: researchSignLink,
             lastModified: userEmail,
         });
         return res.status(200).json("Updated..");

@@ -53,7 +53,7 @@ function SignCrop({ image, setImage }) {
                 onClick={getCroppedImg}
                 className="mb-5 px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
             >
-                Done
+                Crop
             </button>
 
             <ReactCrop

@@ -10,7 +10,6 @@ import ConferenceDetails from './Tabs/ConferenceDetails';
 import FacultyDetails from './Tabs/FacultyDetails'
 import ResearchSection from './Tabs/ResearchSection';
 import AccountSection from './Tabs/AccountSection';
-import HodDetails from './Tabs/HodDetails';
 import DeanDetails from './Tabs/DeanDetails';
 import DeanAction from './Actions/DeanAction';
 
@@ -48,19 +47,17 @@ function ApplicationData({ data, user, role, links }) {
                             {(showClass(data.status, "0") && role === "1") &&
                                 <Tab value="faculty approval" label="Take Action" />
                             }
-                            {(showClass(data.status, "1") || showClass(data.status, "2") || showClass(data.status, "3")) &&
-                                <Tab value="faculty approved" label="Supervisor" />
+                            {(showClass(data.status, "1") || showClass(data.status, "2") || showClass(data.status, "3") || showClass(data.status, "4") || showClass(data.status, "5")) &&
+                                <Tab value="faculty approved" label="Faculty" />
                             }
                             {(showClass(data.status, "1") && role === "2") &&
                                 <Tab value="HOD section approval" label="Take Action" />
                             }
-                            {(showClass(data.status, "2") || showClass(data.status, "3")) &&
-                                <Tab value="HOD section approved" label="HOD Section" />
-                            }
+
                             {(showClass(data.status, "2") && role === "3") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }
-                            {(showClass(data.status, "3") || showClass(data.status, "4")) &&
+                            {(showClass(data.status, "3") || showClass(data.status, "4") || showClass(data.status, "5")) &&
                                 <Tab value="research section approved" label="Research Section" />
                             }
                             {(showClass(data.status, "3") && role === "4") &&
@@ -101,9 +98,7 @@ function ApplicationData({ data, user, role, links }) {
                         <HodAction user={user} data={data} />
                     </TabPanel>
 
-                    <TabPanel value="HOD section approved">
-                        <HodDetails data={data} />
-                    </TabPanel>
+
 
                     <TabPanel value="research section approval">
                         <ResearchAction user={user} data={data} />

@@ -34,7 +34,7 @@ export default function Upload({ setShowModal, setUploadImage, setImageFile }) {
 
                     <label
                         htmlFor="file-upload"
-                        className=" h-20 w-auto px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500"
+                        className=" h-20 w-auto px-3 py-1 text-sm font-bold text-blue-200 transition-colors duration-300 transform bg-blue-600 rounded cursor-pointer hover:bg-blue-500"
                     >
                         <span>Upload image</span>
                         <input

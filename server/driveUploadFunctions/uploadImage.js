@@ -3,10 +3,10 @@ const createClientDrive = require('./configDriveClient');
 const fs = require('fs');
 const stream = require("stream"); // Added
 
-async function uploadImageDrive(imageData, parentId, email) {
+async function uploadImageDrive(imageData, parentId, email, name) {
     const clientDrive = createClientDrive();
 
-    const fileName = "facultySign.jpg";
+    const fileName = name;
     const fileMetadata = {
         name: fileName, // Replace with your desired file name
         parents: [parentId], // Replace with the ID of the destination folder

@@ -13,6 +13,9 @@ const AppData = require('../model/applicationData');
 // credentials import
 require('dotenv').config();
 
+const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
+const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
+const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
 
 router.post("/researchApprovedApps", async (req, res) => {
 
@@ -28,13 +31,10 @@ router.post("/researchApprovedApps", async (req, res) => {
 
 router.post('/accountApproveOrDisapprove', async (req, res) => {
     const {
-        id, status,
+        id, status, image,
         balanceAvailable, grantUtilized, passedForPayment,
-        accountRemarks } = req.body;
-    // Debug Purpose
-    // console.log(id); console.log(status);
-    // console.log(passedForPayment); console.log(balanceAvailable);
-    // console.log(grantUtilized); console.log(accountRemarks);
+        remarksAccount } = req.body;
+
 
 
     try {
@@ -46,28 +46,38 @@ router.post('/accountApproveOrDisapprove', async (req, res) => {
         }
         var bearerToken = bearerHeader.split(" ")[1];
 
-        // console.log( "Student Side Token: " + bearerToken);
-
         if (!bearerToken) {
+            console.log("No Token");
             return res.status(422).json({ error: "No Token" });
         }
-
         // verfiy the token
         var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
-
         //setting email from decode
         const userEmail = decode.email;
 
         const appData = await AppData.findById(id);
+
         if (appData.status !== "3")
             return res.status(422).json("Can't Approve Or Disapprove..");
 
+
+        const applicationFolderName = appData.conferenceStarts + "-" + appData.conferenceEnds + "__" + appData.nameOfConference;
+        const applicationFolderId = await searchDriveFolder(applicationFolderName);
+        const accountSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "accountSign.jpg");
+
+        if (accountSignId === null) {
+            return res.status(422).json("Error Occurred..");
+        }
+
+        const accountSignLink = await createPublicUrl(accountSignId);
+        // console.log(accountSignLink);
         await AppData.findByIdAndUpdate(id, {
             status: status,
             balanceAvailable: balanceAvailable,
             grantUtilized: grantUtilized,
             passedForPayment: passedForPayment,
-            remarksAccounts: accountRemarks,
+            remarksAccounts: remarksAccount,
+            accountSignLink: accountSignLink,
             lastModified: userEmail,
         });
         return res.status(200).json("Updated..");

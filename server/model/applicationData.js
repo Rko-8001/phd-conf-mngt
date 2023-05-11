@@ -95,21 +95,52 @@ const applicationData = new mongoose.Schema({
         type: Boolean,
         // require: true
     },
+
+
+
     facultySignLink: {
         type: String,
     },
+
+
+    hodSignLink: {
+        type: String,
+    },
+
+
     grantEligibility: {
         type: String
     },
     remarksResearch: {
         type: String
     },
+    researchSignLink: {
+        type: String
+    },
+
+
+    balanceAvailable: {
+        type: String
+    },
+    grantUtilized: {
+        type: String
+    },
+    passedForPayment: {
+        type: String
+    },
     remarksAccounts: {
         type: String
     },
-    remarksDean: {
+    accountSignLink: {
         type: String
     },
+
+
+    deanSignLink: {
+        type: String
+    },
+
+
     lastModified: {
         type: String,
     },
