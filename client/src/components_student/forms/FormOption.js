@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Flag from 'react-world-flags'
 import { FaGlobe } from 'react-icons/fa';
+import { FaDollarSign } from 'react-icons/fa';
 
 const formOptions = [
     {
@@ -9,7 +10,7 @@ const formOptions = [
         title: 'Wanna attend in abroad?',
         href: '#',
         description:
-            "If you want to attend the conference in abroad, You need to fill this application form with supporting doucment attached. First Time, Please refer to User Guide. ",
+            "If you want to attend the conference in abroad, You need to fill this application form with supporting document attached. First Time, Please refer to User Guide. ",
         category: { title: 'Application', href: '' },
         function: "goAbroad"
 
@@ -19,13 +20,34 @@ const formOptions = [
         title: 'Wanna Attend within India?',
         href: '#',
         description:
-            "If you want to attend the conference within india, You need to fill this application form with supporting doucment attached. First Time, Please refer to User Guide. ",
+            "If you want to attend the conference within india, You need to fill this application form with supporting document attached. First Time, Please refer to User Guide. ",
         category: { title: 'Application', href: '#' },
         function: "goIndia"
         // <IoMdFlag color="#FF9933" size={32} />
 
     },
+    // {
+    //     id: 1,
+    //     title: 'Fill Settlement Form?',
+    //     href: '#',
+    //     description:
+    //         "If you want to attend the conference within india, You need to fill this application form with supporting doucment attached. First Time, Please refer to User Guide. ",
+    //     category: { title: 'Application', href: '#' },
+    //     function: "goSettlement"
+    //     // <IoMdFlag color="#FF9933" size={32} />
+
+    // },
+
 ]
+const settlement = {
+    id: 1,
+    title: 'Fill Settlement Form?',
+    href: '#',
+    description:
+        "If you want to fill the settlment form, You need to fill this application form with supporting document attached. First Time, Please refer to User Guide. ",
+    category: { title: 'Application', href: '#' },
+    function: "goSettlement"
+}
 
 export default function FormOption() {
 
@@ -37,6 +59,10 @@ export default function FormOption() {
 
     const goAbroad = () => {
         navigate('/studentLogin/formAbroad');
+    }
+    const goSettlement = () => {
+        // alert("navigate('./studentLogin/formSettlement');")
+        navigate('.././formSettlement');
     }
 
     return (
@@ -57,6 +83,9 @@ export default function FormOption() {
                                 if (post.function === "goAbroad") {
                                     goAbroad();
                                 }
+                                else if (post.function === "goSettlement") {
+                                    goSettlement();
+                                }
                                 else {
                                     goIndia();
                                 }
@@ -68,7 +97,7 @@ export default function FormOption() {
                                         >
                                             {post.category.title}
                                         </div>
-                                            {post.title==='Wanna Attend within India?'?<Flag className='h-8 w-auto' code='IN'/>:<FaGlobe color="green" size={32} />}
+                                        {post.title === 'Wanna Attend within India?' ? <Flag className='h-8 w-auto' code='IN' /> : <FaGlobe color="green" size={32} />}
                                     </div>
                                     <div className="group relative">
                                         <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
@@ -86,6 +115,35 @@ export default function FormOption() {
                                 </article>
                             </button>
                         ))}
+                        <div className='tracking-wide  transition-colors duration-300 transform  rounded-lg hover:bg-gray-50 focus:outline-none focus:ring focus:ring-gray-100 focus:ring-opacity-80'>
+
+                            <article onClick={(e) => {
+                                e.preventDefault();
+                                goSettlement();
+                            }} key={settlement.id} className="mx-2 flex max-w-xl flex-col items-start justify-between">
+                                <div className="flex items-center gap-x-4 text-xs">
+                                    <div className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                                    >
+                                        {settlement.category.title}
+                                    </div>
+                                    {/* {settlement.title === 'Wanna Fill Settlement Form?' ? <Flag className='h-8 w-auto' code='IN' /> : <FaGlobe color="green" size={32} />} */}
+                                    <FaDollarSign size={32} />
+                                </div>
+                                <div className="group relative">
+                                    <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                        <div>
+                                            <span className="absolute inset-0" />
+                                            {settlement.title}
+                                        </div>
+                                    </h3>
+                                </div>
+                                <div className="group relative">
+                                    <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                                    </h3>
+                                    <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">{settlement.description}</p>
+                                </div>
+                            </article>
+                        </div>
                     </div>
                 </div>
             </div >

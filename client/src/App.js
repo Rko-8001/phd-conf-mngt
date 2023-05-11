@@ -46,7 +46,7 @@ import {
   StudentFormAbroad, StudentFormIndia,
   StudentFormOption,
   StudentHomePage, StudentProfile,
-  StudentApplicationsPage, StudentSpecficApplication
+  StudentApplicationsPage, StudentSpecficApplication, StudentFormSettlement
 } from './routes/StudentComponent';
 import Footer from './components_student/Side/Footer';
 
@@ -66,6 +66,8 @@ function App() {
           <Route path="profile" element={<StudentRoute Component={StudentProfile} />} />
           <Route path="application" element={<StudentRoute Component={StudentApplicationsPage} />} />
           <Route path="viewApplication" element={<StudentRoute Component={StudentSpecficApplication} />} />
+          <Route path="formSettlement" element={<StudentRoute Component={StudentFormSettlement} />} />
+
         </Route>
 
         <Route path='/facultyLogin'>

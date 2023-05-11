@@ -46,7 +46,6 @@ export default function FacultyApplication() {
                     "authorization": `Bearer ${token}`
                 },
             });
-            console.log("hi");
             return resp.json();
         } catch (error) {
             console.log(error);
@@ -56,16 +55,10 @@ export default function FacultyApplication() {
     useEffect(() => {
         getAppInfo().then((resp) => {
             setApps(resp.data);
-            console.log(apps);
-            delay(100).then(() => {
-                //good
-                setIsLoading(false);
-            }).catch((error) => {
-                console.log(error);
-            })
+            setIsLoading(false);
 
         }).catch((e) => {
-            console.log(e.message)
+            console.log(e)
         });
     }, []);
 

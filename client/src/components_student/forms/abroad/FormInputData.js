@@ -213,7 +213,7 @@ export default function InputData(props) {
               />
             </div>
           </div>
-          
+
           <br />
           <div className="col-span-full">
             <label htmlFor="fundingSources" className="block text-sm font-medium leading-6 text-gray-900">

@@ -82,19 +82,11 @@ function Application() {
     getBasicInfo().then((resp) => {
       setApps(resp);
       setApps2(resp);
-      console.log(resp);
       apps2.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
-      console.log("unsorted");
-      console.log(apps);
-      console.log("sorted");
-      console.log(apps2);
+      
 
-      // delay of 2 seconds
-      delay(100).then(() => {
-        setIsLoading(false);
-      }).catch((error) => {
-        console.log(error);
-      })
+      setIsLoading(false);
+      
 
 
     }).catch((e) => {

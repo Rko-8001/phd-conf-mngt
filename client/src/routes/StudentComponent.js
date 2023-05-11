@@ -10,6 +10,7 @@ import Profile from '../components_student/profile/Profile';
 import Applications from '../components_student/applications/Applications';
 import ViewApplication from '../components_student/applications/ViewApplication';
 import Footer from '../components_student/Side/Footer'
+import FormSettlementData from '../components_student/forms/settlement/FormSettlementData';
 
 
 export const StudentHomePage =
@@ -22,7 +23,7 @@ export const StudentHomePage =
                 <Home />
             </div>
         </div>
-        <Footer/>
+        <Footer />
     </>
 
 export const StudentFormOption =
@@ -32,7 +33,7 @@ export const StudentFormOption =
             <SideBar />
             <FormOption />
         </div>
-        <Footer/>
+        <Footer />
     </>
 
 export const StudentFormIndia =
@@ -42,7 +43,7 @@ export const StudentFormIndia =
             <SideBar />
             <FormInputIndia />
         </div>
-        <Footer/>
+        <Footer />
     </>
 
 export const StudentFormAbroad =
@@ -52,7 +53,16 @@ export const StudentFormAbroad =
             <SideBar />
             <FormInputAbroad />
         </div>
-        <Footer/>
+        <Footer />
+    </>
+export const StudentFormSettlement =
+    <>
+        <UpperNav />
+        <div className='flex'>
+            <SideBar />
+            <FormSettlementData />
+        </div>
+        <Footer />
     </>
 export const StudentProfile =
     <>
@@ -61,7 +71,7 @@ export const StudentProfile =
             <SideBar />
             <Profile />
         </div>
-        <Footer/>
+        <Footer />
     </>
 
 export const StudentApplicationsPage =
@@ -71,12 +81,12 @@ export const StudentApplicationsPage =
             <SideBar />
             <Applications />
         </div>
-        <Footer/>
+        <Footer />
     </>
 
 export const StudentSpecficApplication =
     <>
         <UpperNav />
         <ViewApplication />
-        <Footer/>
+        <Footer />
     </>
