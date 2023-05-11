@@ -95,6 +95,9 @@ const applicationData = new mongoose.Schema({
         type: Boolean,
         // require: true
     },
+    facultySignLink: {
+        type: String,
+    },
     grantEligibility: {
         type: String
     },
