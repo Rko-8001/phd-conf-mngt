@@ -12,6 +12,8 @@ import { BASE_URL } from '../../../components/requests/URL';
 export default function FormInputAbroad() {
 
 
+    const [freezeButton, setFreezeButton] = useState(false);
+
     const [generalInfo, setGeneralInfo] = useState({});
     const [conferenceInfo, setConferenceInfo] = useState({});
 
@@ -166,6 +168,10 @@ export default function FormInputAbroad() {
 
     const requestGrant = async (e) => {
         e.preventDefault();
+        if (freezeButton === true)
+            return;
+
+        setFreezeButton(true);
 
         const formData = new FormData();
 
@@ -220,13 +226,11 @@ export default function FormInputAbroad() {
             },
             body: formData
         });
-        
-        if(resp.status === 200)
-        {
+
+        if (resp.status === 200) {
             console.log("Success");
         }
-        else 
-        {
+        else {
             window.alert("Error");
         }
 
@@ -311,6 +315,8 @@ export default function FormInputAbroad() {
                 getFlightParts={getFlightParts}
 
                 fileFunction={fileFunction}
+
+                freezeButton={freezeButton}
 
                 requestGrant={requestGrant}
             />
