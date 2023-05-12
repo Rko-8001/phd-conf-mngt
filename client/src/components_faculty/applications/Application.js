@@ -30,7 +30,7 @@ export default function FacultyApplication() {
             apps.sort((a, b) => a.email.localeCompare(b.email));
         }
         else if (index === 2) {
-            apps.sort((a, b) => a.venueOfConference.localeCompare(b.venueOfConference));
+            apps.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
         }
         console.log(apps)
     }

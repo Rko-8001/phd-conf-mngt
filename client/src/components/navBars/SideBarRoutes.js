@@ -8,9 +8,9 @@ import User from './assets/User.png';
 
 export const StudentSideBar = [
     { title: "Dashboard", src: Chart_fill, link: "/studentLogin" },
-    { title: "Profile", src: Chart_fill, link: "/studentLogin/Profile" },
-    { title: "Settlement", src: Chat, link: '/studentLogin', gap: true },
-    { title: "Applications", src: User, link: "/studentLogin/application" },
+    { title: "Profile", src: Chart_fill, link: "/studentLogin/Profile"},
+    // { title: "Settlement", src: Chat, link: '/studentLogin', gap: true },
+    { title: "Applications", src: User, link: "/studentLogin/application",gap: true  },
     { title: "Fill Form", src: Calendar, link: "/studentLogin/formFill" },
     { title: "Logout ", src: Folder, gap: true, link: "logout" },
 ];

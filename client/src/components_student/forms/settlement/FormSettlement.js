@@ -117,20 +117,20 @@ export default function InputData(props) {
               </div>
             </div>
           </div>
-          <br/>
-            <div className="sm:col-span-3">
-              <label htmlFor="society" className="block text-sm font-medium leading-6 text-gray-900">
-                Do you have any period of time for which you want to claim DA
-              </label>
-              <div className="">
-                <input id="societyRecognized" type="radio"
-                  onChange={props.getConferenceInfo} value="Yes" name="societyRecognized" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
-                <input id="societyRecognized" type="radio"
-                  onChange={props.getConferenceInfo} value="No" name="societyRecognized" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label for="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
-              </div>
+          <br />
+          <div className="sm:col-span-3">
+            <label htmlFor="society" className="block text-sm font-medium leading-6 text-gray-900">
+              Do you have any period of time for which you want to claim DA
+            </label>
+            <div className="">
+              <input id="societyRecognized" type="radio"
+                onChange={props.getConferenceInfo} value="Yes" name="societyRecognized" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              <label for="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+              <input id="societyRecognized" type="radio"
+                onChange={props.getConferenceInfo} value="No" name="societyRecognized" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              <label for="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
             </div>
+          </div>
 
           <br />
           <p className="py-4">Period of Event for which claimant doesn't want to claim DA:</p>
@@ -281,7 +281,7 @@ export default function InputData(props) {
           <li>All claims mentioned in this form correspond to actual expenditure incurred by me for which no reimbursement have been made from any other source (Govt/Pvt/Others) </li>
           <li>I was not provided with any free boarding/lodging/conveyence/registration fee waiver/travel coupons for which claim has been made.</li>
           <br />
-          <br/>
+          <br />
           <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Your Signature</label>
           <div className="sm:col-span-3">
             <div className="relative flex gap-x-3">
