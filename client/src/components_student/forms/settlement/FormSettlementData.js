@@ -135,16 +135,16 @@ export default function FormSettlementData() {
     })
 
     const checkData = () => {
-        if (!checkConfDetails(conferenceInfo)) {
-            window.alert('Please fill conference Details properly.');
-            return false;
-        }
-        const fin = checkFinances(travel, food, stay, tableData);
-        if (fin === "0") {
-            window.alert("Your Expenses Sum is zero. please review the form.");
-            return false;
-        }
-        return true;
+        // if (!checkConfDetails(conferenceInfo)) {
+        //     window.alert('Please fill conference Details properly.');
+        //     return false;
+        // }
+        // const fin = checkFinances(travel, food, stay, tableData);
+        // if (fin === "0") {
+        //     window.alert("Your Expenses Sum is zero. please review the form.");
+        //     return false;
+        // }
+        // return true;
     }
 
     const submitSettlement = async (e) => {

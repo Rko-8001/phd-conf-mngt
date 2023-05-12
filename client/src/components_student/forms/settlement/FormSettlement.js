@@ -1,12 +1,53 @@
+import React, { useState, useEffect } from 'react'
+import { Alert, AlertTitle } from '@mui/material'
+import { BsAsterisk } from 'react-icons/bs';
 import { Container } from '@mui/material'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Switch } from '@headlessui/react'
 import { AiOutlineEllipsis } from 'react-icons/ai';
+import { getUserToken, setAppToken } from '../../../components_login/Tokens';
+import { BASE_URL } from '../../../components/requests/URL';
 
 
+const data = [];
+// const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
+const options = [];
 export default function InputData(props) {
+
+  const [apps, setApps] = useState(data);
+  const [options, setOptions] = useState([]);
+
+  const getBasicInfo = async (req, res) => {
+    try {
+      const token = getUserToken();
+      const resp = await fetch(`${BASE_URL}/studentApplicationView`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": `Bearer ${token}`
+        },
+      });
+      const data = await resp.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getBasicInfo().then((resp) => {
+
+      setApps(resp.map(resp => resp.nameOfConference));
+      // console.log(resp.nameOfConference);
+      // console.log(resp.map(resp => resp.nameOfConference))
+      // options = apps.map(apps => apps.nameOfConference);
+
+    }).catch((e) => {
+      console.log(e.message)
+    });
+  }, []);
 
   const tableRows = props.tableData.map((info) => {
     return (
@@ -24,15 +65,51 @@ export default function InputData(props) {
       </tr>
     );
   })
+  // const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
+  const [selectedOption, setSelectedOption] = useState();
 
+  const handleChange = (event) => {
+    const option = event.target.value;
+    setSelectedOption(option);
+  };
+  const [alert, setAlert] = useState(true);
 
   return (
     <Container>
+      {alert &&
+            <Alert
+              severity="warning"
+              onClose={() => {
+                setAlert(false);
+              }}
+            >
+              <AlertTitle>Important</AlertTitle>
+              <div className="flex">
+                Fields with <BsAsterisk className='text-[#FF0000] mx-2 h-2' />  are Required.
+              </div>
+            </Alert>
+          }
 
       <form>
         <br />
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">Travelling Allowance Reimbursement/Settlement Form:</h2>
+          <br />
+          <br />
+          <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
+            Select the application for Settlement
+          </label>
+          <br />
+          <select className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' value={selectedOption} onChange={handleChange}>
+            {console.log(apps)}
+            {apps.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          {/* <h2 className="text-base font-semibold leading-7 text-gray-900">Select the application for Settlement</h2> */}
+
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
             <div className="sm:col-span-3">
