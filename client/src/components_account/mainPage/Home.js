@@ -106,6 +106,7 @@ export default function Home() {
                                             <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Available Balance:</h1>
 
                                             <p class="text-gray-500 dark:text-gray-300">
+                                                
                                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
                                             </p>
 
