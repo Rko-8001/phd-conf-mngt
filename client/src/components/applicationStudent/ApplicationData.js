@@ -6,7 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PersonalDetails from './Tabs/PersonalDetails';
 import FinanceDetails from './Tabs/FinanceDetails';
-import ConferenceDetails from './Tabs/ConferenceDetails';
+import ConferenceDetailsIndia from './Tabs/ConferenceDetailsIndia';
 import FacultyDetails from './Tabs/FacultyDetails'
 import ResearchSection from './Tabs/ResearchSection';
 import AccountSection from './Tabs/AccountSection';
@@ -78,7 +78,15 @@ function ApplicationData({ data, user, role, links }) {
                     </TabPanel>
 
                     <TabPanel value="conference details">
-                        <ConferenceDetails user={user} data={data} links={links} />
+                        {
+                            data.type === 1
+                                ?
+                                <>
+                                    Hello
+                                </>
+                                :
+                                <ConferenceDetailsIndia user={user} data={data} links={links} />
+                        }
                     </TabPanel>
 
                     <TabPanel value="finance details">

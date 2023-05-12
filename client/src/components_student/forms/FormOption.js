@@ -16,7 +16,7 @@ const formOptions = [
 
     },
     {
-        id: 1,
+        id: 2,
         title: 'Wanna Attend within India?',
         href: '#',
         description:
@@ -77,7 +77,7 @@ export default function FormOption() {
                     </div>
                     <div className="content-center mx-auto mt-5 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                         {formOptions.map((post) => (
-                            <button onClick={(e) => {
+                            <button key={post.id} onClick={(e) => {
                                 e.preventDefault();
 
                                 if (post.function === "goAbroad") {
@@ -91,7 +91,7 @@ export default function FormOption() {
                                 }
                             }} className=" tracking-wide  transition-colors duration-300 transform  rounded-lg hover:bg-gray-50 focus:outline-none focus:ring focus:ring-gray-100 focus:ring-opacity-80">
 
-                                <article key={post.id} className="mx-2 flex max-w-xl flex-col items-start justify-between">
+                                <article className="mx-2 flex max-w-xl flex-col items-start justify-between">
                                     <div className="flex items-center gap-x-4 text-xs">
                                         <div className="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
                                         >

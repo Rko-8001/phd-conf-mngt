@@ -15,6 +15,7 @@ const AppData = require('../model/applicationData');
 require('dotenv').config();
 
 const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
+const AppDataAbroad = require('../model/applicationAbroad');
 
 // info Loading 
 router.post('/infoLoading', async (req, res) => {
@@ -218,12 +219,36 @@ router.post('/viewAnApplication', async (req, res) => {
     try {
         const data = await AppData.findById(id);
         const user = await User.findOne({ email: data.email });
+        if (data.type === 1) {
+            const dataAbroad = await AppDataAbroad.findById(id);
 
-        const copyofAbstractUrl = await createPublicUrl(data.abstractFileId);
-        const copyOfAcceptanceUrl = await createPublicUrl(data.acceptanceFileId);
-        const copyOfConferenceBrochureUrl = await createPublicUrl(data.brochureFileId);
+            const invitationLetterAdditonalUrl = await createPublicUrl(dataAbroad.invitationLetterAdditionalFileId);
+            const letterOfInvitationUrl = await createPublicUrl(dataAbroad.letterOfInvitationFileId);
+            const conferenceBrochureUrl = await createPublicUrl(dataAbroad.conferenceBrochureFileId);
+            const copyOfAbstractUrl = await createPublicUrl(dataAbroad.copyOfAbstractFileId);
+            const accomodationCostUrl = await createPublicUrl(dataAbroad.accomodationCostFileId);
+            const acceptanceOfPaperUrl = await createPublicUrl(dataAbroad.acceptanceOfPaperFileId)
+            
+            return res.status(200).json(
+                {
+                    data: dataAbroad,
+                    applicantInfo: user,
+                    invitationAdditonalUrl: invitationLetterAdditonalUrl,
+                    invitationUrl: letterOfInvitationUrl,
+                    abstractUrl: copyOfAbstractUrl,
+                    acceptanceUrl: acceptanceOfPaperUrl,
+                    conferenceBrochureUrl: conferenceBrochureUrl,
+                    accmodationUrl: accomodationCostUrl
+                });
+        }
+        else {
+            const copyofAbstractUrl = await createPublicUrl(data.abstractFileId);
+            const copyOfAcceptanceUrl = await createPublicUrl(data.acceptanceFileId);
+            const copyOfConferenceBrochureUrl = await createPublicUrl(data.brochureFileId);
 
-        return res.status(200).json({data: data, applicantInfo: user, abstractUrl: copyofAbstractUrl, acceptanceUrl: copyOfAcceptanceUrl, conferenceBrochureUrl: copyOfConferenceBrochureUrl });
+            return res.status(200).json({ data: data, applicantInfo: user, abstractUrl: copyofAbstractUrl, acceptanceUrl: copyOfAcceptanceUrl, conferenceBrochureUrl: copyOfConferenceBrochureUrl });
+        }
+
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: error });

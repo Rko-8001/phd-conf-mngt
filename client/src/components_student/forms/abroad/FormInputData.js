@@ -190,8 +190,8 @@ export default function InputData(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {flights(1, "destination1", "arrival1", props.getFlightDetails, props.destination1, props.arrival1)}
-                  {flights(2, "destination2", "arrival2", props.getFlightDetails, props.destination2, props.arrival2)}
+                  {flights(1, "destination1", "arrival1", props.getFlightParts, props.destination1, props.arrival1)}
+                  {flights(2, "destination2", "arrival2", props.getFlightParts, props.destination2, props.arrival2)}
                 </tbody>
               </table>
             </div>
@@ -377,8 +377,8 @@ export default function InputData(props) {
               />
 
               <Enclosures
-                title="Accomdation Cost/details"
-                name="accomdationCost"
+                title="Accomodation Cost/details"
+                name="accomodationCost"
                 onChangeFunction={props.fileFunction}
                 type="file"
                 acceptType="application/pdf"
@@ -402,7 +402,7 @@ export default function InputData(props) {
             onClick={props.requestGrant}
             className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Request Grant
+            {props.freezeButton ? "Submitting" : "Request Grant"}
           </button>
         </div>
       </form>

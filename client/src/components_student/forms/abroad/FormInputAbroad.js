@@ -12,6 +12,8 @@ import { BASE_URL } from '../../../components/requests/URL';
 export default function FormInputAbroad() {
 
 
+    const [freezeButton, setFreezeButton] = useState(false);
+
     const [generalInfo, setGeneralInfo] = useState({});
     const [conferenceInfo, setConferenceInfo] = useState({});
 
@@ -42,7 +44,6 @@ export default function FormInputAbroad() {
 
     function getFlightParts(e) {
         const { name, value } = e.target;
-
         if (name === "arrival1") {
             setArrival1(value);
         }
@@ -105,7 +106,7 @@ export default function FormInputAbroad() {
     const getConferenceInfo = ((e) => {
 
         const { name, value } = e.target;
-        console.log(name + " " + value);
+
         setConferenceInfo(prevState => ({
             ...prevState,
             [name]: value
@@ -113,80 +114,126 @@ export default function FormInputAbroad() {
     });
 
     const getAdvance = e => {
-        console.log("aaya");
         setAdvance(!advance);
     }
 
-    const checkData = () => {
-        if (!checkConfDetails(conferenceInfo)) {
-            window.alert('Please fill conference Details properly.');
-            return false;
-        }
-        return true;
+    function setFinances() {
+        const finances = [];
+        finances.push({
+            "particular": "Travel",
+            "amount": travel
+        });
+        finances.push({
+            "particular": "Visa Charges",
+            "amount": visaCharges
+        });
+        finances.push({
+            "particular": "Registration Fee",
+            "amount": registrationFee
+        });
+        finances.push({
+            "particular": "Food",
+            "amount": food
+        });
+        finances.push({
+            "particular": "Stay",
+            "amount": stay
+        });
+        finances.push({
+            "particular": "Medical Insurance",
+            "amount": medicalInsurance
+        });
+        finances.push({
+            "particular": "Others",
+            "amount": others
+        });
+        return finances;
+
+    }
+
+    function setFlightDetails() {
+        const flightDetails = [];
+        flightDetails.push({
+            "serialNo": "1",
+            "arrival": arrival1,
+            "destination": destination1
+        });
+        flightDetails.push({
+            "serialNo": "2",
+            "arrival": arrival2,
+            "destination": destination2
+        });
+        return flightDetails;
     }
 
     const requestGrant = async (e) => {
         e.preventDefault();
-
-
-        // save all data
-        const email = generalInfo.email;
-        const status = "0";
-        const mobileNo = generalInfo.mobileNo;
-        const bankAccountNo = generalInfo.bankAccNo;
-        const nameOfConference = conferenceInfo.nameOfConference;
-        const venueOfConference = conferenceInfo.venueOfConference;
-        const paperInConference = conferenceInfo.paperInConference;
-        const conferenceStarts = dayjs(dateStarts).format('DD/MM/YYYY')
-        const conferenceEnds = dayjs(dateEnds).format('DD/MM/YYYY')
-
-        const studentLeaveStarts = dayjs(leaveStarts).format('DD/MM/YYYY')
-        const studentLeaveEnds = dayjs(leaveEnds).format('DD/MM/YYYY')
-
-        const financialSupport = conferenceInfo.financialSupport;
-        const advances = advance;
-        const finances = [];
-        finances.push({
-            "particular": "travel",
-            "amount": travel
-        });
-        finances.push({
-            "particular": "food",
-            "amount": food
-        });
-        finances.push({
-            "particular": "stay",
-            "amount": stay
-        });
-
-
-        if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
+        if (freezeButton === true)
             return;
+
+        setFreezeButton(true);
+
+        const formData = new FormData();
+
+        formData.append("email", generalInfo.email);
+        formData.append("entryNo", generalInfo.entryNo);
+
+        formData.append("status", "0");
+        formData.append("type", "1");
+
+        formData.append("mobileNo", generalInfo.mobileNo);
+        formData.append("ifscCode", generalInfo.ifsc);
+        formData.append("bankAccountNo", generalInfo.accountNo);
+
+        formData.append("nameOfConference", conferenceInfo.nameOfConference);
+        formData.append("venueOfConference", conferenceInfo.venueOfConference);
+        formData.append("nameOfSociety", conferenceInfo.nameOfSociety);
+        formData.append("societyRecognized", conferenceInfo.societyRecognized);
+        formData.append("reasonToAttend", conferenceInfo.reasonToAttend);
+        formData.append("paperInConference", conferenceInfo.paperInConference);
+        formData.append("fundingSources", conferenceInfo.fundingSources);
+        formData.append("purposeOfVisit", conferenceInfo.purposeOfVisit);
+        formData.append("justification", conferenceInfo.justification);
+        formData.append("sponsorship", conferenceInfo.sponsorship);
+        formData.append("financialSupport", conferenceInfo.financialSupport);
+        formData.append("advances", advance);
+
+
+        formData.append("conferenceStarts", dayjs(dateStarts).format('DD/MM/YYYY'));
+        formData.append("conferenceEnds", dayjs(dateEnds).format('DD/MM/YYYY'));
+
+        formData.append("studentLeaveStarts", dayjs(leaveStarts).format('DD/MM/YYYY'));
+        formData.append("studentLeaveEnds", dayjs(leaveEnds).format('DD/MM/YYYY'));
+
+        const flightDetails = setFlightDetails();
+        const finances = setFinances();
+        formData.append("flightDetails", JSON.stringify(flightDetails));
+        formData.append("finances", JSON.stringify(finances));
+
+        formData.append("letterOfInvitation", enclosures.letterOfInvitation);
+        formData.append("copyOfAbstract", enclosures.copyOfAbstract);
+        formData.append("conferenceBrochure", enclosures.conferenceBrochure);
+        formData.append("acceptanceOfPaper", enclosures.acceptanceOfPaper);
+        formData.append("accomodationCost", enclosures.accomodationCost);
+        formData.append("invitationLetterAdditional", enclosures.invitationLetter);
+
+        const token = getUserToken();
+
+        const resp = await fetch(`${BASE_URL}/studentApplicationSubmitAbroad`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: formData
+        });
+
+        if (resp.status === 200) {
+            console.log("Success");
         }
-        // const res = await fetch("/studentApplicationSubmit", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         email, status,
-        //         mobileNo, bankAccountNo,
-        //         nameOfConference, venueOfConference, paperInConference,
-        //         financialSupport,
-        //         advances, finances,
-        //         conferenceStarts, conferenceEnds,
-        //         studentLeaveStarts, studentLeaveEnds,
-        //     })
-        // });
+        else {
+            window.alert("Error");
+        }
 
-        // logic
-
-        // if (res.status === 422) {
-        //     window.alert("Error Occurred! Please Try Again.");
-        // }
-        // else {
-        //     window.alert("Application Submitted");
-        // }
     }
 
     const getBasicInfo = async (req, res) => {
@@ -268,7 +315,9 @@ export default function FormInputAbroad() {
                 getFlightParts={getFlightParts}
 
                 fileFunction={fileFunction}
-                
+
+                freezeButton={freezeButton}
+
                 requestGrant={requestGrant}
             />
         </>
