@@ -13,7 +13,8 @@ import { tooltipClasses } from "@mui/material";
 
 function FormPrint({ data, user }) {
   const classes = "";
-
+  console.log(data);
+  console.log(user);
   // const getFinances = (finance) => {
   //     var totalAmount = 0;
 
@@ -32,6 +33,15 @@ function FormPrint({ data, user }) {
       <TableCell style={{ fontSize: "16px" }}>{pa?.amount} Rs</TableCell>
     </TableRow>
   ));
+  function extractFileId(driveLink) {
+    const startIndex = driveLink.indexOf('/file/d/') + 8;
+    const endIndex = driveLink.indexOf('/view');
+    if (startIndex !== -1 && endIndex !== -1) {
+      return driveLink.substring(startIndex, endIndex);
+    } else {
+      return null;
+    }
+  }
 
   // <<<<<<< HEAD
   return (
@@ -345,17 +355,20 @@ function FormPrint({ data, user }) {
           <Grid className="py-2 flex flex-col" container spacing={2}>
             <Grid item className="flex-1">
               <pre>
+              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.facultySignLink)}`} alt="sign" />
                 <b>Signature of PhD Scholar</b>
               </pre>
               <pre></pre>
             </Grid>
             <Grid item className="flex-1">
               <pre>
+              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.facultySignLink)}`} alt="sign" />
                 <b>Supervisors</b>{" "}
               </pre>
             </Grid>
             <Grid item className="flex-1">
               <pre>
+              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.hodSignLink)}`} alt="sign" />
                 <b>Head of the Department</b>
               </pre>
             </Grid>
@@ -387,7 +400,7 @@ function FormPrint({ data, user }) {
 
               <Grid className="py-2" container spacing={2}>
                 <Grid item xs={7}>
-                  <pre>Grant Eligibility Rs.400000</pre>
+                  <pre>Grant Eligibility Rs.{data?.grantEligibility}</pre>
                 </Grid>
                 <pre></pre>
               </Grid>
@@ -415,15 +428,17 @@ function FormPrint({ data, user }) {
                 </Grid>
                 <pre></pre>
               </Grid>
-              <Grid className="py-2" container spacing={2} alignItems="center">
+              <Grid className="ml-10" container spacing={2} alignItems="center">
                 <Grid item xs={6}>
                   <pre>
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.researchSignLink)}`} alt="sign" />
                     <b>Dealing Assistant </b>
                   </pre>
                 </Grid>
-                <Grid item xs={5} style={{ textAlign: "right" }}>
-                  <pre style={{ margin: 0 }}>
-                    <b>Assistant Registrar</b>
+                <Grid item xs={6} mx-10>
+                  <pre>
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.researchSignLink)}`} alt="sign" />
+                    <b>Assistant registrar </b>
                   </pre>
                 </Grid>
               </Grid>
@@ -457,21 +472,21 @@ function FormPrint({ data, user }) {
 
               <Grid className="py-2" container spacing={2}>
                 <Grid item xs={7}>
-                  <pre>Grant Utilized Rs.400000</pre>
+                  <pre>Grant Utilized Rs. {data?.grantUtilized} </pre>
                 </Grid>
                 <pre></pre>
               </Grid>
 
               <Grid className="py-2" container spacing={2}>
                 <Grid item xs={7}>
-                  <pre>Balance Available Rs.60000 </pre>
+                  <pre>Balance Available Rs. {data?.balanceAvailable} </pre>
                 </Grid>
                 <pre></pre>
               </Grid>
 
               <Grid className="py-2" container spacing={2}>
                 <Grid item xs={7}>
-                  <pre>Passed for payment of Rs. </pre>
+                  <pre>Passed for payment of Rs. {data?.passedForPayment}</pre>
                 </Grid>
                 <pre></pre>
               </Grid>
@@ -483,27 +498,32 @@ function FormPrint({ data, user }) {
               </Grid>
 
               <Grid className="py-2" container spacing={2} alignItems="center">
-                <Grid item xs={5}>
+                <Grid item xs={4}>
                   <pre>
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.accountSignLink)}`} alt="sign" />
                     <b>Dealing Assistant </b>
                   </pre>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={4}>
                   <pre>
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.accountSignLink)}`} alt="sign" />
                     <b>Accounts Officer</b>
                   </pre>
                 </Grid>
-                <Grid item xs={5} style={{ textAlign: "right" }}>
-                  <pre style={{ margin: 0 }}>
+                <Grid item xs={4}>
+                  <pre >
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.accountSignLink)}`} alt="sign" />
                     <b>Deputy Registrar</b>
                   </pre>
                 </Grid>
               </Grid>
+              
             </div>
           </div>
         </Container>
         <Container style={{ fontSize: "20px" }}>
           <br />
+          
           <b>Associate Dean (PG & Research)</b>
         </Container>
         <Container>
@@ -522,8 +542,9 @@ function FormPrint({ data, user }) {
                 spacing={2}
                 justifyContent="flex-end"
               >
-                <Grid item xs={5} style={{ textAlign: "right" }}>
+                <Grid item>
                   <pre style={{ margin: 1 }}>
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.deanSignLink)}`} alt="sign" />
                     <b>Dealing Assistant </b>
                   </pre>
                 </Grid>
