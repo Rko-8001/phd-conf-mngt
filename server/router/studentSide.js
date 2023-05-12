@@ -9,7 +9,7 @@ require('../mongoDb/connection');
 // requiring user Schema 
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
-
+const AppDataAbroad = require('../model/applicationAbroad');
 
 const { genAppToken } = require('../tokens/generateToken');
 const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
@@ -160,6 +160,87 @@ router.post('/studentApplicationSubmit', async (req, res) => {
     }
 
 });
+
+// submitting application abroad 
+router.post('/studentApplicationSubmitAbroad', async (req, res) => {
+
+    var {
+        email, entryNo, mobileNo,
+        status, type,
+        bankAccountNo, ifscCode,
+        nameOfConference, venueOfConference,
+        nameOfSociety, societyRecognized, reasonToAttend,
+        paperInConference, fundingSources,
+        purposeOfVisit, justification, sponsorship,
+        financialSupport, advances,
+        conferenceStarts, conferenceEnds,
+        studentLeaveStarts, studentLeaveEnds,
+        finances, flightDetails
+    } = req.body;
+
+    const {
+        invitationLetterAdditional, letterOfInvitation,
+        conferenceBrochure, copyOfAbstract,
+        accomodationCost, acceptanceOfPaper
+    } = req.files
+
+    finances = JSON.parse(finances);
+    flightDetails = JSON.parse(flightDetails);
+
+    try {
+        // searching for student folder
+        const parentId = await searchDriveFolder(entryNo);
+        // creating application folder inside student folder
+        var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
+        const applicationFolderId = await createDriveFolder(applicationFolderName, parentId);
+
+        var invitationLetterAdditionalFileId = null;
+        invitationLetterAdditionalFileId = await uploadPdf("invitationLetterAdditional.pdf", invitationLetterAdditional.tempFilePath, applicationFolderId);
+
+        var letterOfInvitationFileId = null;
+        letterOfInvitationFileId = await uploadPdf("letterOfInvitation.pdf", letterOfInvitation.tempFilePath, applicationFolderId);
+
+        var conferenceBrochureFileId = null;
+        conferenceBrochureFileId = await uploadPdf("conferenceBrochure.pdf", conferenceBrochure.tempFilePath, applicationFolderId);
+
+        var copyOfAbstractFileId = null;
+        copyOfAbstractFileId = await uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId);
+
+        var accomodationCostFileId = null;
+        accomodationCostFileId = await uploadPdf("accomodationCost.pdf", accomodationCost.tempFilePath, applicationFolderId);
+
+        var acceptanceOfPaperFileId = null;
+        acceptanceOfPaperFileId = await uploadPdf("acceptanceOfPaper.pdf", acceptanceOfPaper.tempFilePath, applicationFolderId);
+
+        // saving data to mongo
+        const data = new AppDataAbroad(
+            {
+                email, entryNo, mobileNo,
+                status, type,
+                bankAccountNo, ifscCode,
+                nameOfConference, venueOfConference,
+                nameOfSociety, societyRecognized, reasonToAttend,
+                paperInConference, fundingSources,
+                purposeOfVisit, justification, sponsorship,
+                financialSupport, advances,
+                conferenceStarts, conferenceEnds,
+                studentLeaveStarts, studentLeaveEnds,
+                finances, flightDetails,
+                invitationLetterAdditionalFileId, letterOfInvitationFileId,
+                conferenceBrochureFileId, copyOfAbstractFileId,
+                accomodationCostFileId, acceptanceOfPaperFileId
+            });
+            // console.log(data);
+        await data.save();
+        return res.status(200).json({ message: "Application Submitted.." });
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+    }
+
+});
+
+module.exports = router;
 
 // apps view
 router.post('/studentApplicationView', async (req, res) => {

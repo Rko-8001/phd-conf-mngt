@@ -157,7 +157,7 @@ const applicationData = new mongoose.Schema({
     });
 
 
-const AppData = mongoose.model('APPDATA', applicationData);
+const AppData = mongoose.model('APPDATAINDIA', applicationData, 'appdatas');
 
 module.exports = AppData;
 

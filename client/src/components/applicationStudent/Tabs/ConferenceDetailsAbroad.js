@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ConferenceDetails({ user, data, links }) {
+function ConferenceDetailsAbroad({ user, data, links }) {
     return (
         <>
             <div className="overflow-hidden mt-2 bg-white shadow sm:rounded-lg">
@@ -115,4 +115,4 @@ function ConferenceDetails({ user, data, links }) {
     )
 }
 
-export default ConferenceDetails
+export default ConferenceDetailsAbroad

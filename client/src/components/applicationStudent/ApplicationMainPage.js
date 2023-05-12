@@ -57,9 +57,19 @@ export default function ApplicationMainPage({ role, goBack }) {
 
                 setData(resp.data);
                 setApplicantInfo(resp.applicantInfo)
-                getlinks("abstractUrl", resp.abstractUrl);
-                getlinks("acceptanceUrl", resp.acceptanceUrl);
-                getlinks("conferenceBrochureUrl", resp.conferenceBrochureUrl);
+                if (resp.data.type === 1) {
+                    getlinks("invitationAdditonalUrl", resp?.invitationAdditonalUrl)
+                    getlinks("invitationUrl", resp?.invitationUrl)
+                    getlinks("abstractUrl", resp?.abstractUrl)
+                    getlinks("acceptanceUrl", resp?.acceptanceUrl)
+                    getlinks("conferenceBrochureUrl", resp?.conferenceBrochureUrl)
+                    getlinks("accmodationUrl", resp?.accmodationUrl)
+                }
+                else {
+                    getlinks("abstractUrl", resp?.abstractUrl);
+                    getlinks("acceptanceUrl", resp?.acceptanceUrl);
+                    getlinks("conferenceBrochureUrl", resp?.conferenceBrochureUrl);
+                }
                 setIsLoading(false);
             }
             else {

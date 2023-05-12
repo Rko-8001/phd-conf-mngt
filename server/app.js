@@ -13,8 +13,6 @@ require('dotenv').config();
 require('./mongoDb/connection');
 
 
-// requiring user Schema 
-const User = require('./model/userSchema');
 
 const PORT = process.env.PORT || 5000
 
