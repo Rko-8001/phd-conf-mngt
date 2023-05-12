@@ -83,10 +83,10 @@ function Application() {
       setApps(resp);
       setApps2(resp);
       apps2.sort((a, b) => a.nameOfConference.localeCompare(b.nameOfConference));
-      
+
 
       setIsLoading(false);
-      
+
 
 
     }).catch((e) => {
@@ -177,6 +177,8 @@ function Application() {
               className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
               {item.nameOfConference}
             </h5>
+
+
             <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
               Amount Needed: {getFinances(item.finances)} Rs
             </p>
@@ -193,7 +195,7 @@ function Application() {
           </button>
           <div
             className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-            {getDays(item.createdAt)}
+            {getDays(item.createdAt)} ({item.type === 0 ? "National" : "International"})
           </div>
         </div>
 
