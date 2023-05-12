@@ -102,6 +102,8 @@ router.post("/addStudent", async (req, res) => {
         var mobileNo = student.mobileNo;
         var role = "0";
         var mssg = "";
+        var totalBalance = 200000;
+        var unsettledBalance = 0;
         try {
             const user = await User.findOne({ email: email });
             if (user) {
@@ -112,7 +114,8 @@ router.post("/addStudent", async (req, res) => {
                 const newUser = new User({
                     name, email, entryNo, dateOfJoining,
                     department, fellowshipCategory, areaOfSpecialisation,
-                    nameOfSupervisor, emailOfSuperVisor, role, mobileNo
+                    nameOfSupervisor, emailOfSuperVisor, role, mobileNo,
+                    balance: totalBalance, unsettledBalance: unsettledBalance
                 });
                 const parentId = await searchDriveFolder(department);
                 // console.log(parentId);

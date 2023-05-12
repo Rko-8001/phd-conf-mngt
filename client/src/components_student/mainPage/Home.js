@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Sidebar from '../Side/Sidebar';
 import Newcomp from '../Side/Newcomp';
 import Newcomp3 from '../Side/Newcomp3';
@@ -7,10 +7,30 @@ import { FaMoneyBillAlt } from 'react-icons/fa';
 import ApplicationsHome from '../applications/ApplicationsHome';
 import { FaChartLine } from 'react-icons/fa';
 import FlexPage from '../../components/commonPages/FlexPage';
+import { BASE_URL } from '../../components/requests/URL';
+import { getUserToken } from '../../components_login/Tokens';
 
 function Home(props) {
 
+    const [studentInfo, setStudentInfo] = useState({});
 
+    async function fetchUserInfo() {
+        const response = await fetch(`${BASE_URL}/studentInfoLoading`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${getUserToken()}`
+            }
+        })
+        return response.json();
+    }
+    useEffect(() => {
+        fetchUserInfo().then((data) => {
+            setStudentInfo(data);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }, [])
 
     return (
         <>
@@ -62,24 +82,16 @@ function Home(props) {
                                         </svg>
                                     </span>
 
-                                    <h1 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Available Balance:</h1>
+                                    <h2 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Available Balance: {studentInfo?.balance} Rs</h2>
+                                    <h2 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Unsettled Amount: {studentInfo?.unsettledBalance} Rs</h2>
 
-                                    <p class="text-gray-500 dark:text-gray-300">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ab nulla quod dignissimos vel non corrupti doloribus voluptatum eveniet
-                                    </p>
-
-                                    <a href="#" class="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {/* <div className='mx-auto'></div> */}
                     {/* <Newcomp3 /> */}
-                    <FlexPage/>
+                    <FlexPage />
                     <br />
                     <br />
 

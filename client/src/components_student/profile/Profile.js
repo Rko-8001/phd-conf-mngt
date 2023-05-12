@@ -93,14 +93,7 @@ export default function Profile() {
                     </svg>
                     <span>Update Info</span>
                   </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setModalClass("hidden");
-                    }}
-                    className="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                    Request Change Fellowship Category
-                  </button>
+                  
                 </div>
               </div>
             </div>

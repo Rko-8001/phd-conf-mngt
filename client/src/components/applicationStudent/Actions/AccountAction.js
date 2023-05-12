@@ -6,7 +6,6 @@ import Upload from '../uploadSign/Upload.js';
 export default function AccountAction({ user, data }) {
 
     const [grant, setGrant] = useState();
-    const [balance, setBalance] = useState();
     const [payment, setPayment] = useState();
     const [remarks, setRemarks] = useState();
     const [disable, setDisable] = useState(false);
@@ -19,10 +18,6 @@ export default function AccountAction({ user, data }) {
         setGrant(e.target.value);
     }
 
-    const getBalance = (e) => {
-        setBalance(e.target.value);
-    }
-
     const getPayment = (e) => {
         setPayment(e.target.value);
     }
@@ -32,7 +27,7 @@ export default function AccountAction({ user, data }) {
     }
 
     function checks() {
-        if (grant === null || balance === null || payment === null) {
+        if (grant === null || payment === null) {
             window.alert("Please fill the all Field..");
             return false;
         }
@@ -75,7 +70,7 @@ export default function AccountAction({ user, data }) {
         formData.append("id", data._id);
         formData.append("status", status);
         formData.append("grantUtilized", grant);
-        formData.append("balanceAvailable", balance);
+        formData.append("balanceAvailable", user.balance);
         formData.append("passedForPayment", payment);
         formData.append("remarksAccount", remarks);
         formData.append("image", image);
@@ -126,7 +121,7 @@ export default function AccountAction({ user, data }) {
                                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                     <dt className="text-sm font-medium text-gray-500">Balance Available</dt>
                                     <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                        <input type="number" onChange={getBalance} placeholder="" className="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-blue-400 bg-white px-5 py-2.5 text-gray-700 focus:border-red-400 focus:outline-none focus:ring focus:ring-red-300 focus:ring-opacity-40 dark:border-red-400 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-red-300" />
+                                        {user?.balance}
                                     </dd>
                                 </div>
                                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -162,7 +157,7 @@ export default function AccountAction({ user, data }) {
                                 </button>
                             </dd>
                         </div >
-                    
+
                         {image &&
                             <div className='p-3 '>
                                 <p className='text-sm font-medium text-green-500'> Your Signature: </p>
