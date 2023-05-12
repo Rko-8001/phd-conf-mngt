@@ -42,13 +42,10 @@ router.post('/studentInfoLoading', async (req, res) => {
         console.log(error);
         return res.status(422).json({ error: error });
     }
-
-
     //setting email and role from decode
     const role = decode.role;
     const email = decode.email;
-
-
+    
     // fetching data from mongo
     try {
         const student = await User.findOne({ email: email });

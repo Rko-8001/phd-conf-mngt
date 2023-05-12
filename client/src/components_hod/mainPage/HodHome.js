@@ -78,7 +78,7 @@ export default function HodHome() {
                   </div>
                   <ApplicationsHome />
                 </div>
-                <div className="max-w-sm mx-auto">
+                {/* <div className="max-w-sm mx-auto">
                   <div className="my-5  bg-white rounded-lg shadow-md overflow-hidden">
                     <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
                       <span style={{ display: 'flex', alignItems: 'center' }}>
@@ -113,7 +113,7 @@ export default function HodHome() {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               {/* <div className='mx-auto'></div> */}
               <FlexPage />
