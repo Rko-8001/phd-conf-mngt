@@ -28,7 +28,6 @@ function FormInput() {
     const [leaveStarts, setLeaveStarts] = useState(dayjs('2023-01-01'));
     const [leaveEnds, setLeaveEnds] = useState(dayjs('2023-01-01'));
 
-
     const [advance, setAdvance] = useState(false);
     const dataInTable = [];
     const [tableData, setTableData] = useState(dataInTable);

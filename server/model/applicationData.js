@@ -8,6 +8,10 @@ const applicationData = new mongoose.Schema({
         type: String,
         required: true
     },
+    type: {
+        type: Number,
+        default: 0
+    },
     status: {
         type: String,
         required: true

@@ -44,6 +44,14 @@ const userSchema = new mongoose.Schema({
     {
         type: String,
     },
+    balance:
+    {
+        type: Number,
+    },
+    unsettledBalance:
+    {
+        type: Number,
+    },
     role: {
         type: String,
         required: true

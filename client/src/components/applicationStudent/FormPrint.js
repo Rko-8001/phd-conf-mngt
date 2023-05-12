@@ -268,7 +268,7 @@ function FormPrint({ data, user }) {
                       <TableCell style={{ fontSize: "16px" }}>
                         <b>Total</b>
                       </TableCell>
-                      <TableCell style={{ fontSize: "16px" }}>{} RS</TableCell>
+                      <TableCell style={{ fontSize: "16px" }}>{ } RS</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>

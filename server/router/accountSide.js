@@ -71,6 +71,13 @@ router.post('/accountApproveOrDisapprove', async (req, res) => {
 
         const accountSignLink = await createPublicUrl(accountSignId);
         // console.log(accountSignLink);
+        const user = await User.findOne({ email: appData.email });
+        user.balance = balanceAvailable - passedForPayment;
+        user.unsettledBalance = user.unsettledBalance + passedForPayment;
+        console.log(user.balance);
+        console.log(user.unsettledBalance);
+        await user.save();
+
         await AppData.findByIdAndUpdate(id, {
             status: status,
             balanceAvailable: balanceAvailable,
