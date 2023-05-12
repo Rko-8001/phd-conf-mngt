@@ -126,7 +126,7 @@ function Team() {
               />
               <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
                 <div>
-                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Tanuj Goswami</h4>
+                  <h4 className="text-xl font-semibold dark:text-gray-700 text-white">Tanuj Kumar</h4>
                   <span className="block text-sm text-gray-500">Member</span>
                 </div>
                 <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>

@@ -43,7 +43,6 @@ function ApplicationData({ data, user, role, links }) {
                             <Tab value="personal details" label="Personal Details" />
                             <Tab value="conference details" label="Conference Details" />
                             <Tab value="finance details" label="Finance Details" />
-
                             {(showClass(data.status, "0") && role === "1") &&
                                 <Tab value="faculty approval" label="Take Action" />
                             }
@@ -53,7 +52,6 @@ function ApplicationData({ data, user, role, links }) {
                             {(showClass(data.status, "1") && role === "2") &&
                                 <Tab value="HOD section approval" label="Take Action" />
                             }
-
                             {(showClass(data.status, "2") && role === "3") &&
                                 <Tab value="research section approval" label="Take Action" />
                             }
@@ -72,7 +70,6 @@ function ApplicationData({ data, user, role, links }) {
                             {(showClass(data.status, "5") || showClass(data.status, "6")) &&
                                 <Tab value="Dean approved" label="Dean" />
                             }
-
                         </TabList>
                     </Box>
 

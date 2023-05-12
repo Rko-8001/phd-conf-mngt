@@ -258,7 +258,6 @@ function Application() {
                 <FaSort color="red" style={{ marginRight: '0.5rem' }} />
                 <span className='text-lg font-medium'>Sort Applications on the basis of: </span>
               </span>
-              {/* <h1 className="text-lg font-medium">Sort Applications on the basis of: </h1> */}
               <div className="flex">
                 {tabs.map((tab, index) => (
                   <button
@@ -273,7 +272,6 @@ function Application() {
               </div>
             </div>
             <div className="p-2">
-              {/* <p className="text-gray-700">{tabs[activeTabIndex].content}</p> */}
             </div>
           </div>
           <div class="my-3 flex flex-wrap justify-center gap-4">
