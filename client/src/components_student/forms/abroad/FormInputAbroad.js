@@ -12,55 +12,60 @@ import { BASE_URL } from '../../../components/requests/URL';
 export default function FormInputAbroad() {
 
 
-    const [generalInfo, setGeneralInfo] = useState({
-        name: "",
-        mobileNo: "",
-        dept: "",
-        email: "",
-        entryNo: "",
-        bankAccNo: "",
-        doj: "",
-        fellowshipCat: "",
-        aos: "",
-        supervisor: ""
-    });
-    const [conferenceInfo, setConferenceInfo] = useState({
-        nameOfConference: "",
-        venueOfConference: "",
-        paperInConference: "",
-        financialSupport: "",
-        nameOfSociety: "",
-        societyRecognized: "",
-        reasonToAttend: "",
-        fundingSources: "",
-        purpose: "",
-        justification: "",
-        sponsorship: "",
+    const [generalInfo, setGeneralInfo] = useState({});
+    const [conferenceInfo, setConferenceInfo] = useState({});
 
-    });
 
-    const [eventStarts, setEventStarts] = useState(dayjs('2023-01-01'));
-    const [eventEnds, setEventEnds] = useState(dayjs('2023-01-01'));
     const [dateStarts, setDateStarts] = useState(dayjs('2023-01-01'));
     const [dateEnds, setDateEnds] = useState(dayjs('2023-01-01'));
     const [leaveStarts, setLeaveStarts] = useState(dayjs('2023-01-01'));
     const [leaveEnds, setLeaveEnds] = useState(dayjs('2023-01-01'));
 
 
+
     const [advance, setAdvance] = useState(false);
-    const dataInTable = [];
-    const [tableData, setTableData] = useState(dataInTable);
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
     const [visaCharges, setVisaCharges] = useState(0);
     const [registrationFee, setRegistrationFee] = useState(0);
+    const [medicalInsurance, setMedicalInsurance] = useState(0);
+    const [others, setOthers] = useState(0);
 
-    const [rowData, setRowData] = useState({
-        particular: "",
-        amount: ""
-    });
 
+    const [arrival1, setArrival1] = useState("");
+    const [destination1, setDestination1] = useState("");
+    const [arrival2, setArrival2] = useState("");
+    const [destination2, setDestination2] = useState("");
+
+    const [enclosures, setEnclosures] = useState([]);
+
+    function getFlightParts(e) {
+        const { name, value } = e.target;
+
+        if (name === "arrival1") {
+            setArrival1(value);
+        }
+        else if (name === "destination1") {
+            setDestination1(value);
+        }
+        else if (name === "arrival2") {
+            setArrival2(value);
+        }
+        else {
+            setDestination2(value);
+        }
+    }
+
+    const fileFunction = (e) => {
+        e.preventDefault();
+
+        const { name } = e.target;
+        setEnclosures(prevState => ({
+            ...prevState,
+            [name]: e.target.files[0]
+        }));
+    }
 
     const getFixedParts = ((e) => {
         const { name, value } = e.target;
@@ -77,8 +82,14 @@ export default function FormInputAbroad() {
         else if (name === "registrationFee") {
             setRegistrationFee(value)
         }
-        else {
+        else if (name === "food") {
             setFood(value);
+        }
+        else if (name === "medicalInsurance") {
+            setMedicalInsurance(value);
+        }
+        else {
+            setOthers(value);
         }
     })
 
@@ -94,7 +105,7 @@ export default function FormInputAbroad() {
     const getConferenceInfo = ((e) => {
 
         const { name, value } = e.target;
-        // console.log(name + " " + value);
+        console.log(name + " " + value);
         setConferenceInfo(prevState => ({
             ...prevState,
             [name]: value
@@ -106,42 +117,9 @@ export default function FormInputAbroad() {
         setAdvance(!advance);
     }
 
-    const addRowData = (e) => {
-        e.preventDefault();
-        if (!rowData.particular || !rowData.amount) {
-            window.alert("Fill all the fields!");
-            return;
-        }
-        const newTableData = [...tableData]
-        newTableData.push(rowData);
-        setTableData(newTableData);
-        setRowData({ particular: "", amount: "" });
-    }
-
-    const getRowData = (e) => {
-        const { name, value } = e.target;
-        // console.log(name + " " + value);
-        setRowData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    }
-
-    const setFetchData = ((name, value) => {
-        setGeneralInfo(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    })
-
     const checkData = () => {
         if (!checkConfDetails(conferenceInfo)) {
             window.alert('Please fill conference Details properly.');
-            return false;
-        }
-        const fin = checkFinances(travel, food, stay, tableData);
-        if (fin === "0") {
-            window.alert("Your Expenses Sum is zero. please review the form.");
             return false;
         }
         return true;
@@ -167,7 +145,7 @@ export default function FormInputAbroad() {
 
         const financialSupport = conferenceInfo.financialSupport;
         const advances = advance;
-        const finances = [...tableData];
+        const finances = [];
         finances.push({
             "particular": "travel",
             "amount": travel
@@ -214,7 +192,6 @@ export default function FormInputAbroad() {
     const getBasicInfo = async (req, res) => {
         try {
             const token = getUserToken();
-            // console.log(token);
             const resp = await fetch(`${BASE_URL}/studentInfoLoading`, {
                 method: "POST",
                 headers: {
@@ -223,25 +200,30 @@ export default function FormInputAbroad() {
                 },
             });
             return resp.json();
-            // console.log(resp);
         } catch (error) {
             console.log(error);
         }
     }
 
+    function getTodayDate() {
+        const date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate() + 1;
+
+        const ymd = `${year}-${month}-${day}`;
+        setDateStarts(dayjs(ymd));
+        setDateEnds(dayjs(ymd));
+        setLeaveStarts(dayjs(ymd));
+        setLeaveEnds(dayjs(ymd));
+    }
+
     useEffect(() => {
+        getTodayDate();
         getBasicInfo().then((resp) => {
-            console.log(resp);
-            setFetchData("name", resp.name);
-            setFetchData("entryNo", resp.entryNo);
-            setFetchData("dept", resp.department);
-            setFetchData("doj", resp.dateOfJoining);
-            setFetchData("fellowshipCat", resp.fellowshipCategory);
-            setFetchData("aos", resp.areaOfSpecialisation);
-            setFetchData("supervisor", resp.nameOfSupervisor);
-            setFetchData("email", resp.email);
+            setGeneralInfo(resp);
         }).catch((e) => {
-            // console.log(e.message)
+            window.alert("Error Occured! Please Refresh the Page!");
         });
     }, []);
 
@@ -264,18 +246,29 @@ export default function FormInputAbroad() {
                 </div>
             </div>
             <FormInputGenData
-                getGeneralInfo={getGeneralInfo}
+                generalInfo={generalInfo} getGeneralInfo={getGeneralInfo}
+
                 getConferenceInfo={getConferenceInfo}
-                eventStarts={dateStarts} setEventStarts={setDateStarts}
-                eventEnds={dateEnds} setEventEnds={setDateEnds}
+
                 dateStarts={dateStarts} setDateStarts={setDateStarts}
                 dateEnds={dateEnds} setDateEnds={setDateEnds}
+
                 advance={advance} getAdvance={getAdvance}
+
                 leaveStarts={leaveStarts} setLeaveStarts={setLeaveStarts}
                 leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
-                addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
+
                 getFixedParts={getFixedParts}
-                food={food} travel={travel} stay={stay} visaCharges={visaCharges} registrationFee={registrationFee}
+                food={food} travel={travel} stay={stay}
+                visaCharges={visaCharges} registrationFee={registrationFee}
+                medicalInsurance={medicalInsurance} others={others}
+
+                arrival1={arrival1} destination1={destination1}
+                arrival2={arrival2} destination2={destination2}
+                getFlightParts={getFlightParts}
+
+                fileFunction={fileFunction}
+                
                 requestGrant={requestGrant}
             />
         </>
