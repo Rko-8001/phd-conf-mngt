@@ -82,7 +82,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={yadwinder}
+                src={adish}
                 alt="woman"
                 loading="lazy"
                 width="640"
@@ -100,7 +100,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={adish}
+                src={yadwinder}
                 alt="woman"
                 loading="lazy"
                 width="640"
@@ -118,7 +118,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={vinay}
+                src={tanuj}
                 alt="woman"
                 loading="lazy"
                 width="640"
@@ -136,7 +136,7 @@ function Team() {
             <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
-                src={tanuj}
+                src={vinay}
                 alt="woman"
                 loading="lazy"
                 width="640"

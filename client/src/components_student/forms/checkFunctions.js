@@ -23,7 +23,7 @@ export function checkConferenceTime(start, end) {
     const s = new Date(start);
     const e = new Date(end);
     const t = new Date();
-    if (e - s < 0 && s - t < 0) {
+    if (e - s < 0 || s - t < 0) {
         window.alert("Please Check Conference Duration.")
         return false;
     }

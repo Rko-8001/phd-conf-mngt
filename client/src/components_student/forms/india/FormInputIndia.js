@@ -13,6 +13,8 @@ import { BASE_URL } from '../../../components/requests/URL';
 function FormInput() {
     const navigate = useNavigate();
 
+    const [freezeButton, setFreezeButton] = useState(false);
+
     // modal states
     const [showModal, setShowModal] = useState(false);
     const [formSuccess, setFormSuccess] = useState(false); // true if form is submitted successfully
@@ -156,6 +158,10 @@ function FormInput() {
     const requestGrant = async (e) => {
         e.preventDefault();
 
+        if (freezeButton === true)
+            return;
+
+        setFreezeButton(true);
 
         // save all data
         const formData = new FormData();
@@ -194,10 +200,11 @@ function FormInput() {
         formData.append("copyOfConferenceBrochure", enclosures.copyOfConferenceBrochure);
         formData.append("copyOfAbstract", enclosures.copyOfAbstract);
 
-        console.log(enclosures);
+        // console.log(enclosures);
+
         // checking all data entered
         if (!checkData() ||
-            !checkConferenceTime(formData.conferenceStarts, formData.conferenceEnds) ||
+            !checkConferenceTime(dateStarts, dateEnds) ||
             !checkLeaveTime(leaveStarts, leaveEnds) ||
             !checkConfAndLeaveTime(dateStarts, dateEnds, leaveStarts, leaveEnds)
             || !checkEnclosures(enclosures)) {
@@ -218,6 +225,7 @@ function FormInput() {
             setFormSuccess(true);
             setMessage("Application Submitted Successfully!");
         }
+        setFreezeButton(false);
         setShowModal(true);
     }
 
@@ -313,6 +321,7 @@ function FormInput() {
                 food={food} travel={travel} stay={stay} registrationFee={registrationFee}
                 requestGrant={requestGrant}
                 fileFunction={fileFunction}
+                freezeButton={freezeButton}
             />
         </>
     )

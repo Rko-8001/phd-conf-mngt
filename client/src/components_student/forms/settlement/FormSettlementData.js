@@ -147,11 +147,12 @@ export default function FormSettlementData() {
         return true;
     }
 
-    const requestGrant = async (e) => {
+    const submitSettlement = async (e) => {
         e.preventDefault();
-
+        alert("Settlement Form Submitted");
 
         // save all data
+
         const email = generalInfo.email;
         const status = "0";
         const mobileNo = generalInfo.mobileNo;
@@ -185,30 +186,6 @@ export default function FormSettlementData() {
         if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
         }
-        // const res = await fetch("/studentApplicationSubmit", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         email, status,
-        //         mobileNo, bankAccountNo,
-        //         nameOfConference, venueOfConference, paperInConference,
-        //         financialSupport,
-        //         advances, finances,
-        //         conferenceStarts, conferenceEnds,
-        //         studentLeaveStarts, studentLeaveEnds,
-        //     })
-        // });
-
-        // logic
-
-        // if (res.status === 422) {
-        //     window.alert("Error Occurred! Please Try Again.");
-        // }
-        // else {
-        //     window.alert("Application Submitted");
-        // }
     }
 
     const getBasicInfo = async (req, res) => {
@@ -229,21 +206,21 @@ export default function FormSettlementData() {
         }
     }
 
-    useEffect(() => {
-        getBasicInfo().then((resp) => {
-            console.log(resp);
-            setFetchData("name", resp.name);
-            setFetchData("entryNo", resp.entryNo);
-            setFetchData("dept", resp.department);
-            setFetchData("doj", resp.dateOfJoining);
-            setFetchData("fellowshipCat", resp.fellowshipCategory);
-            setFetchData("aos", resp.areaOfSpecialisation);
-            setFetchData("supervisor", resp.nameOfSupervisor);
-            setFetchData("email", resp.email);
-        }).catch((e) => {
-            // console.log(e.message)
-        });
-    }, []);
+    // useEffect(() => {
+    //     getBasicInfo().then((resp) => {
+    //         console.log(resp);
+    //         setFetchData("name", resp.name);
+    //         setFetchData("entryNo", resp.entryNo);
+    //         setFetchData("dept", resp.department);
+    //         setFetchData("doj", resp.dateOfJoining);
+    //         setFetchData("fellowshipCat", resp.fellowshipCategory);
+    //         setFetchData("aos", resp.areaOfSpecialisation);
+    //         setFetchData("supervisor", resp.nameOfSupervisor);
+    //         setFetchData("email", resp.email);
+    //     }).catch((e) => {
+    //         // console.log(e.message)
+    //     });
+    // }, []);
 
     return (
         <>
@@ -276,7 +253,7 @@ export default function FormSettlementData() {
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay} visaCharges={visaCharges} registrationFee={registrationFee}
-                requestGrant={requestGrant}
+                submitSettlement={submitSettlement}
             />
         </>
     )
