@@ -49,18 +49,18 @@ function ConferenceDetailsAbroad({ user, data, links }) {
                                             </th>
                                         </tr>
 
-                                        <tr key={2} className={`${data?.flightDetails[0].destination === ""} ? "hidden : " " `}>
+                                        { !data?.flightDetails[1].destination === "" &&<tr key={2} >
                                             <th scope="col" className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                                 2
                                             </th>
                                             <th scope="col" className="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                {data?.flightDetails[0].destination}
+                                                {data?.flightDetails[1].destination}
 
                                             </th>
                                             <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                                {data?.flightDetails[0].arrival}
+                                                {data?.flightDetails[1].arrival}
                                             </th>
-                                        </tr>
+                                        </tr>}
 
                                     </tbody>
                                 </table>
