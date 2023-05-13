@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import logo from './assets/logo.png';
+import logo from './assets/iitropar.png';
 import arrow from './assets/control.png'
 
 import { getroleToken, removeAppToken, removeUserToken, removeroleToken } from '../../components_login/Tokens';
@@ -79,7 +79,7 @@ const App = () => {
           <img
             src={logo}
             alt='..'
-            className={`cursor-pointer duration-500 ${open && "rotate-[360deg]"
+            className={`cursor-pointer h-8 w-auto duration-500 ${open && "rotate-[360deg]"
               }`}
           />
           <h1
