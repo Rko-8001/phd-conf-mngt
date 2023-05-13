@@ -138,6 +138,9 @@ function Login() {
                         <li key={1}>
                             <Link to="/meetTheTeam">Team</Link>
                         </li>
+                        <li key={4}>
+                            <Link to="/userGuide">User Guide </Link>
+                        </li>
                         <li key={3}>
                             <Link to="/contactUs">Contact Us</Link>
                         </li>

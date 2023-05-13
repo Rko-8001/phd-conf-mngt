@@ -18,26 +18,28 @@ function Team() {
   return (
     <>
 
-      <nav class="bg-gray-800 text-white flex justify-between items-center py-3 px-5">
-        <h1 class="text-xl font-bold">PCMP :: PhD Conference Management Portal</h1>
-        <div class="flex items-center space-x-5 text-xs">
-          <ul class="flex space-x-10 text-gray-300">
-
-            <li>
+      <nav className="bg-gray-800 text-white flex justify-between items-center py-3 px-5">
+        <h1 className="text-xl font-bold">PhDCGM :: PhD Conference Grant Management Portal</h1>
+        <div className="flex items-center space-x-5 text-xs">
+          <ul className="flex space-x-10 text-gray-300">
+            <li key={2}>
+              <Link to="/">Home</Link>
+            </li>
+            <li key={1}>
               <Link to="/meetTheTeam">Team</Link>
             </li>
-            <li>
-              <Link to="/work in progress">About</Link>
+            <li key={4}>
+              <Link to="/userGuide">User Guide </Link>
             </li>
-            <li>
+            <li key={3}>
               <Link to="/contactUs">Contact Us</Link>
             </li>
           </ul>
-          <div class="space-x-5">
+          <div className="space-x-5">
             <button onClick={(e) => {
               e.preventDefault();
               navigate('/login');
-            }} class="border px-5 py-2 rounded font-bold">Login</button>
+            }} className="border px-5 py-2 rounded font-bold">Login</button>
           </div>
         </div>
       </nav>
