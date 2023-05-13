@@ -6,6 +6,7 @@ import { useReactToPrint } from 'react-to-print';
 import ApplicationData from '../../components/applicationStudent/ApplicationData';
 import FormPrint from '../../components/applicationStudent/FormPrint';
 import { BASE_URL } from '../../components/requests/URL';
+import FormPrintAbroad from './FormPrintAbroad';
 
 
 export default function ApplicationMainPage({ role, goBack }) {
@@ -79,6 +80,15 @@ export default function ApplicationMainPage({ role, goBack }) {
             console.log(e.message)
         });
     }, []);
+    function extractFileId(driveLink) {
+        const startIndex = driveLink.indexOf('/file/d/') + 8;
+        const endIndex = driveLink.indexOf('/view');
+        if (startIndex !== -1 && endIndex !== -1) {
+          return driveLink.substring(startIndex, endIndex);
+        } else {
+          return null;
+        }
+      }
 
     return (
         <>
@@ -130,11 +140,11 @@ export default function ApplicationMainPage({ role, goBack }) {
                         </div>
 
                         <ApplicationData data={data} user={applicantInfo} role={role} links={links} />
-                        <div className='hidden'>
+                        <div className=''>
                             <div ref={componentRef} >
                                 {data.type === 1
                                     ?
-                                    <> Hello</>
+                                    <FormPrintAbroad data={data} user={applicantInfo}/>
                                     :
                                     <FormPrint data={data} user={applicantInfo} />
                                 }

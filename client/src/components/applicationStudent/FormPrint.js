@@ -355,20 +355,20 @@ function FormPrint({ data, user }) {
           <Grid className="py-2 flex flex-col" container spacing={2}>
             <Grid item className="flex-1">
               <pre>
-              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.facultySignLink)}`} alt="sign" />
+              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                 <b>Signature of PhD Scholar</b>
               </pre>
               <pre></pre>
             </Grid>
             <Grid item className="flex-1">
               <pre>
-              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.facultySignLink)}`} alt="sign" />
+              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                 <b>Supervisors</b>{" "}
               </pre>
             </Grid>
             <Grid item className="flex-1">
               <pre>
-              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.hodSignLink)}`} alt="sign" />
+              <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
                 <b>Head of the Department</b>
               </pre>
             </Grid>
@@ -405,21 +405,21 @@ function FormPrint({ data, user }) {
                 <pre></pre>
               </Grid>
 
-              <Grid className="py-2" container spacing={2}>
+              {/* <Grid className="py-2" container spacing={2}>
                 <Grid item xs={7}>
                   <pre>Earlier Sanctions: 1. Test 1</pre>
                 </Grid>
                 <pre></pre>
-              </Grid>
+              </Grid> */}
 
-              <Grid className="py-2" container spacing={2}>
+              {/* <Grid className="py-2" container spacing={2}>
                 <Grid item xs={7}>
                   <pre>2. Test 2</pre>
                 </Grid>
                 <pre></pre>
-              </Grid>
+              </Grid> */}
 
-              <Grid className="py-2" container spacing={2}>
+              {/* <Grid className="py-2" container spacing={2}>
                 <Grid item xs={7}>
                   <pre>
                     3. Test 3<br></br>
@@ -427,17 +427,17 @@ function FormPrint({ data, user }) {
                   </pre>
                 </Grid>
                 <pre></pre>
-              </Grid>
+              </Grid> */}
               <Grid className="ml-10" container spacing={2} alignItems="center">
                 <Grid item xs={6}>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.researchSignLink)}`} alt="sign" />
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
                     <b>Dealing Assistant </b>
                   </pre>
                 </Grid>
                 <Grid item xs={6} mx-10>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.researchSignLink)}`} alt="sign" />
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
                     <b>Assistant registrar </b>
                   </pre>
                 </Grid>
@@ -500,19 +500,19 @@ function FormPrint({ data, user }) {
               <Grid className="py-2" container spacing={2} alignItems="center">
                 <Grid item xs={4}>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.accountSignLink)}`} alt="sign" />
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
                     <b>Dealing Assistant </b>
                   </pre>
                 </Grid>
                 <Grid item xs={4}>
                   <pre>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.accountSignLink)}`} alt="sign" />
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
                     <b>Accounts Officer</b>
                   </pre>
                 </Grid>
                 <Grid item xs={4}>
                   <pre >
-                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.accountSignLink)}`} alt="sign" />
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
                     <b>Deputy Registrar</b>
                   </pre>
                 </Grid>
@@ -544,7 +544,7 @@ function FormPrint({ data, user }) {
               >
                 <Grid item>
                   <pre style={{ margin: 1 }}>
-                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data.deanSignLink)}`} alt="sign" />
+                  <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
                     <b>Dealing Assistant </b>
                   </pre>
                 </Grid>
