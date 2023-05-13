@@ -42,6 +42,9 @@ import DeanHome from './components_dean/mainPage/DeanHome';
 import DeanApplication from './components_dean/applications/Application';
 import ViewApplicationDean from './components_dean/applications/ViewApplication';
 
+//                 User Guide
+import UserGuide from './userGuide/UserGuide';
+
 import {
   StudentFormAbroad, StudentFormIndia,
   StudentFormOption,
@@ -57,6 +60,7 @@ function App() {
       <Routes>
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginN />} />
+        <Route path='/userGuide' element={<UserGuide />} />
 
         <Route path='/studentLogin' >
           <Route index element={<StudentRoute Component={StudentHomePage} />} />
