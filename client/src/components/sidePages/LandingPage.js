@@ -59,9 +59,6 @@ export default function LandingPage() {
               >
                 User Guide <span aria-hidden="true">→</span>
               </Link>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                User Guide <span aria-hidden="true">→</span>
-              </a>
             </div>
           </div>
         </div>
