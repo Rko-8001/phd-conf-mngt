@@ -44,7 +44,7 @@ export default function HodAction({ user, data }) {
         formData.append("status", status);
         formData.append("image", image);
 
-        const res = await fetch(`${BASE_URL}/deanApproveOrDisapprove`, {
+        const res = await fetch(`${BASE_URL}/hodApproveOrDisapprove`, {
             method: "POST",
             headers: {
                 "authorization": `Bearer ${token}`

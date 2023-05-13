@@ -34,10 +34,10 @@ function FormPrint({ data, user }) {
     </TableRow>
   ));
   function extractFileId(driveLink) {
-    const startIndex = driveLink.indexOf('/file/d/') + 8;
-    const endIndex = driveLink.indexOf('/view');
+    const startIndex = driveLink?.indexOf('/file/d/') + 8;
+    const endIndex = driveLink?.indexOf('/view');
     if (startIndex !== -1 && endIndex !== -1) {
-      return driveLink.substring(startIndex, endIndex);
+      return driveLink?.substring(startIndex, endIndex);
     } else {
       return null;
     }

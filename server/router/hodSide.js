@@ -92,6 +92,7 @@ router.post('/hodApproveOrDisapprove', async (req, res) => {
         const hodSignId = await uploadImageDrive(image, applicationFolderId, userEmail, "hodSign.jpg");
 
         if (hodSignId === null) {
+            console.log("Error");
             return res.status(422).json("Error Occurred..");
         }
 
