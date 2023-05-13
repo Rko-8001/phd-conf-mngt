@@ -132,7 +132,12 @@ export default function ApplicationMainPage({ role, goBack }) {
                         <ApplicationData data={data} user={applicantInfo} role={role} links={links} />
                         <div className='hidden'>
                             <div ref={componentRef} >
-                                <FormPrint data={data} user={applicantInfo} />
+                                {data.type === 1
+                                    ?
+                                    <> Hello</>
+                                    :
+                                    <FormPrint data={data} user={applicantInfo} />
+                                }
                             </div>
                         </div>
 

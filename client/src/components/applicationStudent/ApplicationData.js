@@ -17,6 +17,7 @@ import ResearchAction from './Actions/ResearchAction';
 import FacultyAction from './Actions/FacultyAction';
 import AccountAction from './Actions/AccountAction';
 import HodAction from './Actions/HodAction';
+import ConferenceDetailsAbroad from './Tabs/ConferenceDetailsAbroad';
 
 function ApplicationData({ data, user, role, links }) {
     const [value, setValue] = useState("personal details");
@@ -81,9 +82,7 @@ function ApplicationData({ data, user, role, links }) {
                         {
                             data.type === 1
                                 ?
-                                <>
-                                    Hello
-                                </>
+                                <ConferenceDetailsAbroad user={user} data={data} links={links} />
                                 :
                                 <ConferenceDetailsIndia user={user} data={data} links={links} />
                         }

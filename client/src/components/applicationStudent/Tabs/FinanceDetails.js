@@ -15,7 +15,7 @@ export default function FinanceDetails({ user, data }) {
     }
 
     const viewFinances = data.finances.map((element, index) =>
-        <tr key={index}>
+        <tr key={index} className={`${element?.amount === 0 ? "hidden" : " "}`}>
             <th scope="col">
                 <td className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
                     <div className="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
@@ -24,7 +24,7 @@ export default function FinanceDetails({ user, data }) {
                 </td>
             </th>
             <th scope="col">
-                <td  className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
+                <td className="px-12 py-4 text-sm font-medium text-left whitespace-nowrap">
                     <div className="inline px-3 py-1 text-sm font-normal text-gray-500 bg-gray-100 rounded-full dark:text-gray-400 gap-x-2 dark:bg-gray-800">
                         {element.amount} Rs
                     </div>
