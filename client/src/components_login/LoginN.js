@@ -132,14 +132,13 @@ function Login() {
                 <h1 className="text-xl font-bold">PhDCGM :: PhD Conference Grant Management Portal</h1>
                 <div className="flex items-center space-x-5 text-xs">
                     <ul className="flex space-x-10 text-gray-300">
-
-                        <li>
+                        <li key={2}>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li key={1}>
                             <Link to="/meetTheTeam">Team</Link>
                         </li>
-                        <li>
-                            <Link to="/work in progress">About</Link>
-                        </li>
-                        <li>
+                        <li key={3}>
                             <Link to="/contactUs">Contact Us</Link>
                         </li>
                     </ul>
@@ -174,13 +173,13 @@ function Login() {
                             <button className="bg-[#002D74] rounded-xl text-white py-2 hover:scale-105 duration-300" onClick={requestLogIn}>{loginButtonMssg}</button>
                         </form>
 
-                        <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
+                        {/* <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
                             <hr className="border-gray-400" />
                             <p className="text-center text-sm">OR</p>
                             <hr className="border-gray-400" />
-                        </div>
+                        </div> */}
 
-                        <button
+                        {/* <button
                             onClick={async (e) => {
                                 e.preventDefault();
                                 const res = await fetch(`${BASE_URL}/auth`, {
@@ -203,7 +202,7 @@ function Login() {
                                 <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
                             </svg>
                             Login With Google
-                        </button>
+                        </button> */}
 
                         {/* <div className="mt-5 text-xs border-b border-[#002D74] py-4 text-[#002D74]">
         <a href="#">Forgot your password?</a>

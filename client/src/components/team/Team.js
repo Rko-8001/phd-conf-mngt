@@ -53,7 +53,7 @@ function Team() {
             <p className="text-gray-600 text-center dark:text-gray-300 lg:mx-auto lg:w-5/12">
               We are thankful to IIT Ropar for giving us this wonderful opportunity. We would also like to thank our mentor Dr Puneet Goyal for guiding us throughout and giving us regular feedback.
             </p>
-            <div className='abc'>
+            <div className='items-center abc '>
 
               <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
                 <img
