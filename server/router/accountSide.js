@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 // connection established
 require('../mongoDb/connection');
 
-
 // requiring user Schema                
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
@@ -30,11 +29,16 @@ router.post("/researchApprovedApps", async (req, res) => {
 });
 
 router.post('/accountApproveOrDisapprove', async (req, res) => {
-    const {
-        id, status, image,
-        balanceAvailable, grantUtilized, passedForPayment,
-        remarksAccount } = req.body;
+    // const {
+    //     id, status, image,
+    //     // balanceAvailable, 
+    //     grantUtilized, passedForPayment,
+    //     remarksAccount } = req.body;
 
+        const {
+            id, status, image,
+            grantUtilized, passedForPayment,
+            remarksAccount } = req.body;
 
 
     try {
@@ -72,7 +76,20 @@ router.post('/accountApproveOrDisapprove', async (req, res) => {
         const accountSignLink = await createPublicUrl(accountSignId);
         // console.log(accountSignLink);
         const user = await User.findOne({ email: appData.email });
+        const balanceAvailable = user.balance;
+        console.log("User Balance: ", user.balance);
+        console.log("Balance Available: ", balanceAvailable);
+        console.log("Passed For Payment: ", passedForPayment);
+        console.log("User Unsettled Balance: ", user.unsettledBalance);
+
+        if (typeof user.unsettledBalance === "undefined")
+            user.unsettledBalance = 0;
+        if (typeof user.balance === "undefined")
+            user.balance = 0;
+
+        console.log(user.unsettledBalance, user.balance);
         user.balance = balanceAvailable - passedForPayment;
+        console.log(user.unsettledBalance, user.balance);
         user.unsettledBalance = user.unsettledBalance + passedForPayment;
         console.log(user.balance);
         console.log(user.unsettledBalance);
@@ -87,6 +104,16 @@ router.post('/accountApproveOrDisapprove', async (req, res) => {
             accountSignLink: accountSignLink,
             lastModified: userEmail,
         });
+
+        // await AppData.findByIdAndUpdate(id, {
+        //     status: status,
+        //     balanceAvailable: balanceAvailable,
+        //     grantUtilized: grantUtilized,
+        //     passedForPayment: passedForPayment,
+        //     remarksAccounts: remarksAccount,
+        //     accountSignLink: accountSignLink,
+        //     lastModified: userEmail,
+        // });
         return res.status(200).json("Updated..");
     } catch (error) {
         console.log(error);

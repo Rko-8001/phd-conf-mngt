@@ -220,7 +220,10 @@ router.post('/viewAnApplication', async (req, res) => {
         const data = await AppData.findById(id);
         const user = await User.findOne({ email: data.email });
         if (data.type === 1) {
+            console.log("Id Bitch: ", id);
             const dataAbroad = await AppDataAbroad.findById(id);
+
+            console.log("Data Bitch: ", dataAbroad);
 
             const invitationLetterAdditonalUrl = await createPublicUrl(dataAbroad.invitationLetterAdditionalFileId);
             const letterOfInvitationUrl = await createPublicUrl(dataAbroad.letterOfInvitationFileId);
@@ -228,6 +231,8 @@ router.post('/viewAnApplication', async (req, res) => {
             const copyOfAbstractUrl = await createPublicUrl(dataAbroad.copyOfAbstractFileId);
             const accomodationCostUrl = await createPublicUrl(dataAbroad.accomodationCostFileId);
             const acceptanceOfPaperUrl = await createPublicUrl(dataAbroad.acceptanceOfPaperFileId)
+
+            console.log("SexyBitch143: ", invitationLetterAdditonalUrl, dataAbroad.invitationLetterAdditionalFileId);
             
             return res.status(200).json(
                 {

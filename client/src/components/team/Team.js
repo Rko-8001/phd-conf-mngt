@@ -13,8 +13,6 @@ import { Link } from 'react-router-dom';
 function Team() {
 
   const navigate = useNavigate();
-
-
   return (
     <>
 
@@ -55,16 +53,18 @@ function Team() {
             <p className="text-gray-600 text-center dark:text-gray-300 lg:mx-auto lg:w-5/12">
               We are thankful to IIT Ropar for giving us this wonderful opportunity. We would also like to thank our mentor Dr Puneet Goyal for guiding us throughout and giving us regular feedback.
             </p>
-            <div className='items-center abc '>
-
+            
+          </div>
+          <div className='my-5 grid gap-6 px-4 sm:px-0 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3'>
+          <div className="group relative rounded-3xl  space-y-6 overflow-hidden"></div>
               <div className="group relative rounded-3xl  space-y-6 overflow-hidden">
                 <img
                   className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
                   src={Puneet}
-                  alt="woman"
+                  alt="Puneet Goyal, Professor, IIT Ropar"
                   loading="lazy"
-                  width="64"
-                  height="80"
+                  width="640"
+                  height="805"
                 />
                 <div className="absolute bottom-0 inset-x-0 h-max mt-auto px-8 py-6 bg-gray-800 dark:bg-white translate-y-24 transition duration-300 ease-in-out group-hover:translate-y-0">
                   <div>
@@ -76,7 +76,6 @@ function Team() {
 
               </div>
             </div>
-          </div>
           <p className="text-gray-600 text-center dark:text-gray-300 lg:mx-auto lg:w-5/12">
             Here is our team, comprising Members with diverse skills and experiences each of their's contribution made this site possible
           </p>
@@ -85,7 +84,7 @@ function Team() {
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
                 src={adish}
-                alt="woman"
+                alt="Adish Lodha"
                 loading="lazy"
                 width="640"
                 height="805"
@@ -103,7 +102,7 @@ function Team() {
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
                 src={yadwinder}
-                alt="woman"
+                alt="Yadwinder Singh"
                 loading="lazy"
                 width="640"
                 height="805"
@@ -121,7 +120,7 @@ function Team() {
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top transition duration-500 group-hover:scale-105 group-hover:grayscale-0"
                 src={tanuj}
-                alt="woman"
+                alt="Tanuj Kumar"
                 loading="lazy"
                 width="640"
                 height="805"
@@ -139,7 +138,7 @@ function Team() {
               <img
                 className="mx-auto h-[26rem] w-full grayscale object-cover object-top ransition duration-500 group-hover:scale-105 group-hover:grayscale-0"
                 src={vinay}
-                alt="woman"
+                alt="Vinay Kumar"
                 loading="lazy"
                 width="640"
                 height="805"
@@ -151,14 +150,10 @@ function Team() {
                 </div>
                 <p className="mt-8 text-gray-300 dark:text-gray-600">Department - Computer Science and Engineering</p>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-
-
-
     </>
   )
 

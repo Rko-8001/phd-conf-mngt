@@ -162,7 +162,7 @@ function App() {
               <Footer />
             </>} />
           <Route path="studentApplication" element={
-            <div class="min-h-screen w-full relative">
+            <div className="min-h-screen w-full relative">
               <UpperNav />
               <ViewApplicationResearch />
               <Footer />
@@ -191,7 +191,7 @@ function App() {
             </>} />
 
           <Route path="studentApplication" element={
-            <div class="min-h-screen w-full relative">
+            <div className="min-h-screen w-full relative">
               <UpperNav />
               <ViewApplicationAccount />
               <Footer />

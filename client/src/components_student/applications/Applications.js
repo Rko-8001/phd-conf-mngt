@@ -274,7 +274,7 @@ function Application() {
             <div className="p-2">
             </div>
           </div>
-          <div class="my-3 flex flex-wrap justify-center gap-4">
+          <div className="my-3 flex flex-wrap justify-center gap-4">
             {apps && renderApps1}
 
           </div>

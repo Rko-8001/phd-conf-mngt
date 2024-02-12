@@ -97,6 +97,8 @@ function Login() {
             const data = await res.json();
             const role = data.role;
             const token = data.token;
+            console.log("Role: " + role);
+            console.log("Token: " + token);
             setUserToken(token);
             setroleToken(role);
             if (role === "0") {

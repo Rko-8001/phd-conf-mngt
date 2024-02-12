@@ -36,10 +36,10 @@ function Home(props) {
         <>
             <div>
                 <Newcomp />
-                <div class="container px-10 py-10 mx-5">
+                <div className="container px-10 py-10 mx-5">
                     <span style={{ display: 'flex', alignItems: 'center' }}>
                         <FaChartLine size={32} style={{ marginRight: '1rem' }} />
-                        <h1 class="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"> <span class="underline decoration-blue-500">Welcome to Student Portal</span></h1>
+                        <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"> <span className="underline decoration-blue-500">Welcome to Student Portal</span></h1>
                     </span>
                 </div>
                 <div className='px-2 w-full'>
@@ -74,16 +74,16 @@ function Home(props) {
                                 <div className="p-2">
                                 </div>
                             </div>
-                            <div class="px-4">
-                                <div class="my-5 p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
-                                    <span class="inline-block text-blue-500 dark:text-blue-400">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                            <div className="px-4">
+                                <div className="my-5 p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
+                                    <span className="inline-block text-blue-500 dark:text-blue-400">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
                                         </svg>
                                     </span>
 
-                                    <h2 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Available Balance: {studentInfo?.balance} Rs</h2>
-                                    <h2 class="text-xl font-semibold text-gray-700 capitalize dark:text-white">Unsettled Amount: {studentInfo?.unsettledBalance} Rs</h2>
+                                    <h2 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">Available Balance: {studentInfo?.balance} Rs</h2>
+                                    <h2 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">Unsettled Amount: {studentInfo?.unsettledBalance} Rs</h2>
 
                                 </div>
                             </div>

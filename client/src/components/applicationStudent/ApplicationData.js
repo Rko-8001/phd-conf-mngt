@@ -22,6 +22,8 @@ import ConferenceDetailsAbroad from './Tabs/ConferenceDetailsAbroad';
 function ApplicationData({ data, user, role, links }) {
     const [value, setValue] = useState("personal details");
 
+    console.log("Application Links: ", links);
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

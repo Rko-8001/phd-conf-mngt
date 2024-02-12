@@ -202,10 +202,10 @@ export default function InputData(props) {
             <div className="">
               <input id="societyRecognized" type="radio"
                 onChange={props.getConferenceInfo} value="Yes" name="societyRecognized" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-              <label for="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+              <label htmlFor="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
               <input id="societyRecognized" type="radio"
                 onChange={props.getConferenceInfo} value="No" name="societyRecognized" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-              <label for="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+              <label htmlFor="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
             </div>
           </div>
 
@@ -289,7 +289,7 @@ export default function InputData(props) {
                   <div className="sm:col-span-3">
                     <div className="relative flex gap-x-3">
                       <div className="text-sm leading-6">
-                        {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Attach File to Support</label> */}
+                        {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Attach File to Support</label> */}
                         <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                         <p className="text-gray-500"></p>
                       </div>
