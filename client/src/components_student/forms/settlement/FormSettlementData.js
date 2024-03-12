@@ -49,7 +49,9 @@ export default function FormSettlementData() {
 
     const [advance, setAdvance] = useState(false);
     const dataInTable = [];
+    const dataInTableTravel = [];
     const [tableData, setTableData] = useState(dataInTable);
+    const [tableDataTravel, setTableDataTravel] = useState(dataInTableTravel);
     const [travel, setTravel] = useState(0);
     const [food, setFood] = useState(0);
     const [stay, setStay] = useState(0);
@@ -57,6 +59,11 @@ export default function FormSettlementData() {
     const [registrationFee, setRegistrationFee] = useState(0);
 
     const [rowData, setRowData] = useState({
+        particular: "",
+        amount: ""
+    });
+
+    const [rowDataTravel, setRowDataTravel] = useState({
         particular: "",
         amount: ""
     });
@@ -118,12 +125,34 @@ export default function FormSettlementData() {
         setRowData({ particular: "", amount: "" });
     }
 
+    const addRowDataTravel = (e) => {
+        e.preventDefault();
+        if (!rowDataTravel.particular || !rowDataTravel.amount) {
+            window.alert("Fill all the fields!");
+            return;
+        }
+        const newTableDataTravel = [...tableDataTravel]
+        newTableDataTravel.push(rowDataTravel);
+        setTableDataTravel(newTableDataTravel);
+        setRowDataTravel({ particular: "", amount: "" });
+    }
+
     const getRowData = (e) => {
         const { name, value } = e.target;
         // console.log(name + " " + value);
         setRowData(prevState => ({
             ...prevState,
             [name]: value
+        }));
+    }
+
+    const getRowDataTravel = (e) => {
+        const { name, value } = e.target;
+        // console.log(name + " " + value);
+        setRowDataTravel(prevState => ({
+            ...prevState,
+            [name]: value
+            
         }));
     }
 
@@ -149,11 +178,13 @@ export default function FormSettlementData() {
 
     const submitSettlement = async (e) => {
         e.preventDefault();
+        console.log(generalInfo);
         alert("Settlement Form Submitted");
 
         // save all data
 
         const email = generalInfo.email;
+        console.log(email);
         const status = "0";
         const mobileNo = generalInfo.mobileNo;
         const bankAccountNo = generalInfo.bankAccNo;
@@ -182,10 +213,27 @@ export default function FormSettlementData() {
             "amount": stay
         });
 
+        const formData = new FormData();
+        formData.append("name", generalInfo.name);
+        formData.append("status", status);
+        formData.append("mobileNo", mobileNo);
+        formData.append("bankAccountNo", bankAccountNo);
+        formData.append("nameOfConference", nameOfConference);
+        formData.append("venueOfConference", venueOfConference);
+        formData.append("paperInConference", paperInConference);
+        formData.append("conferenceStarts", conferenceStarts);
+        formData.append("conferenceEnds", conferenceEnds);
+        formData.append("studentLeaveStarts", studentLeaveStarts);
+        formData.append("studentLeaveEnds", studentLeaveEnds);
+        formData.append("financialSupport", financialSupport);
+        formData.append("advances", advances);
+
 
         if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
             return;
         }
+
+
     }
 
     const getBasicInfo = async (req, res) => {
@@ -251,6 +299,7 @@ export default function FormSettlementData() {
                 leaveStarts={leaveStarts} setLeaveStarts={setLeaveStarts}
                 leaveEnds={leaveEnds} setLeaveEnds={setLeaveEnds}
                 addRowData={addRowData} tableData={tableData} getRowData={getRowData} rowData={rowData}
+                addRowDataTravel={addRowDataTravel} tableDataTravel={tableDataTravel} getRowDataTravel={getRowDataTravel} rowDataTravel={rowDataTravel}
                 getFixedParts={getFixedParts}
                 food={food} travel={travel} stay={stay} visaCharges={visaCharges} registrationFee={registrationFee}
                 submitSettlement={submitSettlement}

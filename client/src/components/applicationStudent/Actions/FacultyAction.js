@@ -44,6 +44,8 @@ export default function FacultyAction({ user, data }) {
         formData.append("status", status);
         formData.append("image", image);
 
+        console.log("Form Data hehe: ");
+
         const res = await fetch(`${BASE_URL}/facultyApproveOrDisapprove`, {
             method: "POST",
             headers: {

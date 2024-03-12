@@ -9,6 +9,9 @@ import { Switch } from '@headlessui/react'
 import { AiOutlineEllipsis } from 'react-icons/ai';
 import { getUserToken, setAppToken } from '../../../components_login/Tokens';
 import { BASE_URL } from '../../../components/requests/URL';
+import Particulars from '../inputFields/Particulars';
+import Enclosures from '../inputFields/Enclosures';
+import ParticularsTravel from '../inputFields/ParticularsTravel';
 
 
 const data = [];
@@ -77,18 +80,18 @@ export default function InputData(props) {
   return (
     <Container>
       {alert &&
-            <Alert
-              severity="warning"
-              onClose={() => {
-                setAlert(false);
-              }}
-            >
-              <AlertTitle>Important</AlertTitle>
-              <div className="flex">
-                Fields with <BsAsterisk className='text-[#FF0000] mx-2 h-2' />  are Required.
-              </div>
-            </Alert>
-          }
+        <Alert
+          severity="warning"
+          onClose={() => {
+            setAlert(false);
+          }}
+        >
+          <AlertTitle>Important</AlertTitle>
+          <div className="flex">
+            Fields with <BsAsterisk className='text-[#FF0000] mx-2 h-2' />  are Required.
+          </div>
+        </Alert>
+      }
 
       <form>
         <br />
@@ -113,14 +116,14 @@ export default function InputData(props) {
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
             <div className="sm:col-span-3">
-              <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
-                Name
+              <label htmlFor="name" name='name' className="block text-sm font-medium leading-6 text-gray-900">
+                Mobile Number
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="mobileNo"
-                  id="mobileNo"
+                  name="name"
+                  id="name"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -128,56 +131,197 @@ export default function InputData(props) {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
-                Bank Account Number
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Emp. Code
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="accountNo"
-                  id="accountNo"
+                  name="bankAccNo"
+                  id="bankAccNo"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
-          </div>
-        </div>
 
-        <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Department details</h2>
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
-              <label htmlFor="nameOfConference" className="block text-sm font-medium leading-6 text-gray-900">
-                Department:
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Department
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="nameOfConference"
-                  id="nameOfConference"
-                  onChange={props.getConferenceInfo}
+                  name="bankAccNo"
+                  id="bankAccNo"
+                  onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
+
             <div className="sm:col-span-3">
-              <label htmlFor="venueOfConference" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
                 Designation
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="venueOfConference"
-                  id="venueOfConference"
+                  name="bankAccNo"
+                  id="bankAccNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Basic Pay with Grade Pay
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="bankAccNo"
+                  id="bankAccNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Budget Head
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="bankAccNo"
+                  id="bankAccNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Advance drawn Rs.
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="bankAccNo"
+                  id="bankAccNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Date
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="bankAccNo"
+                  id="bankAccNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+                Bank Account No.
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="bankAccNo"
+                  id="bankAccNo"
+                  onChange={props.getGeneralInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+        <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Travel between Cities/Countries including local to and fro Airport/Railway station etc.</h2>
+
+          <ParticularsTravel
+            rowDataTravel={props.rowDataTravel}
+            travel={props.travel}
+            tableDataTravel={props.tableDataTravel}
+            addRowDataTravel={props.addRowDataTravel}
+            getRowDataTravel={props.getRowDataTravel}
+          />
+        </div>
+
+
+
+
+
+
+
+
+        <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Any other expenses</h2>
+          {/* <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div className="sm:col-span-3">
+              <label htmlFor="department" className="block text-sm font-medium leading-6 text-gray-900">
+                Department:
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="department"
+                  id="department"
                   onChange={props.getConferenceInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
-          </div>
+            <div className="sm:col-span-3">
+              <label htmlFor="designation" className="block text-sm font-medium leading-6 text-gray-900">
+                Designation
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="designation"
+                  id="designation"
+                  onChange={props.getConferenceInfo}
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+          </div> */}
 
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+
+          <Particulars
+            rowData={props.rowData}
+            getFixedParts={props.getFixedParts}
+            travel={props.travel}
+            food={props.food}
+            stay={props.stay}
+            registrationFee={props.registrationFee}
+            tableData={props.tableData}
+            addRowData={props.addRowData}
+            getRowData={props.getRowData}
+          />
+
+          {/* <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
               <label htmlFor="nameOfSociety" className="block text-sm font-medium leading-6 text-gray-900">
                 Name of Society organizing the conference
@@ -196,7 +340,7 @@ export default function InputData(props) {
           </div>
           <br />
           <div className="sm:col-span-3">
-            <label htmlFor="society" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="societyRecognized" className="block text-sm font-medium leading-6 text-gray-900">
               Do you have any period of time for which you want to claim DA
             </label>
             <div className="">
@@ -207,11 +351,11 @@ export default function InputData(props) {
                 onChange={props.getConferenceInfo} value="No" name="societyRecognized" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
               <label htmlFor="societyRecognized" className=" px-4 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
             </div>
-          </div>
+          </div> */}
 
           <br />
-          <p className="py-4">Period of Event for which claimant doesn't want to claim DA:</p>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/*<p className="py-4">Period of Event for which claimant doesn't want to claim DA:</p>
+           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="From"
               name="EventStarts"
@@ -231,7 +375,7 @@ export default function InputData(props) {
               }}
 
             />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
 
           <br /> <br />
 
@@ -257,117 +401,67 @@ export default function InputData(props) {
         </div>
 
         <div className="border-b border-gray-900/10 pb-12">
-          <h2 className="text-base font-semibold leading-7 text-gray-900">Financial Information</h2>
-
-          <div className="relative overflow-x-auto">
-            <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  <th scope="col" className="px-6 py-3">
-                    Particulars
-                  </th>
-                  <th scope="col" className="px-6 py-3">
-                    Amount (Rs)
-                  </th>
-
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Lodging
-                  </th>
-                  <td className="px-6 py-2">
-                    <input
-                      type="text"
-                      name="travel"
-                      value={props.travel}
-                      className=""
-                      onChange={props.getFixedParts}
-                    />
-                  </td>
-                  <div className="sm:col-span-3">
-                    <div className="relative flex gap-x-3">
-                      <div className="text-sm leading-6">
-                        {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="file_input">Attach File to Support</label> */}
-                        <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                        <p className="text-gray-500"></p>
-                      </div>
-                    </div>
-                  </div>
-
-                </tr>
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Food
-                  </th>
-                  <td className="px-6 py-2">
-                    <input
-                      type="text"
-                      name="food"
-                      value={props.food}
-                      className=""
-                      onChange={props.getFixedParts}
-                    />
-                  </td>
-                  <div className="sm:col-span-3">
-                    <div className="relative flex gap-x-3">
-                      <div className="text-sm leading-6">
-                        {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Attach File to Support</label> */}
-                        <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                        <p className="text-gray-500"></p>
-                      </div>
-                    </div>
-                  </div>
-
-                </tr>
-                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                  <th scope="row" className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Stay
-                  </th>
-                  <td className="px-6 py-2">
-                    <input
-                      type="text"
-                      name="stay"
-                      value={props.stay}
-                      className=""
-                      onChange={props.getFixedParts}
-                    />
-                  </td>
-                  <div className="sm:col-span-3">
-                    <div className="relative flex gap-x-3">
-                      <div className="text-sm leading-6">
-                        {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Attach File to Support</label> */}
-                        <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
-                        <p className="text-gray-500"></p>
-                      </div>
-                    </div>
-                  </div>
-                </tr>
-                {tableRows}
-              </tbody>
-            </table>
-          </div>
-
           <br />
           <br />
           <b>Certified that</b>
           <br />
           <br />
 
-          <li>All claims mentioned in this form correspond to actual expenditure incurred by me for which no reimbursement have been made from any other source (Govt/Pvt/Others) </li>
-          <li>I was not provided with any free boarding/lodging/conveyence/registration fee waiver/travel coupons for which claim has been made.</li>
+          <li>All claims mentioned in this form correspond to actual expenditure incurred by me for which no reimbursement/claims have been
+made from any other source (Govt./Private/Others)</li>
+          <li>I was not provided with any free boarding/lodging/conveyance/registration fee waiver/travel coupons for which claim has been
+made.</li>
           <br />
           <br />
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Your Signature</label>
+          {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Your Signature</label>
           <div className="sm:col-span-3">
             <div className="relative flex gap-x-3">
               <div className="text-sm leading-6">
-                {/* <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Attach File to Support</label> */}
                 <input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file" />
                 <p className="text-gray-500"></p>
               </div>
             </div>
+          </div> */}
+
+<div className="mt-10 space-y-10">
+            <fieldset>
+              <legend className="text-sm flex font-semibold leading-6 text-gray-900">
+                Enclosures Attached
+                <BsAsterisk className='text-[#FF0000] h-2' />
+              </legend>
+              <div className="mt-6 space-y-6">
+
+                <Enclosures
+                  title="Signature"
+                  onChangeFunction={props.fileFunction}
+                  name="copyOfApprovedTour"
+                  type="file"
+                  acceptType="application/pdf"
+                />
+                <Enclosures
+                  title="Enclosure 1"
+                  onChangeFunction={props.fileFunction}
+                  name="copyOfConferenceBrochure"
+                  type="file"
+                  acceptType="application/pdf"
+                />
+                <Enclosures
+                  title="Enclosure 2"
+                  name="copyOfAbstract"
+                  onChangeFunction={props.fileFunction}
+                  type="file"
+                  acceptType="application/pdf"
+                />
+                <Enclosures
+                  title="Enclosure 3"
+                  name="yoursignature"
+                  onChangeFunction={props.fileFunction}
+                  type="file"
+                  acceptType="application/pdf"
+                />
+              </div>
+            </fieldset>
+
           </div>
 
 
