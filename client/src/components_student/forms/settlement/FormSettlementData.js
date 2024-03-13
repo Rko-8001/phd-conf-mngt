@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { getUserToken } from '../../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
+import { generateUtilityClass } from '@mui/material';
 
 export default function FormSettlementData() {
 
@@ -64,8 +65,17 @@ export default function FormSettlementData() {
     });
 
     const [rowDataTravel, setRowDataTravel] = useState({
-        particular: "",
-        amount: ""
+        deptdate: "",
+        depttime: "",
+        deptplace: "",
+        arrivaldate: "",
+        arrivaltime: "",
+        arrivalplace: "",
+        mode: "",
+        KM: "",
+        fare: "",
+        TicketNo: "",
+        remarks: ""
     });
 
 
@@ -127,14 +137,14 @@ export default function FormSettlementData() {
 
     const addRowDataTravel = (e) => {
         e.preventDefault();
-        if (!rowDataTravel.particular || !rowDataTravel.amount) {
-            window.alert("Fill all the fields!");
+        if (!rowDataTravel.deptdate || !rowDataTravel.depttime || !rowDataTravel.deptplace || !rowDataTravel.arrivaldate || !rowDataTravel.arrivaltime || !rowDataTravel.arrivalplace || !rowDataTravel.mode || !rowDataTravel.KM || !rowDataTravel.fare || !rowDataTravel.TicketNo) {
+            window.alert("Fill all the fields! The field name is " + Object.keys(rowDataTravel).find(key => rowDataTravel[key] === ""));
             return;
         }
         const newTableDataTravel = [...tableDataTravel]
         newTableDataTravel.push(rowDataTravel);
         setTableDataTravel(newTableDataTravel);
-        setRowDataTravel({ particular: "", amount: "" });
+        setRowDataTravel({ deptdate: "", depttime: "", deptplace: "", arrivaldate: "", arrivaltime: "", arrivalplace: "", mode: "", KM: "", fare: "", TicketNo: "", remarks: "" });
     }
 
     const getRowData = (e) => {
@@ -179,59 +189,110 @@ export default function FormSettlementData() {
     const submitSettlement = async (e) => {
         e.preventDefault();
         console.log(generalInfo);
-        alert("Settlement Form Submitted");
+        // alert("Settlement Form Submitted");
 
         // save all data
 
-        const email = generalInfo.email;
-        console.log(email);
+        const mobileNo = generalInfo.mobile;
+        const empCode = generalInfo.empCode;
+        const department = generalInfo.department;
+        const designation = generalInfo.designation;
+        const Bpay = generalInfo.Bpay;
+        const budgetHead = generalInfo.budgetHead;
+        const advanceDrawn = generalInfo.advanceDrawn;
+        const Date = dayjs(generalInfo.date).format('DD/MM/YYYY');
+        const bankAccNo = generalInfo.bankAccNo;
+
         const status = "0";
-        const mobileNo = generalInfo.mobileNo;
-        const bankAccountNo = generalInfo.bankAccNo;
-        const nameOfConference = conferenceInfo.nameOfConference;
-        const venueOfConference = conferenceInfo.venueOfConference;
-        const paperInConference = conferenceInfo.paperInConference;
-        const conferenceStarts = dayjs(dateStarts).format('DD/MM/YYYY')
-        const conferenceEnds = dayjs(dateEnds).format('DD/MM/YYYY')
 
-        const studentLeaveStarts = dayjs(leaveStarts).format('DD/MM/YYYY')
-        const studentLeaveEnds = dayjs(leaveEnds).format('DD/MM/YYYY')
-
-        const financialSupport = conferenceInfo.financialSupport;
-        const advances = advance;
         const finances = [...tableData];
-        finances.push({
-            "particular": "travel",
-            "amount": travel
-        });
-        finances.push({
-            "particular": "food",
-            "amount": food
-        });
-        finances.push({
-            "particular": "stay",
-            "amount": stay
-        });
+        const travels = [...tableDataTravel];
 
         const formData = new FormData();
-        formData.append("name", generalInfo.name);
-        formData.append("status", status);
+
         formData.append("mobileNo", mobileNo);
-        formData.append("bankAccountNo", bankAccountNo);
-        formData.append("nameOfConference", nameOfConference);
-        formData.append("venueOfConference", venueOfConference);
-        formData.append("paperInConference", paperInConference);
-        formData.append("conferenceStarts", conferenceStarts);
-        formData.append("conferenceEnds", conferenceEnds);
-        formData.append("studentLeaveStarts", studentLeaveStarts);
-        formData.append("studentLeaveEnds", studentLeaveEnds);
-        formData.append("financialSupport", financialSupport);
-        formData.append("advances", advances);
+        formData.append("empCode", empCode);
+        formData.append("department", department);
+        formData.append("designation", designation);
+        formData.append("Bpay", Bpay);
+        formData.append("budgetHead", budgetHead);
+        formData.append("advanceDrawn", advanceDrawn);
+        formData.append("Date", Date);
+        formData.append("bankAccNo", bankAccNo);
+        formData.append("status", status);
+        
+        formData.append("finances", JSON.stringify(finances));
+        formData.append("travels", JSON.stringify(travels));
 
+        console.log("Sumitting");
 
-        if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
-            return;
+        const res = await fetch(`${BASE_URL}/studentSettlementSubmit`, {
+            method: "POST",
+            body: formData
+        });
+
+        if (res.status === 422) {
+            // setMessage("Error Occurred! Please Try Again.");
+            // setFormSuccess(false);
+            console.log("Error Occurred! Please Try Again.");
         }
+        else {
+            // setFormSuccess(true);
+            // setMessage("Application Submitted Successfully!");
+            console.log("Application Submitted Successfully!");
+        }
+        // setFreezeButton(false);
+        // setShowModal(true);
+
+
+        // console.log(email);
+        // const status = "0";
+        // const mobileNo = generalInfo.mobileNo;
+        // const bankAccountNo = generalInfo.bankAccNo;
+        // const nameOfConference = conferenceInfo.nameOfConference;
+        // const venueOfConference = conferenceInfo.venueOfConference;
+        // const paperInConference = conferenceInfo.paperInConference;
+        // const conferenceStarts = dayjs(dateStarts).format('DD/MM/YYYY')
+        // const conferenceEnds = dayjs(dateEnds).format('DD/MM/YYYY')
+
+        // const studentLeaveStarts = dayjs(leaveStarts).format('DD/MM/YYYY')
+        // const studentLeaveEnds = dayjs(leaveEnds).format('DD/MM/YYYY')
+
+        // const financialSupport = conferenceInfo.financialSupport;
+        // const advances = advance;
+        // const finances = [...tableData];
+        // finances.push({
+        //     "particular": "travel",
+        //     "amount": travel
+        // });
+        // finances.push({
+        //     "particular": "food",
+        //     "amount": food
+        // });
+        // finances.push({
+        //     "particular": "stay",
+        //     "amount": stay
+        // });
+
+        // const formData = new FormData();
+        // formData.append("name", generalInfo.name);
+        // formData.append("status", status);
+        // formData.append("mobileNo", mobileNo);
+        // formData.append("bankAccountNo", bankAccountNo);
+        // formData.append("nameOfConference", nameOfConference);
+        // formData.append("venueOfConference", venueOfConference);
+        // formData.append("paperInConference", paperInConference);
+        // formData.append("conferenceStarts", conferenceStarts);
+        // formData.append("conferenceEnds", conferenceEnds);
+        // formData.append("studentLeaveStarts", studentLeaveStarts);
+        // formData.append("studentLeaveEnds", studentLeaveEnds);
+        // formData.append("financialSupport", financialSupport);
+        // formData.append("advances", advances);
+
+
+        // if (!checkData() || !checkConferenceTime(conferenceStarts, conferenceEnds) || !checkLeaveTime(leaveStarts, leaveEnds)) {
+        //     return;
+        // }
 
 
     }

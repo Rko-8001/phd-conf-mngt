@@ -5,8 +5,18 @@ export default function Particulars(props) {
     const tableRows = props.tableDataTravel.map((info) => {
         return (
             <tr key={info.particularTravel} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                <th className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{info.particularTravel}</th>
-                <th className="px-6 py-2">{info.amountTravel}</th>
+                {/* <th className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">{info.deptdate}</th> */}
+                <th className="px-6 py-2">{info.deptdate}</th>
+                <th className="px-6 py-2">{info.depttime}</th>
+                <th className="px-6 py-2">{info.deptplace}</th>
+                <th className="px-6 py-2">{info.arrivaldate}</th>
+                <th className="px-6 py-2">{info.arrivaltime}</th>
+                <th className="px-6 py-2">{info.arrivalplace}</th>
+                <th className="px-6 py-2">{info.mode}</th>
+                <th className="px-6 py-2">{info.KM}</th>
+                <th className="px-6 py-2">{info.fare}</th>
+                <th className="px-6 py-2">{info.TicketNo}</th>
+                <th className="px-6 py-2">{info.remarks}</th>
             </tr>
         );
     });
@@ -15,15 +25,15 @@ export default function Particulars(props) {
         <>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="deptdate" name='deptdatelabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Departure Date
                     </label>
                     <div className="mt-2">
                         <input
                             type="date"
-                            name="particular"
+                            name="deptdate"
                             id="deptdate"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.deptdata}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -31,15 +41,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="depttime" className="block text-sm font-medium leading-6 text-gray-900">
                         Departure Time
                     </label>
                     <div className="mt-2">
                         <input
                             type="time"
-                            name="amount"
+                            name="depttime"
                             id="depttime"
-                            value={props.rowDataTravel.amountTravel}
+                            value={props.rowDataTravel.depttime}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -47,15 +57,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="deptplace" name='deptplacelabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Departure Place
                     </label>
                     <div className="mt-2">
                         <input
                             type="text"
-                            name="particular"
+                            name="deptplace"
                             id="deptplace"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.deptplace}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -63,15 +73,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="arrivaldate" name='arrivaldatelabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Arrival Date
                     </label>
                     <div className="mt-2">
                         <input
                             type="date"
-                            name="particular"
+                            name="arrivaldate"
                             id="arrivaldate"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.arrivaldate}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -79,15 +89,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="arrivaltime" name='arrivaltimelabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Arrival Time
                     </label>
                     <div className="mt-2">
                         <input
                             type="time"
-                            name="particular"
+                            name="arrivaltime"
                             id="arrivaltime"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.arrivaltime}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -95,15 +105,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="arrivalplace" name='arrivalplacelabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Arrival Place
                     </label>
                     <div className="mt-2">
                         <input
                             type="text"
-                            name="particular"
+                            name="arrivalplace"
                             id="arrivalplace"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.arrivalplace}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -111,15 +121,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="mode" name='modelabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Mode
                     </label>
                     <div className="mt-2">
                         <input
                             type="text"
-                            name="particular"
+                            name="mode"
                             id="mode"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.mode}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -127,15 +137,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="KM" name='KMlabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Km
                     </label>
                     <div className="mt-2">
                         <input
                             type="text"
-                            name="particular"
+                            name="KM"
                             id="KM"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.KM}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -143,15 +153,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="fare" name='fareLabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Fare
                     </label>
                     <div className="mt-2">
                         <input
                             type="text"
-                            name="particular"
+                            name="fare"
                             id="fare"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.fare}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -159,15 +169,15 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-3">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="TicketNo" name='TicketNoLabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Ticket No.
                     </label>
                     <div className="mt-2">
                         <input
                             type="text"
-                            name="particular"
+                            name="TicketNo"
                             id="TicketNo"
-                            value={props.rowDataTravel.particularTravel}
+                            value={props.rowDataTravel.TicketNo}
                             onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         />
@@ -175,7 +185,7 @@ export default function Particulars(props) {
                 </div>
 
                 <div className="sm:col-span-6">
-                    <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
+                    <label htmlFor="remarks" name='remarksLabel' className="block text-sm font-medium leading-6 text-gray-900">
                         Remarks
                     </label>
                     {/* <div className="mt-2">
@@ -193,9 +203,10 @@ export default function Particulars(props) {
                         <textarea
                             type="text"
                             id="remarks"
-                            name="reasonToAttend"
+                            name="remarks"
                             rows={3}
-                            onChange={props.getConferenceInfoTravel}
+                            value={props.rowDataTravel.remarks}
+                            onChange={props.getRowDataTravel}
                             className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                             defaultValue={''}
                         />
@@ -212,7 +223,7 @@ export default function Particulars(props) {
                     ADD
                 </button>
             </div>
-
+                
 
 
 

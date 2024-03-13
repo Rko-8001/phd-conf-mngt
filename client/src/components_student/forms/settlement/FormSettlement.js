@@ -99,7 +99,7 @@ export default function InputData(props) {
           <h2 className="text-base font-semibold leading-7 text-gray-900">Travelling Allowance Reimbursement/Settlement Form:</h2>
           <br />
           <br />
-          <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="applicatonRe" className="block text-sm font-medium leading-6 text-gray-900">
             Select the application for Settlement
           </label>
           <br />
@@ -116,14 +116,14 @@ export default function InputData(props) {
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-6">
             <div className="sm:col-span-3">
-              <label htmlFor="name" name='name' className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="mobile" name='phone' className="block text-sm font-medium leading-6 text-gray-900">
                 Mobile Number
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
-                  name="name"
-                  id="name"
+                  type="tel"
+                  name="mobile"
+                  id="mobile"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -131,14 +131,14 @@ export default function InputData(props) {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="empCode" className="block text-sm font-medium leading-6 text-gray-900">
                 Emp. Code
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="bankAccNo"
-                  id="bankAccNo"
+                  name="empCode"
+                  id="empCode"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -146,14 +146,14 @@ export default function InputData(props) {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="department" className="block text-sm font-medium leading-6 text-gray-900">
                 Department
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="bankAccNo"
-                  id="bankAccNo"
+                  name="department"
+                  id="department"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -161,14 +161,14 @@ export default function InputData(props) {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="designation" className="block text-sm font-medium leading-6 text-gray-900">
                 Designation
               </label>
               <div className="mt-2">
                 <input
                   type="text"
-                  name="bankAccNo"
-                  id="bankAccNo"
+                  name="designation"
+                  id="designation"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -176,14 +176,14 @@ export default function InputData(props) {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="Bpay" className="block text-sm font-medium leading-6 text-gray-900">
                 Basic Pay with Grade Pay
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
-                  name="bankAccNo"
-                  id="bankAccNo"
+                  type="number"
+                  name="Bpay"
+                  id="Bpay"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -191,14 +191,14 @@ export default function InputData(props) {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="budgetHead" className="block text-sm font-medium leading-6 text-gray-900">
                 Budget Head
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
-                  name="bankAccNo"
-                  id="bankAccNo"
+                  type="number"
+                  name="budgetHead"
+                  id="budgetHead"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -211,9 +211,9 @@ export default function InputData(props) {
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
-                  name="bankAccNo"
-                  id="bankAccNo"
+                  type="number"
+                  name="advanceDrawn"
+                  id="advanceDrawn"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -221,14 +221,14 @@ export default function InputData(props) {
             </div>
 
             <div className="sm:col-span-3">
-              <label htmlFor="bankAccNo" className="block text-sm font-medium leading-6 text-gray-900">
+              <label htmlFor="Date" className="block text-sm font-medium leading-6 text-gray-900">
                 Date
               </label>
               <div className="mt-2">
                 <input
-                  type="text"
-                  name="bankAccNo"
-                  id="bankAccNo"
+                  type="date"
+                  name="Date"
+                  id="Date"
                   onChange={props.getGeneralInfo}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />

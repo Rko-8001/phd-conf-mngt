@@ -10,6 +10,7 @@ require('../mongoDb/connection');
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
 const AppDataAbroad = require('../model/applicationAbroad');
+const AppDataSett = require('../model/applicationSettlement');
 
 const { genAppToken } = require('../tokens/generateToken');
 const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
@@ -96,6 +97,145 @@ router.post('/updateInfo', async (req, res) => {
     }
 
 })
+
+
+router.post('/studentSettlementSubmit', async (req, res) => {
+
+    // const mobileNo = generalInfo.mobile;
+    //     const empCode = generalInfo.empCode;
+    //     const department = generalInfo.department;
+    //     const designation = generalInfo.designation;
+    //     const Bpay = generalInfo.Bpay;
+    //     const budgetHead = generalInfo.budgetHead;
+    //     const advanceDrawn = generalInfo.advanceDrawn;
+    //     const Date = dayjs(generalInfo.date).format('DD/MM/YYYY');
+    //     const bankAccNo = generalInfo.bankAccNo;
+
+    //     const status = "0";
+
+    //     const finances = [...tableData];
+    //     const travels = [...tableDataTravel];
+
+    var {
+        mobileNo, empCode, department, designation, Bpay, budgetHead, advanceDrawn, Date, bankAccNo, status,
+        finances, travels
+    } = req.body;
+
+    // var { copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
+
+    finances = JSON.parse(finances);
+    travels = JSON.parse(travels);
+
+
+    console.log("department: " + department);
+
+    try {
+        const data = new AppDataSett(
+            {
+                mobileNo, empCode, department, designation, Bpay, budgetHead, advanceDrawn, Date, bankAccNo, status,
+                finances, travels
+            });
+
+        data.save()
+            .then((result) => {
+                console.log("Application Submitted..");
+                return res.status(200).json({ message: "Application Submitted.." });
+            }).catch((error) => {
+                console.log(error);
+                return res.status(422).json({ message: "Can't submit application. Try Again.." })
+            }
+            );
+
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+    }
+
+
+
+    // try {
+
+        // searching for student folder
+        //     searchDriveFolder(entryNo).then((parentID) => {
+        //         console.log("Parent Id: " + parentID);
+        //         // creating application folder inside student folder
+        //         var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
+        //         const applicationFolderId = createDriveFolder(applicationFolderName, parentID).then((result) => {
+        //             console.log("Application Folder Id: " + result);
+
+        //             uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId).then((abstractFileId) => {
+        //                 console.log("Abstract File Id: " + abstractFileId);
+
+
+        //                 uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId)
+        //                     .then((brochureFileId) => {
+        //                         console.log("Brochure File Id: " + brochureFileId);
+
+
+        //                         uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId)
+        //                             .then((acceptanceFileId) => {
+        //                                 console.log("Acceptance File Id: " + acceptanceFileId);
+
+        //                                 // saving data to mongo
+        //                                 const data = new AppData(
+        //                                     {
+        //                                         email, status,
+        //                                         mobileNo,
+        //                                         bankAccountNo, ifscCode,
+        //                                         nameOfConference, venueOfConference, paperInConference,
+        //                                         conferenceStarts, conferenceEnds,
+        //                                         financialSupport,
+        //                                         advances, finances,
+        //                                         coaa, coaba, cocba,
+        //                                         numberOfDays,
+        //                                         studentLeaveStarts, studentLeaveEnds,
+        //                                         abstractFileId, brochureFileId, acceptanceFileId
+        //                                     });
+        //                                 data.save()
+        //                                     .then((result) => {
+        //                                         console.log("Application Submitted..");
+        //                                         return res.status(200).json({ message: "Application Submitted.." });
+        //                                     }).catch((error) => {
+        //                                         console.log(error);
+        //                                         return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //                                     }
+        //                                     );
+
+        //                             }).catch((error) => {
+        //                                 console.log(error);
+        //                                 return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //                             }
+        //                             );
+
+        //                     }).catch((error) => {
+        //                         console.log(error);
+        //                         return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //                     }
+        //                     );
+
+        //             }).catch((error) => {
+        //                 console.log(error);
+        //                 return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //             }
+        //             );
+
+        //         }).catch((error) => {
+        //             console.log(error);
+        //             return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //         }
+        //         );
+
+        //     }).catch((error) => {
+        //         console.log(error);
+        //         return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //     }
+        //     );
+        // } catch (error) {
+        //     console.log(error);
+        //     return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        // }
+
+    });
 
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
