@@ -391,15 +391,15 @@ function FormPrintAbroad({ data, user }) {
                         <br></br>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={4}>
-                                <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                                 <pre><b>Signature of PhD Scholar</b></pre>
                             </Grid>
                             <Grid item xs={4}>
-                                <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
+                                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.facultySignLink)}`} alt="sign" />
                                 <pre><b>Supervisor(s)</b></pre>
                             </Grid>
                             <Grid item xs={4}>
-                                <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
+                                <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.hodSignLink)}`} alt="sign" />
                                 <pre><b>Head of the Department</b></pre>
                             </Grid>
                         </Grid>
@@ -439,15 +439,15 @@ function FormPrintAbroad({ data, user }) {
                             <br></br>
                             <Grid className="py-2" container spacing={2}>
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
                                     <pre><b>Dealing Assistant</b></pre>
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
                                     <pre><b>Joint Assistant</b></pre>
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.researchSignLink)}`} alt="sign" />
                                     <pre><b>Assistant Registrar</b></pre>
                                 </Grid>
                             </Grid>
@@ -493,15 +493,15 @@ function FormPrintAbroad({ data, user }) {
                             <br></br>
                             <Grid className="py-2" container spacing={2}>
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
                                     <pre><b>Dealing Assistant</b></pre>
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
                                     <pre><b>Accounts Officer</b></pre>
                                 </Grid>
                                 <Grid item xs={4}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.accountSignLink)}`} alt="sign" />
                                     <pre><b>Deputy Registrar</b></pre>
                                 </Grid>
                             </Grid>
@@ -536,7 +536,7 @@ function FormPrintAbroad({ data, user }) {
                             <br></br>
                             <Grid className="py-2" container spacing={2}>
                                 <Grid item xs={12}>
-                                    <img className="h-5 w-auto" src={`https://drive.google.com/uc?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
+                                    <img className="h-5 w-auto" src={`https://drive.google.com/thumbnail?id=${extractFileId(data?.deanSignLink)}`} alt="sign" />
                                     <pre><b>Dealing Assistant</b></pre>
                                 </Grid>
                             </Grid>

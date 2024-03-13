@@ -38,7 +38,7 @@ export default function FacultyApplication() {
     const getAppInfo = async (req, res) => {
         try {
             const token = getUserToken();
-            console.log("hello");
+            console.log("Getting App info");
             const resp = await fetch(`${BASE_URL}/viewFacultyApplications`, {
                 method: "POST",
                 headers: {
@@ -206,7 +206,7 @@ export default function FacultyApplication() {
                             {/* <p className="text-gray-700">{tabs[activeTabIndex].content}</p> */}
                         </div>
                     </div>
-                    <div class="my-3 flex flex-wrap justify-center gap-4">
+                    <div className="my-3 flex flex-wrap justify-center gap-4">
                         {apps && renderApps}
                     </div>
                 </Container>

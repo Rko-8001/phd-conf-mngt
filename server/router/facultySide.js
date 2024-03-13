@@ -176,10 +176,12 @@ router.post('/viewFacultyApplications', async (req, res) => {
 
     // verfiy the token
     try {
+        console.log("Token: " + bearerToken);
         var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
 
         // //setting email and role from decode
         const facultyEmail = decode.email;
+        console.log(facultyEmail);
         const appData = await AppData.find().sort({ "updatedAt": -1 });
 
         var filteredData = new Array();

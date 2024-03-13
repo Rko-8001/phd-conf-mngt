@@ -10,6 +10,7 @@ require('../mongoDb/connection');
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
 const AppDataAbroad = require('../model/applicationAbroad');
+const AppDataSett = require('../model/applicationSettlement');
 
 const { genAppToken } = require('../tokens/generateToken');
 const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
@@ -45,7 +46,7 @@ router.post('/studentInfoLoading', async (req, res) => {
     //setting email and role from decode
     const role = decode.role;
     const email = decode.email;
-    
+
     // fetching data from mongo
     try {
         const student = await User.findOne({ email: email });
@@ -97,6 +98,145 @@ router.post('/updateInfo', async (req, res) => {
 
 })
 
+
+router.post('/studentSettlementSubmit', async (req, res) => {
+
+    // const mobileNo = generalInfo.mobile;
+    //     const empCode = generalInfo.empCode;
+    //     const department = generalInfo.department;
+    //     const designation = generalInfo.designation;
+    //     const Bpay = generalInfo.Bpay;
+    //     const budgetHead = generalInfo.budgetHead;
+    //     const advanceDrawn = generalInfo.advanceDrawn;
+    //     const Date = dayjs(generalInfo.date).format('DD/MM/YYYY');
+    //     const bankAccNo = generalInfo.bankAccNo;
+
+    //     const status = "0";
+
+    //     const finances = [...tableData];
+    //     const travels = [...tableDataTravel];
+
+    var {
+        mobileNo, empCode, department, designation, Bpay, budgetHead, advanceDrawn, Date, bankAccNo, status,
+        finances, travels
+    } = req.body;
+
+    // var { copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
+
+    finances = JSON.parse(finances);
+    travels = JSON.parse(travels);
+
+
+    console.log("department: " + department);
+
+    try {
+        const data = new AppDataSett(
+            {
+                mobileNo, empCode, department, designation, Bpay, budgetHead, advanceDrawn, Date, bankAccNo, status,
+                finances, travels
+            });
+
+        data.save()
+            .then((result) => {
+                console.log("Application Submitted..");
+                return res.status(200).json({ message: "Application Submitted.." });
+            }).catch((error) => {
+                console.log(error);
+                return res.status(422).json({ message: "Can't submit application. Try Again.." })
+            }
+            );
+
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+    }
+
+
+
+    // try {
+
+        // searching for student folder
+        //     searchDriveFolder(entryNo).then((parentID) => {
+        //         console.log("Parent Id: " + parentID);
+        //         // creating application folder inside student folder
+        //         var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
+        //         const applicationFolderId = createDriveFolder(applicationFolderName, parentID).then((result) => {
+        //             console.log("Application Folder Id: " + result);
+
+        //             uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId).then((abstractFileId) => {
+        //                 console.log("Abstract File Id: " + abstractFileId);
+
+
+        //                 uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId)
+        //                     .then((brochureFileId) => {
+        //                         console.log("Brochure File Id: " + brochureFileId);
+
+
+        //                         uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId)
+        //                             .then((acceptanceFileId) => {
+        //                                 console.log("Acceptance File Id: " + acceptanceFileId);
+
+        //                                 // saving data to mongo
+        //                                 const data = new AppData(
+        //                                     {
+        //                                         email, status,
+        //                                         mobileNo,
+        //                                         bankAccountNo, ifscCode,
+        //                                         nameOfConference, venueOfConference, paperInConference,
+        //                                         conferenceStarts, conferenceEnds,
+        //                                         financialSupport,
+        //                                         advances, finances,
+        //                                         coaa, coaba, cocba,
+        //                                         numberOfDays,
+        //                                         studentLeaveStarts, studentLeaveEnds,
+        //                                         abstractFileId, brochureFileId, acceptanceFileId
+        //                                     });
+        //                                 data.save()
+        //                                     .then((result) => {
+        //                                         console.log("Application Submitted..");
+        //                                         return res.status(200).json({ message: "Application Submitted.." });
+        //                                     }).catch((error) => {
+        //                                         console.log(error);
+        //                                         return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //                                     }
+        //                                     );
+
+        //                             }).catch((error) => {
+        //                                 console.log(error);
+        //                                 return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //                             }
+        //                             );
+
+        //                     }).catch((error) => {
+        //                         console.log(error);
+        //                         return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //                     }
+        //                     );
+
+        //             }).catch((error) => {
+        //                 console.log(error);
+        //                 return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //             }
+        //             );
+
+        //         }).catch((error) => {
+        //             console.log(error);
+        //             return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //         }
+        //         );
+
+        //     }).catch((error) => {
+        //         console.log(error);
+        //         return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        //     }
+        //     );
+        // } catch (error) {
+        //     console.log(error);
+        //     return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        // }
+
+    });
+
 // submitting application 
 router.post('/studentApplicationSubmit', async (req, res) => {
 
@@ -115,42 +255,86 @@ router.post('/studentApplicationSubmit', async (req, res) => {
 
     finances = JSON.parse(finances);
 
+
+    console.log("Name of Conferenceii: " + nameOfConference);
+
     try {
 
         // searching for student folder
-        const parentId = await searchDriveFolder(entryNo);
-        // creating application folder inside student folder
-        var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
-        const applicationFolderId = await createDriveFolder(applicationFolderName, parentId);
+        searchDriveFolder(entryNo).then((parentID) => {
+            console.log("Parent Id: " + parentID);
+            // creating application folder inside student folder
+            var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
+            const applicationFolderId = createDriveFolder(applicationFolderName, parentID).then((result) => {
+                console.log("Application Folder Id: " + result);
 
-        // uploading files to application folder
-        var abstractFileId = null;
-        abstractFileId = await uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId);
+                uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId).then((abstractFileId) => {
+                    console.log("Abstract File Id: " + abstractFileId);
 
-        var brochureFileId = null;
-        brochureFileId = await uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId);
 
-        var acceptanceFileId = null;
-        acceptanceFileId = await uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId);
+                    uploadPdf("copyOfConferenceBrochure.pdf", copyOfConferenceBrochure.tempFilePath, applicationFolderId)
+                        .then((brochureFileId) => {
+                            console.log("Brochure File Id: " + brochureFileId);
 
-        // saving data to mongo
-        const data = new AppData(
-            {
-                email, status,
-                mobileNo,
-                bankAccountNo, ifscCode,
-                nameOfConference, venueOfConference, paperInConference,
-                conferenceStarts, conferenceEnds,
-                financialSupport,
-                advances, finances,
-                coaa, coaba, cocba,
-                numberOfDays,
-                studentLeaveStarts, studentLeaveEnds,
-                abstractFileId, brochureFileId, acceptanceFileId
-            });
-        await data.save();
 
-        return res.status(200).json({ message: "Application Submitted.." });
+                            uploadPdf("copyOfAcceptance.pdf", copyOfAcceptance.tempFilePath, applicationFolderId)
+                                .then((acceptanceFileId) => {
+                                    console.log("Acceptance File Id: " + acceptanceFileId);
+
+                                    // saving data to mongo
+                                    const data = new AppData(
+                                        {
+                                            email, status,
+                                            mobileNo,
+                                            bankAccountNo, ifscCode,
+                                            nameOfConference, venueOfConference, paperInConference,
+                                            conferenceStarts, conferenceEnds,
+                                            financialSupport,
+                                            advances, finances,
+                                            coaa, coaba, cocba,
+                                            numberOfDays,
+                                            studentLeaveStarts, studentLeaveEnds,
+                                            abstractFileId, brochureFileId, acceptanceFileId
+                                        });
+                                    data.save()
+                                        .then((result) => {
+                                            console.log("Application Submitted..");
+                                            return res.status(200).json({ message: "Application Submitted.." });
+                                        }).catch((error) => {
+                                            console.log(error);
+                                            return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                        }
+                                        );
+
+                                }).catch((error) => {
+                                    console.log(error);
+                                    return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                }
+                                );
+
+                        }).catch((error) => {
+                            console.log(error);
+                            return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                        }
+                        );
+
+                }).catch((error) => {
+                    console.log(error);
+                    return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                }
+                );
+
+            }).catch((error) => {
+                console.log(error);
+                return res.status(422).json({ message: "Can't submit application. Try Again.." })
+            }
+            );
+
+        }).catch((error) => {
+            console.log(error);
+            return res.status(422).json({ message: "Can't submit application. Try Again.." })
+        }
+        );
     } catch (error) {
         console.log(error);
         return res.status(422).json({ message: "Can't submit application. Try Again.." })
@@ -186,50 +370,96 @@ router.post('/studentApplicationSubmitAbroad', async (req, res) => {
 
     try {
         // searching for student folder
-        const parentId = await searchDriveFolder(entryNo);
-        // creating application folder inside student folder
-        var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
-        const applicationFolderId = await createDriveFolder(applicationFolderName, parentId);
+        console.log("Entry No: " + entryNo);
+        searchDriveFolder(entryNo).then((parentID) => {
+            console.log("Parent Id: " + parentID);
+            const parentId = parentID;
+            // creating application folder inside student folder
+            var applicationFolderName = conferenceStarts + "-" + conferenceEnds + "__" + nameOfConference; // name of application folder
+            const applicationFolderId = createDriveFolder(applicationFolderName, parentId).then((result) => {
+                console.log("Application Folder Id: " + result);
 
-        var invitationLetterAdditionalFileId = null;
-        invitationLetterAdditionalFileId = await uploadPdf("invitationLetterAdditional.pdf", invitationLetterAdditional.tempFilePath, applicationFolderId);
+                uploadPdf("invitationLetterAdditional.pdf", invitationLetterAdditional.tempFilePath, applicationFolderId)
+                    .then((invitationLetterAdditionalFileId) => {
+                        console.log("Invitation Letter Additional File Id: " + invitationLetterAdditionalFileId);
 
-        var letterOfInvitationFileId = null;
-        letterOfInvitationFileId = await uploadPdf("letterOfInvitation.pdf", letterOfInvitation.tempFilePath, applicationFolderId);
+                        uploadPdf("letterOfInvitation.pdf", letterOfInvitation.tempFilePath, applicationFolderId)
+                            .then((letterOfInvitationFileId) => {
+                                console.log("Letter Of Invitation File Id: " + letterOfInvitationFileId);
+                                uploadPdf("conferenceBrochure.pdf", conferenceBrochure.tempFilePath, applicationFolderId)
+                                    .then((conferenceBrochureFileId) => {
+                                        console.log("Conference Brochure File Id: " + conferenceBrochureFileId);
+                                        uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId)
+                                            .then((copyOfAbstractFileId) => {
+                                                console.log("Copy Of Abstract File Id: " + copyOfAbstractFileId);
+                                                uploadPdf("accomodationCost.pdf", accomodationCost.tempFilePath, applicationFolderId)
+                                                    .then((accomodationCostFileId) => {
+                                                        console.log("Accomodation Cost File Id: " + accomodationCostFileId);
+                                                        uploadPdf("acceptanceOfPaper.pdf", acceptanceOfPaper.tempFilePath, applicationFolderId)
+                                                            .then((acceptanceOfPaperFileId) => {
+                                                                console.log("Acceptance Of Paper File Id: " + acceptanceOfPaperFileId);
 
-        var conferenceBrochureFileId = null;
-        conferenceBrochureFileId = await uploadPdf("conferenceBrochure.pdf", conferenceBrochure.tempFilePath, applicationFolderId);
+                                                                const data = new AppDataAbroad(
+                                                                    {
+                                                                        email, entryNo, mobileNo,
+                                                                        status, type,
+                                                                        bankAccountNo, ifscCode,
+                                                                        nameOfConference, venueOfConference,
+                                                                        nameOfSociety, societyRecognized, reasonToAttend,
+                                                                        paperInConference, fundingSources,
+                                                                        purposeOfVisit, justification, sponsorship,
+                                                                        financialSupport, advances,
+                                                                        conferenceStarts, conferenceEnds,
+                                                                        studentLeaveStarts, studentLeaveEnds,
+                                                                        finances, flightDetails,
+                                                                        invitationLetterAdditionalFileId, letterOfInvitationFileId,
+                                                                        conferenceBrochureFileId, copyOfAbstractFileId,
+                                                                        accomodationCostFileId, acceptanceOfPaperFileId
+                                                                    });
 
-        var copyOfAbstractFileId = null;
-        copyOfAbstractFileId = await uploadPdf("copyOfAbstract.pdf", copyOfAbstract.tempFilePath, applicationFolderId);
+                                                                data.save()
+                                                                    .then((result) => {
+                                                                        console.log("Application Submitted..");
+                                                                        return res.status(200).json({ message: "Application Submitted.." });
 
-        var accomodationCostFileId = null;
-        accomodationCostFileId = await uploadPdf("accomodationCost.pdf", accomodationCost.tempFilePath, applicationFolderId);
+                                                                    }).catch((error) => {
+                                                                        console.log(error);
+                                                                        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                                                    });
 
-        var acceptanceOfPaperFileId = null;
-        acceptanceOfPaperFileId = await uploadPdf("acceptanceOfPaper.pdf", acceptanceOfPaper.tempFilePath, applicationFolderId);
 
-        // saving data to mongo
-        const data = new AppDataAbroad(
-            {
-                email, entryNo, mobileNo,
-                status, type,
-                bankAccountNo, ifscCode,
-                nameOfConference, venueOfConference,
-                nameOfSociety, societyRecognized, reasonToAttend,
-                paperInConference, fundingSources,
-                purposeOfVisit, justification, sponsorship,
-                financialSupport, advances,
-                conferenceStarts, conferenceEnds,
-                studentLeaveStarts, studentLeaveEnds,
-                finances, flightDetails,
-                invitationLetterAdditionalFileId, letterOfInvitationFileId,
-                conferenceBrochureFileId, copyOfAbstractFileId,
-                accomodationCostFileId, acceptanceOfPaperFileId
+                                                            }).catch((error) => {
+                                                                console.log(error);
+                                                                return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                                            });
+                                                    }).catch((error) => {
+                                                        console.log(error);
+                                                        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                                    });
+                                            }).catch((error) => {
+                                                console.log(error);
+                                                return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                            });
+                                    }
+                                    ).catch((error) => {
+                                        console.log(error);
+                                        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                                    });
+                            }).catch((error) => {
+                                console.log(error);
+                                return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                            });
+                    }).catch((error) => {
+                        console.log(error);
+                        return res.status(422).json({ message: "Can't submit application. Try Again.." })
+                    });
+
+            }).catch((error) => {
+                console.log(error);
+                return res.status(422).json({ message: "Can't submit application. Try Again.." })
             });
-            // console.log(data);
-        await data.save();
-        return res.status(200).json({ message: "Application Submitted.." });
+        });
+
     } catch (error) {
         console.log(error);
         return res.status(422).json({ message: "Can't submit application. Try Again.." })

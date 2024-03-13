@@ -98,7 +98,7 @@ export default function Profile() {
               </div>
             </div>
             <div className={`${modalClass}`}>
-            <UpdateInfoModal  setModalClass={setModalClass} mobileNo={profileInfo.mobileNo}/>
+            <UpdateInfoModal  setModalclassName={setModalClass} mobileNo={profileInfo.mobileNo}/>
             </div>
             <ProfilePersonalInfo profileInfo={profileInfo} />
 

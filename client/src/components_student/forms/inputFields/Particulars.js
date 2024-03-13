@@ -1,7 +1,8 @@
 import React from 'react'
+import Enclosures from './Enclosures';
 
 export default function Particulars(props) {
-    
+
     const tableRows = props.tableData.map((info) => {
         return (
             <tr key={info.particular} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -14,7 +15,7 @@ export default function Particulars(props) {
     return (
         <>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-2">
                     <label htmlFor="mobileNo" name='mobileNo' className="block text-sm font-medium leading-6 text-gray-900">
                         Particulars
                     </label>
@@ -30,7 +31,7 @@ export default function Particulars(props) {
                     </div>
                 </div>
 
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-2">
                     <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
                         Amount
                     </label>
@@ -45,6 +46,30 @@ export default function Particulars(props) {
                         />
                     </div>
                 </div>
+
+                <div className="sm:col-span-2">
+                    {/* <label htmlFor="accountNo" className="block text-sm font-medium leading-6 text-gray-900">
+                        Upload Bill
+                    </label>
+                    <div className="mt-2">
+                        <input
+                            type="file"
+                            name="amount"
+                            id="amount"
+                            value={props.rowData.amount}
+                            onChange={props.getRowData}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        />
+                    </div> */}
+                    <Enclosures
+                        title="Upload Bill"
+                        name="yoursignature"
+                        onChangeFunction={props.fileFunction}
+                        type="file"
+                        acceptType="application/pdf"
+                    />
+                </div>
+
 
             </div>
             <div className="mt-6 flex items-center justify-end gap-x-6">
@@ -69,6 +94,9 @@ export default function Particulars(props) {
                             <th scope="col" className="px-6 py-3">
                                 Amount (Rs)
                             </th>
+                            <th scope="col" className="px-6 py-3">
+                                Bill
+                            </th>
 
                         </tr>
                     </thead>
@@ -86,6 +114,15 @@ export default function Particulars(props) {
                                     onChange={props.getFixedParts}
                                 />
                             </td>
+                            <td className="px-6 py-2">
+                                <Enclosures
+                                    title="Upload Bill"
+                                    name="yoursignature"
+                                    onChangeFunction={props.fileFunction}
+                                    type="file"
+                                    acceptType="application/pdf"
+                                />
+                            </td>
 
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -99,6 +136,15 @@ export default function Particulars(props) {
                                     value={props.registrationFee}
                                     className=""
                                     onChange={props.getFixedParts}
+                                />
+                            </td>
+                            <td className="px-6 py-2">
+                                <Enclosures
+                                    title="Upload Bill"
+                                    name="yoursignature"
+                                    onChangeFunction={props.fileFunction}
+                                    type="file"
+                                    acceptType="application/pdf"
                                 />
                             </td>
 
@@ -116,6 +162,15 @@ export default function Particulars(props) {
                                     onChange={props.getFixedParts}
                                 />
                             </td>
+                            <td className="px-6 py-2">
+                                <Enclosures
+                                    title="Upload Bill"
+                                    name="yoursignature"
+                                    onChangeFunction={props.fileFunction}
+                                    type="file"
+                                    acceptType="application/pdf"
+                                />
+                            </td>
 
                         </tr>
                         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -129,6 +184,15 @@ export default function Particulars(props) {
                                     value={props.stay}
                                     className=""
                                     onChange={props.getFixedParts}
+                                />
+                            </td>
+                            <td className="px-6 py-2">
+                                <Enclosures
+                                    title="Upload Bill"
+                                    name="yoursignature"
+                                    onChangeFunction={props.fileFunction}
+                                    type="file"
+                                    acceptType="application/pdf"
                                 />
                             </td>
                         </tr>
