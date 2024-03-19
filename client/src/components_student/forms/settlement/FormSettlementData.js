@@ -23,7 +23,17 @@ export default function FormSettlementData() {
         doj: "",
         fellowshipCat: "",
         aos: "",
-        supervisor: ""
+        supervisor: "",
+        mobile: "",
+        empCode: "",
+        department: "",
+        designation: "",
+        Bpay: "",
+        budgetHead: "",
+        advanceDrawn: "",
+        date: "",
+        status: "0",
+        applicationID: ""
     });
     const [conferenceInfo, setConferenceInfo] = useState({
         nameOfConference: "",
@@ -101,7 +111,8 @@ export default function FormSettlementData() {
 
     const getGeneralInfo = ((e) => {
         const { name, value } = e.target;
-        // console.log(name + " " + value);
+
+        console.log(name + " " + value + " " + e.target);
         setGeneralInfo(prevState => ({
             ...prevState,
             [name]: value
@@ -193,6 +204,13 @@ export default function FormSettlementData() {
 
         // save all data
 
+        const applicationID = generalInfo.applicationID;
+        console.log("ApplicationID:", applicationID);
+        if (applicationID == "")
+        {
+            console.log("NOPE");
+            return;
+        }
         const mobileNo = generalInfo.mobile;
         const empCode = generalInfo.empCode;
         const department = generalInfo.department;
@@ -210,6 +228,7 @@ export default function FormSettlementData() {
 
         const formData = new FormData();
 
+        formData.append("parentId", applicationID);
         formData.append("mobileNo", mobileNo);
         formData.append("empCode", empCode);
         formData.append("department", department);
@@ -220,6 +239,7 @@ export default function FormSettlementData() {
         formData.append("Date", Date);
         formData.append("bankAccNo", bankAccNo);
         formData.append("status", status);
+        formData.append("type", 3);
         
         formData.append("finances", JSON.stringify(finances));
         formData.append("travels", JSON.stringify(travels));

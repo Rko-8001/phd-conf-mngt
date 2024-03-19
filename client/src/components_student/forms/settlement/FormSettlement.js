@@ -42,7 +42,10 @@ export default function InputData(props) {
   useEffect(() => {
     getBasicInfo().then((resp) => {
 
-      setApps(resp.map(resp => resp.nameOfConference));
+      // console.log(resp);
+      setApps(resp.map(resp => ({ nameOfConference: resp.nameOfConference, _id: resp._id })));
+
+      console.log("APPS", apps);
       // console.log(resp.nameOfConference);
       // console.log(resp.map(resp => resp.nameOfConference))
       // options = apps.map(apps => apps.nameOfConference);
@@ -74,6 +77,7 @@ export default function InputData(props) {
   const handleChange = (event) => {
     const option = event.target.value;
     setSelectedOption(option);
+    console.log("Changing option to ", selectedOption);
   };
   const [alert, setAlert] = useState(true);
 
@@ -99,15 +103,16 @@ export default function InputData(props) {
           <h2 className="text-base font-semibold leading-7 text-gray-900">Travelling Allowance Reimbursement/Settlement Form:</h2>
           <br />
           <br />
-          <label htmlFor="applicatonRe" className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor="applicatonID" className="block text-sm font-medium leading-6 text-gray-900">
             Select the application for Settlement
           </label>
           <br />
-          <select className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' value={selectedOption} onChange={handleChange}>
+          <select id="applicationID" name="applicationID" className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6' value={selectedOption} onChange={(event) => { props.getGeneralInfo(event); handleChange(event); }}>
             {console.log(apps)}
+            <option value="" disabled selected>Select the application for Settlement</option>
             {apps.map((item) => (
-              <option key={item} value={item}>
-                {item}
+              <option key={item._id} value={item._id} id={item._id}>
+                {item.nameOfConference}
               </option>
             ))}
           </select>
