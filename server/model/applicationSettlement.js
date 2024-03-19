@@ -59,6 +59,14 @@ const applicationData = new mongoose.Schema({
         type: String,
         required: true
     },
+    parentId: {
+        type: String,
+        required: true
+    },
+    type: {
+        type: String,
+        required: true
+    },
     finances: {
         type: Array,
         required: true

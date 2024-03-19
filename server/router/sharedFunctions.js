@@ -10,6 +10,7 @@ require('../mongoDb/connection');
 // requiring user Schema                
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
+const AppDataSett = require('../model/applicationSettlement');
 
 // credentials import
 require('dotenv').config();
@@ -218,40 +219,130 @@ router.post('/viewAnApplication', async (req, res) => {
 
     try {
         const data = await AppData.findById(id);
-        const user = await User.findOne({ email: data.email });
-        if (data.type === 1) {
-            console.log("Id Bitch: ", id);
-            const dataAbroad = await AppDataAbroad.findById(id);
-
-            console.log("Data Bitch: ", dataAbroad);
-
-            const invitationLetterAdditonalUrl = await createPublicUrl(dataAbroad.invitationLetterAdditionalFileId);
-            const letterOfInvitationUrl = await createPublicUrl(dataAbroad.letterOfInvitationFileId);
-            const conferenceBrochureUrl = await createPublicUrl(dataAbroad.conferenceBrochureFileId);
-            const copyOfAbstractUrl = await createPublicUrl(dataAbroad.copyOfAbstractFileId);
-            const accomodationCostUrl = await createPublicUrl(dataAbroad.accomodationCostFileId);
-            const acceptanceOfPaperUrl = await createPublicUrl(dataAbroad.acceptanceOfPaperFileId)
-
-            console.log("SexyBitch143: ", invitationLetterAdditonalUrl, dataAbroad.invitationLetterAdditionalFileId);
-            
-            return res.status(200).json(
-                {
-                    data: dataAbroad,
-                    applicantInfo: user,
-                    invitationAdditonalUrl: invitationLetterAdditonalUrl,
-                    invitationUrl: letterOfInvitationUrl,
-                    abstractUrl: copyOfAbstractUrl,
-                    acceptanceUrl: acceptanceOfPaperUrl,
-                    conferenceBrochureUrl: conferenceBrochureUrl,
-                    accmodationUrl: accomodationCostUrl
-                });
+        const dataSettlement = await AppDataSett.findById(id);
+        let Email = null;
+        if (dataSettlement?._doc?.email != null)
+        {
+            Email = dataSettlement?._doc?.email;
+        }
+        else if (data?._doc?.email != null)
+        {
+            Email = data?._doc?.email;
         }
         else {
-            const copyofAbstractUrl = await createPublicUrl(data.abstractFileId);
-            const copyOfAcceptanceUrl = await createPublicUrl(data.acceptanceFileId);
-            const copyOfConferenceBrochureUrl = await createPublicUrl(data.brochureFileId);
+            const parentId = dataSettlement._doc.parentId;
+            const dataAbroad = await AppDataAbroad.findById(parentId);
+            const dataIndia = await AppData.findById(parentId);
 
-            return res.status(200).json({ data: data, applicantInfo: user, abstractUrl: copyofAbstractUrl, acceptanceUrl: copyOfAcceptanceUrl, conferenceBrochureUrl: copyOfConferenceBrochureUrl });
+            let data = {};
+            if (dataIndia != null) {
+                data = dataIndia;
+            }
+            else {
+                data = dataAbroad;
+            }
+
+            Email = data.email;
+
+        }
+        console.log(Email, data?._doc?.email, dataSettlement?._doc?.email);
+        console.log(data);
+        console.log(dataSettlement);
+        const user = await User.findOne({ email: Email });
+        console.log("USER");
+        console.log(user);
+        if (data?.email != null) {
+            if (data.type === 1) {
+                console.log("Id Bitch: ", id);
+                const dataAbroad = await AppDataAbroad.findById(id);
+
+                console.log("Data Bitch: ", dataAbroad);
+
+                const invitationLetterAdditonalUrl = await createPublicUrl(dataAbroad.invitationLetterAdditionalFileId);
+                const letterOfInvitationUrl = await createPublicUrl(dataAbroad.letterOfInvitationFileId);
+                const conferenceBrochureUrl = await createPublicUrl(dataAbroad.conferenceBrochureFileId);
+                const copyOfAbstractUrl = await createPublicUrl(dataAbroad.copyOfAbstractFileId);
+                const accomodationCostUrl = await createPublicUrl(dataAbroad.accomodationCostFileId);
+                const acceptanceOfPaperUrl = await createPublicUrl(dataAbroad.acceptanceOfPaperFileId)
+
+                console.log("SexyBitch143: ", invitationLetterAdditonalUrl, dataAbroad.invitationLetterAdditionalFileId);
+
+                return res.status(200).json(
+                    {
+                        data: dataAbroad,
+                        applicantInfo: user,
+                        invitationAdditonalUrl: invitationLetterAdditonalUrl,
+                        invitationUrl: letterOfInvitationUrl,
+                        abstractUrl: copyOfAbstractUrl,
+                        acceptanceUrl: acceptanceOfPaperUrl,
+                        conferenceBrochureUrl: conferenceBrochureUrl,
+                        accmodationUrl: accomodationCostUrl
+                    });
+            }
+            else {
+                const copyofAbstractUrl = await createPublicUrl(data.abstractFileId);
+                const copyOfAcceptanceUrl = await createPublicUrl(data.acceptanceFileId);
+                const copyOfConferenceBrochureUrl = await createPublicUrl(data.brochureFileId);
+
+                return res.status(200).json({ data: data, applicantInfo: user, abstractUrl: copyofAbstractUrl, acceptanceUrl: copyOfAcceptanceUrl, conferenceBrochureUrl: copyOfConferenceBrochureUrl });
+            }
+        }
+        else {
+            console.log("UO");
+            console.log(dataSettlement);
+
+            const parentId = dataSettlement._doc.parentId;
+
+            console.log(parentId);
+
+            // console.log("Id Bitch: ", id);
+            const dataAbroad = await AppDataAbroad.findById(parentId);
+            const dataIndia = await AppData.findById(parentId);
+
+            let data = {};
+            if (dataIndia != null) {
+                data = dataIndia;
+            }
+            else {
+                data = dataAbroad;
+            }
+
+            data.type = 3;
+            
+            console.log("DATA");
+            console.log(data);
+
+            const combinedData = {
+                ...data._doc,
+                ...dataSettlement._doc
+            }
+
+
+
+            // const data = await 
+
+            // console.log("Data Bitch: ", dataAbroad);
+
+            // const invitationLetterAdditonalUrl = await createPublicUrl(data._doc.invitationLetterAdditionalFileId);
+            // const letterOfInvitationUrl = await createPublicUrl(data._doc.letterOfInvitationFileId);
+            // const conferenceBrochureUrl = await createPublicUrl(data._doc.conferenceBrochureFileId);
+            // const copyOfAbstractUrl = await createPublicUrl(data._doc.copyOfAbstractFileId);
+            // const accomodationCostUrl = await createPublicUrl(data._doc.accomodationCostFileId);
+            // const acceptanceOfPaperUrl = await createPublicUrl(data._doc.acceptanceOfPaperFileId)
+
+            // console.log("SexyBitch143: ", invitationLetterAdditonalUrl, dataAbroad.invitationLetterAdditionalFileId);
+
+            return res.status(200).json(
+                {
+                    data: combinedData,
+                    applicantInfo: user,
+                    // invitationAdditonalUrl: invitationLetterAdditonalUrl,
+                    // invitationUrl: letterOfInvitationUrl,
+                    // abstractUrl: copyOfAbstractUrl,
+                    // acceptanceUrl: acceptanceOfPaperUrl,
+                    // conferenceBrochureUrl: conferenceBrochureUrl,
+                    // accmodationUrl: accomodationCostUrl
+                });
         }
 
     } catch (error) {
