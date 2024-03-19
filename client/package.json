@@ -30,6 +30,7 @@
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
     "react-to-print": "^2.14.11",
+    "react-toastify": "^10.0.5",
     "react-world-flags": "^1.5.1",
     "styled-components": "^5.3.9",
     "uuid": "^9.0.0",

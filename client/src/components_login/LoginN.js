@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { BASE_URL } from '../components/requests/URL';
 import { delay } from '../components/loading/Delay';
 import Alert from '../components/alerts/Alert';
-
+import Footer from '../components_student/Side/Footer';
 function Login() {
 
     const navigate = useNavigate();
@@ -124,38 +124,43 @@ function Login() {
         }
         setLoginButtonMssg("Log In.")
     }
-
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
 
 
     return (
         <>
 
-            <nav className="bg-gray-800 text-white flex justify-between items-center py-3 px-5">
-                <h1 className="text-xl font-bold">PhDCGM :: PhD Conference Grant Management Portal</h1>
-                <div className="flex items-center space-x-5 text-xs">
-                    <ul className="flex space-x-10 text-gray-300">
-                        <li key={2}>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li key={1}>
-                            <Link to="/meetTheTeam">Team</Link>
-                        </li>
-                        <li key={4}>
-                            <Link to="/userGuide">User Guide </Link>
-                        </li>
-                        <li key={3}>
-                            <Link to="/contactUs">Contact Us</Link>
-                        </li>
-                    </ul>
-                    <div className="space-x-5">
-                        <button onClick={(e) => {
-                            e.preventDefault();
-                            navigate('/login');
-                        }} className="border px-5 py-2 rounded font-bold">Login</button>
+            <nav className="bg-gray-800 text-white">
+                <div className="container mx-auto py-4 px-2 md:flex md:justify-between md:items-center">
+                    <div className="flex justify-between items-center">
+                        <Link to="/" className="text-xl font-bold">PhDCGM :: PhD Conference Grant Management Portal</Link>
+                        <button className="md:hidden" onClick={toggleNavbar}>
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div className={`md:flex flex-col md:flex-row md:items-center ${isOpen ? '' : 'hidden'} ${isOpen ? 'mt-4' : ''}`}>
+                        <div className="flex flex-col md:flex-row md:space-x-2 mr-5">
+                            <Link to="/" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Home</Link>
+                            <Link to="/meetTheTeam" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Team</Link>
+                            <Link to="/userGuide" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">User Guide</Link>
+                            <Link to="/researchInfo" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Research at IIT Ropar</Link>
+                            <Link to="/contactUs" className="block md:inline-block py-2 px-2 text-white hover:bg-gray-700 hover:text-white">Contact Us</Link>
+                        </div>
+                        <div className="mt-4 md:mt-0 ml-2 mr-4">
+                            <button onClick={(e) => {
+                                e.preventDefault();
+                                navigate('/login');
+                            }} className="border px-5 py-2 rounded font-bold">Login</button>
+                        </div>
                     </div>
                 </div>
             </nav>
-
 
             <section className="bg-gray-50 min-h-screen flex items-center justify-center">
                 <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center">
@@ -225,6 +230,7 @@ function Login() {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 

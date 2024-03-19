@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 // importing Components
 import FormInputGenData from './FormInputData';
 import dayjs from 'dayjs';
-
+import { toast } from 'react-toastify';
 import { getUserToken } from '../../../components_login/Tokens';
 import { checkConfDetails, checkConferenceTime, checkFinances, checkLeaveTime } from '../checkFunctions';
 import { BASE_URL } from '../../../components/requests/URL';
@@ -165,7 +165,11 @@ export default function FormInputAbroad() {
         });
         return flightDetails;
     }
-
+    const showErrorToast = (message) => {
+        toast.error(message, {
+            position: toast.POSITION.TOP_CENTER
+        });
+    };
     const requestGrant = async (e) => {
         e.preventDefault();
         if (freezeButton === true)
@@ -173,6 +177,103 @@ export default function FormInputAbroad() {
 
         setFreezeButton(true);
 
+        if (!generalInfo.email || !generalInfo.email.includes('@') || !generalInfo.email.includes('.')) {
+            showErrorToast('Please enter a valid email');
+            return;
+        }
+
+
+        if (!generalInfo.entryNo) {
+            showErrorToast('Please enter an entry number');
+            return;
+        }
+
+
+        const mobileRegex = /^[0-9]{10}$/;
+        if (!generalInfo.mobileNo || !mobileRegex.test(generalInfo.mobileNo)) {
+            showErrorToast('Please enter a valid 10-digit mobile number');
+            return;
+        }
+
+
+        const ifscRegex = /^[A-Za-z]{4}[a-zA-Z0-9]{7}$/;
+        if (!generalInfo.ifsc || !ifscRegex.test(generalInfo.ifsc)) {
+            showErrorToast('Please enter a valid IFSC code');
+            return;
+        }
+
+
+        const accountNoRegex = /^[0-9]{9,18}$/;
+        if (!generalInfo.accountNo || !accountNoRegex.test(generalInfo.accountNo)) {
+            showErrorToast('Please enter a valid bank account number (9-18 digits)');
+            return;
+        }
+
+
+        if (!conferenceInfo.nameOfConference) {
+            showErrorToast('Please enter the name of the conference');
+            return;
+        }
+
+        if (!conferenceInfo.venueOfConference) {
+            showErrorToast('Please enter the venue of the conference');
+            return;
+        }
+
+        if (!conferenceInfo.nameOfSociety) {
+            showErrorToast('Please enter the name of the society');
+            return;
+        }
+
+        if (!conferenceInfo.societyRecognized) {
+            showErrorToast('Please specify if the society is recognized');
+            return;
+        }
+
+        if (!conferenceInfo.reasonToAttend) {
+            showErrorToast('Please provide a reason to attend the conference');
+            return;
+        }
+
+        if (!conferenceInfo.paperInConference) {
+            showErrorToast('Please specify if you have a paper in the conference');
+            return;
+        }
+
+        if (!conferenceInfo.fundingSources) {
+            showErrorToast('Please specify your funding sources');
+            return;
+        }
+
+        if (!conferenceInfo.purposeOfVisit) {
+            showErrorToast('Please specify the purpose of your visit');
+            return;
+        }
+
+        if (!conferenceInfo.justification) {
+            showErrorToast('Please provide justification');
+            return;
+        }
+
+        if (!conferenceInfo.sponsorship) {
+            showErrorToast('Please specify if you have sponsorship');
+            return;
+        }
+
+        if (!conferenceInfo.financialSupport) {
+            showErrorToast('Please specify if you have financial support');
+            return;
+        }
+
+        if (dayjs(dateStarts).isAfter(dayjs(dateEnds))) {
+            showErrorToast('Conference start date should be before or same as the end date');
+            return;
+        }
+
+        if (dayjs(leaveStarts).isAfter(dayjs(leaveEnds))) {
+            showErrorToast('Student leave start date should be before or same as the end date');
+            return;
+        }
         const formData = new FormData();
 
         formData.append("email", generalInfo.email);
