@@ -16,11 +16,14 @@ import FormSettlementData from '../components_student/forms/settlement/FormSettl
 export const StudentHomePage =
     <>
         <UpperNav />
-        <div className='flex'>
+        <div className='flex h-full'>
+            <div className='h-full'>
             <SideBar />
-            <div>
-                <Heading />
-                <Home />
+            </div>
+
+            <div style={{ flex: 1, width: '100%' }}>
+            <Heading />
+            <Home />
             </div>
         </div>
         <Footer />

@@ -91,7 +91,7 @@ function Home(props) {
                     </div>
                     {/* <div className='mx-auto'></div> */}
                     {/* <Newcomp3 /> */}
-                    <FlexPage />
+                    {/* <FlexPage /> */}
                     <br />
                     <br />
 

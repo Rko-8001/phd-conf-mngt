@@ -60,6 +60,14 @@ export default function LandingPage() {
                 User Guide <span aria-hidden="true">→</span>
               </Link>
             </div>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <Link
+                to="/researchInfo"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Research at IIT Ropar
+              </Link>
+            </div>
           </div>
         </div>
         <div className="absolute inset-x-0 top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">

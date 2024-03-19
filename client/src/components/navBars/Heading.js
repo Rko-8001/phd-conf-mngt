@@ -19,21 +19,24 @@ export default function Heading() {
       sx={{
         p: 2,
         margin: 'auto',
-        maxWidth: 500,
+        // maxWidth: 500,
         flexGrow: 1,
         backgroundColor: (theme) =>
           theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        display: 'flex',
+        alignItems: 'center', // Center vertically
+        justifyContent: 'center', // Center horizontally
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} alignItems="center" justifyContent="center">
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 128 }}>
             <Img alt="complex" src={img} />
           </ButtonBase>
         </Grid>
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
+        <Grid item>
+          <Grid container direction="column" alignItems="center" spacing={2}>
+            <Grid item>
               <Typography gutterBottom variant="subtitle1" component="div">
                 {/* Welcome to the Faculty Portal */}
               </Typography>
@@ -47,12 +50,10 @@ export default function Heading() {
               </Typography>
             </Grid>
             <Grid item>
+              <Typography variant="subtitle1" component="div">
+                {/* $19.00 */}
+              </Typography>
             </Grid>
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-              {/* $19.00 */}
-            </Typography>
           </Grid>
         </Grid>
       </Grid>

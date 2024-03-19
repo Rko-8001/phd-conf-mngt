@@ -52,7 +52,7 @@ import {
   StudentApplicationsPage, StudentSpecficApplication, StudentFormSettlement
 } from './routes/StudentComponent';
 import Footer from './components_student/Side/Footer';
-
+import ResearchHere from './components/sidePages/ResearchHere';
 function App() {
 
   return (
@@ -61,7 +61,7 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<LoginN />} />
         <Route path='/userGuide' element={<UserGuide />} />
-
+        <Route path='/researchInfo' element={<ResearchHere />} />
         <Route path='/studentLogin' >
           <Route index element={<StudentRoute Component={StudentHomePage} />} />
           <Route path="formFill" element={<StudentRoute Component={StudentFormOption} />} />
