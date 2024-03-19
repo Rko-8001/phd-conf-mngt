@@ -8,12 +8,14 @@ import { BASE_URL } from '../../components/requests/URL';
 import { FaSort } from 'react-icons/fa';
 
 const data = [];
+const settlementData = [];
 export default function FacultyApplication() {
 
     const navigate = useNavigate();
 
     const [isLoading, setIsLoading] = useState(true);
     const [apps, setApps] = useState(data);
+    const [appsSettlement, setAppsSettlement] = useState(settlementData);
     const [activeTabIndex, setActiveTabIndex] = useState(0);
 
     const tabs = [
@@ -52,15 +54,53 @@ export default function FacultyApplication() {
         }
     }
 
+    const getAppInfoSettlement = async (req, res) => {
+        try {
+            const token = getUserToken();
+            console.log("Getting App info");
+            const resp = await fetch(`${BASE_URL}/viewFacultyApplicationsSettlement`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `Bearer ${token}`
+                },
+            });
+            return resp.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         getAppInfo().then((resp) => {
             setApps(resp.data);
             setIsLoading(false);
 
+            getAppInfoSettlement().then((resp) => {
+                setAppsSettlement(resp.data);
+                console.log(resp.data);
+                setIsLoading(false);
+
+            }).catch((e) => {
+                console.log(e)
+            });
+
         }).catch((e) => {
             console.log(e)
         });
     }, []);
+
+
+    // useEffect(() => {
+    //     getAppInfoSettlement().then((resp) => {
+    //         setAppsSettlement(resp.data);
+    //         setIsLoading(false);
+
+    //     }).catch((e) => {
+    //         console.log(e)
+    //     });
+    // }, []);
+
 
     const getStatus = (code) => {
         if (code === "0")
@@ -162,7 +202,48 @@ export default function FacultyApplication() {
                     </button>
                     <div
                         className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
-                        {getDays(item.createdAt)} ({item.type === 0 ? "National" : "International"})
+                        {getDays(item.createdAt)}
+                        ({item.type === 0 ? "National" : "International"})
+                    </div>
+                </div>
+
+            </div>
+
+            <br />
+        </>
+    );
+
+
+    const renderSettlementApps = appsSettlement.map((item, index) =>
+        <>
+            <div key={index}>
+                <div className="block max-w-md  rounded-lg  bg-white text-center shadow-lg dark:bg-neutral-700">
+                    <div className="border-b-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+                        {getStatus(item.status)}
+                    </div>
+                    <div className="p-4">
+                        <h5
+                            className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                            {item.nameOfConference}
+                        </h5>
+                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+                            Amounttt Needed: {getFinances(item.finances)} Rs
+                        </p>
+                        <p className="mb-1 text-base text-neutral-600 dark:text-neutral-200">
+                            Submitted By: {item.email}
+                        </p>
+                    </div>
+                    <button
+                        name={item._id}
+                        onClick={viewSpecficApplication}
+                        className="rounded-md bg-indigo-600 px-3 py-2 mb-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        View Full Application
+                    </button>
+                    <div
+                        className="border-t-2 border-neutral-100 px-6 py-3 dark:border-neutral-600 dark:text-neutral-50">
+                        {getDays(item.createdAt)}
+                        ({item.type === 0 ? "National" : "International"})
                     </div>
                 </div>
 
@@ -208,6 +289,7 @@ export default function FacultyApplication() {
                     </div>
                     <div className="my-3 flex flex-wrap justify-center gap-4">
                         {apps && renderApps}
+                        {appsSettlement && renderSettlementApps}
                     </div>
                 </Container>
             }

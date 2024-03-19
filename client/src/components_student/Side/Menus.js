@@ -21,9 +21,9 @@ export const PRODUCTS = [
     { name: "Newsletter", link: "https://iitrpr.ac.in/prajwalam-quarterly-newsletter-iit-ropar" },
   ];
   export const CONTACT = [
-    { name: "Indian Institute of Technology Ropar", link: "#" },
-    { name: "Rupnagar, Punjab-140001,India", link: "#" },
-    { name: "Webinars", link: "#" },
+    { name: "Indian Institute of Technology Ropar", link: "https://www.iitrpr.ac.in/" },
+    { name: "Rupnagar, Punjab-140001,India", link: "https://www.iitrpr.ac.in/" },
+    { name: "Announcements", link: "https://www.iitrpr.ac.in/news-announcement-archive" },
     { name: "How to reach IIT Ropar", link: "https://www.google.co.in/maps/dir/Rupnagar+Old+Bus+Stand,+Chhota+Khera,+Basant+Nagar,+Rupnagar,+Punjab/Indian+institute+of+Technology+Ropar,+Bara+Phool,+Punjab/@30.9622865,76.4685449,13z/am=t/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3905543310e70e63:0x63397d7938035537!2m2!1d76.5338166!2d30.9669695!1m5!1m1!1s0x390554d4ffffffff:0xb81f1e2708c91100!2m2!1d76.473305!2d30.9686169" },
     
   ];
