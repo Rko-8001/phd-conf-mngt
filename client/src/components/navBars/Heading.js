@@ -31,7 +31,8 @@ export default function Heading() {
       <Grid container spacing={2} alignItems="center" justifyContent="center">
         <Grid item>
           <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img alt="complex" src={img} />
+          <a href="https://www.iitrpr.ac.in/logo-iit-ropar">
+            <Img alt="complex" src={img} /></a>
           </ButtonBase>
         </Grid>
         <Grid item>
@@ -39,11 +40,17 @@ export default function Heading() {
             <Grid item>
               <Typography gutterBottom variant="subtitle1" component="div">
                 {/* Welcome to the Faculty Portal */}
+                <a href="https://www.iitrpr.ac.in/">
+                  Indian Institute of Technology Ropar
+                </a>
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {/* <h6>Welcome to the Faculty Portal </h6> */}
-                <h4>Indian Institute of Technology Ropar</h4>
-                <h4>भारतीय प्रौद्योगिकी संस्थान रोपड़</h4>
+                {/* <h4>Indian Institute of Technology Ropar</h4> */}
+                <a href="https://www.iitrpr.ac.in/" target="_blank" rel="noopener noreferrer">
+                भारतीय प्रौद्योगिकी संस्थान रोपड़
+                </a>
+                {/* <h4>भारतीय प्रौद्योगिकी संस्थान रोपड़</h4> */}
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 {/* ID: 1030114 */}

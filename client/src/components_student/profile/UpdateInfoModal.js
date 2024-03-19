@@ -11,7 +11,7 @@ export default function UpdateInfoModal({ setModalClass, profileInfo , setProfil
     const [newDepartment, setNewDepartment] = useState(profileInfo?.department||'');
     const [newDateOfJoining, setNewDateOfJoining] = useState(profileInfo?.dateOfJoining||'');
     const [newFellowshipCategory, setNewFellowshipCategory] = useState(profileInfo?.fellowshipCategory||'');
-    const [newSpecialization, setNewSpecialization] = useState(profileInfo?.specialization||'');
+    const [newSpecialization, setNewSpecialization] = useState(profileInfo?.areaOfSpecialisation||'');
     const [newSupervisor, setNewSupervisor] = useState(profileInfo?.nameOfSupervisor||'');
     const [newSupervisorEmail , setNewSupervisorEmail] =useState(profileInfo?.emailOfSupervisor||'');
 
@@ -109,6 +109,7 @@ export default function UpdateInfoModal({ setModalClass, profileInfo , setProfil
                     <label htmlFor="date of joining" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Date of Joining</label>
                     <input
                         id="date of joining"
+                        type='date'
                         defaultValue={profileInfo?.dateOfJoining}
                         onChange={(e) => setNewDateOfJoining(e.target.value)}
                         className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
