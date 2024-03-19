@@ -9,6 +9,7 @@ require('../mongoDb/connection');
 // requiring user Schema                
 const User = require('../model/userSchema');
 const AppData = require('../model/applicationData');
+const AppDataSett = require('../model/applicationSettlement');
 
 // credentials import
 require('dotenv').config();
@@ -16,6 +17,9 @@ require('dotenv').config();
 const searchDriveFolder = require('../driveUploadFunctions/searchFolder');
 const uploadImageDrive = require('../driveUploadFunctions/uploadImage');
 const createPublicUrl = require('../driveUploadFunctions/createPublicUrl');
+const AppDataAbroad = require('../model/applicationAbroad');
+
+const ObjectId = require('mongodb').ObjectId;
 
 router.post('/facultyInfoLoading', async (req, res) => {
     const { email } = req.body;
@@ -199,6 +203,98 @@ router.post('/viewFacultyApplications', async (req, res) => {
             }
         }
         return res.status(200).json({ data: filteredData });
+    } catch (error) {
+        console.log(error);
+        return res.status(422).json({ error: error });
+    }
+})
+
+
+router.post('/viewFacultyApplicationsSettlement', async (req, res) => {
+
+    const bearerHeader = await req.headers["authorization"];
+    if (!bearerHeader) {
+        return res.status(422).json({ error: "No Header" });
+    }
+    var bearerToken = bearerHeader.split(" ")[1];
+
+    // console.log( "Token: " + bearerToken);
+
+    if (!bearerToken) {
+        return res.status(422).json({ error: "No Token" });
+    }
+
+    // verfiy the token
+    try {
+        console.log("Token: " + bearerToken);
+        var decode = jwt.verify(bearerToken, process.env.JWT_SECRET)
+
+        // //setting email and role from decode
+        const facultyEmail = decode.email;
+        console.log(facultyEmail);
+
+        const settData = await AppDataSett.find().sort({ "updatedAt": -1 });
+
+        var filteredData = new Array();
+        const user = await User.find();
+        for (let i = 0; i < user.length; i++) {
+            if (user[i].role === "0") {
+                if (facultyEmail === user[i].emailOfSupervisor) {
+
+                    const settData = await AppDataSett.find({ email: user[i].email });
+
+
+                    settData.forEach(async (element, index) => {
+                        console.log(element);
+                        console.log(element._doc.parentId);
+
+                        try {
+                            const dataIndia = await AppData.findById(element._doc.parentId);
+                            const dataAbroad = await AppDataAbroad.findById(element._doc.parentId);
+                            console.log("PARENT DATA");
+                            // console.log(data);
+
+                            let data = {};
+                            if (dataIndia != null)
+                            {
+                                data = dataIndia;
+                            }
+                            else
+                            {
+                                data = dataAbroad;
+                            }
+
+                            const modelement = {
+                                ...data._doc,
+                                ...element._doc,
+                            }
+
+                            console.log(modelement);
+
+                            filteredData.push(modelement);
+
+                            // filteredData.push(element);
+                            // console.log(filteredData);
+
+                            if (index === settData.length - 1) {
+                                // This is the last iteration
+                                // Call your function here
+                                // console.log("Filtered Data");
+                                // console.log(filteredData);
+
+                                return res.status(200).json({ data: filteredData });
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
+                    });
+                    
+
+                }
+            }
+        }
+        // console.log(filteredData);
+        // return res.status(200).json({ data: filteredData });
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: error });

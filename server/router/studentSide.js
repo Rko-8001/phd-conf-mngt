@@ -118,7 +118,7 @@ router.post('/studentSettlementSubmit', async (req, res) => {
 
     var {
         mobileNo, empCode, department, designation, Bpay, budgetHead, advanceDrawn, Date, bankAccNo, status,
-        finances, travels
+        finances, travels, parentId, type
     } = req.body;
 
     // var { copyOfAbstract, copyOfConferenceBrochure, copyOfAcceptance } = req.files;
@@ -128,12 +128,13 @@ router.post('/studentSettlementSubmit', async (req, res) => {
 
 
     console.log("department: " + department);
+    console.log("parentID: ", parentId);
 
     try {
         const data = new AppDataSett(
             {
                 mobileNo, empCode, department, designation, Bpay, budgetHead, advanceDrawn, Date, bankAccNo, status,
-                finances, travels
+                finances, travels, parentId, type
             });
 
         data.save()
