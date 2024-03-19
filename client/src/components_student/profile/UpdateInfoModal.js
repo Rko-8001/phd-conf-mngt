@@ -2,9 +2,18 @@ import React, { useState } from 'react'
 import { BASE_URL } from '../../components/requests/URL';
 import { getUserToken } from '../../components_login/Tokens';
 
-export default function UpdateInfoModal({ setModalClass, mobileNo }) {
+export default function UpdateInfoModal({ setModalClass, profileInfo , setProfileInfo }) {
 
-    const [newMobile, setNewMobile] = useState(mobileNo);
+    const [newMobile, setNewMobile] = useState(profileInfo?.mobileNo ||'');
+    const [newName, setNewName] = useState(profileInfo?.name||'');
+    const [newEntryNumber, setNewEntryNumber] = useState(profileInfo?.entryNo||'');
+    const [newEmail, setNewEmail] = useState(profileInfo?.email||'');
+    const [newDepartment, setNewDepartment] = useState(profileInfo?.department||'');
+    const [newDateOfJoining, setNewDateOfJoining] = useState(profileInfo?.dateOfJoining||'');
+    const [newFellowshipCategory, setNewFellowshipCategory] = useState(profileInfo?.fellowshipCategory||'');
+    const [newSpecialization, setNewSpecialization] = useState(profileInfo?.specialization||'');
+    const [newSupervisor, setNewSupervisor] = useState(profileInfo?.nameOfSupervisor||'');
+    const [newSupervisorEmail , setNewSupervisorEmail] =useState(profileInfo?.emailOfSupervisor||'');
 
     async function updateInfo(e) {
         e.preventDefault();
@@ -15,18 +24,44 @@ export default function UpdateInfoModal({ setModalClass, mobileNo }) {
                 "Content-Type": "application/json",
                 "authorization": `Bearer ${getUserToken()}`,
             },
-            body: JSON.stringify({ mobileNo: newMobile, aisehi: "aisehi" })
+            body: JSON.stringify({
+                mobileNo: newMobile,
+                name: newName,
+                entryNumber: newEntryNumber,
+                email: newEmail,
+                department: newDepartment,
+                dateOfJoining: newDateOfJoining,
+                fellowshipCategory: newFellowshipCategory,
+                specialization: newSpecialization,
+                supervisor: newSupervisor,
+                supervisorEmail : newSupervisorEmail,
+                aisehi: "aisehi"
+            })
         })
         setModalClass("hidden");
         if (repsonse.status === 200) {
             window.alert("Updated");
+            const updatedProfileInfo = {
+                ...profileInfo,
+                mobileNo: newMobile,
+                name: newName,
+                entryNo: newEntryNumber,
+                email: newEmail,
+                department: newDepartment,
+                dateOfJoining: newDateOfJoining,
+                fellowshipCategory: newFellowshipCategory,
+                areaOfSpecialisation: newSpecialization,
+                nameOfSupervisor: newSupervisor,
+                emailOfSupervisor: newSupervisorEmail,
+            };
+            setProfileInfo(updatedProfileInfo);
         }
         else {
             window.alert("Error Occured. Please Try Again..");
         }
-    
+
     }
-    
+
     return (
         <>
             <div className="container mx-auto w-11/12 md:w-2/3 max-w-lg">
@@ -39,17 +74,87 @@ export default function UpdateInfoModal({ setModalClass, mobileNo }) {
                         </svg>
                     </div>
                     <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter Updated Details</h1>
-                    <label htmlFor="email2" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Mobile No</label>
+                    <label htmlFor="name" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Full name</label>
+                    <input
+                        id="name"
+                        defaultValue={profileInfo?.name}
+                        onChange={(e) => setNewName(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter your name"
+                    />
+                    <label htmlFor="entrynumber" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Entry Number</label>
+                    <input
+                        id="entry number"
+                        defaultValue={profileInfo?.entryNo}
+                        onChange={(e) => setNewEntryNumber(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter your entry number"
+                    />
+                    <label htmlFor="email" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Email</label>
+                    <input
+                        id="email"
+                        defaultValue={profileInfo?.email}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter your email"
+                    />
+                    <label htmlFor="dept" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Department</label>
+                    <input
+                        id="dept"
+                        defaultValue={profileInfo?.department}
+                        onChange={(e) => setNewDepartment(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter your department"
+                    />
+                    <label htmlFor="date of joining" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Date of Joining</label>
+                    <input
+                        id="date of joining"
+                        defaultValue={profileInfo?.dateOfJoining}
+                        onChange={(e) => setNewDateOfJoining(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter your date of joining"
+                    />
+                    <label htmlFor="fellowship category" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Fellowship Category</label>
+                    <input
+                        id="fellowship category"
+                        defaultValue={profileInfo?.fellowshipCategory}
+                        onChange={(e) => setNewFellowshipCategory(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter your fellowship category"
+                    />
+                    <label htmlFor="name" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Area of Specialisation</label>
+                    <input
+                        id="specialization"
+                        defaultValue={profileInfo?.areaOfSpecialisation}
+                        onChange={(e) => setNewSpecialization(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter your specialization"
+                    />
+                    <label htmlFor="name of supervisor" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Name of Supervisor</label>
+                    <input
+                        id="supervisor name"
+                        defaultValue={profileInfo?.nameOfSupervisor}
+                        onChange={(e) => setNewSupervisor(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter name of supervisor"
+                    />
+                    <label htmlFor="mail of supervisor" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Email of Supervisor</label>
+                    <input
+                        id="supervisor mail"
+                        defaultValue={profileInfo?.emailOfSupervisor}
+                        onChange={(e) => setNewSupervisorEmail(e.target.value)}
+                        className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-4 text-sm border-gray-300 rounded border"
+                        placeholder="Enter email of suprevisor"
+                    />
+                    <label htmlFor="mobile" className="text-gray-800 text-sm font-bold leading-tight tracking-normal">Mobile No</label>
                     <div className="relative mb-5 mt-2">
                         <div className="absolute text-gray-600 flex items-center px-4 border-r h-full">
                             +91
                         </div>
                         <input
-                            id="email2"
-                            defaultValue={mobileNo}
-                            onChange={(e) => {
-                                setNewMobile(e.target.value);
-                            }}
+                            id="mobile"
+                            defaultValue={profileInfo?.mobileNo}
+                            onChange={(e) => setNewMobile(e.target.value)}
                             className="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-16 text-sm border-gray-300 rounded border" placeholder="XXXX - XXXX - XX" />
                     </div>
 

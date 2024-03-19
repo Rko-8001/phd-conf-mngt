@@ -29,9 +29,9 @@ export const PRODUCTS = [
   ];
   
   export const Icons = [
-    { name: "", link: "#" },
-    { name: "logo-twitter", link: "#" },
-    { name: "logo-github", link: "#" },
-    { name: "logo-linkedin", link: "#" },
-    { name: "logo-instagram", link: "#" },
+    { name: "" },
+    { name: "logo-twitter" },
+    { name: "logo-github" },
+    { name: "logo-linkedin"},
+    { name: "logo-instagram"},
   ];

@@ -1,7 +1,13 @@
-import React from 'react'
-
+import React , {useState} from 'react'
+import UpdateInfoModal from './UpdateInfoModal';
 export default function ProfilePersonalInfo({ profileInfo }) {
+    const [currentProfileInfo, setCurrentProfileInfo] = useState(profileInfo);
+    const [modalClass, setModalClass] = useState("");
+    const updateProfileInfo =(updatedTnfo)=>{
+        setCurrentProfileInfo(updatedTnfo);
+    };
     return (
+        <>
         <div className="overflow-hidden mt-5 bg-white shadow sm:rounded-lg">
             <div className="px-4 py-5 sm:px-6">
                 <h3 className="text-base font-semibold leading-6 text-gray-900">Personal Information</h3>
@@ -48,5 +54,6 @@ export default function ProfilePersonalInfo({ profileInfo }) {
                 </dl>
             </div>
         </div>
+        </>
     )
 }

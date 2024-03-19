@@ -12,9 +12,10 @@ export default function Profile() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [profileInfo, setProfileInfo] = useState({});
-  const [modalClass, setModalClass] = useState("hidden ");
+  // const [modalClass, setModalClass] = useState("hidden");
+  const [showModal, setShowModal] = useState(false);
 
-  const getBasicInfo = async (req, res) => {
+  const getBasicInfo = async () => {
     try {
       const token = getUserToken();
       // console.log(token);
@@ -48,7 +49,29 @@ export default function Profile() {
       console.log(e.message)
     });
   }, []);
+  const handleUpdateButtonClick = () => {
+    setShowModal(true);
+  };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const uploadedImageUrl = reader.result;
+      setProfileInfo(prevProfileInfo => ({
+        ...prevProfileInfo,
+        profileImageUrl: uploadedImageUrl
+      }));
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <>
       {isLoading ?
@@ -60,7 +83,7 @@ export default function Profile() {
 
             <div className="bg-gray-50 rounded-lg shadow-xl pb-8">
 
-              <div className="w-full h-[200px]">
+              <div className="w-full h-[350px]">
                 <img
                   src={iitRopar}
                   className="w-full h-full object-cover overflow-y-hidden rounded-tl-lg rounded-tr-lg"
@@ -69,10 +92,20 @@ export default function Profile() {
               </div>
 
               <div className="flex flex-col items-center -mt-20">
-                <img src={userPhoto}
-                  className="w-40 border-4 border-white rounded-full"
-                  alt=""
-                />
+                <label htmlFor="profileImageInput" className="w-40 border-4 border-white rounded-full cursor-pointer">
+                  <img
+                    src={profileInfo.profileImageUrl || userPhoto}
+                    className="w-40 border-4 border-white rounded-full"
+                    alt=""
+                  />
+                  <input
+                    id="profileImageInput"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleImageUpload}
+                  />
+                </label>
                 <div className="flex items-center space-x-2 mt-2 flex-col">
                   <p className="text-xl">{profileInfo.name}</p>
                   <p className="text">{profileInfo.email}</p>
@@ -82,10 +115,11 @@ export default function Profile() {
               <div className="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
                 <div className="flex items-center space-x-4 mt-2">
                   <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setModalClass("");
-                    }}
+                    // onClick={(e) => {
+                    //   e.preventDefault();
+                    //   setModalClass("");
+                    // }}
+                    onClick={handleUpdateButtonClick}
                     className="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
@@ -93,13 +127,17 @@ export default function Profile() {
                     </svg>
                     <span>Update Info</span>
                   </button>
-                  
+
                 </div>
               </div>
             </div>
-            <div className={`${modalClass}`}>
-            <UpdateInfoModal  setModalclassName={setModalClass} mobileNo={profileInfo.mobileNo}/>
-            </div>
+            {showModal && (
+              <UpdateInfoModal
+                setModalClass={handleCloseModal}
+                profileInfo={profileInfo}
+                setProfileInfo={setProfileInfo}
+              />
+            )}
             <ProfilePersonalInfo profileInfo={profileInfo} />
 
           </div >
