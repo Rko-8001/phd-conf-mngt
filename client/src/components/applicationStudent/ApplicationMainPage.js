@@ -149,7 +149,7 @@ export default function ApplicationMainPage({ role, goBack }) {
                                     <FormPrintAbroad data={data} user={applicantInfo} />
                                     :
                                     (
-                                        data.type === 2
+                                        data.type === 0
                                             ?
                                             <FormPrint data={data} user={applicantInfo} />
                                             :

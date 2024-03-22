@@ -155,7 +155,7 @@ router.post('/facultyApproveOrDisapprove', async (req, res) => {
             facultySignLink: facultySignLink,
             status: status,
         });
-        
+
         return res.status(200).json("Updated..");
     } catch (error) {
         console.log(error);
@@ -238,63 +238,87 @@ router.post('/viewFacultyApplicationsSettlement', async (req, res) => {
         var filteredData = new Array();
         const user = await User.find();
         for (let i = 0; i < user.length; i++) {
-            if (user[i].role === "0") {
-                if (facultyEmail === user[i].emailOfSupervisor) {
-
-                    const settData = await AppDataSett.find({ email: user[i].email });
+            if (user[i].role === "0" && facultyEmail === user[i].emailOfSupervisor) {
 
 
-                    settData.forEach(async (element, index) => {
-                        console.log(element);
-                        console.log(element._doc.parentId);
+                const userSettData = await AppDataSett.find({ email: user[i].email });
 
-                        try {
-                            const dataIndia = await AppData.findById(element._doc.parentId);
-                            const dataAbroad = await AppDataAbroad.findById(element._doc.parentId);
-                            console.log("PARENT DATA");
-                            // console.log(data);
+                for (const element of userSettData) {
+                    try {
 
-                            let data = {};
-                            if (dataIndia != null)
-                            {
-                                data = dataIndia;
-                            }
-                            else
-                            {
-                                data = dataAbroad;
-                            }
+                        const dataIndia = await AppData.findById(element.parentId);
+                        const dataAbroad = await AppDataAbroad.findById(element.parentId);
 
-                            const modelement = {
-                                ...data._doc,
-                                ...element._doc,
-                            }
 
-                            console.log(modelement);
-
-                            filteredData.push(modelement);
-
-                            // filteredData.push(element);
-                            // console.log(filteredData);
-
-                            if (index === settData.length - 1) {
-                                // This is the last iteration
-                                // Call your function here
-                                // console.log("Filtered Data");
-                                // console.log(filteredData);
-
-                                return res.status(200).json({ data: filteredData });
-                            }
-                        } catch (error) {
-                            console.log(error);
+                        let data = {};
+                        if (dataIndia != null) {
+                            data = dataIndia;
                         }
-                    });
-                    
+                        else {
+                            data = dataAbroad;
+                        }
 
+                        const modelement = {
+                            ...data._doc,
+                            ...element._doc,
+                        };
+                        filteredData.push(modelement);
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
+
+
+
+                // const settData = await AppDataSett.find({ email: user[i].email });
+
+                // settData.forEach(async (element, index) => {
+                //     console.log(element);
+                //     console.log(element._doc.parentId);
+
+                //     try {
+                //         const dataIndia = await AppData.findById(element._doc.parentId);
+                //         const dataAbroad = await AppDataAbroad.findById(element._doc.parentId);
+                //         console.log("PARENT DATA");
+                //         // console.log(data);
+
+                //         let data = {};
+                //         if (dataIndia != null) {
+                //             data = dataIndia;
+                //         }
+                //         else {
+                //             data = dataAbroad;
+                //         }
+
+                //         const modelement = {
+                //             ...data._doc,
+                //             ...element._doc,
+                //         }
+
+                //         console.log(modelement);
+
+                //         filteredData.push(modelement);
+
+                //         // filteredData.push(element);
+                //         // console.log(filteredData);
+
+                //         if (index === settData.length - 1) {
+                //             // This is the last iteration
+                //             // Call your function here
+                //             // console.log("Filtered Data");
+                //             // console.log(filteredData);
+
+                //             return res.status(200).json({ data: filteredData });
+                //         }
+                //     } catch (error) {
+                //         console.log(error);
+                //     }
+                // });
             }
         }
         // console.log(filteredData);
         // return res.status(200).json({ data: filteredData });
+        return res.status(200).json({ data: filteredData });
     } catch (error) {
         console.log(error);
         return res.status(422).json({ error: error });

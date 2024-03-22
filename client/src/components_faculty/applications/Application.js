@@ -26,7 +26,7 @@ export default function FacultyApplication() {
     function handleTabClick(index) {
         setActiveTabIndex(index);
         if (index === 0) {
-            apps.sort((a, b) => a.conferenceStarts.localeCompare(b.conferenceStarts));
+            apps.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
         }
         else if (index === 1) {
             apps.sort((a, b) => a.email.localeCompare(b.email));
@@ -71,24 +71,39 @@ export default function FacultyApplication() {
         }
     }
 
+
     useEffect(() => {
-        getAppInfo().then((resp) => {
-            setApps(resp.data);
+        Promise.all([getAppInfo(), getAppInfoSettlement()])
+        .then(([infoResp, settlementResp]) => {
+            setApps(prev => [...prev, ...infoResp.data, ...settlementResp.data]);
             setIsLoading(false);
-
-            getAppInfoSettlement().then((resp) => {
-                setAppsSettlement(resp.data);
-                console.log(resp.data);
-                setIsLoading(false);
-
-            }).catch((e) => {
-                console.log(e)
-            });
-
-        }).catch((e) => {
-            console.log(e)
+        })
+        .catch((error) => {
+            console.error("Error fetching application data:", error);
+            setIsLoading(false);
         });
     }, []);
+
+    // useEffect(() => {
+    //     getAppInfo().then((resp) => {
+    //         setApps(resp.data);
+    //         setIsLoading(false);
+
+    //         getAppInfoSettlement().then((resp) => {
+    //             setAppsSettlement(resp.data);
+    //             setApps( prev => [...prev, ...resp.data]);
+    //             console.log(resp.data);
+    //             setIsLoading(false);
+
+    //         }).catch((e) => {
+    //             console.log(e)
+    //         });
+
+    //     }).catch((e) => {
+    //         console.log(e)
+    //     });
+
+    // }, []);
 
 
     // useEffect(() => {
@@ -289,7 +304,7 @@ export default function FacultyApplication() {
                     </div>
                     <div className="my-3 flex flex-wrap justify-center gap-4">
                         {apps && renderApps}
-                        {appsSettlement && renderSettlementApps}
+                        {/* {appsSettlement && renderSettlementApps} */}
                     </div>
                 </Container>
             }

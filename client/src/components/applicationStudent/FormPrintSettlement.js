@@ -39,6 +39,9 @@ function FormPrintSettlement({ data, user }) {
             <TableCell style={{ fontSize: "16px" }}>
                 <b>{index + 1}</b>
             </TableCell>
+            <TableCell style={{ fontSize: "16px" }}>detail 1</TableCell>
+            <TableCell style={{ fontSize: "16px" }}>25489</TableCell>
+            <TableCell style={{ fontSize: "16px" }}>yoo</TableCell>
             {/* <TableCell style={{ fontSize: "16px" }}>{pa?.deptdate}</TableCell>
             <TableCell style={{ fontSize: "16px" }}>{pa?.deptplace}</TableCell>
             <TableCell style={{ fontSize: "16px" }}>{pa?.depttime}</TableCell> */}
@@ -163,6 +166,43 @@ function FormPrintSettlement({ data, user }) {
                 </Container>
                 <br></br>
 
+
+
+                <Container>
+                    <div className={classes.form}>
+                        <Grid className="py-2" container spacing={2}>
+                            <Grid item xs={7}>
+                                <pre><b>INSTRUCTION FOR PREPARING TRAVELLING ALLOWANCE REIMBURSEENT BILLS :</b></pre>
+                                <pre>1. Claim must be properly filled in and submitted within 15 days of
+                                    completion of journey. <br></br>Failure to do so may entail recovery of
+                                    advance, drawn if any, in single instalment, from the salary.    </pre>
+                                <pre>2. Money Receipts/Ticket numbers/PNR (in case of travel by rail) copy of paper ticket <br></br>
+                                    or e-ticket with boarding pass (in case of travel by air) should be furnished along with T.A. bill.</pre>
+                                <pre>3. Hotels bills and Food bills should invariably be enclosed.</pre>
+                                <pre>All contingent expenses claimed for which bills are not available should be self-certified.</pre>
+                                <br></br>
+                                <pre>Travel between Cities/Countries including local to and fro Airport/Railway station etc.</pre>
+                            </Grid>
+                        </Grid>
+                        {/* <Grid className="py-2" container spacing={2}>
+                            <Grid item xs={7}>
+                                <pre>2. Why would you like to attend this conference and what is its relevance with your PhD thesis: <b>{user?.purposeOfVisit}</b>  </pre>
+                            </Grid>
+                        </Grid>
+
+                        <Grid className="py-2" container spacing={2}>
+                            <Grid item xs={7}>
+                                <pre>3. Itinerary/Flight details (arrival & departure to the place of conference):  </pre>
+                            </Grid>
+
+                        </Grid> */}
+                    </div>
+                </Container>
+
+
+                <br></br>
+
+
                 <Container>
                     <div className={classes.form}>
                         <div style={{ border: "2px solid black", padding: "10px" }}>
@@ -228,14 +268,14 @@ function FormPrintSettlement({ data, user }) {
 
 
 
-                <div style={{ textAlign: 'center', fontSize: "24px" }} >
+                {/* <div style={{ textAlign: 'center', fontSize: "24px" }} >
                     <h2>
                         <u><b>PART B: INFORMATION ABOUT THE CONFERENCE/ SYMPOSIUM</b></u>
                     </h2>
                 </div>
-                <br></br>
+                <br></br> */}
 
-                <Container>
+                {/* <Container>
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
@@ -265,7 +305,7 @@ function FormPrintSettlement({ data, user }) {
 
                         </Grid>
                     </div>
-                </Container>
+                </Container> */}
 
                 {/* <Container>
                     <div className={classes.form}>
@@ -291,7 +331,7 @@ function FormPrintSettlement({ data, user }) {
                     </div>
                 </Container> */}
                 <br></br>
-                <Container>
+                {/* <Container>
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
@@ -325,7 +365,7 @@ function FormPrintSettlement({ data, user }) {
                             </Grid>
                         </Grid>
                     </div>
-                </Container>
+                </Container> */}
 
                 {/* <Container>
                     <div className={classes.form}>
@@ -368,7 +408,7 @@ function FormPrintSettlement({ data, user }) {
 
                 <br></br>
 
-                <Container>
+                {/* <Container>
                     <div className={classes.form}>
                         <Grid className="py-2" container spacing={2}>
                             <Grid item xs={7}>
@@ -389,7 +429,22 @@ function FormPrintSettlement({ data, user }) {
                             </Grid>
                         </Grid>
                     </div>
+                </Container> */}
+
+
+
+                <Container>
+                    <div className={classes.form}>
+                        <Grid className="py-2" container spacing={2}>
+                            <Grid item xs={7}>
+                                <pre>Any other expenses (Lodging, Boarding, Registration fee, Visa fee, Insurance, etc.)</pre>
+                            </Grid>
+                        </Grid>
+                    </div>
                 </Container>
+
+
+                <br></br>
 
                 <Container>
                     <div className={classes.form}>
@@ -402,33 +457,54 @@ function FormPrintSettlement({ data, user }) {
                                                 <b>Sr. No.</b>
                                             </TableCell>
                                             <TableCell style={{ fontSize: "16px" }}>
-                                                <b>Particulars</b>
+                                                <b>Details</b>
                                             </TableCell>
                                             <TableCell style={{ fontSize: "16px" }}>
                                                 <b>Amount(Rs)</b>
+                                            </TableCell>
+                                            <TableCell style={{ fontSize: "16px" }}>
+                                                <b>Receipt</b>
                                             </TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {renderParticulars}
                                         <TableRow>
-                                            <TableCell style={{ fontSize: "16px" }}></TableCell>
-                                            <TableCell style={{ fontSize: "16px" }}></TableCell>
-                                            <TableCell style={{ fontSize: "16px" }}></TableCell>
-                                            <TableCell style={{ fontSize: "16px" }}></TableCell>
+                                            <TableCell style={{ fontSize: "16px" }}>1</TableCell>
+                                            <TableCell style={{ fontSize: "16px" }}>Deetails 1</TableCell>
+                                            <TableCell style={{ fontSize: "16px" }}>9302</TableCell>
+                                            <TableCell style={{ fontSize: "16px" }}>Yoo</TableCell>
                                         </TableRow>
-                                        <TableRow>
+                                        {/* <TableRow>
                                             <TableCell style={{ fontSize: "16px" }}></TableCell>
                                             <TableCell style={{ fontSize: "16px" }}><b>Total</b></TableCell>
                                             <TableCell style={{ fontSize: "16px" }}></TableCell>
                                             <TableCell style={{ fontSize: "16px" }}></TableCell>
-                                        </TableRow>
+                                        </TableRow> */}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
                         </div>
                     </div>
                 </Container>
+
+                <br></br>
+
+                
+                <Container>
+                    <div className={classes.form}>
+                        <Grid className="py-2" container spacing={2}>
+                            <Grid item xs={7}>
+                                <pre><b>Certified that</b></pre>
+                                <pre> All claims mentioned in this form correspond to actual expenditure incurred by me <br></br> for which no reimbursement/claims have been
+made from any other source (Govt./Private/Others)</pre>
+                                <pre> I was not provided with any free boarding/lodging/conveyance/registration fee waiver/travel <br></br> coupons for which claim has been made.</pre>
+                            </Grid>
+                        </Grid>
+                    </div>
+                </Container>
+
+
 
                 <br></br>
                 <div style={{ textAlign: 'center' }} >
